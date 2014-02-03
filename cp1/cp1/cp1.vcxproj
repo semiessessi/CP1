@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7DF8AC76-28EE-4196-89DB-4C29A339ACDE}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>cp1</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>YYERROR_VERBOSE;YYDEBUG;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\bnfcout\includehacks;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PreBuildEvent>
+      <Command>cd $(SolutionDir)..\..\bnfcout\
+$(SolutionDir)..\..\tools\bnfc-2.4b.exe -cpp $(SolutionDir)..\..\grammar\cp.cf
+$(SolutionDir)..\..\tools\sed.exe -i "s/BEGIN YYINITIAL/BEGIN YYINITIAL\; return 0/g" $(SolutionDir).l
+$(SolutionDir)..\..\tools\flex++.exe $(SolutionDir).l
+$(SolutionDir)..\..\tools\bison.exe -d -t -r state,solved --locations -o parse.cpp $(SolutionDir).y
+copy $(SolutionDir).y $(SolutionDir).y.cpy
+copy /b $(SolutionDir)y.head + $(SolutionDir).y.cpy $(SolutionDir).y
+$(SolutionDir)..\..\tools\sed.exe -i "s/void yyerror/extern void yyerror(const char *str);void yyerror_fucko/g" $(SolutionDir)..\..\bnfcout\parse.cpp</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>YYERROR_VERBOSE;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\bnfcout\includehacks;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PreBuildEvent>
+      <Command>cd $(SolutionDir)..\..\bnfcout\
+$(SolutionDir)..\..\tools\bnfc-2.4b.exe -cpp $(SolutionDir)..\..\grammar\cp.cf
+$(SolutionDir)..\..\tools\sed.exe -i "s/BEGIN YYINITIAL/BEGIN YYINITIAL\; return 0/g" $(SolutionDir).l
+$(SolutionDir)..\..\tools\flex++.exe $(SolutionDir).l
+$(SolutionDir)..\..\tools\bison.exe -d -t -r state,solved --locations -o parse.cpp $(SolutionDir).y
+copy $(SolutionDir).y $(SolutionDir).y.cpy
+copy /b $(SolutionDir)y.head + $(SolutionDir).y.cpy $(SolutionDir).y
+$(SolutionDir)..\..\tools\sed.exe -i "s/void yyerror/extern void yyerror(const char *str);void yyerror_fucko/g" $(SolutionDir)..\..\bnfcout\parse.cpp</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="..\..\grammar\cp.cf" />
+    <None Include="..\Source\Compiler\LLVM\LLVMIntrin2Byte.inl" />
+    <None Include="..\Source\Compiler\LLVM\LLVMIntrin4Byte.inl" />
+    <None Include="..\Source\Compiler\LLVM\LLVMIntrin8Byte.inl" />
+    <None Include="..\Source\Compiler\LLVM\LLVMIntrinByte.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\bnfcout\Absyn.C">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\bnfcout\bisonhax.cpp" />
+    <ClCompile Include="..\..\bnfcout\lex.yy.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\bnfcout\lexhax.cpp" />
+    <ClCompile Include="..\..\bnfcout\parse.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\bnfcout\Printer.C">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\Source\Compiler\CompilerVisitor.cpp" />
+    <ClCompile Include="..\Source\Compiler\LLVM\LLVMTransform.cpp" />
+    <ClCompile Include="..\Source\Compiler\OperatorInfo.cpp" />
+    <ClCompile Include="..\Source\Compiler\ParameterInfo.cpp" />
+    <ClCompile Include="..\Source\Compiler\TypeInfo.cpp" />
+    <ClCompile Include="..\Source\Compiler\TypeVisitor.cpp" />
+    <ClCompile Include="..\Source\Core\EntryPoint.cpp" />
+    <ClCompile Include="..\Source\Core\HackyFileLiner.cpp" />
+    <ClCompile Include="..\Source\Error\HackyErrorHandler.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\bnfcout\Absyn.H" />
+    <ClInclude Include="..\..\bnfcout\bisonlocation.h" />
+    <ClInclude Include="..\..\bnfcout\parse.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\bnfcout\Parser.H" />
+    <ClInclude Include="..\Source\Compiler\CompilerVisitor.h" />
+    <ClInclude Include="..\Source\Compiler\ConstantFinder.h" />
+    <ClInclude Include="..\Source\Compiler\EntryPointFinder.h" />
+    <ClInclude Include="..\Source\Compiler\ExternFinder.h" />
+    <ClInclude Include="..\Source\Compiler\FunctionFinder.h" />
+    <ClInclude Include="..\Source\Compiler\LLVM\LLVMTransform.h" />
+    <ClInclude Include="..\Source\Compiler\ONVisitor.h" />
+    <ClInclude Include="..\Source\Compiler\OperatorFinder.h" />
+    <ClInclude Include="..\Source\Compiler\OperatorInfo.h" />
+    <ClInclude Include="..\Source\Compiler\OperatorNameMangle.h" />
+    <ClInclude Include="..\Source\Compiler\OperatorVisitor.h" />
+    <ClInclude Include="..\Source\Compiler\ParameterInfo.h" />
+    <ClInclude Include="..\Source\Compiler\ParameterVisitor.h" />
+    <ClInclude Include="..\Source\Compiler\RVVisitor.h" />
+    <ClInclude Include="..\Source\Compiler\TypeFinder.h" />
+    <ClInclude Include="..\Source\Compiler\TypeInfo.h" />
+    <ClInclude Include="..\Source\Compiler\TypeVisitor.h" />
+    <ClInclude Include="..\Source\Compiler\VariableFinder.h" />
+    <ClInclude Include="..\Source\Core\Switches.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

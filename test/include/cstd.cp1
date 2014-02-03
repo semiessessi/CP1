@@ -1,0 +1,10 @@
+import int32;
+//expose pointer;
+
+namespace cstd
+{
+
+extern int32 puts( pointer szString );
+extern int32 getchar();
+
+}

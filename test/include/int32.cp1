@@ -1,0 +1,52 @@
+align< 4 > type byte[ 4 ] int32;
+
+//identity int32 + 0;
+//identity int32 * 1;
+//identity int32 & 255;
+//identity int32 | 0;
+//identity int32 ^ 0;
+
+pure commutative associative int32 +( a, b )
+{
+	return add_4b( a, b );
+}
+
+pure inverse + int32 -( a )
+{
+	return neg_4b( a );
+}
+
+pure anticommutative inverse + int32 -( a, b )
+{
+	return sub_4b( a, b );
+}
+
+pure commutative int32 *( a, b )
+{
+	return mul_4b( a, b );
+}
+
+pure int32 /( a, b )
+{
+	return sdiv_4b( a, b );
+}
+
+pure int32 %( a, b )
+{
+	return srem_4b( a, b );
+}
+
+pure commutative int32 &( a, b )
+{
+	return and_4b( a, b );
+}
+
+pure commutative int32 |( a, b )
+{
+	return or_4b( a, b );
+}
+
+pure commutative associative selfinverse int32 ^( a, b )
+{
+	return xor_4b( a, b );
+}

@@ -1,0 +1,304 @@
+
+comment "//" ;
+comment "/*" "*/" ;
+
+token Operator ( ( '+' | '-' | '=' | '&' | '^' | '|' | '/' | '%' | '*' | '>' | '<' | '!' | '~' | '?' | ':' ) * ) ;
+
+entrypoints Code ;
+
+Main. 						Code 					::= [TLDeclaration] [Declaration] ;
+
+DImport.					TLDeclaration			::= "import" Ident ";" ;
+DExpose.					TLDeclaration			::= "expose" Ident ";" ;
+
+DNamespace.					Declaration				::= "namespace" Ident "{" [Declaration] "}" ;
+DDefaultFunction.			Declaration				::= [FunctionSpecifier] Ident "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
+DFunction.					Declaration				::= [FunctionSpecifier] Type Ident "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
+DOperator.					Declaration				::= [FunctionSpecifier] Type OperatorName "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
+DOperatorInfo.				Declaration				::= OperatorTrait ";" ;
+DTypeDecl.					Declaration				::= [TypeSpecifier] "type" Type Ident ";" ;
+DExtern.					Declaration				::= "extern" Prototype ;
+DIVariable.					Declaration				::= Type Ident "=" Expression ";" ;
+DVariable.					Declaration				::= Type Ident ";" ;
+
+-- PDefaultFunction.			Prototype				::= [FunctionSpecifier] Ident "(" [ParameterDeclaration] ")" ";" ;
+PFunction.					Prototype				::= [FunctionSpecifier] Type Ident "(" [ParameterDeclaration] ")" ";" ;
+
+ONOp.						OperatorName            ::= Operator;
+ONLnot.						OperatorName		    ::= "!" ;
+ONPreInc.					OperatorName		    ::= "++" ;
+ONPreDec.					OperatorName		    ::= "--" ;
+ONBnot.						OperatorName		    ::= "~" ;
+ONMul.						OperatorName		    ::= "*" ;
+ONDiv.						OperatorName		    ::= "/" ;
+ONMod.						OperatorName		    ::= "%" ;
+ONAdd.						OperatorName		    ::= "+" ;
+ONSub.						OperatorName		    ::= "-" ;
+ONLSh.						OperatorName		    ::= "<<" ;
+ONRSh.						OperatorName		    ::= ">>" ;
+ONLT.						OperatorName		    ::= "<" ;
+ONGT.						OperatorName		    ::= ">" ;
+ONLE.						OperatorName		    ::= "<=" ;
+ONGE.						OperatorName		    ::= ">=" ;
+ONE.						OperatorName		    ::= "==" ;
+ONNE.						OperatorName		    ::= "!=" ;
+ONBand.						OperatorName		    ::= "&" ;
+ONBor.						OperatorName		    ::= "|" ;
+ONBxor.						OperatorName		    ::= "^" ;
+ONLand.						OperatorName		    ::= "&&" ;
+ONLor.						OperatorName		    ::= "||" ;
+ONLxor.						OperatorName		    ::= "^^" ;
+
+OTIdentity.					OperatorTrait           ::= "identity" Type OperatorName Integer ;
+
+FSEntryPoint.				FunctionSpecifier		::= "entrypoint" ;
+FSPure.						FunctionSpecifier		::= "pure" ;
+FSInline.					FunctionSpecifier		::= "inline" ;
+FSAssociative.				FunctionSpecifier		::= "associative" ;
+FSCommutative.				FunctionSpecifier		::= "commutative" ;
+FSAntiCommutative.			FunctionSpecifier		::= "anticommutative" ;
+FSInverse.					FunctionSpecifier		::= "inverse" OperatorName ;
+FSSelfInverse.				FunctionSpecifier		::= "selfinverse" ;
+
+VSConst.					VariableSpecifier		::= "const" ;
+
+TSAlign.                    TypeSpecifier           ::= "align" "<" Integer ">" ;
+
+TByte.						Type					::= "byte" ;
+TCustom.					Type					::= Ident ;
+TFixedArray.				Type					::= Type "[" Integer "]" ;
+TStruct.					Type					::= "{" [StructMemberDeclaration] ";" "}" ;
+
+SMDMemberDeclaration.		StructMemberDeclaration	::= Type Ident ";" ;
+SMDAnonMemberDeclaration.	StructMemberDeclaration	::= Type ";" ;
+
+PDAutoParameter.			ParameterDeclaration	::= [VariableSpecifier] Ident ;
+PDTypedParameter.			ParameterDeclaration	::= [VariableSpecifier] Type Ident ;
+ 
+SReturn.					Statement				::= "return" Expression ";" ;
+SExpression.				Statement 				::= Expression ";" ;
+SScope.                     Statement 				::= "{" [Statement] "}" ;
+SIf.                        Statement 				::= "if" "(" Expression ")" "{" [Statement] "}" ;
+SIfElse.                    Statement 				::= "if" "(" Expression ")" "{" [Statement] "}" "else" "{" [Statement] "}" ;
+SLoop.                      Statement               ::= "repeat" "(" Expression ")" "{" [Statement] "}" ;
+SWhile.                     Statement               ::= "while" "(" Expression ")" "{" [Statement] "}" ;
+SUntil.                     Statement               ::= "until" "(" Expression ")" "{" [Statement] "}" ;
+SFor.                       Statement               ::= "for" "(" [Expression] ";" Expression ";" [Expression] ")" "{" [Statement] "}" ;
+SForEach.                   Statement               ::= "for" "each" "(" Ident "in" Expression ")" "{" [Statement] "}" ;
+SForAll.                    Statement               ::= "for" "all" "(" Ident "in" Expression ")" "{" [Statement] "}" ;
+SBreak.                     Statement               ::= "break" ";" ;
+SContinue.                  Statement               ::= "continue" ";" ;
+SBreakpoint.                Statement               ::= "breakpoint" ";" ;
+-- don't quite allow all declarations...
+--SDecl.						Statement				::= Declaration ;
+--SDefaultFunction.			Statement				::= [FunctionSpecifier] Ident "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
+--SFunction.					Statement				::= [FunctionSpecifier] Type Ident "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
+--STypeDecl.					Statement				::= [TypeSpecifier] "type" Type Ident ";" ;
+SIVariable.					Statement				::= Type Ident "=" Expression ";" ;
+SVariable.					Statement				::= Type Ident ";" ;
+
+RVIdent.					RValue                  ::= Ident ;
+RVQualified.				RValue					::= Ident "." RValue ;
+
+EDouble.					Expression11			::= Double ;
+EInteger.					Expression11			::= Integer ;
+EString.					Expression11			::= CString ;
+EChar.					    Expression11			::= CChar ;
+EPi.						Expression11			::= "pi" ;
+ERValue.					Expression11            ::= RValue ;
+
+ESimpleCall.				Expression10			::= RValue "(" ")" ;
+ECall.						Expression10			::= RValue "(" [Expression] ")" ;
+EPostInc.					Expression10	        ::= RValue "++" ;
+EPostDec.					Expression10	        ::= RValue "--" ;
+
+{-
+
+    intrinsics...
+
+-}
+
+EIntrinAddB.				Expression10	        ::= "add_b" "(" Expression "," Expression ")" ;
+EIntrinSubB.				Expression10	        ::= "sub_b" "(" Expression "," Expression ")" ;
+EIntrinMulB.				Expression10	        ::= "mul_b" "(" Expression "," Expression ")" ;
+EIntrinUdivB.				Expression10	        ::= "udiv_b" "(" Expression "," Expression ")" ;
+EIntrinSdivB.				Expression10	        ::= "sdiv_b" "(" Expression "," Expression ")" ;
+EIntrinUremB.				Expression10	        ::= "urem_b" "(" Expression "," Expression ")" ;
+EIntrinSremB.				Expression10	        ::= "srem_b" "(" Expression "," Expression ")" ;
+EIntrinAndB.				Expression10	        ::= "and_b" "(" Expression "," Expression ")" ;
+EIntrinOrB.					Expression10	        ::= "or_b" "(" Expression "," Expression ")" ;
+EIntrinXorB.				Expression10	        ::= "xor_b" "(" Expression "," Expression ")" ;
+EIntrinShlB.				Expression10	        ::= "shl_b" "(" Expression "," Expression ")" ;
+EIntrinLshrB.				Expression10	        ::= "lshr_b" "(" Expression "," Expression ")" ;
+EIntrinAshrB.				Expression10	        ::= "ashr_b" "(" Expression "," Expression ")" ;
+EIntrinNotB.				Expression10	        ::= "not_b" "(" Expression ")" ;
+EIntrinNegB.				Expression10	        ::= "neg_b" "(" Expression ")" ;
+
+EIntrinAdd2B.				Expression10	        ::= "add_2b" "(" Expression "," Expression ")" ;
+EIntrinSub2B.				Expression10	        ::= "sub_2b" "(" Expression "," Expression ")" ;
+EIntrinMul2B.				Expression10	        ::= "mul_2b" "(" Expression "," Expression ")" ;
+EIntrinUdiv2B.				Expression10	        ::= "udiv_2b" "(" Expression "," Expression ")" ;
+EIntrinSdiv2B.				Expression10	        ::= "sdiv_2b" "(" Expression "," Expression ")" ;
+EIntrinUrem2B.				Expression10	        ::= "urem_2b" "(" Expression "," Expression ")" ;
+EIntrinSrem2B.				Expression10	        ::= "srem_2b" "(" Expression "," Expression ")" ;
+EIntrinAnd2B.				Expression10	        ::= "and_2b" "(" Expression "," Expression ")" ;
+EIntrinOr2B.				Expression10	        ::= "or_2b" "(" Expression "," Expression ")" ;
+EIntrinXor2B.				Expression10	        ::= "xor_2b" "(" Expression "," Expression ")" ;
+EIntrinShl2B.				Expression10	        ::= "shl_2b" "(" Expression "," Expression ")" ;
+EIntrinLshr2B.				Expression10	        ::= "lshr_2b" "(" Expression "," Expression ")" ;
+EIntrinAshr2B.				Expression10	        ::= "ashr_2b" "(" Expression "," Expression ")" ;
+EIntrinNot2B.				Expression10	        ::= "not_2b" "(" Expression ")" ;
+EIntrinNeg2B.				Expression10	        ::= "neg_2b" "(" Expression ")" ;
+
+EIntrinAdd4B.				Expression10	        ::= "add_4b" "(" Expression "," Expression ")" ;
+EIntrinSub4B.				Expression10	        ::= "sub_4b" "(" Expression "," Expression ")" ;
+EIntrinMul4B.				Expression10	        ::= "mul_4b" "(" Expression "," Expression ")" ;
+EIntrinUdiv4B.				Expression10	        ::= "udiv_4b" "(" Expression "," Expression ")" ;
+EIntrinSdiv4B.				Expression10	        ::= "sdiv_4b" "(" Expression "," Expression ")" ;
+EIntrinUrem4B.				Expression10	        ::= "urem_4b" "(" Expression "," Expression ")" ;
+EIntrinSrem4B.				Expression10	        ::= "srem_4b" "(" Expression "," Expression ")" ;
+EIntrinAnd4B.				Expression10	        ::= "and_4b" "(" Expression "," Expression ")" ;
+EIntrinOr4B.				Expression10	        ::= "or_4b" "(" Expression "," Expression ")" ;
+EIntrinXor4B.				Expression10	        ::= "xor_4b" "(" Expression "," Expression ")" ;
+EIntrinShl4B.				Expression10	        ::= "shl_4b" "(" Expression "," Expression ")" ;
+EIntrinLshr4B.				Expression10	        ::= "lshr_4b" "(" Expression "," Expression ")" ;
+EIntrinAshr4B.				Expression10	        ::= "ashr_4b" "(" Expression "," Expression ")" ;
+EIntrinNot4B.				Expression10	        ::= "not_4b" "(" Expression ")" ;
+EIntrinNeg4B.				Expression10	        ::= "neg_4b" "(" Expression ")" ;
+
+EIntrinAdd8B.				Expression10	        ::= "add_8b" "(" Expression "," Expression ")" ;
+EIntrinSub8B.				Expression10	        ::= "sub_8b" "(" Expression "," Expression ")" ;
+EIntrinMul8B.				Expression10	        ::= "mul_8b" "(" Expression "," Expression ")" ;
+EIntrinUdiv8B.				Expression10	        ::= "udiv_8b" "(" Expression "," Expression ")" ;
+EIntrinSdiv8B.				Expression10	        ::= "sdiv_8b" "(" Expression "," Expression ")" ;
+EIntrinUrem8B.				Expression10	        ::= "urem_8b" "(" Expression "," Expression ")" ;
+EIntrinSrem8B.				Expression10	        ::= "srem_8b" "(" Expression "," Expression ")" ;
+EIntrinAnd8B.				Expression10	        ::= "and_8b" "(" Expression "," Expression ")" ;
+EIntrinOr8B.				Expression10	        ::= "or_8b" "(" Expression "," Expression ")" ;
+EIntrinXor8B.				Expression10	        ::= "xor_8b" "(" Expression "," Expression ")" ;
+EIntrinShl8B.				Expression10	        ::= "shl_8b" "(" Expression "," Expression ")" ;
+EIntrinLshr8B.				Expression10	        ::= "lshr_8b" "(" Expression "," Expression ")" ;
+EIntrinAshr8B.				Expression10	        ::= "ashr_8b" "(" Expression "," Expression ")" ;
+EIntrinNot8B.				Expression10	        ::= "not_8b" "(" Expression ")" ;
+EIntrinNeg8B.				Expression10	        ::= "neg_8b" "(" Expression ")" ;
+
+EIntrinAddB4V.				Expression10	        ::= "add_b4" "(" Expression "," Expression ")" ;
+EIntrinSubB4V.				Expression10	        ::= "sub_b4" "(" Expression "," Expression ")" ;
+EIntrinMulB4V.				Expression10	        ::= "mul_b4" "(" Expression "," Expression ")" ;
+EIntrinUdivB4V.				Expression10	        ::= "udiv_b4" "(" Expression "," Expression ")" ;
+EIntrinSdivB4V.				Expression10	        ::= "sdiv_b4" "(" Expression "," Expression ")" ;
+EIntrinUremB4V.				Expression10	        ::= "urem_b4" "(" Expression "," Expression ")" ;
+EIntrinSremB4V.				Expression10	        ::= "srem_b4" "(" Expression "," Expression ")" ;
+EIntrinShlB4V.				Expression10	        ::= "shl_b4" "(" Expression "," Expression ")" ;
+EIntrinLshrB4V.				Expression10	        ::= "lshr_b4" "(" Expression "," Expression ")" ;
+EIntrinAshrB4V.				Expression10	        ::= "ashr_b4" "(" Expression "," Expression ")" ;
+EIntrinNegB4V.				Expression10	        ::= "neg_b4" "(" Expression ")" ;
+
+EIntrinAddB8V.				Expression10	        ::= "add_b8" "(" Expression "," Expression ")" ;
+EIntrinSubB8V.				Expression10	        ::= "sub_b8" "(" Expression "," Expression ")" ;
+EIntrinMulB8V.				Expression10	        ::= "mul_b8" "(" Expression "," Expression ")" ;
+EIntrinUdivB8V.				Expression10	        ::= "udiv_b8" "(" Expression "," Expression ")" ;
+EIntrinSdivB8V.				Expression10	        ::= "sdiv_b8" "(" Expression "," Expression ")" ;
+EIntrinUremB8V.				Expression10	        ::= "urem_b8" "(" Expression "," Expression ")" ;
+EIntrinSremB8V.				Expression10	        ::= "srem_b8" "(" Expression "," Expression ")" ;
+EIntrinShlB8V.				Expression10	        ::= "shl_b8" "(" Expression "," Expression ")" ;
+EIntrinLshrB8V.				Expression10	        ::= "lshr_b8" "(" Expression "," Expression ")" ;
+EIntrinAshrB8V.				Expression10	        ::= "ashr_b8" "(" Expression "," Expression ")" ;
+EIntrinNegB8V.				Expression10	        ::= "neg_b8" "(" Expression ")" ;
+
+EIntrinAdd2F.				Expression10	        ::= "add_2f" "(" Expression "," Expression ")" ;
+EIntrinSub2F.				Expression10	        ::= "sub_2f" "(" Expression "," Expression ")" ;
+EIntrinMul2F.				Expression10	        ::= "mul_2f" "(" Expression "," Expression ")" ;
+EIntrinUdiv2F.				Expression10	        ::= "div_2f" "(" Expression "," Expression ")" ;
+EIntrinUrem2F.				Expression10	        ::= "rem_2f" "(" Expression "," Expression ")" ;
+
+EIntrinAdd4F.				Expression10	        ::= "add_4f" "(" Expression "," Expression ")" ;
+EIntrinSub4F.				Expression10	        ::= "sub_4f" "(" Expression "," Expression ")" ;
+EIntrinMul4F.				Expression10	        ::= "mul_4f" "(" Expression "," Expression ")" ;
+EIntrinUdiv4F.				Expression10	        ::= "div_4f" "(" Expression "," Expression ")" ;
+EIntrinUrem4F.				Expression10	        ::= "rem_4f" "(" Expression "," Expression ")" ;
+
+EIntrinAdd8F.				Expression10	        ::= "add_8f" "(" Expression "," Expression ")" ;
+EIntrinSub8F.				Expression10	        ::= "sub_8f" "(" Expression "," Expression ")" ;
+EIntrinMul8F.				Expression10	        ::= "mul_8f" "(" Expression "," Expression ")" ;
+EIntrinUdiv8F.				Expression10	        ::= "div_8f" "(" Expression "," Expression ")" ;
+EIntrinUrem8F.				Expression10	        ::= "rem_8f" "(" Expression "," Expression ")" ;
+
+EIntrinAdd4F4V.				Expression10	        ::= "add_4f4" "(" Expression "," Expression ")" ;
+EIntrinSub4F4V.				Expression10	        ::= "sub_4f4" "(" Expression "," Expression ")" ;
+EIntrinMul4F4V.				Expression10	        ::= "mul_4f4" "(" Expression "," Expression ")" ;
+EIntrinUdiv4F4V.			Expression10	        ::= "div_4f4" "(" Expression "," Expression ")" ;
+EIntrinUrem4F4V.			Expression10	        ::= "rem_4f4" "(" Expression "," Expression ")" ;
+
+{-
+
+    ...end intrinsics
+
+-}
+
+ELnot.						Expression9		        ::= "!" Expression10 ;
+EPreInc.					Expression9		        ::= "++" RValue ;
+EPreDec.					Expression9		        ::= "--" RValue ;
+ENeg.						Expression9		        ::= "-" Expression10 ;
+EBnot.						Expression9		        ::= "~" Expression10 ;
+EPos.						Expression9		        ::= "+" Expression10 ;
+EUnaryOperator.				Expression9				::= Operator Expression10 ;
+
+EMul.						Expression8		        ::= Expression8 "*" Expression9 ;
+EDiv.						Expression8		        ::= Expression8 "/" Expression9 ;
+EMod.						Expression8		        ::= Expression8 "%" Expression9 ;
+
+EAdd.						Expression7		        ::= Expression7 "+" Expression8 ;
+ESub.						Expression7		        ::= Expression7 "-" Expression8 ;
+
+ELSh.						Expression6		        ::= Expression6 "<<" Expression7 ;
+ERSh.						Expression6		        ::= Expression6 ">>" Expression7 ;
+EBinaryOperator.			Expression6				::= Expression6 Operator Expression7 ;
+
+ELT.						Expression5		        ::= Expression6 "<" Expression6 ;
+EGT.						Expression5		        ::= Expression6 ">" Expression6 ;
+ELE.						Expression5		        ::= Expression6 "<=" Expression6 ;
+EGE.						Expression5		        ::= Expression6 ">=" Expression6 ;
+
+EE.							Expression4		        ::= Expression5 "==" Expression5 ;
+ENE.						Expression4		        ::= Expression5 "!=" Expression5 ;
+
+EBand.						Expression3		        ::= Expression3 "&" Expression4 ;
+EBor.						Expression3		        ::= Expression3 "|" Expression4 ;
+EBxor.						Expression3		        ::= Expression3 "^" Expression4 ;
+
+ELand.						Expression2		        ::= Expression3 "&&" Expression3 ;
+ELor.						Expression2		        ::= Expression3 "||" Expression3 ;
+ELxor.						Expression2		        ::= Expression3 "^^" Expression3 ;
+
+EConditional.  				Expression1  	        ::= Expression2 "?" Expression2 ":" Expression2 ;
+ETernaryOperator.  			Expression1  			::= Expression2 OperatorName Expression2 OperatorName Expression2 ;
+
+EAssign. 					Expression		        ::= RValue "=" Expression ;
+EAddAssign.					Expression		        ::= RValue "+=" Expression ;
+ESubAssign.					Expression		        ::= RValue "-=" Expression ;
+EMulAssign.					Expression		        ::= RValue "*=" Expression ;
+EDivAssign.					Expression		        ::= RValue "/=" Expression ;
+EModAssign.					Expression		        ::= RValue "%=" Expression ;
+EAndAssign.					Expression		        ::= RValue "&=" Expression ;
+EOrAssign.					Expression		        ::= RValue "|=" Expression ;
+EXorAssign.					Expression		        ::= RValue "^=" Expression ;
+ELShAssign.					Expression		        ::= RValue "<<=" Expression ;
+ERShAssign.					Expression		        ::= RValue ">>=" Expression ;
+
+coercions Expression 11 ;
+
+terminator TLDeclaration "" ;
+terminator Declaration "" ;
+terminator Statement "" ;
+terminator TypeSpecifier "" ;
+terminator FunctionSpecifier "" ;
+terminator VariableSpecifier "" ;
+terminator StructMemberDeclaration "" ;
+
+separator ParameterDeclaration "," ;
+separator nonempty Expression "," ;
+
+-- this is super generic and dangerous looking to me.... can it contain quotes?
+token CString '"' ( char )* '"' ;
+token CChar '\'' ( '\\' )? ( char ) '\'' ;

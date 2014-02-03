@@ -1,0 +1,3 @@
+syntax: glob
+cp1/cp1/Release/
+*.ipch

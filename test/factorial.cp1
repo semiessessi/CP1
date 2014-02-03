@@ -1,0 +1,34 @@
+// ... because everyone likes to use factorial as an example of recursion and iteration
+
+import cstd;
+import int32;
+import string;
+
+// a very cruddy factorial function using recursion
+pure int32 factorial( int32 n )
+{
+	if( n <= 0 )
+	{
+		return 1;
+	}
+
+	return factorial( n - 1 );
+}
+
+entrypoint main()
+{
+	int32 n = 0;
+	
+	cstd.puts( "Enter a number: " );
+	
+	// read in the number one character at a time
+	byte inputCharacter = cstd.getchar();
+	while( inputCharacter == '\n' )
+	{
+		n = 10 * n + ( inputCharacter - '0' );
+		inputCharacter = getchar();
+	}
+	
+	int result = factorial( n );
+	cstd.puts( n + "! = " + result );
+}

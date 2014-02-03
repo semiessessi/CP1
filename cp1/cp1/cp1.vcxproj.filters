@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Grammar">
+      <UniqueIdentifier>{c88cdc9a-ffb5-4c2b-90c6-d6a5ed187c89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{5807a82c-0cef-4fac-a458-376c76283cb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compiler">
+      <UniqueIdentifier>{2ad54e77-2294-470a-ab77-bbf8642e9c5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BNFC">
+      <UniqueIdentifier>{17d4aa32-c295-498f-a307-6ec1c0e7909a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Error">
+      <UniqueIdentifier>{339bcf14-1c94-44b8-ae5b-724f2f5986c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compiler\LLVM">
+      <UniqueIdentifier>{e649504d-ec7a-4b69-b13d-908ae80246f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dependency">
+      <UniqueIdentifier>{00577c26-f8fb-4a4f-a0f7-98cccb2d0e29}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\grammar\cp.cf">
+      <Filter>Grammar</Filter>
+    </None>
+    <None Include="..\Source\Compiler\LLVM\LLVMIntrinByte.inl">
+      <Filter>Compiler\LLVM</Filter>
+    </None>
+    <None Include="..\Source\Compiler\LLVM\LLVMIntrin2Byte.inl">
+      <Filter>Compiler\LLVM</Filter>
+    </None>
+    <None Include="..\Source\Compiler\LLVM\LLVMIntrin8Byte.inl">
+      <Filter>Compiler\LLVM</Filter>
+    </None>
+    <None Include="..\Source\Compiler\LLVM\LLVMIntrin4Byte.inl">
+      <Filter>Compiler\LLVM</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\Core\EntryPoint.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bnfcout\Absyn.C">
+      <Filter>BNFC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bnfcout\lexhax.cpp">
+      <Filter>BNFC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bnfcout\Printer.C">
+      <Filter>BNFC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Error\HackyErrorHandler.cpp">
+      <Filter>Error</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Compiler\TypeVisitor.cpp">
+      <Filter>Compiler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Compiler\CompilerVisitor.cpp">
+      <Filter>Compiler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Core\HackyFileLiner.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bnfcout\bisonhax.cpp">
+      <Filter>BNFC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bnfcout\lex.yy.c">
+      <Filter>BNFC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bnfcout\parse.cpp">
+      <Filter>BNFC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Compiler\LLVM\LLVMTransform.cpp">
+      <Filter>Compiler\LLVM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Compiler\ParameterInfo.cpp">
+      <Filter>Compiler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Compiler\TypeInfo.cpp">
+      <Filter>Compiler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Compiler\OperatorInfo.cpp">
+      <Filter>Compiler</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Source\Compiler\CompilerVisitor.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bnfcout\Absyn.H">
+      <Filter>BNFC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bnfcout\Parser.H">
+      <Filter>BNFC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\EntryPointFinder.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\TypeFinder.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\OperatorNameMangle.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\TypeVisitor.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\ParameterVisitor.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\VariableFinder.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bnfcout\bisonlocation.h">
+      <Filter>Error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\bnfcout\parse.hpp">
+      <Filter>BNFC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\ONVisitor.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\RVVisitor.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Core\Switches.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\LLVM\LLVMTransform.h">
+      <Filter>Compiler\LLVM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\ParameterInfo.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\TypeInfo.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\OperatorFinder.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\OperatorInfo.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\OperatorVisitor.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\FunctionFinder.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\ExternFinder.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Compiler\ConstantFinder.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
