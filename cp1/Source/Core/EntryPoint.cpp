@@ -17,6 +17,8 @@
 
 #include "../Error/VerboseInfo.h"
 
+#include "../Optimisers/FirstPass.h"
+
 #include "Switches.h"
 
 extern int yydebug;
@@ -199,14 +201,30 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 		}
 		
         // pretty original code...
-        if( gxSwitches.infoVerbosity > 2 )
+        if( gxSwitches.infoVerbosity > 1 )
         {
             PrintAbsyn printer;
             for( size_t i = 0; i < apCode.size(); ++i )
             {
-				if( apCode[ i ])
+				if( apCode[ i ] )
 				{
 					printf( "\r\nOriginal source for %s:\r\n", aszFilenames[ i ].c_str() );
+					printf( "%s\r\n", printer.print( apCode[ i ] ) );
+				}
+			}
+        }
+        
+        // pretty original code after first pass optimisation...
+        if( gxSwitches.infoVerbosity > 1 )
+        {
+            PrintAbsyn printer;
+            for( size_t i = 0; i < apCode.size(); ++i )
+            {
+				if( apCode[ i ] )
+				{
+                    FirstPassOptimiser fp;
+                    apCode[ i ]->accept( &fp );
+					printf( "\r\n%s after first pass optimisation:\r\n", aszFilenames[ i ].c_str() );
 					printf( "%s\r\n", printer.print( apCode[ i ] ) );
 				}
 			}
