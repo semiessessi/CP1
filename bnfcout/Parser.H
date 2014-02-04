@@ -10,6 +10,7 @@ class OperatorTrait;
 class FunctionSpecifier;
 class VariableSpecifier;
 class TypeSpecifier;
+class GenericParam;
 class Type;
 class StructMemberDeclaration;
 class ParameterDeclaration;
@@ -23,6 +24,7 @@ class ListTypeSpecifier;
 class ListFunctionSpecifier;
 class ListVariableSpecifier;
 class ListStructMemberDeclaration;
+class ListGenericParam;
 class ListParameterDeclaration;
 class ListExpression;
 
@@ -41,6 +43,7 @@ typedef union
   FunctionSpecifier* functionspecifier_;
   VariableSpecifier* variablespecifier_;
   TypeSpecifier* typespecifier_;
+  GenericParam* genericparam_;
   Type* type_;
   StructMemberDeclaration* structmemberdeclaration_;
   ParameterDeclaration* parameterdeclaration_;
@@ -54,6 +57,7 @@ typedef union
   ListFunctionSpecifier* listfunctionspecifier_;
   ListVariableSpecifier* listvariablespecifier_;
   ListStructMemberDeclaration* liststructmemberdeclaration_;
+  ListGenericParam* listgenericparam_;
   ListParameterDeclaration* listparameterdeclaration_;
   ListExpression* listexpression_;
 } YYSTYPE;
@@ -265,9 +269,12 @@ typedef union
 #define _SYMB_203 462
 #define _SYMB_204 463
 #define _SYMB_205 464
-#define _INTEGER_ 465
-#define _DOUBLE_ 466
-#define _IDENT_ 467
+#define _SYMB_206 465
+#define _SYMB_207 466
+#define _SYMB_208 467
+#define _INTEGER_ 468
+#define _DOUBLE_ 469
+#define _IDENT_ 470
 
 extern YYSTYPE yylval;
 Code* pCode(FILE *inp);

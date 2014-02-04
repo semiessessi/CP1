@@ -87,16 +87,22 @@ void yyerror(const char *str)
 	// SE: fill out intrinsics etc...
     FUCKO_MACRO( _SYMB_45, 'add_2b' );
     
-	FUCKO_MACRO( _SYMB_45, 'add_2b' );
-	FUCKO_MACRO( _SYMB_55, 'align' );
-	FUCKO_MACRO( _SYMB_56, 'all' );
-	FUCKO_MACRO( _SYMB_69, 'break' );
-	FUCKO_MACRO( _SYMB_70, 'breakpoint' );
-	FUCKO_MACRO( _SYMB_71, 'byte' );
-	FUCKO_MACRO( _SYMB_72, 'commutative' );
-	FUCKO_MACRO( _SYMB_159, 'type' );
-	FUCKO_MACRO( _SYMB_173, 'while' );
-	
+	FUCKO_MACRO( _SYMB_56, 'align' );
+	FUCKO_MACRO( _SYMB_57, 'all' );
+	FUCKO_MACRO( _SYMB_70, 'break' );
+	FUCKO_MACRO( _SYMB_71, 'breakpoint' );
+	FUCKO_MACRO( _SYMB_72, 'byte' );
+	FUCKO_MACRO( _SYMB_97, 'commutative' );
+    FUCKO_MACRO( _SYMB_98, 'const' );
+	FUCKO_MACRO( _SYMB_105, 'else' );
+	FUCKO_MACRO( _SYMB_106, 'entrypoint' );
+	FUCKO_MACRO( _SYMB_113, 'if' );
+    FUCKO_MACRO( _SYMB_156, 'return' );
+    FUCKO_MACRO( _SYMB_186, 'type' );
+    FUCKO_MACRO( _SYMB_193, 'until' );
+    FUCKO_MACRO( _SYMB_200, 'where' );
+    FUCKO_MACRO( _SYMB_201, 'while' );
+    
 	// must be last to avoid fucking up the above tests...
     FUCKO_MACRO( _SYMB_0, ';' );
     FUCKO_MACRO( _SYMB_1, '{' );

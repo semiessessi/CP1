@@ -84,7 +84,11 @@ class PrintAbsyn : public Visitor
   void visitVSConst(VSConst *p);
   void visitTypeSpecifier(TypeSpecifier *p); /* abstract class */
   void visitTSAlign(TSAlign *p);
+  void visitTSGeneric(TSGeneric *p);
+  void visitGenericParam(GenericParam *p); /* abstract class */
+  void visitTSGParam(TSGParam *p);
   void visitType(Type *p); /* abstract class */
+  void visitTAddress(TAddress *p);
   void visitTByte(TByte *p);
   void visitTCustom(TCustom *p);
   void visitTFixedArray(TFixedArray *p);
@@ -304,6 +308,7 @@ class PrintAbsyn : public Visitor
   void visitListFunctionSpecifier(ListFunctionSpecifier* p);
   void visitListVariableSpecifier(ListVariableSpecifier* p);
   void visitListStructMemberDeclaration(ListStructMemberDeclaration* p);
+  void visitListGenericParam(ListGenericParam* p);
   void visitListParameterDeclaration(ListParameterDeclaration* p);
   void visitListExpression(ListExpression* p);
 
@@ -431,7 +436,11 @@ class ShowAbsyn : public Visitor
   void visitVSConst(VSConst *p);
   void visitTypeSpecifier(TypeSpecifier *p); /* abstract class */
   void visitTSAlign(TSAlign *p);
+  void visitTSGeneric(TSGeneric *p);
+  void visitGenericParam(GenericParam *p); /* abstract class */
+  void visitTSGParam(TSGParam *p);
   void visitType(Type *p); /* abstract class */
+  void visitTAddress(TAddress *p);
   void visitTByte(TByte *p);
   void visitTCustom(TCustom *p);
   void visitTFixedArray(TFixedArray *p);
@@ -651,6 +660,7 @@ class ShowAbsyn : public Visitor
   void visitListFunctionSpecifier(ListFunctionSpecifier* p);
   void visitListVariableSpecifier(ListVariableSpecifier* p);
   void visitListStructMemberDeclaration(ListStructMemberDeclaration* p);
+  void visitListGenericParam(ListGenericParam* p);
   void visitListParameterDeclaration(ListParameterDeclaration* p);
   void visitListExpression(ListExpression* p);
 

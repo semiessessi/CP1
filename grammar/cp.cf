@@ -18,8 +18,8 @@ DOperator.					Declaration				::= [FunctionSpecifier] Type OperatorName "(" [Par
 DOperatorInfo.				Declaration				::= OperatorTrait ";" ;
 DTypeDecl.					Declaration				::= [TypeSpecifier] "type" Type Ident ";" ;
 DExtern.					Declaration				::= "extern" Prototype ;
-DIVariable.					Declaration				::= Type Ident "=" Expression ";" ;
-DVariable.					Declaration				::= Type Ident ";" ;
+DIVariable.					Declaration				::= "global" [VariableSpecifier] Type Ident "=" Expression ";" ;
+DVariable.					Declaration				::= "global" [VariableSpecifier] Type Ident ";" ;
 
 -- PDefaultFunction.			Prototype				::= [FunctionSpecifier] Ident "(" [ParameterDeclaration] ")" ";" ;
 PFunction.					Prototype				::= [FunctionSpecifier] Type Ident "(" [ParameterDeclaration] ")" ";" ;
@@ -49,7 +49,7 @@ ONLand.						OperatorName		    ::= "&&" ;
 ONLor.						OperatorName		    ::= "||" ;
 ONLxor.						OperatorName		    ::= "^^" ;
 
-OTIdentity.					OperatorTrait           ::= "identity" Type OperatorName Integer ;
+OTIdentity.					OperatorTrait           ::= "identity" Type OperatorName Expression ;
 
 FSEntryPoint.				FunctionSpecifier		::= "entrypoint" ;
 FSPure.						FunctionSpecifier		::= "pure" ;
@@ -63,7 +63,11 @@ FSSelfInverse.				FunctionSpecifier		::= "selfinverse" ;
 VSConst.					VariableSpecifier		::= "const" ;
 
 TSAlign.                    TypeSpecifier           ::= "align" "<" Integer ">" ;
+TSGeneric.                  TypeSpecifier           ::= "generic" "<" [GenericParam] ">" ;
 
+TSGParam.                   GenericParam            ::= "type" Ident ;
+
+TAddress.					Type					::= "address" ;
 TByte.						Type					::= "byte" ;
 TCustom.					Type					::= Ident ;
 TFixedArray.				Type					::= Type "[" Integer "]" ;
@@ -329,6 +333,7 @@ terminator FunctionSpecifier "" ;
 terminator VariableSpecifier "" ;
 terminator StructMemberDeclaration "" ;
 
+separator nonempty GenericParam "," ;
 separator ParameterDeclaration "," ;
 separator nonempty Expression "," ;
 

@@ -1,5 +1,5 @@
 import int32;
-//expose pointer;
+//import pointer;
 
 namespace cstd
 {

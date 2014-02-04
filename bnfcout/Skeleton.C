@@ -101,6 +101,7 @@ void Skeleton::visitDIVariable(DIVariable* divariable)
 {
   /* Code For DIVariable Goes Here */
 
+  if (divariable->listvariablespecifier_) {divariable->listvariablespecifier_->accept(this);}
   divariable->type_->accept(this);
   visitIdent(divariable->ident_);
   divariable->expression_->accept(this);
@@ -110,6 +111,7 @@ void Skeleton::visitDVariable(DVariable* dvariable)
 {
   /* Code For DVariable Goes Here */
 
+  if (dvariable->listvariablespecifier_) {dvariable->listvariablespecifier_->accept(this);}
   dvariable->type_->accept(this);
   visitIdent(dvariable->ident_);
 }
@@ -281,7 +283,7 @@ void Skeleton::visitOTIdentity(OTIdentity* otidentity)
 
   otidentity->type_->accept(this);
   otidentity->operatorname_->accept(this);
-  visitInteger(otidentity->integer_);
+  otidentity->expression_->accept(this);
 }
 
 void Skeleton::visitFunctionSpecifier(FunctionSpecifier* functionspecifier) {} //abstract class
@@ -352,7 +354,29 @@ void Skeleton::visitTSAlign(TSAlign* tsalign)
   visitInteger(tsalign->integer_);
 }
 
+void Skeleton::visitTSGeneric(TSGeneric* tsgeneric)
+{
+  /* Code For TSGeneric Goes Here */
+
+  if (tsgeneric->listgenericparam_) {tsgeneric->listgenericparam_->accept(this);}
+}
+
+void Skeleton::visitGenericParam(GenericParam* genericparam) {} //abstract class
+
+void Skeleton::visitTSGParam(TSGParam* tsgparam)
+{
+  /* Code For TSGParam Goes Here */
+
+  visitIdent(tsgparam->ident_);
+}
+
 void Skeleton::visitType(Type* type) {} //abstract class
+
+void Skeleton::visitTAddress(TAddress* taddress)
+{
+  /* Code For TAddress Goes Here */
+
+}
 
 void Skeleton::visitTByte(TByte* tbyte)
 {
@@ -2057,6 +2081,16 @@ void Skeleton::visitListStructMemberDeclaration(ListStructMemberDeclaration* lis
     /* Code For ListStructMemberDeclaration Goes Here */
     liststructmemberdeclaration->structmemberdeclaration_->accept(this);
     liststructmemberdeclaration = liststructmemberdeclaration->liststructmemberdeclaration_;
+  }
+}
+
+void Skeleton::visitListGenericParam(ListGenericParam* listgenericparam)
+{
+  while(listgenericparam!= 0)
+  {
+    /* Code For ListGenericParam Goes Here */
+    listgenericparam->genericparam_->accept(this);
+    listgenericparam = listgenericparam->listgenericparam_;
   }
 }
 

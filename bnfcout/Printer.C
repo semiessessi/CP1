@@ -250,7 +250,8 @@ void PrintAbsyn::visitDIVariable(DIVariable* p)
   int oldi = _i_;
   if (oldi > 0) render(_L_PAREN);
 
-  _i_ = 0; p->type_->accept(this);
+  render("global");
+  if(p->listvariablespecifier_) {_i_ = 0; p->listvariablespecifier_->accept(this);}  _i_ = 0; p->type_->accept(this);
   visitIdent(p->ident_);
   render('=');
   _i_ = 0; p->expression_->accept(this);
@@ -266,7 +267,8 @@ void PrintAbsyn::visitDVariable(DVariable* p)
   int oldi = _i_;
   if (oldi > 0) render(_L_PAREN);
 
-  _i_ = 0; p->type_->accept(this);
+  render("global");
+  if(p->listvariablespecifier_) {_i_ = 0; p->listvariablespecifier_->accept(this);}  _i_ = 0; p->type_->accept(this);
   visitIdent(p->ident_);
   render(';');
 
@@ -593,7 +595,7 @@ void PrintAbsyn::visitOTIdentity(OTIdentity* p)
   render("identity");
   _i_ = 0; p->type_->accept(this);
   _i_ = 0; p->operatorname_->accept(this);
-  visitInteger(p->integer_);
+  _i_ = 0; p->expression_->accept(this);
 
   if (oldi > 0) render(_R_PAREN);
 
@@ -730,7 +732,48 @@ void PrintAbsyn::visitTSAlign(TSAlign* p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitTSGeneric(TSGeneric* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render("generic");
+  render('<');
+  if(p->listgenericparam_) {_i_ = 0; p->listgenericparam_->accept(this);}  render('>');
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitGenericParam(GenericParam*p) {} //abstract class
+
+void PrintAbsyn::visitTSGParam(TSGParam* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render("type");
+  visitIdent(p->ident_);
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitType(Type*p) {} //abstract class
+
+void PrintAbsyn::visitTAddress(TAddress* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render("address");
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
 
 void PrintAbsyn::visitTByte(TByte* p)
 {
@@ -4137,6 +4180,25 @@ void PrintAbsyn::visitListStructMemberDeclaration(ListStructMemberDeclaration *l
   }
 }
 
+void PrintAbsyn::visitListGenericParam(ListGenericParam *listgenericparam)
+{
+  while(listgenericparam!= 0)
+  {
+    if (listgenericparam->listgenericparam_ == 0)
+    {
+      listgenericparam->genericparam_->accept(this);
+
+      listgenericparam = 0;
+    }
+    else
+    {
+      listgenericparam->genericparam_->accept(this);
+      render(',');
+      listgenericparam = listgenericparam->listgenericparam_;
+    }
+  }
+}
+
 void PrintAbsyn::visitListParameterDeclaration(ListParameterDeclaration *listparameterdeclaration)
 {
   while(listparameterdeclaration!= 0)
@@ -4388,6 +4450,10 @@ void ShowAbsyn::visitDIVariable(DIVariable* p)
   bufAppend("DIVariable");
   bufAppend(' ');
   bufAppend('[');
+  if (p->listvariablespecifier_)  p->listvariablespecifier_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
   if (p->type_)  p->type_->accept(this);
   bufAppend(']');
   bufAppend(' ');
@@ -4403,6 +4469,10 @@ void ShowAbsyn::visitDVariable(DVariable* p)
 {
   bufAppend('(');
   bufAppend("DVariable");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listvariablespecifier_)  p->listvariablespecifier_->accept(this);
+  bufAppend(']');
   bufAppend(' ');
   bufAppend('[');
   if (p->type_)  p->type_->accept(this);
@@ -4552,7 +4622,9 @@ void ShowAbsyn::visitOTIdentity(OTIdentity* p)
   if (p->operatorname_)  p->operatorname_->accept(this);
   bufAppend(']');
   bufAppend(' ');
-  visitInteger(p->integer_);
+  bufAppend('[');
+  if (p->expression_)  p->expression_->accept(this);
+  bufAppend(']');
   bufAppend(')');
 }
 void ShowAbsyn::visitFunctionSpecifier(FunctionSpecifier* p) {} //abstract class
@@ -4612,8 +4684,33 @@ void ShowAbsyn::visitTSAlign(TSAlign* p)
   bufAppend(' ');
   bufAppend(')');
 }
+void ShowAbsyn::visitTSGeneric(TSGeneric* p)
+{
+  bufAppend('(');
+  bufAppend("TSGeneric");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listgenericparam_)  p->listgenericparam_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitGenericParam(GenericParam* p) {} //abstract class
+
+void ShowAbsyn::visitTSGParam(TSGParam* p)
+{
+  bufAppend('(');
+  bufAppend("TSGParam");
+  bufAppend(' ');
+  visitIdent(p->ident_);
+  bufAppend(')');
+}
 void ShowAbsyn::visitType(Type* p) {} //abstract class
 
+void ShowAbsyn::visitTAddress(TAddress* p)
+{
+  bufAppend("TAddress");
+}
 void ShowAbsyn::visitTByte(TByte* p)
 {
   bufAppend("TByte");
@@ -7064,6 +7161,24 @@ void ShowAbsyn::visitListStructMemberDeclaration(ListStructMemberDeclaration *li
     {
       liststructmemberdeclaration->structmemberdeclaration_->accept(this);
       liststructmemberdeclaration = 0;
+    }
+  }
+}
+
+void ShowAbsyn::visitListGenericParam(ListGenericParam *listgenericparam)
+{
+  while(listgenericparam!= 0)
+  {
+    if (listgenericparam->listgenericparam_)
+    {
+      listgenericparam->genericparam_->accept(this);
+      bufAppend(", ");
+      listgenericparam = listgenericparam->listgenericparam_;
+    }
+    else
+    {
+      listgenericparam->genericparam_->accept(this);
+      listgenericparam = 0;
     }
   }
 }

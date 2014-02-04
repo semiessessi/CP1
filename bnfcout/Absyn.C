@@ -253,8 +253,9 @@ DExtern *DExtern::clone() const {
 }
 
 /********************   DIVariable    ********************/
-DIVariable::DIVariable(Type *p1, Ident p2, Expression *p3) { type_ = p1; ident_ = p2; expression_ = p3; }
-DIVariable::DIVariable(const DIVariable & other) {   type_ = other.type_->clone();
+DIVariable::DIVariable(ListVariableSpecifier *p1, Type *p2, Ident p3, Expression *p4) { listvariablespecifier_ = p1; type_ = p2; ident_ = p3; expression_ = p4; }
+DIVariable::DIVariable(const DIVariable & other) {   listvariablespecifier_ = other.listvariablespecifier_->clone();
+  type_ = other.type_->clone();
   ident_ = other.ident_;
   expression_ = other.expression_->clone();
 
@@ -265,13 +266,14 @@ DIVariable &DIVariable::operator=(const DIVariable & other) {
   return *this;
 }
 void DIVariable::swap(DIVariable & other) {
+  std::swap(listvariablespecifier_, other.listvariablespecifier_);
   std::swap(type_, other.type_);
   std::swap(ident_, other.ident_);
   std::swap(expression_, other.expression_);
 
 }
 
-DIVariable::~DIVariable() { delete(type_); delete(expression_); }
+DIVariable::~DIVariable() { delete(listvariablespecifier_); delete(type_); delete(expression_); }
 
 void DIVariable::accept(Visitor *v) { v->visitDIVariable(this); }
 DIVariable *DIVariable::clone() const {
@@ -279,8 +281,9 @@ DIVariable *DIVariable::clone() const {
 }
 
 /********************   DVariable    ********************/
-DVariable::DVariable(Type *p1, Ident p2) { type_ = p1; ident_ = p2; }
-DVariable::DVariable(const DVariable & other) {   type_ = other.type_->clone();
+DVariable::DVariable(ListVariableSpecifier *p1, Type *p2, Ident p3) { listvariablespecifier_ = p1; type_ = p2; ident_ = p3; }
+DVariable::DVariable(const DVariable & other) {   listvariablespecifier_ = other.listvariablespecifier_->clone();
+  type_ = other.type_->clone();
   ident_ = other.ident_;
 
 }
@@ -290,12 +293,13 @@ DVariable &DVariable::operator=(const DVariable & other) {
   return *this;
 }
 void DVariable::swap(DVariable & other) {
+  std::swap(listvariablespecifier_, other.listvariablespecifier_);
   std::swap(type_, other.type_);
   std::swap(ident_, other.ident_);
 
 }
 
-DVariable::~DVariable() { delete(type_); }
+DVariable::~DVariable() { delete(listvariablespecifier_); delete(type_); }
 
 void DVariable::accept(Visitor *v) { v->visitDVariable(this); }
 DVariable *DVariable::clone() const {
@@ -813,10 +817,10 @@ ONLxor *ONLxor::clone() const {
 }
 
 /********************   OTIdentity    ********************/
-OTIdentity::OTIdentity(Type *p1, OperatorName *p2, Integer p3) { type_ = p1; operatorname_ = p2; integer_ = p3; }
+OTIdentity::OTIdentity(Type *p1, OperatorName *p2, Expression *p3) { type_ = p1; operatorname_ = p2; expression_ = p3; }
 OTIdentity::OTIdentity(const OTIdentity & other) {   type_ = other.type_->clone();
   operatorname_ = other.operatorname_->clone();
-  integer_ = other.integer_;
+  expression_ = other.expression_->clone();
 
 }
 OTIdentity &OTIdentity::operator=(const OTIdentity & other) {
@@ -827,11 +831,11 @@ OTIdentity &OTIdentity::operator=(const OTIdentity & other) {
 void OTIdentity::swap(OTIdentity & other) {
   std::swap(type_, other.type_);
   std::swap(operatorname_, other.operatorname_);
-  std::swap(integer_, other.integer_);
+  std::swap(expression_, other.expression_);
 
 }
 
-OTIdentity::~OTIdentity() { delete(type_); delete(operatorname_); }
+OTIdentity::~OTIdentity() { delete(type_); delete(operatorname_); delete(expression_); }
 
 void OTIdentity::accept(Visitor *v) { v->visitOTIdentity(this); }
 OTIdentity *OTIdentity::clone() const {
@@ -1040,6 +1044,70 @@ TSAlign::~TSAlign() { }
 void TSAlign::accept(Visitor *v) { v->visitTSAlign(this); }
 TSAlign *TSAlign::clone() const {
   return new TSAlign(*this);
+}
+
+/********************   TSGeneric    ********************/
+TSGeneric::TSGeneric(ListGenericParam *p1) { listgenericparam_ = p1; }
+TSGeneric::TSGeneric(const TSGeneric & other) {   listgenericparam_ = other.listgenericparam_->clone();
+
+}
+TSGeneric &TSGeneric::operator=(const TSGeneric & other) {
+  TSGeneric tmp(other);
+  swap(tmp);
+  return *this;
+}
+void TSGeneric::swap(TSGeneric & other) {
+  std::swap(listgenericparam_, other.listgenericparam_);
+
+}
+
+TSGeneric::~TSGeneric() { delete(listgenericparam_); }
+
+void TSGeneric::accept(Visitor *v) { v->visitTSGeneric(this); }
+TSGeneric *TSGeneric::clone() const {
+  return new TSGeneric(*this);
+}
+
+/********************   TSGParam    ********************/
+TSGParam::TSGParam(Ident p1) { ident_ = p1; }
+TSGParam::TSGParam(const TSGParam & other) {   ident_ = other.ident_;
+
+}
+TSGParam &TSGParam::operator=(const TSGParam & other) {
+  TSGParam tmp(other);
+  swap(tmp);
+  return *this;
+}
+void TSGParam::swap(TSGParam & other) {
+  std::swap(ident_, other.ident_);
+
+}
+
+TSGParam::~TSGParam() { }
+
+void TSGParam::accept(Visitor *v) { v->visitTSGParam(this); }
+TSGParam *TSGParam::clone() const {
+  return new TSGParam(*this);
+}
+
+/********************   TAddress    ********************/
+TAddress::TAddress() { }
+TAddress::TAddress(const TAddress & other) { 
+}
+TAddress &TAddress::operator=(const TAddress & other) {
+  TAddress tmp(other);
+  swap(tmp);
+  return *this;
+}
+void TAddress::swap(TAddress & other) {
+
+}
+
+TAddress::~TAddress() { }
+
+void TAddress::accept(Visitor *v) { v->visitTAddress(this); }
+TAddress *TAddress::clone() const {
+  return new TAddress(*this);
 }
 
 /********************   TByte    ********************/
@@ -6333,6 +6401,61 @@ ListStructMemberDeclaration* ListStructMemberDeclaration::reverse(ListStructMemb
 void ListStructMemberDeclaration::accept(Visitor *v) { v->visitListStructMemberDeclaration(this); }
 ListStructMemberDeclaration *ListStructMemberDeclaration::clone() const {
   return new ListStructMemberDeclaration(*this);
+}
+
+/********************   ListGenericParam    ********************/
+ListGenericParam::ListGenericParam(GenericParam *p1, ListGenericParam *p2) { genericparam_ = p1; listgenericparam_ = p2; }
+ListGenericParam::ListGenericParam(const ListGenericParam & other) {   genericparam_ = other.genericparam_->clone();
+  listgenericparam_ = other.listgenericparam_->clone();
+
+}
+ListGenericParam &ListGenericParam::operator=(const ListGenericParam & other) {
+  ListGenericParam tmp(other);
+  swap(tmp);
+  return *this;
+}
+void ListGenericParam::swap(ListGenericParam & other) {
+  std::swap(genericparam_, other.genericparam_);
+  std::swap(listgenericparam_, other.listgenericparam_);
+
+}
+
+ListGenericParam::~ListGenericParam() { delete(genericparam_); delete(listgenericparam_); }
+ListGenericParam::ListGenericParam(GenericParam *p)
+{
+  genericparam_ = p;
+  listgenericparam_= 0;
+}
+ListGenericParam* ListGenericParam::reverse()
+{
+  if (listgenericparam_ == 0) return this;
+  else
+  {
+    ListGenericParam *tmp = listgenericparam_->reverse(this);
+    listgenericparam_ = 0;
+    return tmp;
+  }
+}
+
+ListGenericParam* ListGenericParam::reverse(ListGenericParam* prev)
+{
+  if (listgenericparam_ == 0)
+  {
+    listgenericparam_ = prev;
+    return this;
+  }
+  else
+  {
+    ListGenericParam *tmp = listgenericparam_->reverse(this);
+    listgenericparam_ = prev;
+    return tmp;
+  }
+}
+
+
+void ListGenericParam::accept(Visitor *v) { v->visitListGenericParam(this); }
+ListGenericParam *ListGenericParam::clone() const {
+  return new ListGenericParam(*this);
 }
 
 /********************   ListParameterDeclaration    ********************/

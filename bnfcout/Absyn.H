@@ -64,6 +64,9 @@ class FSInverse;
 class FSSelfInverse;
 class VSConst;
 class TSAlign;
+class TSGeneric;
+class TSGParam;
+class TAddress;
 class TByte;
 class TCustom;
 class TFixedArray;
@@ -278,6 +281,7 @@ class ListTypeSpecifier;
 class ListFunctionSpecifier;
 class ListVariableSpecifier;
 class ListStructMemberDeclaration;
+class ListGenericParam;
 class ListParameterDeclaration;
 class ListExpression;
 class Code;
@@ -289,6 +293,7 @@ class OperatorTrait;
 class FunctionSpecifier;
 class VariableSpecifier;
 class TypeSpecifier;
+class GenericParam;
 class Type;
 class StructMemberDeclaration;
 class ParameterDeclaration;
@@ -351,6 +356,9 @@ class Visitor
   virtual void visitFSSelfInverse(FSSelfInverse *p) = 0;
   virtual void visitVSConst(VSConst *p) = 0;
   virtual void visitTSAlign(TSAlign *p) = 0;
+  virtual void visitTSGeneric(TSGeneric *p) = 0;
+  virtual void visitTSGParam(TSGParam *p) = 0;
+  virtual void visitTAddress(TAddress *p) = 0;
   virtual void visitTByte(TByte *p) = 0;
   virtual void visitTCustom(TCustom *p) = 0;
   virtual void visitTFixedArray(TFixedArray *p) = 0;
@@ -565,6 +573,7 @@ class Visitor
   virtual void visitListFunctionSpecifier(ListFunctionSpecifier *p) = 0;
   virtual void visitListVariableSpecifier(ListVariableSpecifier *p) = 0;
   virtual void visitListStructMemberDeclaration(ListStructMemberDeclaration *p) = 0;
+  virtual void visitListGenericParam(ListGenericParam *p) = 0;
   virtual void visitListParameterDeclaration(ListParameterDeclaration *p) = 0;
   virtual void visitListExpression(ListExpression *p) = 0;
   virtual void visitCode(Code *p) = 0;
@@ -576,6 +585,7 @@ class Visitor
   virtual void visitFunctionSpecifier(FunctionSpecifier *p) = 0;
   virtual void visitVariableSpecifier(VariableSpecifier *p) = 0;
   virtual void visitTypeSpecifier(TypeSpecifier *p) = 0;
+  virtual void visitGenericParam(GenericParam *p) = 0;
   virtual void visitType(Type *p) = 0;
   virtual void visitStructMemberDeclaration(StructMemberDeclaration *p) = 0;
   virtual void visitParameterDeclaration(ParameterDeclaration *p) = 0;
@@ -776,13 +786,14 @@ class DExtern : public Declaration
 class DIVariable : public Declaration
 {
  public:
+  ListVariableSpecifier *listvariablespecifier_;
   Type *type_;
   Ident ident_;
   Expression *expression_;
 
   DIVariable(const DIVariable &);
   DIVariable &operator=(const DIVariable &);
-  DIVariable(Type *p1, Ident p2, Expression *p3);
+  DIVariable(ListVariableSpecifier *p1, Type *p2, Ident p3, Expression *p4);
   ~DIVariable();
   virtual void accept(Visitor *v);
   virtual  DIVariable  *clone() const;
@@ -792,12 +803,13 @@ class DIVariable : public Declaration
 class DVariable : public Declaration
 {
  public:
+  ListVariableSpecifier *listvariablespecifier_;
   Type *type_;
   Ident ident_;
 
   DVariable(const DVariable &);
   DVariable &operator=(const DVariable &);
-  DVariable(Type *p1, Ident p2);
+  DVariable(ListVariableSpecifier *p1, Type *p2, Ident p3);
   ~DVariable();
   virtual void accept(Visitor *v);
   virtual  DVariable  *clone() const;
@@ -1157,11 +1169,11 @@ class OTIdentity : public OperatorTrait
  public:
   Type *type_;
   OperatorName *operatorname_;
-  Integer integer_;
+  Expression *expression_;
 
   OTIdentity(const OTIdentity &);
   OTIdentity &operator=(const OTIdentity &);
-  OTIdentity(Type *p1, OperatorName *p2, Integer p3);
+  OTIdentity(Type *p1, OperatorName *p2, Expression *p3);
   ~OTIdentity();
   virtual void accept(Visitor *v);
   virtual  OTIdentity  *clone() const;
@@ -1318,10 +1330,57 @@ class TSAlign : public TypeSpecifier
   void swap(TSAlign &);
 };
 
+class TSGeneric : public TypeSpecifier
+{
+ public:
+  ListGenericParam *listgenericparam_;
+
+  TSGeneric(const TSGeneric &);
+  TSGeneric &operator=(const TSGeneric &);
+  TSGeneric(ListGenericParam *p1);
+  ~TSGeneric();
+  virtual void accept(Visitor *v);
+  virtual  TSGeneric  *clone() const;
+  void swap(TSGeneric &);
+};
+
+
+class GenericParam : public Visitable {
+public:
+  virtual GenericParam *clone() const = 0;
+};
+
+class TSGParam : public GenericParam
+{
+ public:
+  Ident ident_;
+
+  TSGParam(const TSGParam &);
+  TSGParam &operator=(const TSGParam &);
+  TSGParam(Ident p1);
+  ~TSGParam();
+  virtual void accept(Visitor *v);
+  virtual  TSGParam  *clone() const;
+  void swap(TSGParam &);
+};
+
 
 class Type : public Visitable {
 public:
   virtual Type *clone() const = 0;
+};
+
+class TAddress : public Type
+{
+ public:
+
+  TAddress(const TAddress &);
+  TAddress &operator=(const TAddress &);
+  TAddress();
+  ~TAddress();
+  virtual void accept(Visitor *v);
+  virtual  TAddress  *clone() const;
+  void swap(TAddress &);
 };
 
 class TByte : public Type
@@ -4405,6 +4464,23 @@ class ListStructMemberDeclaration : public Visitable
   virtual void accept(Visitor *v);
   virtual ListStructMemberDeclaration *clone() const;
   void swap(ListStructMemberDeclaration &);
+};
+class ListGenericParam : public Visitable
+{
+ public:
+  GenericParam *genericparam_;
+  ListGenericParam *listgenericparam_;
+
+  ListGenericParam(const ListGenericParam &);
+  ListGenericParam &operator=(const ListGenericParam &);
+  ListGenericParam(GenericParam *p1, ListGenericParam *p2);
+  ListGenericParam(GenericParam *p);
+  ~ListGenericParam();
+  ListGenericParam* reverse();
+  ListGenericParam* reverse(ListGenericParam *l);
+  virtual void accept(Visitor *v);
+  virtual ListGenericParam *clone() const;
+  void swap(ListGenericParam &);
 };
 class ListParameterDeclaration : public Visitable
 {

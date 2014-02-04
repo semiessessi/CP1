@@ -61,25 +61,26 @@ The reserved words used in E:\extra_cp\cp\cp1\cp1\ are the following: \\
 {\reserved{add\_2b}} &{\reserved{add\_2f}} &{\reserved{add\_4b}} \\
 {\reserved{add\_4f}} &{\reserved{add\_4f4}} &{\reserved{add\_8b}} \\
 {\reserved{add\_8f}} &{\reserved{add\_b}} &{\reserved{add\_b4}} \\
-{\reserved{add\_b8}} &{\reserved{align}} &{\reserved{all}} \\
-{\reserved{and\_2b}} &{\reserved{and\_4b}} &{\reserved{and\_8b}} \\
-{\reserved{and\_b}} &{\reserved{anticommutative}} &{\reserved{ashr\_2b}} \\
-{\reserved{ashr\_4b}} &{\reserved{ashr\_8b}} &{\reserved{ashr\_b}} \\
-{\reserved{ashr\_b4}} &{\reserved{ashr\_b8}} &{\reserved{associative}} \\
-{\reserved{break}} &{\reserved{breakpoint}} &{\reserved{byte}} \\
-{\reserved{cmp\_2b}} &{\reserved{cmp\_4b}} &{\reserved{cmp\_8b}} \\
-{\reserved{cmp\_b}} &{\reserved{cmp\_ge\_2b}} &{\reserved{cmp\_ge\_4b}} \\
-{\reserved{cmp\_ge\_8b}} &{\reserved{cmp\_ge\_b}} &{\reserved{cmp\_gt\_2b}} \\
-{\reserved{cmp\_gt\_4b}} &{\reserved{cmp\_gt\_8b}} &{\reserved{cmp\_gt\_b}} \\
-{\reserved{cmp\_le\_2b}} &{\reserved{cmp\_le\_4b}} &{\reserved{cmp\_le\_8b}} \\
-{\reserved{cmp\_le\_b}} &{\reserved{cmp\_lt\_2b}} &{\reserved{cmp\_lt\_4b}} \\
-{\reserved{cmp\_lt\_8b}} &{\reserved{cmp\_lt\_b}} &{\reserved{cmp\_ne\_2b}} \\
-{\reserved{cmp\_ne\_4b}} &{\reserved{cmp\_ne\_8b}} &{\reserved{cmp\_ne\_b}} \\
-{\reserved{commutative}} &{\reserved{const}} &{\reserved{continue}} \\
-{\reserved{div\_2f}} &{\reserved{div\_4f}} &{\reserved{div\_4f4}} \\
-{\reserved{div\_8f}} &{\reserved{each}} &{\reserved{else}} \\
-{\reserved{entrypoint}} &{\reserved{expose}} &{\reserved{extern}} \\
-{\reserved{for}} &{\reserved{identity}} &{\reserved{if}} \\
+{\reserved{add\_b8}} &{\reserved{address}} &{\reserved{align}} \\
+{\reserved{all}} &{\reserved{and\_2b}} &{\reserved{and\_4b}} \\
+{\reserved{and\_8b}} &{\reserved{and\_b}} &{\reserved{anticommutative}} \\
+{\reserved{ashr\_2b}} &{\reserved{ashr\_4b}} &{\reserved{ashr\_8b}} \\
+{\reserved{ashr\_b}} &{\reserved{ashr\_b4}} &{\reserved{ashr\_b8}} \\
+{\reserved{associative}} &{\reserved{break}} &{\reserved{breakpoint}} \\
+{\reserved{byte}} &{\reserved{cmp\_2b}} &{\reserved{cmp\_4b}} \\
+{\reserved{cmp\_8b}} &{\reserved{cmp\_b}} &{\reserved{cmp\_ge\_2b}} \\
+{\reserved{cmp\_ge\_4b}} &{\reserved{cmp\_ge\_8b}} &{\reserved{cmp\_ge\_b}} \\
+{\reserved{cmp\_gt\_2b}} &{\reserved{cmp\_gt\_4b}} &{\reserved{cmp\_gt\_8b}} \\
+{\reserved{cmp\_gt\_b}} &{\reserved{cmp\_le\_2b}} &{\reserved{cmp\_le\_4b}} \\
+{\reserved{cmp\_le\_8b}} &{\reserved{cmp\_le\_b}} &{\reserved{cmp\_lt\_2b}} \\
+{\reserved{cmp\_lt\_4b}} &{\reserved{cmp\_lt\_8b}} &{\reserved{cmp\_lt\_b}} \\
+{\reserved{cmp\_ne\_2b}} &{\reserved{cmp\_ne\_4b}} &{\reserved{cmp\_ne\_8b}} \\
+{\reserved{cmp\_ne\_b}} &{\reserved{commutative}} &{\reserved{const}} \\
+{\reserved{continue}} &{\reserved{div\_2f}} &{\reserved{div\_4f}} \\
+{\reserved{div\_4f4}} &{\reserved{div\_8f}} &{\reserved{each}} \\
+{\reserved{else}} &{\reserved{entrypoint}} &{\reserved{expose}} \\
+{\reserved{extern}} &{\reserved{for}} &{\reserved{generic}} \\
+{\reserved{global}} &{\reserved{identity}} &{\reserved{if}} \\
 {\reserved{import}} &{\reserved{in}} &{\reserved{inline}} \\
 {\reserved{inverse}} &{\reserved{lshr\_2b}} &{\reserved{lshr\_4b}} \\
 {\reserved{lshr\_8b}} &{\reserved{lshr\_b}} &{\reserved{lshr\_b4}} \\
@@ -159,8 +160,8 @@ All other symbols are terminals.\\
  & {\delimit}  &{\nonterminal{OperatorTrait}} {\terminal{;}}  \\
  & {\delimit}  &{\nonterminal{ListTypeSpecifier}} {\terminal{type}} {\nonterminal{Type}} {\nonterminal{Ident}} {\terminal{;}}  \\
  & {\delimit}  &{\terminal{extern}} {\nonterminal{Prototype}}  \\
- & {\delimit}  &{\nonterminal{Type}} {\nonterminal{Ident}} {\terminal{{$=$}}} {\nonterminal{Expression}} {\terminal{;}}  \\
- & {\delimit}  &{\nonterminal{Type}} {\nonterminal{Ident}} {\terminal{;}}  \\
+ & {\delimit}  &{\terminal{global}} {\nonterminal{ListVariableSpecifier}} {\nonterminal{Type}} {\nonterminal{Ident}} {\terminal{{$=$}}} {\nonterminal{Expression}} {\terminal{;}}  \\
+ & {\delimit}  &{\terminal{global}} {\nonterminal{ListVariableSpecifier}} {\nonterminal{Type}} {\nonterminal{Ident}} {\terminal{;}}  \\
 \end{tabular}\\
 
 \begin{tabular}{lll}
@@ -195,7 +196,7 @@ All other symbols are terminals.\\
 \end{tabular}\\
 
 \begin{tabular}{lll}
-{\nonterminal{OperatorTrait}} & {\arrow}  &{\terminal{identity}} {\nonterminal{Type}} {\nonterminal{OperatorName}} {\nonterminal{Integer}}  \\
+{\nonterminal{OperatorTrait}} & {\arrow}  &{\terminal{identity}} {\nonterminal{Type}} {\nonterminal{OperatorName}} {\nonterminal{Expression}}  \\
 \end{tabular}\\
 
 \begin{tabular}{lll}
@@ -215,10 +216,16 @@ All other symbols are terminals.\\
 
 \begin{tabular}{lll}
 {\nonterminal{TypeSpecifier}} & {\arrow}  &{\terminal{align}} {\terminal{{$<$}}} {\nonterminal{Integer}} {\terminal{{$>$}}}  \\
+ & {\delimit}  &{\terminal{generic}} {\terminal{{$<$}}} {\nonterminal{ListGenericParam}} {\terminal{{$>$}}}  \\
 \end{tabular}\\
 
 \begin{tabular}{lll}
-{\nonterminal{Type}} & {\arrow}  &{\terminal{byte}}  \\
+{\nonterminal{GenericParam}} & {\arrow}  &{\terminal{type}} {\nonterminal{Ident}}  \\
+\end{tabular}\\
+
+\begin{tabular}{lll}
+{\nonterminal{Type}} & {\arrow}  &{\terminal{address}}  \\
+ & {\delimit}  &{\terminal{byte}}  \\
  & {\delimit}  &{\nonterminal{Ident}}  \\
  & {\delimit}  &{\nonterminal{Type}} {\terminal{[}} {\nonterminal{Integer}} {\terminal{]}}  \\
  & {\delimit}  &{\nonterminal{Type}} {\terminal{[}} {\terminal{]}}  \\
@@ -520,6 +527,11 @@ All other symbols are terminals.\\
 \begin{tabular}{lll}
 {\nonterminal{ListStructMemberDeclaration}} & {\arrow}  &{\emptyP} \\
  & {\delimit}  &{\nonterminal{StructMemberDeclaration}} {\nonterminal{ListStructMemberDeclaration}}  \\
+\end{tabular}\\
+
+\begin{tabular}{lll}
+{\nonterminal{ListGenericParam}} & {\arrow}  &{\nonterminal{GenericParam}}  \\
+ & {\delimit}  &{\nonterminal{GenericParam}} {\terminal{,}} {\nonterminal{ListGenericParam}}  \\
 \end{tabular}\\
 
 \begin{tabular}{lll}

@@ -54,7 +54,10 @@ class CompilerVisitor : public Visitor
   virtual void visitFSInverse( FSInverse *p ) {}
   virtual void visitFSSelfInverse( FSSelfInverse *p ) {}
   virtual void visitTSAlign( TSAlign* p ) {}
+  virtual void visitTSGeneric( TSGeneric* p ) {}
+  virtual void visitTSGParam( TSGParam* p ) {}
   virtual void visitVSConst(VSConst *p) {}
+  virtual void visitTAddress(TAddress *p) {}
   virtual void visitTByte(TByte *p) {}
   virtual void visitTCustom(TCustom *p) {}
   virtual void visitTStruct(TStruct *p) {}
@@ -273,11 +276,13 @@ class CompilerVisitor : public Visitor
   virtual void visitListVariableSpecifier(ListVariableSpecifier *p) {}
   virtual void visitListParameterDeclaration(ListParameterDeclaration *p) {}
   virtual void visitListExpression(ListExpression *p) {}
+  virtual void visitListGenericParam(ListGenericParam *p) {}
   virtual void visitCode(Code *p) {}
   virtual void visitTLDeclaration(TLDeclaration *p) {}
   virtual void visitDeclaration(Declaration *p) {}
   virtual void visitPrototype( Prototype* p ) {}
   virtual void visitOperatorName(OperatorName *p) {}
+  virtual void visitGenericParam(GenericParam *p) {}
   //virtual void visitTypeBlockDeclaration(TypeBlockDeclaration *p) {}
   virtual void visitOperatorTrait(OperatorTrait *p) {}
   virtual void visitFunctionSpecifier(FunctionSpecifier *p) {}

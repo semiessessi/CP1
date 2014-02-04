@@ -65,7 +65,11 @@ class Skeleton : public Visitor
   void visitVSConst(VSConst* vsconst);
   void visitTypeSpecifier(TypeSpecifier* typespecifier); /* abstract class */
   void visitTSAlign(TSAlign* tsalign);
+  void visitTSGeneric(TSGeneric* tsgeneric);
+  void visitGenericParam(GenericParam* genericparam); /* abstract class */
+  void visitTSGParam(TSGParam* tsgparam);
   void visitType(Type* type); /* abstract class */
+  void visitTAddress(TAddress* taddress);
   void visitTByte(TByte* tbyte);
   void visitTCustom(TCustom* tcustom);
   void visitTFixedArray(TFixedArray* tfixedarray);
@@ -278,7 +282,7 @@ class Skeleton : public Visitor
   void visitEXorAssign(EXorAssign* exorassign);
   void visitELShAssign(ELShAssign* elshassign);
   void visitERShAssign(ERShAssign* ershassign);
-  void visitListTLDeclaration(ListTLDeclaration* listtldeclaration);  void visitListDeclaration(ListDeclaration* listdeclaration);  void visitListStatement(ListStatement* liststatement);  void visitListTypeSpecifier(ListTypeSpecifier* listtypespecifier);  void visitListFunctionSpecifier(ListFunctionSpecifier* listfunctionspecifier);  void visitListVariableSpecifier(ListVariableSpecifier* listvariablespecifier);  void visitListStructMemberDeclaration(ListStructMemberDeclaration* liststructmemberdeclaration);  void visitListParameterDeclaration(ListParameterDeclaration* listparameterdeclaration);  void visitListExpression(ListExpression* listexpression);
+  void visitListTLDeclaration(ListTLDeclaration* listtldeclaration);  void visitListDeclaration(ListDeclaration* listdeclaration);  void visitListStatement(ListStatement* liststatement);  void visitListTypeSpecifier(ListTypeSpecifier* listtypespecifier);  void visitListFunctionSpecifier(ListFunctionSpecifier* listfunctionspecifier);  void visitListVariableSpecifier(ListVariableSpecifier* listvariablespecifier);  void visitListStructMemberDeclaration(ListStructMemberDeclaration* liststructmemberdeclaration);  void visitListGenericParam(ListGenericParam* listgenericparam);  void visitListParameterDeclaration(ListParameterDeclaration* listparameterdeclaration);  void visitListExpression(ListExpression* listexpression);
   void visitOperator(Operator p);  void visitCstring(CString p);  void visitCchar(CChar p);
   void visitIdent(String s);
   void visitInteger(Integer i);
