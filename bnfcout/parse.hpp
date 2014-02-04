@@ -245,9 +245,10 @@
      _SYMB_202 = 461,
      _SYMB_203 = 462,
      _SYMB_204 = 463,
-     _INTEGER_ = 464,
-     _DOUBLE_ = 465,
-     _IDENT_ = 466
+     _SYMB_205 = 464,
+     _INTEGER_ = 465,
+     _DOUBLE_ = 466,
+     _IDENT_ = 467
    };
 #endif
 
@@ -258,7 +259,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 481 "G:\\extra_cp\\cp\\cp1\\cp1\\.y"
+#line 481 "E:\\extra_cp\\cp\\cp1\\cp1\\.y"
 
   int int_;
   char char_;
@@ -293,7 +294,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 297 "parse.hpp"
+#line 298 "parse.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

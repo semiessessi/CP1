@@ -375,6 +375,13 @@ void Skeleton::visitTFixedArray(TFixedArray* tfixedarray)
   visitInteger(tfixedarray->integer_);
 }
 
+void Skeleton::visitTGenericArray(TGenericArray* tgenericarray)
+{
+  /* Code For TGenericArray Goes Here */
+
+  tgenericarray->type_->accept(this);
+}
+
 void Skeleton::visitTStruct(TStruct* tstruct)
 {
   /* Code For TStruct Goes Here */
@@ -532,6 +539,7 @@ void Skeleton::visitSIVariable(SIVariable* sivariable)
 {
   /* Code For SIVariable Goes Here */
 
+  if (sivariable->listvariablespecifier_) {sivariable->listvariablespecifier_->accept(this);}
   sivariable->type_->accept(this);
   visitIdent(sivariable->ident_);
   sivariable->expression_->accept(this);
@@ -541,6 +549,7 @@ void Skeleton::visitSVariable(SVariable* svariable)
 {
   /* Code For SVariable Goes Here */
 
+  if (svariable->listvariablespecifier_) {svariable->listvariablespecifier_->accept(this);}
   svariable->type_->accept(this);
   visitIdent(svariable->ident_);
 }
@@ -603,6 +612,36 @@ void Skeleton::visitERValue(ERValue* ervalue)
   /* Code For ERValue Goes Here */
 
   ervalue->rvalue_->accept(this);
+}
+
+void Skeleton::visitEArray(EArray* earray)
+{
+  /* Code For EArray Goes Here */
+
+  if (earray->listexpression_) {earray->listexpression_->accept(this);}
+}
+
+void Skeleton::visitEList(EList* elist)
+{
+  /* Code For EList Goes Here */
+
+  if (elist->listexpression_) {elist->listexpression_->accept(this);}
+}
+
+void Skeleton::visitEAComp(EAComp* eacomp)
+{
+  /* Code For EAComp Goes Here */
+
+  eacomp->expression_->accept(this);
+  if (eacomp->listexpression_) {eacomp->listexpression_->accept(this);}
+}
+
+void Skeleton::visitELComp(ELComp* elcomp)
+{
+  /* Code For ELComp Goes Here */
+
+  elcomp->expression_->accept(this);
+  if (elcomp->listexpression_) {elcomp->listexpression_->accept(this);}
 }
 
 void Skeleton::visitESimpleCall(ESimpleCall* esimplecall)

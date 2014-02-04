@@ -222,11 +222,12 @@ IDENT [a-zA-Z0-9'_]
 <YYINITIAL>"urem_b"      	 return _SYMB_194;
 <YYINITIAL>"urem_b4"      	 return _SYMB_195;
 <YYINITIAL>"urem_b8"      	 return _SYMB_196;
-<YYINITIAL>"while"      	 return _SYMB_197;
-<YYINITIAL>"xor_2b"      	 return _SYMB_198;
-<YYINITIAL>"xor_4b"      	 return _SYMB_199;
-<YYINITIAL>"xor_8b"      	 return _SYMB_200;
-<YYINITIAL>"xor_b"      	 return _SYMB_201;
+<YYINITIAL>"where"      	 return _SYMB_197;
+<YYINITIAL>"while"      	 return _SYMB_198;
+<YYINITIAL>"xor_2b"      	 return _SYMB_199;
+<YYINITIAL>"xor_4b"      	 return _SYMB_200;
+<YYINITIAL>"xor_8b"      	 return _SYMB_201;
+<YYINITIAL>"xor_b"      	 return _SYMB_202;
 
 <YYINITIAL>"//"[^\n]*\n  ++yy_mylinenumber ; 	 /* BNFC single-line comment */;
 <YYINITIAL>"/*"      	 BEGIN COMMENT;
@@ -234,9 +235,9 @@ IDENT [a-zA-Z0-9'_]
 <COMMENT>.      	 /* BNFC multi-line comment */;
 <COMMENT>[\n]   ++yy_mylinenumber ; 	 /* BNFC multi-line comment */;
 
-<YYINITIAL>(\+|\-|\=|\&|\^|\||\/|\%|\*|\>|\<|\!|\~|\?|\:)*     	 yylval.string_ = strdup(yytext); return _SYMB_202;
-<YYINITIAL>\".*\"     	 yylval.string_ = strdup(yytext); return _SYMB_203;
-<YYINITIAL>'\\?.'     	 yylval.string_ = strdup(yytext); return _SYMB_204;
+<YYINITIAL>(\+|\-|\=|\&|\^|\||\/|\%|\*|\>|\<|\!|\~|\?|\:)*     	 yylval.string_ = strdup(yytext); return _SYMB_203;
+<YYINITIAL>\".*\"     	 yylval.string_ = strdup(yytext); return _SYMB_204;
+<YYINITIAL>'\\?.'     	 yylval.string_ = strdup(yytext); return _SYMB_205;
 <YYINITIAL>{DIGIT}+"."{DIGIT}+("e"(\-)?{DIGIT}+)?      	 yylval.double_ = atof(yytext); return _DOUBLE_;
 <YYINITIAL>{DIGIT}+      	 yylval.int_ = atoi(yytext); return _INTEGER_;
 <YYINITIAL>{LETTER}{IDENT}*      	 yylval.string_ = strdup(yytext); return _IDENT_;

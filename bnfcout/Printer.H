@@ -88,6 +88,7 @@ class PrintAbsyn : public Visitor
   void visitTByte(TByte *p);
   void visitTCustom(TCustom *p);
   void visitTFixedArray(TFixedArray *p);
+  void visitTGenericArray(TGenericArray *p);
   void visitTStruct(TStruct *p);
   void visitStructMemberDeclaration(StructMemberDeclaration *p); /* abstract class */
   void visitSMDMemberDeclaration(SMDMemberDeclaration *p);
@@ -122,6 +123,10 @@ class PrintAbsyn : public Visitor
   void visitEChar(EChar *p);
   void visitEPi(EPi *p);
   void visitERValue(ERValue *p);
+  void visitEArray(EArray *p);
+  void visitEList(EList *p);
+  void visitEAComp(EAComp *p);
+  void visitELComp(ELComp *p);
   void visitESimpleCall(ESimpleCall *p);
   void visitECall(ECall *p);
   void visitEPostInc(EPostInc *p);
@@ -430,6 +435,7 @@ class ShowAbsyn : public Visitor
   void visitTByte(TByte *p);
   void visitTCustom(TCustom *p);
   void visitTFixedArray(TFixedArray *p);
+  void visitTGenericArray(TGenericArray *p);
   void visitTStruct(TStruct *p);
   void visitStructMemberDeclaration(StructMemberDeclaration *p); /* abstract class */
   void visitSMDMemberDeclaration(SMDMemberDeclaration *p);
@@ -464,6 +470,10 @@ class ShowAbsyn : public Visitor
   void visitEChar(EChar *p);
   void visitEPi(EPi *p);
   void visitERValue(ERValue *p);
+  void visitEArray(EArray *p);
+  void visitEList(EList *p);
+  void visitEAComp(EAComp *p);
+  void visitELComp(ELComp *p);
   void visitESimpleCall(ESimpleCall *p);
   void visitECall(ECall *p);
   void visitEPostInc(EPostInc *p);

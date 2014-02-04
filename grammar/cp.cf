@@ -67,6 +67,7 @@ TSAlign.                    TypeSpecifier           ::= "align" "<" Integer ">" 
 TByte.						Type					::= "byte" ;
 TCustom.					Type					::= Ident ;
 TFixedArray.				Type					::= Type "[" Integer "]" ;
+TGenericArray.				Type					::= Type "[" "]" ;
 TStruct.					Type					::= "{" [StructMemberDeclaration] ";" "}" ;
 
 SMDMemberDeclaration.		StructMemberDeclaration	::= Type Ident ";" ;
@@ -94,8 +95,8 @@ SBreakpoint.                Statement               ::= "breakpoint" ";" ;
 --SDefaultFunction.			Statement				::= [FunctionSpecifier] Ident "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
 --SFunction.					Statement				::= [FunctionSpecifier] Type Ident "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
 --STypeDecl.					Statement				::= [TypeSpecifier] "type" Type Ident ";" ;
-SIVariable.					Statement				::= Type Ident "=" Expression ";" ;
-SVariable.					Statement				::= Type Ident ";" ;
+SIVariable.					Statement				::= [VariableSpecifier] Type Ident "=" Expression ";" ;
+SVariable.					Statement				::= [VariableSpecifier] Type Ident ";" ;
 
 RVIdent.					RValue                  ::= Ident ;
 RVQualified.				RValue					::= Ident "." RValue ;
@@ -106,6 +107,14 @@ EString.					Expression11			::= CString ;
 EChar.					    Expression11			::= CChar ;
 EPi.						Expression11			::= "pi" ;
 ERValue.					Expression11            ::= RValue ;
+
+EArray.						Expression10			::= "{" [Expression] "}" ;
+EList.						Expression10			::= "[" [Expression] "]" ;
+
+EAComp.						Expression10			::= "{" Expression "where" [Expression] "}" ;
+ELComp.						Expression10			::= "[" Expression "where" [Expression] "]" ;
+
+--EIndex.						Expression10			::=  Expression "[" Expression "]" ;
 
 ESimpleCall.				Expression10			::= RValue "(" ")" ;
 ECall.						Expression10			::= RValue "(" [Expression] ")" ;

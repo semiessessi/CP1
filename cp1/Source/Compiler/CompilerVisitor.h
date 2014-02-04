@@ -59,6 +59,7 @@ class CompilerVisitor : public Visitor
   virtual void visitTCustom(TCustom *p) {}
   virtual void visitTStruct(TStruct *p) {}
   virtual void visitTFixedArray(TFixedArray *p) {}
+  virtual void visitTGenericArray( TGenericArray* p ) {}
   virtual void visitSMDMemberDeclaration( SMDMemberDeclaration *p ) {}
   virtual void visitSMDAnonMemberDeclaration( SMDAnonMemberDeclaration *p ) {}
   virtual void visitSReturn(SReturn *p) {}
@@ -85,6 +86,11 @@ class CompilerVisitor : public Visitor
   virtual void visitEDouble(EDouble *p) {}
   virtual void visitEInteger(EInteger *p) {}
   virtual void visitEPi(EPi *p) {}
+  virtual void visitEArray(EArray *p) {}
+  virtual void visitEList(EList *p) {}
+  virtual void visitEAComp(EAComp *p) {}
+  virtual void visitELComp(ELComp *p) {}
+  //virtual void visitEIndex(EIndex *p) {}
   virtual void visitERValue(ERValue *p) {}
   virtual void visitESimpleCall(ESimpleCall *p) {}
   virtual void visitECall(ECall *p) {}

@@ -771,6 +771,20 @@ void PrintAbsyn::visitTFixedArray(TFixedArray* p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitTGenericArray(TGenericArray* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  _i_ = 0; p->type_->accept(this);
+  render('[');
+  render(']');
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitTStruct(TStruct* p)
 {
   int oldi = _i_;
@@ -1074,7 +1088,7 @@ void PrintAbsyn::visitSIVariable(SIVariable* p)
   int oldi = _i_;
   if (oldi > 0) render(_L_PAREN);
 
-  _i_ = 0; p->type_->accept(this);
+  if(p->listvariablespecifier_) {_i_ = 0; p->listvariablespecifier_->accept(this);}  _i_ = 0; p->type_->accept(this);
   visitIdent(p->ident_);
   render('=');
   _i_ = 0; p->expression_->accept(this);
@@ -1090,7 +1104,7 @@ void PrintAbsyn::visitSVariable(SVariable* p)
   int oldi = _i_;
   if (oldi > 0) render(_L_PAREN);
 
-  _i_ = 0; p->type_->accept(this);
+  if(p->listvariablespecifier_) {_i_ = 0; p->listvariablespecifier_->accept(this);}  _i_ = 0; p->type_->accept(this);
   visitIdent(p->ident_);
   render(';');
 
@@ -1197,6 +1211,62 @@ void PrintAbsyn::visitERValue(ERValue* p)
   _i_ = 0; p->rvalue_->accept(this);
 
   if (oldi > 11) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEArray(EArray* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render('{');
+  if(p->listexpression_) {_i_ = 0; p->listexpression_->accept(this);}  render('}');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEList(EList* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render('[');
+  if(p->listexpression_) {_i_ = 0; p->listexpression_->accept(this);}  render(']');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEAComp(EAComp* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render('{');
+  _i_ = 0; p->expression_->accept(this);
+  render("where");
+  if(p->listexpression_) {_i_ = 0; p->listexpression_->accept(this);}  render('}');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitELComp(ELComp* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render('[');
+  _i_ = 0; p->expression_->accept(this);
+  render("where");
+  if(p->listexpression_) {_i_ = 0; p->listexpression_->accept(this);}  render(']');
+
+  if (oldi > 10) render(_R_PAREN);
 
   _i_ = oldi;
 }
@@ -4569,6 +4639,17 @@ void ShowAbsyn::visitTFixedArray(TFixedArray* p)
   bufAppend(' ');
   bufAppend(')');
 }
+void ShowAbsyn::visitTGenericArray(TGenericArray* p)
+{
+  bufAppend('(');
+  bufAppend("TGenericArray");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
 void ShowAbsyn::visitTStruct(TStruct* p)
 {
   bufAppend('(');
@@ -4817,6 +4898,10 @@ void ShowAbsyn::visitSIVariable(SIVariable* p)
   bufAppend("SIVariable");
   bufAppend(' ');
   bufAppend('[');
+  if (p->listvariablespecifier_)  p->listvariablespecifier_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
   if (p->type_)  p->type_->accept(this);
   bufAppend(']');
   bufAppend(' ');
@@ -4832,6 +4917,10 @@ void ShowAbsyn::visitSVariable(SVariable* p)
 {
   bufAppend('(');
   bufAppend("SVariable");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listvariablespecifier_)  p->listvariablespecifier_->accept(this);
+  bufAppend(']');
   bufAppend(' ');
   bufAppend('[');
   if (p->type_)  p->type_->accept(this);
@@ -4909,6 +4998,58 @@ void ShowAbsyn::visitERValue(ERValue* p)
   bufAppend('[');
   if (p->rvalue_)  p->rvalue_->accept(this);
   bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEArray(EArray* p)
+{
+  bufAppend('(');
+  bufAppend("EArray");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexpression_)  p->listexpression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEList(EList* p)
+{
+  bufAppend('(');
+  bufAppend("EList");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexpression_)  p->listexpression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEAComp(EAComp* p)
+{
+  bufAppend('(');
+  bufAppend("EAComp");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->expression_)  p->expression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexpression_)  p->listexpression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitELComp(ELComp* p)
+{
+  bufAppend('(');
+  bufAppend("ELComp");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->expression_)  p->expression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexpression_)  p->listexpression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
   bufAppend(')');
 }
 void ShowAbsyn::visitESimpleCall(ESimpleCall* p)

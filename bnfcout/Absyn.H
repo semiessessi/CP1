@@ -67,6 +67,7 @@ class TSAlign;
 class TByte;
 class TCustom;
 class TFixedArray;
+class TGenericArray;
 class TStruct;
 class SMDMemberDeclaration;
 class SMDAnonMemberDeclaration;
@@ -96,6 +97,10 @@ class EString;
 class EChar;
 class EPi;
 class ERValue;
+class EArray;
+class EList;
+class EAComp;
+class ELComp;
 class ESimpleCall;
 class ECall;
 class EPostInc;
@@ -349,6 +354,7 @@ class Visitor
   virtual void visitTByte(TByte *p) = 0;
   virtual void visitTCustom(TCustom *p) = 0;
   virtual void visitTFixedArray(TFixedArray *p) = 0;
+  virtual void visitTGenericArray(TGenericArray *p) = 0;
   virtual void visitTStruct(TStruct *p) = 0;
   virtual void visitSMDMemberDeclaration(SMDMemberDeclaration *p) = 0;
   virtual void visitSMDAnonMemberDeclaration(SMDAnonMemberDeclaration *p) = 0;
@@ -378,6 +384,10 @@ class Visitor
   virtual void visitEChar(EChar *p) = 0;
   virtual void visitEPi(EPi *p) = 0;
   virtual void visitERValue(ERValue *p) = 0;
+  virtual void visitEArray(EArray *p) = 0;
+  virtual void visitEList(EList *p) = 0;
+  virtual void visitEAComp(EAComp *p) = 0;
+  virtual void visitELComp(ELComp *p) = 0;
   virtual void visitESimpleCall(ESimpleCall *p) = 0;
   virtual void visitECall(ECall *p) = 0;
   virtual void visitEPostInc(EPostInc *p) = 0;
@@ -1356,6 +1366,20 @@ class TFixedArray : public Type
   void swap(TFixedArray &);
 };
 
+class TGenericArray : public Type
+{
+ public:
+  Type *type_;
+
+  TGenericArray(const TGenericArray &);
+  TGenericArray &operator=(const TGenericArray &);
+  TGenericArray(Type *p1);
+  ~TGenericArray();
+  virtual void accept(Visitor *v);
+  virtual  TGenericArray  *clone() const;
+  void swap(TGenericArray &);
+};
+
 class TStruct : public Type
 {
  public:
@@ -1655,13 +1679,14 @@ class SBreakpoint : public Statement
 class SIVariable : public Statement
 {
  public:
+  ListVariableSpecifier *listvariablespecifier_;
   Type *type_;
   Ident ident_;
   Expression *expression_;
 
   SIVariable(const SIVariable &);
   SIVariable &operator=(const SIVariable &);
-  SIVariable(Type *p1, Ident p2, Expression *p3);
+  SIVariable(ListVariableSpecifier *p1, Type *p2, Ident p3, Expression *p4);
   ~SIVariable();
   virtual void accept(Visitor *v);
   virtual  SIVariable  *clone() const;
@@ -1671,12 +1696,13 @@ class SIVariable : public Statement
 class SVariable : public Statement
 {
  public:
+  ListVariableSpecifier *listvariablespecifier_;
   Type *type_;
   Ident ident_;
 
   SVariable(const SVariable &);
   SVariable &operator=(const SVariable &);
-  SVariable(Type *p1, Ident p2);
+  SVariable(ListVariableSpecifier *p1, Type *p2, Ident p3);
   ~SVariable();
   virtual void accept(Visitor *v);
   virtual  SVariable  *clone() const;
@@ -1805,6 +1831,64 @@ class ERValue : public Expression
   virtual void accept(Visitor *v);
   virtual  ERValue  *clone() const;
   void swap(ERValue &);
+};
+
+class EArray : public Expression
+{
+ public:
+  ListExpression *listexpression_;
+
+  EArray(const EArray &);
+  EArray &operator=(const EArray &);
+  EArray(ListExpression *p1);
+  ~EArray();
+  virtual void accept(Visitor *v);
+  virtual  EArray  *clone() const;
+  void swap(EArray &);
+};
+
+class EList : public Expression
+{
+ public:
+  ListExpression *listexpression_;
+
+  EList(const EList &);
+  EList &operator=(const EList &);
+  EList(ListExpression *p1);
+  ~EList();
+  virtual void accept(Visitor *v);
+  virtual  EList  *clone() const;
+  void swap(EList &);
+};
+
+class EAComp : public Expression
+{
+ public:
+  Expression *expression_;
+  ListExpression *listexpression_;
+
+  EAComp(const EAComp &);
+  EAComp &operator=(const EAComp &);
+  EAComp(Expression *p1, ListExpression *p2);
+  ~EAComp();
+  virtual void accept(Visitor *v);
+  virtual  EAComp  *clone() const;
+  void swap(EAComp &);
+};
+
+class ELComp : public Expression
+{
+ public:
+  Expression *expression_;
+  ListExpression *listexpression_;
+
+  ELComp(const ELComp &);
+  ELComp &operator=(const ELComp &);
+  ELComp(Expression *p1, ListExpression *p2);
+  ~ELComp();
+  virtual void accept(Visitor *v);
+  virtual  ELComp  *clone() const;
+  void swap(ELComp &);
 };
 
 class ESimpleCall : public Expression

@@ -1108,6 +1108,28 @@ TFixedArray *TFixedArray::clone() const {
   return new TFixedArray(*this);
 }
 
+/********************   TGenericArray    ********************/
+TGenericArray::TGenericArray(Type *p1) { type_ = p1; }
+TGenericArray::TGenericArray(const TGenericArray & other) {   type_ = other.type_->clone();
+
+}
+TGenericArray &TGenericArray::operator=(const TGenericArray & other) {
+  TGenericArray tmp(other);
+  swap(tmp);
+  return *this;
+}
+void TGenericArray::swap(TGenericArray & other) {
+  std::swap(type_, other.type_);
+
+}
+
+TGenericArray::~TGenericArray() { delete(type_); }
+
+void TGenericArray::accept(Visitor *v) { v->visitTGenericArray(this); }
+TGenericArray *TGenericArray::clone() const {
+  return new TGenericArray(*this);
+}
+
 /********************   TStruct    ********************/
 TStruct::TStruct(ListStructMemberDeclaration *p1) { liststructmemberdeclaration_ = p1; }
 TStruct::TStruct(const TStruct & other) {   liststructmemberdeclaration_ = other.liststructmemberdeclaration_->clone();
@@ -1555,8 +1577,9 @@ SBreakpoint *SBreakpoint::clone() const {
 }
 
 /********************   SIVariable    ********************/
-SIVariable::SIVariable(Type *p1, Ident p2, Expression *p3) { type_ = p1; ident_ = p2; expression_ = p3; }
-SIVariable::SIVariable(const SIVariable & other) {   type_ = other.type_->clone();
+SIVariable::SIVariable(ListVariableSpecifier *p1, Type *p2, Ident p3, Expression *p4) { listvariablespecifier_ = p1; type_ = p2; ident_ = p3; expression_ = p4; }
+SIVariable::SIVariable(const SIVariable & other) {   listvariablespecifier_ = other.listvariablespecifier_->clone();
+  type_ = other.type_->clone();
   ident_ = other.ident_;
   expression_ = other.expression_->clone();
 
@@ -1567,13 +1590,14 @@ SIVariable &SIVariable::operator=(const SIVariable & other) {
   return *this;
 }
 void SIVariable::swap(SIVariable & other) {
+  std::swap(listvariablespecifier_, other.listvariablespecifier_);
   std::swap(type_, other.type_);
   std::swap(ident_, other.ident_);
   std::swap(expression_, other.expression_);
 
 }
 
-SIVariable::~SIVariable() { delete(type_); delete(expression_); }
+SIVariable::~SIVariable() { delete(listvariablespecifier_); delete(type_); delete(expression_); }
 
 void SIVariable::accept(Visitor *v) { v->visitSIVariable(this); }
 SIVariable *SIVariable::clone() const {
@@ -1581,8 +1605,9 @@ SIVariable *SIVariable::clone() const {
 }
 
 /********************   SVariable    ********************/
-SVariable::SVariable(Type *p1, Ident p2) { type_ = p1; ident_ = p2; }
-SVariable::SVariable(const SVariable & other) {   type_ = other.type_->clone();
+SVariable::SVariable(ListVariableSpecifier *p1, Type *p2, Ident p3) { listvariablespecifier_ = p1; type_ = p2; ident_ = p3; }
+SVariable::SVariable(const SVariable & other) {   listvariablespecifier_ = other.listvariablespecifier_->clone();
+  type_ = other.type_->clone();
   ident_ = other.ident_;
 
 }
@@ -1592,12 +1617,13 @@ SVariable &SVariable::operator=(const SVariable & other) {
   return *this;
 }
 void SVariable::swap(SVariable & other) {
+  std::swap(listvariablespecifier_, other.listvariablespecifier_);
   std::swap(type_, other.type_);
   std::swap(ident_, other.ident_);
 
 }
 
-SVariable::~SVariable() { delete(type_); }
+SVariable::~SVariable() { delete(listvariablespecifier_); delete(type_); }
 
 void SVariable::accept(Visitor *v) { v->visitSVariable(this); }
 SVariable *SVariable::clone() const {
@@ -1778,6 +1804,98 @@ ERValue::~ERValue() { delete(rvalue_); }
 void ERValue::accept(Visitor *v) { v->visitERValue(this); }
 ERValue *ERValue::clone() const {
   return new ERValue(*this);
+}
+
+/********************   EArray    ********************/
+EArray::EArray(ListExpression *p1) { listexpression_ = p1; }
+EArray::EArray(const EArray & other) {   listexpression_ = other.listexpression_->clone();
+
+}
+EArray &EArray::operator=(const EArray & other) {
+  EArray tmp(other);
+  swap(tmp);
+  return *this;
+}
+void EArray::swap(EArray & other) {
+  std::swap(listexpression_, other.listexpression_);
+
+}
+
+EArray::~EArray() { delete(listexpression_); }
+
+void EArray::accept(Visitor *v) { v->visitEArray(this); }
+EArray *EArray::clone() const {
+  return new EArray(*this);
+}
+
+/********************   EList    ********************/
+EList::EList(ListExpression *p1) { listexpression_ = p1; }
+EList::EList(const EList & other) {   listexpression_ = other.listexpression_->clone();
+
+}
+EList &EList::operator=(const EList & other) {
+  EList tmp(other);
+  swap(tmp);
+  return *this;
+}
+void EList::swap(EList & other) {
+  std::swap(listexpression_, other.listexpression_);
+
+}
+
+EList::~EList() { delete(listexpression_); }
+
+void EList::accept(Visitor *v) { v->visitEList(this); }
+EList *EList::clone() const {
+  return new EList(*this);
+}
+
+/********************   EAComp    ********************/
+EAComp::EAComp(Expression *p1, ListExpression *p2) { expression_ = p1; listexpression_ = p2; }
+EAComp::EAComp(const EAComp & other) {   expression_ = other.expression_->clone();
+  listexpression_ = other.listexpression_->clone();
+
+}
+EAComp &EAComp::operator=(const EAComp & other) {
+  EAComp tmp(other);
+  swap(tmp);
+  return *this;
+}
+void EAComp::swap(EAComp & other) {
+  std::swap(expression_, other.expression_);
+  std::swap(listexpression_, other.listexpression_);
+
+}
+
+EAComp::~EAComp() { delete(expression_); delete(listexpression_); }
+
+void EAComp::accept(Visitor *v) { v->visitEAComp(this); }
+EAComp *EAComp::clone() const {
+  return new EAComp(*this);
+}
+
+/********************   ELComp    ********************/
+ELComp::ELComp(Expression *p1, ListExpression *p2) { expression_ = p1; listexpression_ = p2; }
+ELComp::ELComp(const ELComp & other) {   expression_ = other.expression_->clone();
+  listexpression_ = other.listexpression_->clone();
+
+}
+ELComp &ELComp::operator=(const ELComp & other) {
+  ELComp tmp(other);
+  swap(tmp);
+  return *this;
+}
+void ELComp::swap(ELComp & other) {
+  std::swap(expression_, other.expression_);
+  std::swap(listexpression_, other.listexpression_);
+
+}
+
+ELComp::~ELComp() { delete(expression_); delete(listexpression_); }
+
+void ELComp::accept(Visitor *v) { v->visitELComp(this); }
+ELComp *ELComp::clone() const {
+  return new ELComp(*this);
 }
 
 /********************   ESimpleCall    ********************/

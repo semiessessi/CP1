@@ -69,6 +69,7 @@ class Skeleton : public Visitor
   void visitTByte(TByte* tbyte);
   void visitTCustom(TCustom* tcustom);
   void visitTFixedArray(TFixedArray* tfixedarray);
+  void visitTGenericArray(TGenericArray* tgenericarray);
   void visitTStruct(TStruct* tstruct);
   void visitStructMemberDeclaration(StructMemberDeclaration* structmemberdeclaration); /* abstract class */
   void visitSMDMemberDeclaration(SMDMemberDeclaration* smdmemberdeclaration);
@@ -103,6 +104,10 @@ class Skeleton : public Visitor
   void visitEChar(EChar* echar);
   void visitEPi(EPi* epi);
   void visitERValue(ERValue* ervalue);
+  void visitEArray(EArray* earray);
+  void visitEList(EList* elist);
+  void visitEAComp(EAComp* eacomp);
+  void visitELComp(ELComp* elcomp);
   void visitESimpleCall(ESimpleCall* esimplecall);
   void visitECall(ECall* ecall);
   void visitEPostInc(EPostInc* epostinc);
