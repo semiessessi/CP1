@@ -146,7 +146,7 @@ void yyerror(const char *str)
                     {
                         printf( "---" );
                     }
-				    printf( ( i == gpxLocation->first_column ) ? "+" : "-" );
+				    printf( ( i == ( gpxLocation->first_column - 1 ) ) ? "+" : "-" );
 			    }
 				printf( "^\n" );
             }
