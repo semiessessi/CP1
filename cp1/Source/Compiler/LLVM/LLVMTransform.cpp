@@ -251,9 +251,9 @@ void LLVMTransformVisitor::visitSIfElse( SIfElse *p )
 	int iIfCounter = siIfCounter;
 	++siIfCounter;
 	out += "br i1 %r" + std::to_string( siTempCounter );
-	out += ", label %ifbody" + std::to_string( iIfCounter );
+	out += ", label %if2body" + std::to_string( iIfCounter );
 	out += ", label %elsebody" + std::to_string( iIfCounter ) + "\r\n";
-	out += "\r\nifbody" + std::to_string( iIfCounter ) + ":\r\n";
+	out += "\r\nif2body" + std::to_string( iIfCounter ) + ":\r\n";
 	++siTempCounter;
 	p->liststatement_1->accept( this );
 	for( int i = 0; i < siTabLevel; ++i )
@@ -270,6 +270,18 @@ void LLVMTransformVisitor::visitSIfElse( SIfElse *p )
 	out += "br label %endif" + std::to_string( iIfCounter ) + "\r\n";
 	out += "\r\nendif" + std::to_string( iIfCounter ) + ":\r\n";
 }
+
+// void LLVMTransformVisitor::visitSLoop( SLoop *p )
+// {
+	// p->expression_->accept( this );
+	// // SE - TODO: types
+	// int iAmount = siTempCounter;
+	// ++siTempCounter;
+	// for( int i = 0; i < siTabLevel; ++i )
+    // {
+        // out += "\t";
+    // }
+// }
 
 void LLVMTransformVisitor::visitEInteger(EInteger *p)
 {
