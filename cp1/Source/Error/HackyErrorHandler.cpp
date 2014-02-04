@@ -34,7 +34,14 @@ void yyerror(const char *str)
     }
 
 	char buf[ 2048 ];
-	sprintf( buf, "%s(%d): error: %s", szCurrentFile.c_str(), yy_mylinenumber + 1, str );
+	if( gpxLocation )
+	{
+		sprintf( buf, "%s(%d,%d): error: %s", szCurrentFile.c_str(), yy_mylinenumber + 1, gpxLocation->last_column, str );
+	}
+	else
+	{
+		sprintf( buf, "%s(%d): error: %s", szCurrentFile.c_str(), yy_mylinenumber + 1, str );
+	}
 	std::string err = buf;
 	
 	size_t f;
@@ -134,7 +141,7 @@ void yyerror(const char *str)
 				printf( "   \t|-" );
 			    for( int i = 0; i < gpxLocation->last_column; ++i )
 			    {
-				    printf( "-" );
+				    printf( ( i == gpxLocation->first_column ) ? "+" : "-" );
 			    }
 				printf( "^\n" );
             }
