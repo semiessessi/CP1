@@ -405,6 +405,63 @@ void LLVMTransformVisitor::visitSWhile( SWhile *p )
 	out += "\r\nendwhile" + std::to_string( iRepeatCount ) + ":\r\n";	
 }
 
+void LLVMTransformVisitor::visitSUntil( SUntil *p )
+{
+	//SE - TODO: types	
+	static int siRepeatCounter = 0;
+	int iRepeatCount = siRepeatCounter;
+	++siRepeatCounter;
+	
+	out += "until" + std::to_string( iRepeatCount ) + ":\r\n";	
+	
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "br label %untilbody" + std::to_string( iRepeatCount ) + "\r\n";
+	
+	// ...
+	
+	out += "\r\nuntilbody" + std::to_string( iRepeatCount ) + ":\r\n";
+	
+	p->liststatement_->accept( this );
+	
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	
+	out += "br label %untilloop" + std::to_string( iRepeatCount ) + "\r\n";
+	
+	// ...
+	
+	out += "\r\nuntilloop" + std::to_string( iRepeatCount ) + ":\r\n";
+	
+	p->expression_->accept( this );
+	int iTest = siTempCounter;
+	++siTempCounter;
+	int iCompare = siTempCounter;
+	++siTempCounter;
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "%r" + std::to_string( iCompare );
+	out += " = icmp ne i32 %r" + std::to_string( iTest ) + ", 0\r\n";
+	
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "br i1 %r" + std::to_string( iCompare );
+	out += ", label %enduntil" + std::to_string( iRepeatCount );
+	out += ", label %untilbody" + std::to_string( iRepeatCount ) + "\r\n";
+	
+	// ...
+	
+	out += "\r\nenduntil" + std::to_string( iRepeatCount ) + ":\r\n";	
+}
+
 void LLVMTransformVisitor::visitEInteger(EInteger *p)
 {
     for( int i = 0; i < siTabLevel; ++i )
