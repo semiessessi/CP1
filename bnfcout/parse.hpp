@@ -221,9 +221,33 @@
      _SYMB_178 = 437,
      _SYMB_179 = 438,
      _SYMB_180 = 439,
-     _INTEGER_ = 440,
-     _DOUBLE_ = 441,
-     _IDENT_ = 442
+     _SYMB_181 = 440,
+     _SYMB_182 = 441,
+     _SYMB_183 = 442,
+     _SYMB_184 = 443,
+     _SYMB_185 = 444,
+     _SYMB_186 = 445,
+     _SYMB_187 = 446,
+     _SYMB_188 = 447,
+     _SYMB_189 = 448,
+     _SYMB_190 = 449,
+     _SYMB_191 = 450,
+     _SYMB_192 = 451,
+     _SYMB_193 = 452,
+     _SYMB_194 = 453,
+     _SYMB_195 = 454,
+     _SYMB_196 = 455,
+     _SYMB_197 = 456,
+     _SYMB_198 = 457,
+     _SYMB_199 = 458,
+     _SYMB_200 = 459,
+     _SYMB_201 = 460,
+     _SYMB_202 = 461,
+     _SYMB_203 = 462,
+     _SYMB_204 = 463,
+     _INTEGER_ = 464,
+     _DOUBLE_ = 465,
+     _IDENT_ = 466
    };
 #endif
 
@@ -234,7 +258,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 481 "E:\\extra_cp\\cp\\cp1\\cp1\\.y"
+#line 481 "G:\\extra_cp\\cp\\cp1\\cp1\\.y"
 
   int int_;
   char char_;
@@ -269,7 +293,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 273 "parse.hpp"
+#line 297 "parse.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

@@ -752,6 +752,54 @@ void Skeleton::visitEIntrinNegB(EIntrinNegB* eintrinnegb)
   eintrinnegb->expression_->accept(this);
 }
 
+void Skeleton::visitEIntrinCEqB(EIntrinCEqB* eintrinceqb)
+{
+  /* Code For EIntrinCEqB Goes Here */
+
+  eintrinceqb->expression_1->accept(this);
+  eintrinceqb->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCNeB(EIntrinCNeB* eintrincneb)
+{
+  /* Code For EIntrinCNeB Goes Here */
+
+  eintrincneb->expression_1->accept(this);
+  eintrincneb->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCLtB(EIntrinCLtB* eintrincltb)
+{
+  /* Code For EIntrinCLtB Goes Here */
+
+  eintrincltb->expression_1->accept(this);
+  eintrincltb->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCGtB(EIntrinCGtB* eintrincgtb)
+{
+  /* Code For EIntrinCGtB Goes Here */
+
+  eintrincgtb->expression_1->accept(this);
+  eintrincgtb->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCLeB(EIntrinCLeB* eintrincleb)
+{
+  /* Code For EIntrinCLeB Goes Here */
+
+  eintrincleb->expression_1->accept(this);
+  eintrincleb->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCGeB(EIntrinCGeB* eintrincgeb)
+{
+  /* Code For EIntrinCGeB Goes Here */
+
+  eintrincgeb->expression_1->accept(this);
+  eintrincgeb->expression_2->accept(this);
+}
+
 void Skeleton::visitEIntrinAdd2B(EIntrinAdd2B* eintrinadd2b)
 {
   /* Code For EIntrinAdd2B Goes Here */
@@ -868,6 +916,54 @@ void Skeleton::visitEIntrinNeg2B(EIntrinNeg2B* eintrinneg2b)
   /* Code For EIntrinNeg2B Goes Here */
 
   eintrinneg2b->expression_->accept(this);
+}
+
+void Skeleton::visitEIntrinCEq2B(EIntrinCEq2B* eintrinceq2b)
+{
+  /* Code For EIntrinCEq2B Goes Here */
+
+  eintrinceq2b->expression_1->accept(this);
+  eintrinceq2b->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCNe2B(EIntrinCNe2B* eintrincne2b)
+{
+  /* Code For EIntrinCNe2B Goes Here */
+
+  eintrincne2b->expression_1->accept(this);
+  eintrincne2b->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCLt2B(EIntrinCLt2B* eintrinclt2b)
+{
+  /* Code For EIntrinCLt2B Goes Here */
+
+  eintrinclt2b->expression_1->accept(this);
+  eintrinclt2b->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCGt2B(EIntrinCGt2B* eintrincgt2b)
+{
+  /* Code For EIntrinCGt2B Goes Here */
+
+  eintrincgt2b->expression_1->accept(this);
+  eintrincgt2b->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCLe2B(EIntrinCLe2B* eintrincle2b)
+{
+  /* Code For EIntrinCLe2B Goes Here */
+
+  eintrincle2b->expression_1->accept(this);
+  eintrincle2b->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCGe2B(EIntrinCGe2B* eintrincge2b)
+{
+  /* Code For EIntrinCGe2B Goes Here */
+
+  eintrincge2b->expression_1->accept(this);
+  eintrincge2b->expression_2->accept(this);
 }
 
 void Skeleton::visitEIntrinAdd4B(EIntrinAdd4B* eintrinadd4b)
@@ -988,6 +1084,54 @@ void Skeleton::visitEIntrinNeg4B(EIntrinNeg4B* eintrinneg4b)
   eintrinneg4b->expression_->accept(this);
 }
 
+void Skeleton::visitEIntrinCEq4B(EIntrinCEq4B* eintrinceq4b)
+{
+  /* Code For EIntrinCEq4B Goes Here */
+
+  eintrinceq4b->expression_1->accept(this);
+  eintrinceq4b->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCNe4B(EIntrinCNe4B* eintrincne4b)
+{
+  /* Code For EIntrinCNe4B Goes Here */
+
+  eintrincne4b->expression_1->accept(this);
+  eintrincne4b->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCLt4B(EIntrinCLt4B* eintrinclt4b)
+{
+  /* Code For EIntrinCLt4B Goes Here */
+
+  eintrinclt4b->expression_1->accept(this);
+  eintrinclt4b->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCGt4B(EIntrinCGt4B* eintrincgt4b)
+{
+  /* Code For EIntrinCGt4B Goes Here */
+
+  eintrincgt4b->expression_1->accept(this);
+  eintrincgt4b->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCLe4B(EIntrinCLe4B* eintrincle4b)
+{
+  /* Code For EIntrinCLe4B Goes Here */
+
+  eintrincle4b->expression_1->accept(this);
+  eintrincle4b->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCGe4B(EIntrinCGe4B* eintrincge4b)
+{
+  /* Code For EIntrinCGe4B Goes Here */
+
+  eintrincge4b->expression_1->accept(this);
+  eintrincge4b->expression_2->accept(this);
+}
+
 void Skeleton::visitEIntrinAdd8B(EIntrinAdd8B* eintrinadd8b)
 {
   /* Code For EIntrinAdd8B Goes Here */
@@ -1104,6 +1248,54 @@ void Skeleton::visitEIntrinNeg8B(EIntrinNeg8B* eintrinneg8b)
   /* Code For EIntrinNeg8B Goes Here */
 
   eintrinneg8b->expression_->accept(this);
+}
+
+void Skeleton::visitEIntrinCEq8B(EIntrinCEq8B* eintrinceq8b)
+{
+  /* Code For EIntrinCEq8B Goes Here */
+
+  eintrinceq8b->expression_1->accept(this);
+  eintrinceq8b->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCNe8B(EIntrinCNe8B* eintrincne8b)
+{
+  /* Code For EIntrinCNe8B Goes Here */
+
+  eintrincne8b->expression_1->accept(this);
+  eintrincne8b->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCLt8B(EIntrinCLt8B* eintrinclt8b)
+{
+  /* Code For EIntrinCLt8B Goes Here */
+
+  eintrinclt8b->expression_1->accept(this);
+  eintrinclt8b->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCGt8B(EIntrinCGt8B* eintrincgt8b)
+{
+  /* Code For EIntrinCGt8B Goes Here */
+
+  eintrincgt8b->expression_1->accept(this);
+  eintrincgt8b->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCLe8B(EIntrinCLe8B* eintrincle8b)
+{
+  /* Code For EIntrinCLe8B Goes Here */
+
+  eintrincle8b->expression_1->accept(this);
+  eintrincle8b->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCGe8B(EIntrinCGe8B* eintrincge8b)
+{
+  /* Code For EIntrinCGe8B Goes Here */
+
+  eintrincge8b->expression_1->accept(this);
+  eintrincge8b->expression_2->accept(this);
 }
 
 void Skeleton::visitEIntrinAddB4V(EIntrinAddB4V* eintrinaddb4v)

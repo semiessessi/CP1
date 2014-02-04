@@ -105,6 +105,12 @@ class CompilerVisitor : public Visitor
   virtual void visitEIntrinAshrB(EIntrinAshrB *p) {}
   virtual void visitEIntrinNotB(EIntrinNotB *p) {}
   virtual void visitEIntrinNegB(EIntrinNegB *p) {}
+  virtual void visitEIntrinCEqB(EIntrinCEqB *p) {}
+  virtual void visitEIntrinCNeB(EIntrinCNeB *p) {}
+  virtual void visitEIntrinCLtB(EIntrinCLtB *p) {}
+  virtual void visitEIntrinCGtB(EIntrinCGtB *p) {}
+  virtual void visitEIntrinCLeB(EIntrinCLeB *p) {}
+  virtual void visitEIntrinCGeB(EIntrinCGeB *p) {}
   virtual void visitEIntrinAdd2B(EIntrinAdd2B *p) {}
   virtual void visitEIntrinSub2B(EIntrinSub2B *p) {}
   virtual void visitEIntrinMul2B(EIntrinMul2B *p) {}
@@ -120,6 +126,12 @@ class CompilerVisitor : public Visitor
   virtual void visitEIntrinAshr2B(EIntrinAshr2B *p) {}
   virtual void visitEIntrinNot2B(EIntrinNot2B *p) {}
   virtual void visitEIntrinNeg2B(EIntrinNeg2B *p) {}
+  virtual void visitEIntrinCEq2B(EIntrinCEq2B *p) {}
+  virtual void visitEIntrinCNe2B(EIntrinCNe2B *p) {}
+  virtual void visitEIntrinCLt2B(EIntrinCLt2B *p) {}
+  virtual void visitEIntrinCGt2B(EIntrinCGt2B *p) {}
+  virtual void visitEIntrinCLe2B(EIntrinCLe2B *p) {}
+  virtual void visitEIntrinCGe2B(EIntrinCGe2B *p) {}
   virtual void visitEIntrinAdd4B(EIntrinAdd4B *p) {}
   virtual void visitEIntrinSub4B(EIntrinSub4B *p) {}
   virtual void visitEIntrinMul4B(EIntrinMul4B *p) {}
@@ -135,6 +147,12 @@ class CompilerVisitor : public Visitor
   virtual void visitEIntrinAshr4B(EIntrinAshr4B *p) {}
   virtual void visitEIntrinNot4B(EIntrinNot4B *p) {}
   virtual void visitEIntrinNeg4B(EIntrinNeg4B *p) {}
+  virtual void visitEIntrinCEq4B(EIntrinCEq4B *p) {}
+  virtual void visitEIntrinCNe4B(EIntrinCNe4B *p) {}
+  virtual void visitEIntrinCLt4B(EIntrinCLt4B *p) {}
+  virtual void visitEIntrinCGt4B(EIntrinCGt4B *p) {}
+  virtual void visitEIntrinCLe4B(EIntrinCLe4B *p) {}
+  virtual void visitEIntrinCGe4B(EIntrinCGe4B *p) {}
   virtual void visitEIntrinAdd8B(EIntrinAdd8B *p) {}
   virtual void visitEIntrinSub8B(EIntrinSub8B *p) {}
   virtual void visitEIntrinMul8B(EIntrinMul8B *p) {}
@@ -150,6 +168,12 @@ class CompilerVisitor : public Visitor
   virtual void visitEIntrinAshr8B(EIntrinAshr8B *p) {}
   virtual void visitEIntrinNot8B(EIntrinNot8B *p) {}
   virtual void visitEIntrinNeg8B(EIntrinNeg8B *p) {}
+  virtual void visitEIntrinCEq8B(EIntrinCEq8B *p) {}
+  virtual void visitEIntrinCNe8B(EIntrinCNe8B *p) {}
+  virtual void visitEIntrinCLt8B(EIntrinCLt8B *p) {}
+  virtual void visitEIntrinCGt8B(EIntrinCGt8B *p) {}
+  virtual void visitEIntrinCLe8B(EIntrinCLe8B *p) {}
+  virtual void visitEIntrinCGe8B(EIntrinCGe8B *p) {}
   virtual void visitEIntrinAddB4V(EIntrinAddB4V *p) {}
   virtual void visitEIntrinSubB4V(EIntrinSubB4V *p) {}
   virtual void visitEIntrinMulB4V(EIntrinMulB4V *p) {}

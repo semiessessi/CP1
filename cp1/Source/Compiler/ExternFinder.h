@@ -18,6 +18,10 @@ public:
 	
 	ExternFinder() : mbNameParams( false ), miParam( 0 ), miUnique( 0 ), mpCurrentExtern( NULL ), mszCurrentNamespace( "_dot_" ) {}
 	
+    virtual void visitDFunction(DFunction *p) {}
+    virtual void visitDDefaultFunction( DDefaultFunction *p ) {}
+    virtual void visitDOperator(DOperator *p) {}
+    
 	virtual void visitDNamespace( DNamespace *p )
 	{
 		mszCurrentNamespace += p->ident_;

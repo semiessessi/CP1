@@ -115,6 +115,12 @@ class EIntrinLshrB;
 class EIntrinAshrB;
 class EIntrinNotB;
 class EIntrinNegB;
+class EIntrinCEqB;
+class EIntrinCNeB;
+class EIntrinCLtB;
+class EIntrinCGtB;
+class EIntrinCLeB;
+class EIntrinCGeB;
 class EIntrinAdd2B;
 class EIntrinSub2B;
 class EIntrinMul2B;
@@ -130,6 +136,12 @@ class EIntrinLshr2B;
 class EIntrinAshr2B;
 class EIntrinNot2B;
 class EIntrinNeg2B;
+class EIntrinCEq2B;
+class EIntrinCNe2B;
+class EIntrinCLt2B;
+class EIntrinCGt2B;
+class EIntrinCLe2B;
+class EIntrinCGe2B;
 class EIntrinAdd4B;
 class EIntrinSub4B;
 class EIntrinMul4B;
@@ -145,6 +157,12 @@ class EIntrinLshr4B;
 class EIntrinAshr4B;
 class EIntrinNot4B;
 class EIntrinNeg4B;
+class EIntrinCEq4B;
+class EIntrinCNe4B;
+class EIntrinCLt4B;
+class EIntrinCGt4B;
+class EIntrinCLe4B;
+class EIntrinCGe4B;
 class EIntrinAdd8B;
 class EIntrinSub8B;
 class EIntrinMul8B;
@@ -160,6 +178,12 @@ class EIntrinLshr8B;
 class EIntrinAshr8B;
 class EIntrinNot8B;
 class EIntrinNeg8B;
+class EIntrinCEq8B;
+class EIntrinCNe8B;
+class EIntrinCLt8B;
+class EIntrinCGt8B;
+class EIntrinCLe8B;
+class EIntrinCGe8B;
 class EIntrinAddB4V;
 class EIntrinSubB4V;
 class EIntrinMulB4V;
@@ -373,6 +397,12 @@ class Visitor
   virtual void visitEIntrinAshrB(EIntrinAshrB *p) = 0;
   virtual void visitEIntrinNotB(EIntrinNotB *p) = 0;
   virtual void visitEIntrinNegB(EIntrinNegB *p) = 0;
+  virtual void visitEIntrinCEqB(EIntrinCEqB *p) = 0;
+  virtual void visitEIntrinCNeB(EIntrinCNeB *p) = 0;
+  virtual void visitEIntrinCLtB(EIntrinCLtB *p) = 0;
+  virtual void visitEIntrinCGtB(EIntrinCGtB *p) = 0;
+  virtual void visitEIntrinCLeB(EIntrinCLeB *p) = 0;
+  virtual void visitEIntrinCGeB(EIntrinCGeB *p) = 0;
   virtual void visitEIntrinAdd2B(EIntrinAdd2B *p) = 0;
   virtual void visitEIntrinSub2B(EIntrinSub2B *p) = 0;
   virtual void visitEIntrinMul2B(EIntrinMul2B *p) = 0;
@@ -388,6 +418,12 @@ class Visitor
   virtual void visitEIntrinAshr2B(EIntrinAshr2B *p) = 0;
   virtual void visitEIntrinNot2B(EIntrinNot2B *p) = 0;
   virtual void visitEIntrinNeg2B(EIntrinNeg2B *p) = 0;
+  virtual void visitEIntrinCEq2B(EIntrinCEq2B *p) = 0;
+  virtual void visitEIntrinCNe2B(EIntrinCNe2B *p) = 0;
+  virtual void visitEIntrinCLt2B(EIntrinCLt2B *p) = 0;
+  virtual void visitEIntrinCGt2B(EIntrinCGt2B *p) = 0;
+  virtual void visitEIntrinCLe2B(EIntrinCLe2B *p) = 0;
+  virtual void visitEIntrinCGe2B(EIntrinCGe2B *p) = 0;
   virtual void visitEIntrinAdd4B(EIntrinAdd4B *p) = 0;
   virtual void visitEIntrinSub4B(EIntrinSub4B *p) = 0;
   virtual void visitEIntrinMul4B(EIntrinMul4B *p) = 0;
@@ -403,6 +439,12 @@ class Visitor
   virtual void visitEIntrinAshr4B(EIntrinAshr4B *p) = 0;
   virtual void visitEIntrinNot4B(EIntrinNot4B *p) = 0;
   virtual void visitEIntrinNeg4B(EIntrinNeg4B *p) = 0;
+  virtual void visitEIntrinCEq4B(EIntrinCEq4B *p) = 0;
+  virtual void visitEIntrinCNe4B(EIntrinCNe4B *p) = 0;
+  virtual void visitEIntrinCLt4B(EIntrinCLt4B *p) = 0;
+  virtual void visitEIntrinCGt4B(EIntrinCGt4B *p) = 0;
+  virtual void visitEIntrinCLe4B(EIntrinCLe4B *p) = 0;
+  virtual void visitEIntrinCGe4B(EIntrinCGe4B *p) = 0;
   virtual void visitEIntrinAdd8B(EIntrinAdd8B *p) = 0;
   virtual void visitEIntrinSub8B(EIntrinSub8B *p) = 0;
   virtual void visitEIntrinMul8B(EIntrinMul8B *p) = 0;
@@ -418,6 +460,12 @@ class Visitor
   virtual void visitEIntrinAshr8B(EIntrinAshr8B *p) = 0;
   virtual void visitEIntrinNot8B(EIntrinNot8B *p) = 0;
   virtual void visitEIntrinNeg8B(EIntrinNeg8B *p) = 0;
+  virtual void visitEIntrinCEq8B(EIntrinCEq8B *p) = 0;
+  virtual void visitEIntrinCNe8B(EIntrinCNe8B *p) = 0;
+  virtual void visitEIntrinCLt8B(EIntrinCLt8B *p) = 0;
+  virtual void visitEIntrinCGt8B(EIntrinCGt8B *p) = 0;
+  virtual void visitEIntrinCLe8B(EIntrinCLe8B *p) = 0;
+  virtual void visitEIntrinCGe8B(EIntrinCGe8B *p) = 0;
   virtual void visitEIntrinAddB4V(EIntrinAddB4V *p) = 0;
   virtual void visitEIntrinSubB4V(EIntrinSubB4V *p) = 0;
   virtual void visitEIntrinMulB4V(EIntrinMulB4V *p) = 0;
@@ -2026,6 +2074,90 @@ class EIntrinNegB : public Expression
   void swap(EIntrinNegB &);
 };
 
+class EIntrinCEqB : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCEqB(const EIntrinCEqB &);
+  EIntrinCEqB &operator=(const EIntrinCEqB &);
+  EIntrinCEqB(Expression *p1, Expression *p2);
+  ~EIntrinCEqB();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCEqB  *clone() const;
+  void swap(EIntrinCEqB &);
+};
+
+class EIntrinCNeB : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCNeB(const EIntrinCNeB &);
+  EIntrinCNeB &operator=(const EIntrinCNeB &);
+  EIntrinCNeB(Expression *p1, Expression *p2);
+  ~EIntrinCNeB();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCNeB  *clone() const;
+  void swap(EIntrinCNeB &);
+};
+
+class EIntrinCLtB : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCLtB(const EIntrinCLtB &);
+  EIntrinCLtB &operator=(const EIntrinCLtB &);
+  EIntrinCLtB(Expression *p1, Expression *p2);
+  ~EIntrinCLtB();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCLtB  *clone() const;
+  void swap(EIntrinCLtB &);
+};
+
+class EIntrinCGtB : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCGtB(const EIntrinCGtB &);
+  EIntrinCGtB &operator=(const EIntrinCGtB &);
+  EIntrinCGtB(Expression *p1, Expression *p2);
+  ~EIntrinCGtB();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCGtB  *clone() const;
+  void swap(EIntrinCGtB &);
+};
+
+class EIntrinCLeB : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCLeB(const EIntrinCLeB &);
+  EIntrinCLeB &operator=(const EIntrinCLeB &);
+  EIntrinCLeB(Expression *p1, Expression *p2);
+  ~EIntrinCLeB();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCLeB  *clone() const;
+  void swap(EIntrinCLeB &);
+};
+
+class EIntrinCGeB : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCGeB(const EIntrinCGeB &);
+  EIntrinCGeB &operator=(const EIntrinCGeB &);
+  EIntrinCGeB(Expression *p1, Expression *p2);
+  ~EIntrinCGeB();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCGeB  *clone() const;
+  void swap(EIntrinCGeB &);
+};
+
 class EIntrinAdd2B : public Expression
 {
  public:
@@ -2234,6 +2366,90 @@ class EIntrinNeg2B : public Expression
   virtual void accept(Visitor *v);
   virtual  EIntrinNeg2B  *clone() const;
   void swap(EIntrinNeg2B &);
+};
+
+class EIntrinCEq2B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCEq2B(const EIntrinCEq2B &);
+  EIntrinCEq2B &operator=(const EIntrinCEq2B &);
+  EIntrinCEq2B(Expression *p1, Expression *p2);
+  ~EIntrinCEq2B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCEq2B  *clone() const;
+  void swap(EIntrinCEq2B &);
+};
+
+class EIntrinCNe2B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCNe2B(const EIntrinCNe2B &);
+  EIntrinCNe2B &operator=(const EIntrinCNe2B &);
+  EIntrinCNe2B(Expression *p1, Expression *p2);
+  ~EIntrinCNe2B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCNe2B  *clone() const;
+  void swap(EIntrinCNe2B &);
+};
+
+class EIntrinCLt2B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCLt2B(const EIntrinCLt2B &);
+  EIntrinCLt2B &operator=(const EIntrinCLt2B &);
+  EIntrinCLt2B(Expression *p1, Expression *p2);
+  ~EIntrinCLt2B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCLt2B  *clone() const;
+  void swap(EIntrinCLt2B &);
+};
+
+class EIntrinCGt2B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCGt2B(const EIntrinCGt2B &);
+  EIntrinCGt2B &operator=(const EIntrinCGt2B &);
+  EIntrinCGt2B(Expression *p1, Expression *p2);
+  ~EIntrinCGt2B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCGt2B  *clone() const;
+  void swap(EIntrinCGt2B &);
+};
+
+class EIntrinCLe2B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCLe2B(const EIntrinCLe2B &);
+  EIntrinCLe2B &operator=(const EIntrinCLe2B &);
+  EIntrinCLe2B(Expression *p1, Expression *p2);
+  ~EIntrinCLe2B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCLe2B  *clone() const;
+  void swap(EIntrinCLe2B &);
+};
+
+class EIntrinCGe2B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCGe2B(const EIntrinCGe2B &);
+  EIntrinCGe2B &operator=(const EIntrinCGe2B &);
+  EIntrinCGe2B(Expression *p1, Expression *p2);
+  ~EIntrinCGe2B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCGe2B  *clone() const;
+  void swap(EIntrinCGe2B &);
 };
 
 class EIntrinAdd4B : public Expression
@@ -2446,6 +2662,90 @@ class EIntrinNeg4B : public Expression
   void swap(EIntrinNeg4B &);
 };
 
+class EIntrinCEq4B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCEq4B(const EIntrinCEq4B &);
+  EIntrinCEq4B &operator=(const EIntrinCEq4B &);
+  EIntrinCEq4B(Expression *p1, Expression *p2);
+  ~EIntrinCEq4B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCEq4B  *clone() const;
+  void swap(EIntrinCEq4B &);
+};
+
+class EIntrinCNe4B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCNe4B(const EIntrinCNe4B &);
+  EIntrinCNe4B &operator=(const EIntrinCNe4B &);
+  EIntrinCNe4B(Expression *p1, Expression *p2);
+  ~EIntrinCNe4B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCNe4B  *clone() const;
+  void swap(EIntrinCNe4B &);
+};
+
+class EIntrinCLt4B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCLt4B(const EIntrinCLt4B &);
+  EIntrinCLt4B &operator=(const EIntrinCLt4B &);
+  EIntrinCLt4B(Expression *p1, Expression *p2);
+  ~EIntrinCLt4B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCLt4B  *clone() const;
+  void swap(EIntrinCLt4B &);
+};
+
+class EIntrinCGt4B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCGt4B(const EIntrinCGt4B &);
+  EIntrinCGt4B &operator=(const EIntrinCGt4B &);
+  EIntrinCGt4B(Expression *p1, Expression *p2);
+  ~EIntrinCGt4B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCGt4B  *clone() const;
+  void swap(EIntrinCGt4B &);
+};
+
+class EIntrinCLe4B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCLe4B(const EIntrinCLe4B &);
+  EIntrinCLe4B &operator=(const EIntrinCLe4B &);
+  EIntrinCLe4B(Expression *p1, Expression *p2);
+  ~EIntrinCLe4B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCLe4B  *clone() const;
+  void swap(EIntrinCLe4B &);
+};
+
+class EIntrinCGe4B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCGe4B(const EIntrinCGe4B &);
+  EIntrinCGe4B &operator=(const EIntrinCGe4B &);
+  EIntrinCGe4B(Expression *p1, Expression *p2);
+  ~EIntrinCGe4B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCGe4B  *clone() const;
+  void swap(EIntrinCGe4B &);
+};
+
 class EIntrinAdd8B : public Expression
 {
  public:
@@ -2654,6 +2954,90 @@ class EIntrinNeg8B : public Expression
   virtual void accept(Visitor *v);
   virtual  EIntrinNeg8B  *clone() const;
   void swap(EIntrinNeg8B &);
+};
+
+class EIntrinCEq8B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCEq8B(const EIntrinCEq8B &);
+  EIntrinCEq8B &operator=(const EIntrinCEq8B &);
+  EIntrinCEq8B(Expression *p1, Expression *p2);
+  ~EIntrinCEq8B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCEq8B  *clone() const;
+  void swap(EIntrinCEq8B &);
+};
+
+class EIntrinCNe8B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCNe8B(const EIntrinCNe8B &);
+  EIntrinCNe8B &operator=(const EIntrinCNe8B &);
+  EIntrinCNe8B(Expression *p1, Expression *p2);
+  ~EIntrinCNe8B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCNe8B  *clone() const;
+  void swap(EIntrinCNe8B &);
+};
+
+class EIntrinCLt8B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCLt8B(const EIntrinCLt8B &);
+  EIntrinCLt8B &operator=(const EIntrinCLt8B &);
+  EIntrinCLt8B(Expression *p1, Expression *p2);
+  ~EIntrinCLt8B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCLt8B  *clone() const;
+  void swap(EIntrinCLt8B &);
+};
+
+class EIntrinCGt8B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCGt8B(const EIntrinCGt8B &);
+  EIntrinCGt8B &operator=(const EIntrinCGt8B &);
+  EIntrinCGt8B(Expression *p1, Expression *p2);
+  ~EIntrinCGt8B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCGt8B  *clone() const;
+  void swap(EIntrinCGt8B &);
+};
+
+class EIntrinCLe8B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCLe8B(const EIntrinCLe8B &);
+  EIntrinCLe8B &operator=(const EIntrinCLe8B &);
+  EIntrinCLe8B(Expression *p1, Expression *p2);
+  ~EIntrinCLe8B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCLe8B  *clone() const;
+  void swap(EIntrinCLe8B &);
+};
+
+class EIntrinCGe8B : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIntrinCGe8B(const EIntrinCGe8B &);
+  EIntrinCGe8B &operator=(const EIntrinCGe8B &);
+  EIntrinCGe8B(Expression *p1, Expression *p2);
+  ~EIntrinCGe8B();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCGe8B  *clone() const;
+  void swap(EIntrinCGe8B &);
 };
 
 class EIntrinAddB4V : public Expression

@@ -1,0 +1,53 @@
+type byte bool;
+
+const bool true = 1;
+const bool false = 0;
+
+identity int32 & true;
+identity int32 | false;
+identity int32 ^ false;
+
+pure commutative bool &&( a, b )
+{
+	return and_b( a, b );
+}
+
+pure commutative bool ||( a, b )
+{
+	return or_b( a, b );
+}
+
+pure commutative associative selfinverse bool ^( a, b )
+{
+	return xor_b( a, b );
+}
+
+pure bool ==( a, b )
+{
+    return cmp_b( a, b );
+}
+
+pure bool !=( a, b )
+{
+    return cmp_ne_b( a, b );
+}
+
+pure bool >( a, b )
+{
+    return cmp_gt_b( a, b );
+}
+
+pure bool <( a, b )
+{
+    return cmp_lt_b( a, b );
+}
+
+pure bool >=( a, b )
+{
+    return cmp_ge_b( a, b );
+}
+
+pure bool <=( a, b )
+{
+    return cmp_le_b( a, b );
+}
