@@ -27,17 +27,13 @@ public:
 		mszCurrentNamespace += p->ident_;
 		mszCurrentNamespace += "_dot_";
 		
-		verboseInfo( 3, "Current namespace: %s\n", mszCurrentNamespace.c_str() );
-		
 		DescendingCompilerVisitor::visitDNamespace( p );
 		
 		mszCurrentNamespace.resize( mszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_ ) );
-		verboseInfo( 3, "Current namespace: %s\n", mszCurrentNamespace.c_str() );
 	}
 	
 	virtual void visitDExtern( DExtern *p )
 	{
-		verboseInfo( 3, "Visiting DExtern\n" );
 		maxFoundExterns.push_back( "declare " );
 		mpCurrentExtern = &( maxFoundExterns.back() );
 
@@ -45,8 +41,7 @@ public:
 	}
 
 	virtual void visitPFunction( PFunction* p )
-	{
-		verboseInfo( 3, "Visiting PFunction\n" );
+    {
 		std::string& szExtern = *mpCurrentExtern;
 
 		// add the return type with some assumptions
@@ -159,13 +154,11 @@ public:
 
 	virtual void visitPDTypedParameter( PDTypedParameter* p )
 	{
-		verboseInfo( 3, "Visiting PDTypedParameter\n" );
 		p->type_->accept( this );
 	}
 
 	virtual void visitTCustom( TCustom* p )
 	{
-		verboseInfo( 3, "Visiting TCustom\n" );
 		std::string& szExtern = *mpCurrentExtern;
 		szExtern += hackyTypeConverter( p->ident_ );
 		if( mbNameParams )
