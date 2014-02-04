@@ -289,8 +289,8 @@ class DescendingCompilerVisitor : public CompilerVisitor
   virtual void visitSIf(SIf *p);
   virtual void visitSIfElse(SIfElse *p);
   virtual void visitSLoop(SLoop *p);
-  virtual void visitSWhile(SWhile *p) {}
-  virtual void visitSUntil(SUntil *p) {}
+  virtual void visitSWhile(SWhile *p);
+  virtual void visitSUntil(SUntil *p);
   virtual void visitSFor(SFor *p) {}
   virtual void visitSForEach(SForEach *p) {}
   virtual void visitSForAll(SForAll *p) {}

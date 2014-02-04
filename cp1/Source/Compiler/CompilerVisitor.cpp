@@ -190,6 +190,18 @@ void DescendingCompilerVisitor::visitSLoop( SLoop *p )
     p->liststatement_->accept( this );  
 }
 
+void DescendingCompilerVisitor::visitSWhile( SWhile *p )
+{
+	p->expression_->accept( this );
+    p->liststatement_->accept( this );  
+}
+
+void DescendingCompilerVisitor::visitSUntil( SUntil *p )
+{
+	p->expression_->accept( this );
+    p->liststatement_->accept( this );  
+}
+
 void DescendingCompilerVisitor::visitECall( ECall *p )
 {
     p->listexpression_->accept( this );

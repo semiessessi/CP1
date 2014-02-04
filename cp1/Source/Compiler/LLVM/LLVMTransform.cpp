@@ -348,6 +348,63 @@ void LLVMTransformVisitor::visitSLoop( SLoop *p )
 	out += "\r\nendrepeat" + std::to_string( iRepeatCount ) + ":\r\n";	
 }
 
+void LLVMTransformVisitor::visitSWhile( SWhile *p )
+{
+	//SE - TODO: types	
+	static int siRepeatCounter = 0;
+	int iRepeatCount = siRepeatCounter;
+	++siRepeatCounter;
+	
+	out += "while" + std::to_string( iRepeatCount ) + ":\r\n";	
+	
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "br label %whileloop" + std::to_string( iRepeatCount ) + "\r\n";
+	
+	// ...
+	
+	out += "\r\nwhilebody" + std::to_string( iRepeatCount ) + ":\r\n";
+	
+	p->liststatement_->accept( this );
+	
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	
+	out += "br label %whileloop" + std::to_string( iRepeatCount ) + "\r\n";
+	
+	// ...
+	
+	out += "\r\nwhileloop" + std::to_string( iRepeatCount ) + ":\r\n";
+	
+	p->expression_->accept( this );
+	int iTest = siTempCounter;
+	++siTempCounter;
+	int iCompare = siTempCounter;
+	++siTempCounter;
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "%r" + std::to_string( iCompare );
+	out += " = icmp eq i32 %r" + std::to_string( iTest ) + ", 0\r\n";
+	
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "br i1 %r" + std::to_string( iCompare );
+	out += ", label %endwhile" + std::to_string( iRepeatCount );
+	out += ", label %whilebody" + std::to_string( iRepeatCount ) + "\r\n";
+	
+	// ...
+	
+	out += "\r\nendwhile" + std::to_string( iRepeatCount ) + ":\r\n";	
+}
+
 void LLVMTransformVisitor::visitEInteger(EInteger *p)
 {
     for( int i = 0; i < siTabLevel; ++i )
