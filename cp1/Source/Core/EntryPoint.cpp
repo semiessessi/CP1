@@ -15,6 +15,8 @@
 #include "../Compiler/TypeFinder.h"
 #include "../Compiler/ImportFinder.h"
 
+#include "../Error/VerboseInfo.h"
+
 #include "Switches.h"
 
 extern int yydebug;
@@ -134,7 +136,7 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
                 doHackery( pFile );
 				apCode[ i ] = pCode( pFile );
 				fclose( pFile );
-				
+
 				yy_mylinenumber = 0;
 				LexFlushBuffer();
 			}
@@ -150,7 +152,10 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 		for( size_t i = 0; i < apCode.size(); ++i )
 		{
 			ImportFinder f;
-			apCode[ i ]->accept( &f );
+			if( apCode[ i ] )
+			{
+				apCode[ i ]->accept( &f );
+			}
 			
 			for( size_t j = 0; j < f.maszImports.size(); ++j )
 			{
@@ -199,9 +204,12 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
             PrintAbsyn printer;
             for( size_t i = 0; i < apCode.size(); ++i )
             {
-                printf( "\r\nOriginal source for %s:\r\n", aszFilenames[ i ].c_str() );
-                printf( "%s\r\n", printer.print( apCode[ i ] ) );
-            }
+				if( apCode[ i ])
+				{
+					printf( "\r\nOriginal source for %s:\r\n", aszFilenames[ i ].c_str() );
+					printf( "%s\r\n", printer.print( apCode[ i ] ) );
+				}
+			}
         }
         
         // pretty print parse trees...
@@ -210,9 +218,12 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
             ShowAbsyn printer;
             for( size_t i = 0; i < apCode.size(); ++i )
             {
-                printf( "\r\nParse tree for %s:\r\n", aszFilenames[ i ].c_str() );
-                printf( "%s\r\n", printer.show( apCode[ i ] ) );
-            }
+				if( apCode[ i ] )
+				{
+					printf( "\r\nParse tree for %s:\r\n", aszFilenames[ i ].c_str() );
+					printf( "%s\r\n", printer.show( apCode[ i ] ) );
+				}
+			}
         }
         
 		if( gxSwitches.infoVerbosity > 1 )
@@ -353,25 +364,36 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 			fclose( pFile );
 		}
 
-        //
+		for( size_t i = 0; i < apCode.size(); ++i )
+		{
+			if( apCode[ i ] == 0 )
+			{
+				printf( "Fatal error: Could not compile %s\n", aszFilenames[ i ].c_str() );
+				goto mainExit;
+			}
+		}
+	
+		if( gxSwitches.infoVerbosity > 0 )
+		{
+			printf( "Compiling from generated LLVM...\n" );
+		}
+		
+		params += " -cppgen=program -filetype=obj";
+		//params += gxSwitches.optimisationLevel;
+		params += " temp.ll";
+		system( params.c_str() );
+		
+		if( gxSwitches.infoVerbosity > 0 )
+		{
+			printf( "Linking with GCC...\n" );
+		}
+		
+		system( "gcc temp.o -O3 -oa.exe\n" );
 	}
-
-	if( gxSwitches.infoVerbosity > 0 )
+	else
 	{
-		printf( "Compiling from generated LLVM...\n" );
+		printf( "Insufficient arguments. Try cp1 /? for help.\n" );
 	}
-	
-	params += " -cppgen=program -filetype=obj";
-	//params += gxSwitches.optimisationLevel;
-	params += " temp.ll";
-	system( params.c_str() );
-	
-	if( gxSwitches.infoVerbosity > 0 )
-	{
-		printf( "Linking with GCC...\n" );
-	}
-	
-	system( "gcc temp.o -O3 -oa.exe\n" );
 
 	printf( "Done.\n" );
 
