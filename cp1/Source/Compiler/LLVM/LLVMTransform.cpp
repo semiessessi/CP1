@@ -273,28 +273,79 @@ void LLVMTransformVisitor::visitSIfElse( SIfElse *p )
 
 void LLVMTransformVisitor::visitSLoop( SLoop *p )
 {
-	// p->expression_->accept( this );
-	// SE - TODO: types
-	// int iAmount = siTempCounter;
-	// static int siRepeatCounter = 0;
-	// ++siTempCounter;
-	// for( int i = 0; i < siTabLevel; ++i )
-    // {
-        // out += "\t";
-    // }
-	// int iRepeatCount = siRepeatCounter;
-	// ++siRepeatCounter;
-	// out += "br label %repeat" + std::to_string( iRepeatCount ) + "\r\n";
-	// out += "repeat" + std::to_string( iRepeatCount ) + ":\r\n";
-	// for( int i = 0; i < siTabLevel; ++i )
-    // {
-        // out += "\t";
-    // }
-	// out += "%r" + std::to_string( siTempCounter );
-	// ++siTempCounter;
-	// out += "phi [ %r" + std::to_string( siRepeatCounter ) +", %repeat" + std::to_string( iRepeatCount ) + " ],"
-	// out += " [ %nextvar, %loop ]";
-	// ++siTempCounter;
+	//SE - TODO: types	
+	static int siRepeatCounter = 0;
+	int iRepeatCount = siRepeatCounter;
+	++siRepeatCounter;
+	
+	out += "repeat" + std::to_string( iRepeatCount ) + ":\r\n";
+
+	p->expression_->accept( this );
+	
+	int iAmount = siTempCounter;
+	++siTempCounter;
+	
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "br label %repeatloop" + std::to_string( iRepeatCount ) + "\r\n";
+	
+	// ...
+	
+	out += "\r\nrepeatbody" + std::to_string( iRepeatCount ) + ":\r\n";
+	
+	p->liststatement_->accept( this );
+	
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	
+	out += "br label %repeatloop" + std::to_string( iRepeatCount ) + "\r\n";
+	
+	// ...
+	
+	out += "\r\nrepeatloop" + std::to_string( iRepeatCount ) + ":\r\n";
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "%r" + std::to_string( siTempCounter );
+	int iPhi = siTempCounter;
+	++siTempCounter;
+	int iLoop = siTempCounter;
+	++siTempCounter;
+	int iCompare = siTempCounter;
+	++siTempCounter;
+	out += " = phi i32 [ %r" + std::to_string( iAmount ) +", %repeat" + std::to_string( iRepeatCount ) + " ],";
+	out += " [ %r" + std::to_string( iLoop ) +", %repeatbody" + std::to_string( iRepeatCount ) + " ]\r\n";
+	
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "%r" + std::to_string( iLoop );
+	out += " = sub i32 %r" + std::to_string( iPhi ) + ", 1\r\n";
+	
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "%r" + std::to_string( iCompare );
+	out += " = icmp slt i32 %r" + std::to_string( iLoop ) + ", 0\r\n";
+	
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "br i1 %r" + std::to_string( iCompare );
+	out += ", label %endrepeat" + std::to_string( iRepeatCount );
+	out += ", label %repeatbody" + std::to_string( iRepeatCount ) + "\r\n";
+	
+	// ...
+	
+	out += "\r\nendrepeat" + std::to_string( iRepeatCount ) + ":\r\n";	
 }
 
 void LLVMTransformVisitor::visitEInteger(EInteger *p)
