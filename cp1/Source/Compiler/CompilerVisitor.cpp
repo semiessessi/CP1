@@ -166,6 +166,21 @@ void DescendingCompilerVisitor::visitSReturn( SReturn *p )
     
 }
 
+void DescendingCompilerVisitor::visitSScope( SScope *p )
+{
+    p->liststatement_->accept( this );  
+}
+
+void DescendingCompilerVisitor::visitSIf( SIf *p )
+{
+    p->liststatement_->accept( this );  
+}
+
+void DescendingCompilerVisitor::visitSLoop( SLoop *p )
+{
+    p->liststatement_->accept( this );  
+}
+
 void DescendingCompilerVisitor::visitECall( ECall *p )
 {
     p->listexpression_->accept( this );
