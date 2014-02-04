@@ -210,19 +210,65 @@ void LLVMTransformVisitor::visitSIf( SIf *p )
     }
 	
 	static int siIfCounter = 0;
+	int iIfCounter = siIfCounter;
+	++siIfCounter;
 	out += "br i1 %r" + std::to_string( siTempCounter );
-	out += ", label %ifbody" + std::to_string( siIfCounter );
-	out += ", label %endif" + std::to_string( siIfCounter ) + "\r\n";
-	out += "\r\nifbody" + std::to_string( siIfCounter ) + ":\r\n";
+	out += ", label %ifbody" + std::to_string( iIfCounter );
+	out += ", label %endif" + std::to_string( iIfCounter ) + "\r\n";
+	out += "\r\nifbody" + std::to_string( iIfCounter ) + ":\r\n";
 	++siTempCounter;
 	p->liststatement_->accept( this );
 	for( int i = 0; i < siTabLevel; ++i )
     {
         out += "\t";
     }
-	out += "br label %endif" + std::to_string( siIfCounter ) + "\r\n";
-	out += "\r\nendif" + std::to_string( siIfCounter ) + ":\r\n";
+	out += "br label %endif" + std::to_string( iIfCounter ) + "\r\n";
+	out += "\r\nendif" + std::to_string( iIfCounter ) + ":\r\n";
+}
+
+void LLVMTransformVisitor::visitSIfElse( SIfElse *p )
+{
+	p->expression_->accept( this );
+	// SE - TODO: types
+	int iCondition = siTempCounter;
+	++siTempCounter;
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "%r";
+	out += std::to_string( siTempCounter );
+	out += " = icmp ne i32 %r";
+	out += std::to_string( iCondition );
+	out += ", 0\n";
+	
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	
+	static int siIfCounter = 0;
+	int iIfCounter = siIfCounter;
 	++siIfCounter;
+	out += "br i1 %r" + std::to_string( siTempCounter );
+	out += ", label %ifbody" + std::to_string( iIfCounter );
+	out += ", label %elsebody" + std::to_string( iIfCounter ) + "\r\n";
+	out += "\r\nifbody" + std::to_string( iIfCounter ) + ":\r\n";
+	++siTempCounter;
+	p->liststatement_1->accept( this );
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "br label %endif" + std::to_string( iIfCounter ) + "\r\n";
+	out += "\r\nelsebody" + std::to_string( iIfCounter ) + ":\r\n";
+	p->liststatement_2->accept( this );
+	for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "br label %endif" + std::to_string( iIfCounter ) + "\r\n";
+	out += "\r\nendif" + std::to_string( iIfCounter ) + ":\r\n";
 }
 
 void LLVMTransformVisitor::visitEInteger(EInteger *p)
@@ -235,7 +281,7 @@ void LLVMTransformVisitor::visitEInteger(EInteger *p)
     out += stringFromInt( siTempCounter );
     out += " = bitcast i32 ";
     out += stringFromInt( p->integer_ );
-    out += "to i32\r\n";
+    out += " to i32\r\n";
 }
 
 void LLVMTransformVisitor::visitERValue(ERValue *p)

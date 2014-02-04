@@ -33,6 +33,8 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   virtual void visitSReturn(SReturn *p);
   virtual void visitSExpression(SExpression *p);
   virtual void visitSIf(SIf *p);
+  virtual void visitSIfElse(SIfElse *p);
+  //virtual void visitSLoop(SLoop *p);
   //virtual void visitEDouble(EDouble *p);
   virtual void visitEInteger(EInteger *p);
   //virtual void visitEIdentifier(EIdentifier *p);

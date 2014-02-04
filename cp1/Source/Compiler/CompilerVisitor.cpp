@@ -173,11 +173,20 @@ void DescendingCompilerVisitor::visitSScope( SScope *p )
 
 void DescendingCompilerVisitor::visitSIf( SIf *p )
 {
+	p->expression_->accept( this );
     p->liststatement_->accept( this );  
+}
+
+void DescendingCompilerVisitor::visitSIfElse( SIfElse *p )
+{
+	p->expression_->accept( this );
+    p->liststatement_1->accept( this );
+	p->liststatement_2->accept( this );	
 }
 
 void DescendingCompilerVisitor::visitSLoop( SLoop *p )
 {
+	p->expression_->accept( this );
     p->liststatement_->accept( this );  
 }
 
