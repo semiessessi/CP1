@@ -14,5 +14,7 @@
 			printf( __VA_ARGS__ ); \
 		} \
 	} while( false )
+    
+#define FILE_LINE_3 verboseInfo( 3, "File %s, line %d\n", __FILE__, __LINE__ );
 
 #endif
