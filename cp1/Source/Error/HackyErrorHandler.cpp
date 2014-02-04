@@ -120,6 +120,7 @@ void yyerror(const char *str)
 	
     printf( "%s\n", err.c_str() );
 
+    // SE - TODO: something to normalise tabs to spaces...
     if( gxSwitches.errorVerbosity > 1 )
     {
         printf( "\n" );
@@ -141,6 +142,10 @@ void yyerror(const char *str)
 				printf( "   \t|-" );
 			    for( int i = 0; i < gpxLocation->last_column; ++i )
 			    {
+                    if( gaszLines[ yy_mylinenumber ].c_str()[ i ] == '\t' )
+                    {
+                        printf( "---" );
+                    }
 				    printf( ( i == gpxLocation->first_column ) ? "+" : "-" );
 			    }
 				printf( "^\n" );
@@ -150,11 +155,19 @@ void yyerror(const char *str)
 				printf( "   \t| " );
                 for( int i = 0; i < gpxLocation->first_column - 1; ++i )
 			    {
+                    if( gaszLines[ yy_mylinenumber ].c_str()[ i ] == '\t' )
+                    {
+                        printf( "   " );
+                    }
 				    printf( " " );
 			    }
                 printf( "|" );
 			    for( int i = gpxLocation->first_column; i < gpxLocation->last_column; ++i )
 			    {
+                    if( gaszLines[ yy_mylinenumber ].c_str()[ i ] == '\t' )
+                    {
+                        printf( "---" );
+                    }
 				    printf( "-" );
 			    }
 				printf( "|\n" );
