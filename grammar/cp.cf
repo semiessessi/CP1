@@ -18,8 +18,8 @@ DOperator.					Declaration				::= [FunctionSpecifier] Type OperatorName "(" [Par
 DOperatorInfo.				Declaration				::= OperatorTrait ";" ;
 DTypeDecl.					Declaration				::= [TypeSpecifier] "type" Type Ident ";" ;
 DExtern.					Declaration				::= "extern" Prototype ;
-DIVariable.					Declaration				::= "global" [VariableSpecifier] Type Ident "=" Expression ";" ;
-DVariable.					Declaration				::= "global" [VariableSpecifier] Type Ident ";" ;
+DIVariable.					Declaration				::= [VariableSpecifier] Type Ident "=" Expression ";" ;
+DVariable.					Declaration				::= [VariableSpecifier] Type Ident ";" ;
 
 -- PDefaultFunction.			Prototype				::= [FunctionSpecifier] Ident "(" [ParameterDeclaration] ")" ";" ;
 PFunction.					Prototype				::= [FunctionSpecifier] Type Ident "(" [ParameterDeclaration] ")" ";" ;
@@ -118,7 +118,7 @@ EList.						Expression10			::= "[" [Expression] "]" ;
 EAComp.						Expression10			::= "{" Expression "where" [Expression] "}" ;
 ELComp.						Expression10			::= "[" Expression "where" [Expression] "]" ;
 
---EIndex.						Expression10			::=  Expression "[" Expression "]" ;
+EIndex.						Expression10			::=  Expression "[" Expression "]" ;
 
 ESimpleCall.				Expression10			::= RValue "(" ")" ;
 ECall.						Expression10			::= RValue "(" [Expression] ")" ;

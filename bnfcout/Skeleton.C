@@ -668,6 +668,14 @@ void Skeleton::visitELComp(ELComp* elcomp)
   if (elcomp->listexpression_) {elcomp->listexpression_->accept(this);}
 }
 
+void Skeleton::visitEIndex(EIndex* eindex)
+{
+  /* Code For EIndex Goes Here */
+
+  eindex->expression_1->accept(this);
+  eindex->expression_2->accept(this);
+}
+
 void Skeleton::visitESimpleCall(ESimpleCall* esimplecall)
 {
   /* Code For ESimpleCall Goes Here */

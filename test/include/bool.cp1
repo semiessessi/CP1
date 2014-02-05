@@ -1,7 +1,7 @@
 type byte bool;
 
-global const bool true = 1;
-global const bool false = 0;
+const bool true = 1;
+const bool false = 0;
 
 identity int32 & true;
 identity int32 | false;

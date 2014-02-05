@@ -2,7 +2,7 @@
 
 generic< type T > type address pointer;
 
-global const pointer null = 0;
+const pointer null = 0;
 
 identity pointer + null;
 identity pointer | null;

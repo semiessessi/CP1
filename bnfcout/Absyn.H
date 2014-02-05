@@ -104,6 +104,7 @@ class EArray;
 class EList;
 class EAComp;
 class ELComp;
+class EIndex;
 class ESimpleCall;
 class ECall;
 class EPostInc;
@@ -396,6 +397,7 @@ class Visitor
   virtual void visitEList(EList *p) = 0;
   virtual void visitEAComp(EAComp *p) = 0;
   virtual void visitELComp(ELComp *p) = 0;
+  virtual void visitEIndex(EIndex *p) = 0;
   virtual void visitESimpleCall(ESimpleCall *p) = 0;
   virtual void visitECall(ECall *p) = 0;
   virtual void visitEPostInc(EPostInc *p) = 0;
@@ -1948,6 +1950,20 @@ class ELComp : public Expression
   virtual void accept(Visitor *v);
   virtual  ELComp  *clone() const;
   void swap(ELComp &);
+};
+
+class EIndex : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EIndex(const EIndex &);
+  EIndex &operator=(const EIndex &);
+  EIndex(Expression *p1, Expression *p2);
+  ~EIndex();
+  virtual void accept(Visitor *v);
+  virtual  EIndex  *clone() const;
+  void swap(EIndex &);
 };
 
 class ESimpleCall : public Expression

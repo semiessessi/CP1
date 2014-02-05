@@ -131,6 +131,7 @@ class PrintAbsyn : public Visitor
   void visitEList(EList *p);
   void visitEAComp(EAComp *p);
   void visitELComp(ELComp *p);
+  void visitEIndex(EIndex *p);
   void visitESimpleCall(ESimpleCall *p);
   void visitECall(ECall *p);
   void visitEPostInc(EPostInc *p);
@@ -483,6 +484,7 @@ class ShowAbsyn : public Visitor
   void visitEList(EList *p);
   void visitEAComp(EAComp *p);
   void visitELComp(ELComp *p);
+  void visitEIndex(EIndex *p);
   void visitESimpleCall(ESimpleCall *p);
   void visitECall(ECall *p);
   void visitEPostInc(EPostInc *p);

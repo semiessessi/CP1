@@ -93,7 +93,7 @@ class CompilerVisitor : public Visitor
   virtual void visitEList(EList *p) {}
   virtual void visitEAComp(EAComp *p) {}
   virtual void visitELComp(ELComp *p) {}
-  //virtual void visitEIndex(EIndex *p) {}
+  virtual void visitEIndex(EIndex *p) {}
   virtual void visitERValue(ERValue *p) {}
   virtual void visitESimpleCall(ESimpleCall *p) {}
   virtual void visitECall(ECall *p) {}

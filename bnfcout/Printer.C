@@ -250,7 +250,6 @@ void PrintAbsyn::visitDIVariable(DIVariable* p)
   int oldi = _i_;
   if (oldi > 0) render(_L_PAREN);
 
-  render("global");
   if(p->listvariablespecifier_) {_i_ = 0; p->listvariablespecifier_->accept(this);}  _i_ = 0; p->type_->accept(this);
   visitIdent(p->ident_);
   render('=');
@@ -267,7 +266,6 @@ void PrintAbsyn::visitDVariable(DVariable* p)
   int oldi = _i_;
   if (oldi > 0) render(_L_PAREN);
 
-  render("global");
   if(p->listvariablespecifier_) {_i_ = 0; p->listvariablespecifier_->accept(this);}  _i_ = 0; p->type_->accept(this);
   visitIdent(p->ident_);
   render(';');
@@ -1308,6 +1306,21 @@ void PrintAbsyn::visitELComp(ELComp* p)
   _i_ = 0; p->expression_->accept(this);
   render("where");
   if(p->listexpression_) {_i_ = 0; p->listexpression_->accept(this);}  render(']');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIndex(EIndex* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  _i_ = 0; p->expression_1->accept(this);
+  render('[');
+  _i_ = 0; p->expression_2->accept(this);
+  render(']');
 
   if (oldi > 10) render(_R_PAREN);
 
@@ -5146,6 +5159,17 @@ void ShowAbsyn::visitELComp(ELComp* p)
   bufAppend('[');
   if (p->listexpression_)  p->listexpression_->accept(this);
   bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIndex(EIndex* p)
+{
+  bufAppend('(');
+  bufAppend("EIndex");
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
   bufAppend(' ');
   bufAppend(')');
 }

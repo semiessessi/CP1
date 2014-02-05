@@ -1966,6 +1966,30 @@ ELComp *ELComp::clone() const {
   return new ELComp(*this);
 }
 
+/********************   EIndex    ********************/
+EIndex::EIndex(Expression *p1, Expression *p2) { expression_1 = p1; expression_2 = p2; }
+EIndex::EIndex(const EIndex & other) {   expression_1 = other.expression_1->clone();
+  expression_2 = other.expression_2->clone();
+
+}
+EIndex &EIndex::operator=(const EIndex & other) {
+  EIndex tmp(other);
+  swap(tmp);
+  return *this;
+}
+void EIndex::swap(EIndex & other) {
+  std::swap(expression_1, other.expression_1);
+  std::swap(expression_2, other.expression_2);
+
+}
+
+EIndex::~EIndex() { delete(expression_1); delete(expression_2); }
+
+void EIndex::accept(Visitor *v) { v->visitEIndex(this); }
+EIndex *EIndex::clone() const {
+  return new EIndex(*this);
+}
+
 /********************   ESimpleCall    ********************/
 ESimpleCall::ESimpleCall(RValue *p1) { rvalue_ = p1; }
 ESimpleCall::ESimpleCall(const ESimpleCall & other) {   rvalue_ = other.rvalue_->clone();

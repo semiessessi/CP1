@@ -96,12 +96,12 @@ void yyerror(const char *str)
     FUCKO_MACRO( _SYMB_98, 'const' );
 	FUCKO_MACRO( _SYMB_105, 'else' );
 	FUCKO_MACRO( _SYMB_106, 'entrypoint' );
-	FUCKO_MACRO( _SYMB_113, 'if' );
-    FUCKO_MACRO( _SYMB_156, 'return' );
-    FUCKO_MACRO( _SYMB_186, 'type' );
-    FUCKO_MACRO( _SYMB_193, 'until' );
-    FUCKO_MACRO( _SYMB_200, 'where' );
-    FUCKO_MACRO( _SYMB_201, 'while' );
+	FUCKO_MACRO( _SYMB_112, 'if' );
+    FUCKO_MACRO( _SYMB_155, 'return' );
+    FUCKO_MACRO( _SYMB_185, 'type' );
+    FUCKO_MACRO( _SYMB_192, 'until' );
+    FUCKO_MACRO( _SYMB_199, 'where' );
+    FUCKO_MACRO( _SYMB_200, 'while' );
     
 	// must be last to avoid fucking up the above tests...
     FUCKO_MACRO( _SYMB_0, ';' );

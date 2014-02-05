@@ -247,10 +247,9 @@
      _SYMB_205 = 464,
      _SYMB_206 = 465,
      _SYMB_207 = 466,
-     _SYMB_208 = 467,
-     _INTEGER_ = 468,
-     _DOUBLE_ = 469,
-     _IDENT_ = 470
+     _INTEGER_ = 467,
+     _DOUBLE_ = 468,
+     _IDENT_ = 469
    };
 #endif
 
@@ -297,7 +296,7 @@ typedef union YYSTYPE
 
 
 /* Line 2638 of glr.c  */
-#line 301 "parse.hpp"
+#line 300 "parse.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 #endif

@@ -112,6 +112,7 @@ class Skeleton : public Visitor
   void visitEList(EList* elist);
   void visitEAComp(EAComp* eacomp);
   void visitELComp(ELComp* elcomp);
+  void visitEIndex(EIndex* eindex);
   void visitESimpleCall(ESimpleCall* esimplecall);
   void visitECall(ECall* ecall);
   void visitEPostInc(EPostInc* epostinc);
