@@ -259,7 +259,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2638 of glr.c  */
-#line 522 "E:\\extra_cp\\cp\\cp1\\cp1\\.y"
+#line 522 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
 
   int int_;
   char char_;
