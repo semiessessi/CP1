@@ -2122,10 +2122,6 @@ void Skeleton::visitListExpression(ListExpression* listexpression)
   }
 }
 
-void Skeleton::visitOperator(Operator p)
-{
-  /* Code for Operator Goes Here */
-}
 void Skeleton::visitCstring(CString p)
 {
   /* Code for CString Goes Here */
@@ -2133,6 +2129,10 @@ void Skeleton::visitCstring(CString p)
 void Skeleton::visitCchar(CChar p)
 {
   /* Code for CChar Goes Here */
+}
+void Skeleton::visitOperator(Operator p)
+{
+  /* Code for Operator Goes Here */
 }
 void Skeleton::visitIdent(Ident i)
 {

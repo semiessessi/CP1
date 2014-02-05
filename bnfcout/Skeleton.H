@@ -284,7 +284,7 @@ class Skeleton : public Visitor
   void visitELShAssign(ELShAssign* elshassign);
   void visitERShAssign(ERShAssign* ershassign);
   void visitListTLDeclaration(ListTLDeclaration* listtldeclaration);  void visitListDeclaration(ListDeclaration* listdeclaration);  void visitListStatement(ListStatement* liststatement);  void visitListTypeSpecifier(ListTypeSpecifier* listtypespecifier);  void visitListFunctionSpecifier(ListFunctionSpecifier* listfunctionspecifier);  void visitListVariableSpecifier(ListVariableSpecifier* listvariablespecifier);  void visitListStructMemberDeclaration(ListStructMemberDeclaration* liststructmemberdeclaration);  void visitListGenericParam(ListGenericParam* listgenericparam);  void visitListParameterDeclaration(ListParameterDeclaration* listparameterdeclaration);  void visitListExpression(ListExpression* listexpression);
-  void visitOperator(Operator p);  void visitCstring(CString p);  void visitCchar(CChar p);
+  void visitCstring(CString p);  void visitCchar(CChar p);  void visitOperator(Operator p);
   void visitIdent(String s);
   void visitInteger(Integer i);
   void visitDouble(Double d);

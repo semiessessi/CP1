@@ -237,9 +237,9 @@ IDENT [a-zA-Z0-9'_]
 <COMMENT>.      	 /* BNFC multi-line comment */;
 <COMMENT>[\n]   ++yy_mylinenumber ; 	 /* BNFC multi-line comment */;
 
-<YYINITIAL>(\+|\-|\=|\&|\^|\||\/|\%|\*|\>|\<|\!|\~|\?|\:)*     	 yylval.string_ = strdup(yytext); return _SYMB_205;
-<YYINITIAL>\".*\"     	 yylval.string_ = strdup(yytext); return _SYMB_206;
-<YYINITIAL>'\\?.'     	 yylval.string_ = strdup(yytext); return _SYMB_207;
+<YYINITIAL>\".*\"     	 yylval.string_ = strdup(yytext); return _SYMB_205;
+<YYINITIAL>'\\?.'     	 yylval.string_ = strdup(yytext); return _SYMB_206;
+<YYINITIAL>(\+|\-|\=|\&|\^|\||\/|\%|\*|\>|\<|\!|\~|\?|\:)(\+|\-|\=|\&|\^|\||\/|\%|\*|\>|\<|\!|\~|\?|\:)(\+|\-|\=|\&|\^|\||\/|\%|\*|\>|\<|\!|\~|\?|\:)+     	 yylval.string_ = strdup(yytext); return _SYMB_207;
 <YYINITIAL>{DIGIT}+"."{DIGIT}+("e"(\-)?{DIGIT}+)?      	 yylval.double_ = atof(yytext); return _DOUBLE_;
 <YYINITIAL>{DIGIT}+      	 yylval.int_ = atoi(yytext); return _INTEGER_;
 <YYINITIAL>{LETTER}{IDENT}*      	 yylval.string_ = strdup(yytext); return _IDENT_;

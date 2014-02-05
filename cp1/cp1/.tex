@@ -42,14 +42,14 @@ followed by an unsigned or negative exponent.
 
 
 
-Operator literals are recognized by the regular expression
-\((\mbox{`{$+$}'} \mid \mbox{`{$-$}'} \mid \mbox{`{$=$}'} \mid \mbox{`\&'} \mid \mbox{`\^'} \mid \mbox{`{$|$}'} \mid \mbox{`/'} \mid \mbox{`\%'} \mid \mbox{`*'} \mid \mbox{`{$>$}'} \mid \mbox{`{$<$}'} \mid \mbox{`!'} \mid \mbox{`\~{}'} \mid \mbox{`?'} \mid \mbox{`:'})*\)
-
 CString literals are recognized by the regular expression
 \(\mbox{`"'} {\nonterminal{anychar}}* \mbox{`"'}\)
 
 CChar literals are recognized by the regular expression
 \(\mbox{`''} \mbox{`$\backslash$'}? {\nonterminal{anychar}} \mbox{`''}\)
+
+Operator literals are recognized by the regular expression
+\((\mbox{`{$+$}'} \mid \mbox{`{$-$}'} \mid \mbox{`{$=$}'} \mid \mbox{`\&'} \mid \mbox{`\^'} \mid \mbox{`{$|$}'} \mid \mbox{`/'} \mid \mbox{`\%'} \mid \mbox{`*'} \mid \mbox{`{$>$}'} \mid \mbox{`{$<$}'} \mid \mbox{`!'} \mid \mbox{`\~{}'} \mid \mbox{`?'} \mid \mbox{`:'}) (\mbox{`{$+$}'} \mid \mbox{`{$-$}'} \mid \mbox{`{$=$}'} \mid \mbox{`\&'} \mid \mbox{`\^'} \mid \mbox{`{$|$}'} \mid \mbox{`/'} \mid \mbox{`\%'} \mid \mbox{`*'} \mid \mbox{`{$>$}'} \mid \mbox{`{$<$}'} \mid \mbox{`!'} \mid \mbox{`\~{}'} \mid \mbox{`?'} \mid \mbox{`:'}) (\mbox{`{$+$}'} \mid \mbox{`{$-$}'} \mid \mbox{`{$=$}'} \mid \mbox{`\&'} \mid \mbox{`\^'} \mid \mbox{`{$|$}'} \mid \mbox{`/'} \mid \mbox{`\%'} \mid \mbox{`*'} \mid \mbox{`{$>$}'} \mid \mbox{`{$<$}'} \mid \mbox{`!'} \mid \mbox{`\~{}'} \mid \mbox{`?'} \mid \mbox{`:'})+\)
 
 
 \subsection*{Reserved words and symbols}

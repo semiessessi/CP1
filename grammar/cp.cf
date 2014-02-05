@@ -2,8 +2,6 @@
 comment "//" ;
 comment "/*" "*/" ;
 
-token Operator ( ( '+' | '-' | '=' | '&' | '^' | '|' | '/' | '%' | '*' | '>' | '<' | '!' | '~' | '?' | ':' ) * ) ;
-
 entrypoints Code ;
 
 Main. 						Code 					::= [TLDeclaration] [Declaration] ;
@@ -340,3 +338,6 @@ separator nonempty Expression "," ;
 -- this is super generic and dangerous looking to me.... can it contain quotes?
 token CString '"' ( char )* '"' ;
 token CChar '\'' ( '\\' )? ( char ) '\'' ;
+
+-- for now custom operators must be three characters long for now to avoid a ton of ambiguity for the parser...
+token Operator ( ( '+' | '-' | '=' | '&' | '^' | '|' | '/' | '%' | '*' | '>' | '<' | '!' | '~' | '?' | ':' ) ( '+' | '-' | '=' | '&' | '^' | '|' | '/' | '%' | '*' | '>' | '<' | '!' | '~' | '?' | ':' ) ( '+' | '-' | '=' | '&' | '^' | '|' | '/' | '%' | '*' | '>' | '<' | '!' | '~' | '?' | ':' )+ ) ;

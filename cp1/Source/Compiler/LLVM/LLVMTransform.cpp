@@ -859,6 +859,7 @@ void LLVMTransformVisitor::visitERSh(ERSh *p)
 
 void LLVMTransformVisitor::visitEBinaryOperator(EBinaryOperator *p)
 {
+    /*
 	// are we operating on built-in types?
 	int left = siTempCounter;
 
@@ -919,6 +920,7 @@ void LLVMTransformVisitor::visitEBinaryOperator(EBinaryOperator *p)
     out += "\r\n";
 
 	// with a built in operator?
+    */
 }
 
 void LLVMTransformVisitor::visitEBand(EBand *p)

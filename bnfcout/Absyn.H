@@ -9,9 +9,9 @@ typedef char Char;
 typedef double Double;
 typedef char* String;
 typedef char* Ident;
-typedef char* Operator;
 typedef char* CString;
 typedef char* CChar;
+typedef char* Operator;
 
 
 /********************   Forward Declarations    ********************/

@@ -759,9 +759,9 @@ ListExpression* reverseListExpression(ListExpression *l)
 %token _SYMB_202    //   xor_4b
 %token _SYMB_203    //   xor_8b
 %token _SYMB_204    //   xor_b
-%token<string_> _SYMB_205    //   Operator
-%token<string_> _SYMB_206    //   CString
-%token<string_> _SYMB_207    //   CChar
+%token<string_> _SYMB_205    //   CString
+%token<string_> _SYMB_206    //   CChar
+%token<string_> _SYMB_207    //   Operator
 
 %type <code_> Code
 %type <tldeclaration_> TLDeclaration
@@ -825,7 +825,7 @@ Declaration : _SYMB_133 _IDENT_ _SYMB_1 ListDeclaration _SYMB_2 { $$ = new DName
 ;
 Prototype : ListFunctionSpecifier Type _IDENT_ _SYMB_3 ListParameterDeclaration _SYMB_4 _SYMB_0 { $$ = new PFunction(reverseListFunctionSpecifier($1), $2, $3, $5);  } 
 ;
-OperatorName : _SYMB_205 { $$ = new ONOp($1);  } 
+OperatorName : _SYMB_207 { $$ = new ONOp($1);  } 
   | _SYMB_6 { $$ = new ONLnot();  }
   | _SYMB_7 { $$ = new ONPreInc();  }
   | _SYMB_8 { $$ = new ONPreDec();  }
@@ -903,8 +903,8 @@ RValue : _IDENT_ { $$ = new RVIdent($1);  }
 ;
 Expression11 : _DOUBLE_ { $$ = new EDouble($1);  } 
   | _INTEGER_ { $$ = new EInteger($1);  }
-  | _SYMB_206 { $$ = new EString($1);  }
-  | _SYMB_207 { $$ = new EChar($1);  }
+  | _SYMB_205 { $$ = new EString($1);  }
+  | _SYMB_206 { $$ = new EChar($1);  }
   | _SYMB_148 { $$ = new EPi();  }
   | RValue { $$ = new ERValue($1);  }
   | _SYMB_3 Expression _SYMB_4 { $$ = $2;  }
@@ -1052,7 +1052,7 @@ Expression9 : _SYMB_6 Expression10 { $$ = new ELnot($2);  }
   | _SYMB_14 Expression10 { $$ = new ENeg($2);  }
   | _SYMB_9 Expression10 { $$ = new EBnot($2);  }
   | _SYMB_13 Expression10 { $$ = new EPos($2);  }
-  | _SYMB_205 Expression10 { $$ = new EUnaryOperator($1, $2);  }
+  | _SYMB_207 Expression10 { $$ = new EUnaryOperator($1, $2);  }
   | Expression10 { $$ = $1;  }
 ;
 Expression8 : Expression8 _SYMB_10 Expression9 { $$ = new EMul($1, $3);  } 
@@ -1066,7 +1066,7 @@ Expression7 : Expression7 _SYMB_13 Expression8 { $$ = new EAdd($1, $3);  }
 ;
 Expression6 : Expression6 _SYMB_15 Expression7 { $$ = new ELSh($1, $3);  } 
   | Expression6 _SYMB_16 Expression7 { $$ = new ERSh($1, $3);  }
-  | Expression6 _SYMB_205 Expression7 { $$ = new EBinaryOperator($1, $2, $3);  }
+  | Expression6 _SYMB_207 Expression7 { $$ = new EBinaryOperator($1, $2, $3);  }
   | Expression7 { $$ = $1;  }
 ;
 Expression5 : Expression6 _SYMB_17 Expression6 { $$ = new ELT($1, $3);  } 
