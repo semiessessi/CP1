@@ -45,13 +45,14 @@ class PrintAbsyn : public Visitor
   void visitPrototype(Prototype *p); /* abstract class */
   void visitPFunction(PFunction *p);
   void visitOperatorName(OperatorName *p); /* abstract class */
-  void visitONOp(ONOp *p);
   void visitONLnot(ONLnot *p);
   void visitONPreInc(ONPreInc *p);
   void visitONPreDec(ONPreDec *p);
   void visitONBnot(ONBnot *p);
   void visitONMul(ONMul *p);
+  void visitONExp(ONExp *p);
   void visitONDiv(ONDiv *p);
+  void visitONRDiv(ONRDiv *p);
   void visitONMod(ONMod *p);
   void visitONAdd(ONAdd *p);
   void visitONSub(ONSub *p);
@@ -69,6 +70,8 @@ class PrintAbsyn : public Visitor
   void visitONLand(ONLand *p);
   void visitONLor(ONLor *p);
   void visitONLxor(ONLxor *p);
+  void visitONRight(ONRight *p);
+  void visitONLeft(ONLeft *p);
   void visitOperatorTrait(OperatorTrait *p); /* abstract class */
   void visitOTIdentity(OTIdentity *p);
   void visitFunctionSpecifier(FunctionSpecifier *p); /* abstract class */
@@ -268,7 +271,6 @@ class PrintAbsyn : public Visitor
   void visitENeg(ENeg *p);
   void visitEBnot(EBnot *p);
   void visitEPos(EPos *p);
-  void visitEUnaryOperator(EUnaryOperator *p);
   void visitEMul(EMul *p);
   void visitEDiv(EDiv *p);
   void visitEMod(EMod *p);
@@ -276,7 +278,6 @@ class PrintAbsyn : public Visitor
   void visitESub(ESub *p);
   void visitELSh(ELSh *p);
   void visitERSh(ERSh *p);
-  void visitEBinaryOperator(EBinaryOperator *p);
   void visitELT(ELT *p);
   void visitEGT(EGT *p);
   void visitELE(ELE *p);
@@ -290,7 +291,6 @@ class PrintAbsyn : public Visitor
   void visitELor(ELor *p);
   void visitELxor(ELxor *p);
   void visitEConditional(EConditional *p);
-  void visitETernaryOperator(ETernaryOperator *p);
   void visitEAssign(EAssign *p);
   void visitEAddAssign(EAddAssign *p);
   void visitESubAssign(ESubAssign *p);
@@ -398,13 +398,14 @@ class ShowAbsyn : public Visitor
   void visitPrototype(Prototype *p); /* abstract class */
   void visitPFunction(PFunction *p);
   void visitOperatorName(OperatorName *p); /* abstract class */
-  void visitONOp(ONOp *p);
   void visitONLnot(ONLnot *p);
   void visitONPreInc(ONPreInc *p);
   void visitONPreDec(ONPreDec *p);
   void visitONBnot(ONBnot *p);
   void visitONMul(ONMul *p);
+  void visitONExp(ONExp *p);
   void visitONDiv(ONDiv *p);
+  void visitONRDiv(ONRDiv *p);
   void visitONMod(ONMod *p);
   void visitONAdd(ONAdd *p);
   void visitONSub(ONSub *p);
@@ -422,6 +423,8 @@ class ShowAbsyn : public Visitor
   void visitONLand(ONLand *p);
   void visitONLor(ONLor *p);
   void visitONLxor(ONLxor *p);
+  void visitONRight(ONRight *p);
+  void visitONLeft(ONLeft *p);
   void visitOperatorTrait(OperatorTrait *p); /* abstract class */
   void visitOTIdentity(OTIdentity *p);
   void visitFunctionSpecifier(FunctionSpecifier *p); /* abstract class */
@@ -621,7 +624,6 @@ class ShowAbsyn : public Visitor
   void visitENeg(ENeg *p);
   void visitEBnot(EBnot *p);
   void visitEPos(EPos *p);
-  void visitEUnaryOperator(EUnaryOperator *p);
   void visitEMul(EMul *p);
   void visitEDiv(EDiv *p);
   void visitEMod(EMod *p);
@@ -629,7 +631,6 @@ class ShowAbsyn : public Visitor
   void visitESub(ESub *p);
   void visitELSh(ELSh *p);
   void visitERSh(ERSh *p);
-  void visitEBinaryOperator(EBinaryOperator *p);
   void visitELT(ELT *p);
   void visitEGT(EGT *p);
   void visitELE(ELE *p);
@@ -643,7 +644,6 @@ class ShowAbsyn : public Visitor
   void visitELor(ELor *p);
   void visitELxor(ELxor *p);
   void visitEConditional(EConditional *p);
-  void visitETernaryOperator(ETernaryOperator *p);
   void visitEAssign(EAssign *p);
   void visitEAddAssign(EAddAssign *p);
   void visitESubAssign(ESubAssign *p);

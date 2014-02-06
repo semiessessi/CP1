@@ -18,13 +18,15 @@ class CompilerVisitor : public Visitor
   virtual void visitDVariable( DVariable *p ) {}
   virtual void visitDIVariable( DIVariable *p ) {}
   virtual void visitPFunction( PFunction *p ) {}
-  virtual void visitONOp(ONOp *p) {}
+  //virtual void visitONOp(ONOp *p) {}
   virtual void visitONLnot(ONLnot *p) {}
   virtual void visitONPreInc(ONPreInc *p) {}
   virtual void visitONPreDec(ONPreDec *p) {}
   virtual void visitONBnot(ONBnot *p) {}
   virtual void visitONMul(ONMul *p) {}
+  virtual void visitONExp(ONExp *p) {}
   virtual void visitONDiv(ONDiv *p) {}
+  virtual void visitONRDiv(ONRDiv *p) {}
   virtual void visitONMod(ONMod *p) {}
   virtual void visitONAdd(ONAdd *p) {}
   virtual void visitONSub(ONSub *p) {}
@@ -36,6 +38,8 @@ class CompilerVisitor : public Visitor
   virtual void visitONGE(ONGE *p) {}
   virtual void visitONE(ONE *p) {}
   virtual void visitONNE(ONNE *p) {}
+  virtual void visitONRight(ONRight *p) {}
+  virtual void visitONLeft(ONLeft *p) {}
   virtual void visitONBand(ONBand *p) {}
   virtual void visitONBor(ONBor *p) {}
   virtual void visitONBxor(ONBxor *p) {}
@@ -231,7 +235,7 @@ class CompilerVisitor : public Visitor
   virtual void visitENeg(ENeg *p) {}
   virtual void visitEBnot(EBnot *p) {}
   virtual void visitEPos(EPos *p) {}
-  virtual void visitEUnaryOperator(EUnaryOperator *p) {}
+  //virtual void visitEUnaryOperator(EUnaryOperator *p) {}
   virtual void visitEMul(EMul *p) {}
   virtual void visitEDiv(EDiv *p) {}
   virtual void visitEMod(EMod *p) {}
@@ -239,7 +243,7 @@ class CompilerVisitor : public Visitor
   virtual void visitESub(ESub *p) {}
   virtual void visitELSh(ELSh *p) {}
   virtual void visitERSh(ERSh *p) {}
-  virtual void visitEBinaryOperator(EBinaryOperator *p) {}
+  //virtual void visitEBinaryOperator(EBinaryOperator *p) {}
   virtual void visitELT(ELT *p) {}
   virtual void visitEGT(EGT *p) {}
   virtual void visitELE(ELE *p) {}
@@ -253,7 +257,7 @@ class CompilerVisitor : public Visitor
   virtual void visitELor(ELor *p) {}
   virtual void visitELxor(ELxor *p) {}
   virtual void visitEConditional(EConditional *p) {}
-  virtual void visitETernaryOperator(ETernaryOperator *p) {}
+  //virtual void visitETernaryOperator(ETernaryOperator *p) {}
   virtual void visitEAssign(EAssign *p) {}
   virtual void visitEAddAssign(EAddAssign *p) {}
   virtual void visitESubAssign(ESubAssign *p) {}

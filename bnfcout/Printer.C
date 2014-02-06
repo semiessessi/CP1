@@ -295,18 +295,6 @@ void PrintAbsyn::visitPFunction(PFunction* p)
 
 void PrintAbsyn::visitOperatorName(OperatorName*p) {} //abstract class
 
-void PrintAbsyn::visitONOp(ONOp* p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(_L_PAREN);
-
-  visitIdent(p->operator_);
-
-  if (oldi > 0) render(_R_PAREN);
-
-  _i_ = oldi;
-}
-
 void PrintAbsyn::visitONLnot(ONLnot* p)
 {
   int oldi = _i_;
@@ -367,12 +355,36 @@ void PrintAbsyn::visitONMul(ONMul* p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitONExp(ONExp* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render("**");
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitONDiv(ONDiv* p)
 {
   int oldi = _i_;
   if (oldi > 0) render(_L_PAREN);
 
   render('/');
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitONRDiv(ONRDiv* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render('\\');
 
   if (oldi > 0) render(_R_PAREN);
 
@@ -577,6 +589,30 @@ void PrintAbsyn::visitONLxor(ONLxor* p)
   if (oldi > 0) render(_L_PAREN);
 
   render("^^");
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitONRight(ONRight* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render("->");
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitONLeft(ONLeft* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render("<-");
 
   if (oldi > 0) render(_R_PAREN);
 
@@ -3581,19 +3617,6 @@ void PrintAbsyn::visitEPos(EPos* p)
   _i_ = oldi;
 }
 
-void PrintAbsyn::visitEUnaryOperator(EUnaryOperator* p)
-{
-  int oldi = _i_;
-  if (oldi > 9) render(_L_PAREN);
-
-  visitIdent(p->operator_);
-  _i_ = 10; p->expression_->accept(this);
-
-  if (oldi > 9) render(_R_PAREN);
-
-  _i_ = oldi;
-}
-
 void PrintAbsyn::visitEMul(EMul* p)
 {
   int oldi = _i_;
@@ -3685,20 +3708,6 @@ void PrintAbsyn::visitERSh(ERSh* p)
 
   _i_ = 6; p->expression_1->accept(this);
   render(">>");
-  _i_ = 7; p->expression_2->accept(this);
-
-  if (oldi > 6) render(_R_PAREN);
-
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitEBinaryOperator(EBinaryOperator* p)
-{
-  int oldi = _i_;
-  if (oldi > 6) render(_L_PAREN);
-
-  _i_ = 6; p->expression_1->accept(this);
-  visitIdent(p->operator_);
   _i_ = 7; p->expression_2->accept(this);
 
   if (oldi > 6) render(_R_PAREN);
@@ -3883,22 +3892,6 @@ void PrintAbsyn::visitEConditional(EConditional* p)
   render('?');
   _i_ = 2; p->expression_2->accept(this);
   render(':');
-  _i_ = 2; p->expression_3->accept(this);
-
-  if (oldi > 1) render(_R_PAREN);
-
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitETernaryOperator(ETernaryOperator* p)
-{
-  int oldi = _i_;
-  if (oldi > 1) render(_L_PAREN);
-
-  _i_ = 2; p->expression_1->accept(this);
-  _i_ = 0; p->operatorname_1->accept(this);
-  _i_ = 2; p->expression_2->accept(this);
-  _i_ = 0; p->operatorname_2->accept(this);
   _i_ = 2; p->expression_3->accept(this);
 
   if (oldi > 1) render(_R_PAREN);
@@ -4520,14 +4513,6 @@ void ShowAbsyn::visitPFunction(PFunction* p)
 }
 void ShowAbsyn::visitOperatorName(OperatorName* p) {} //abstract class
 
-void ShowAbsyn::visitONOp(ONOp* p)
-{
-  bufAppend('(');
-  bufAppend("ONOp");
-  bufAppend(' ');
-  visitIdent(p->operator_);
-  bufAppend(')');
-}
 void ShowAbsyn::visitONLnot(ONLnot* p)
 {
   bufAppend("ONLnot");
@@ -4548,9 +4533,17 @@ void ShowAbsyn::visitONMul(ONMul* p)
 {
   bufAppend("ONMul");
 }
+void ShowAbsyn::visitONExp(ONExp* p)
+{
+  bufAppend("ONExp");
+}
 void ShowAbsyn::visitONDiv(ONDiv* p)
 {
   bufAppend("ONDiv");
+}
+void ShowAbsyn::visitONRDiv(ONRDiv* p)
+{
+  bufAppend("ONRDiv");
 }
 void ShowAbsyn::visitONMod(ONMod* p)
 {
@@ -4619,6 +4612,14 @@ void ShowAbsyn::visitONLor(ONLor* p)
 void ShowAbsyn::visitONLxor(ONLxor* p)
 {
   bufAppend("ONLxor");
+}
+void ShowAbsyn::visitONRight(ONRight* p)
+{
+  bufAppend("ONRight");
+}
+void ShowAbsyn::visitONLeft(ONLeft* p)
+{
+  bufAppend("ONLeft");
 }
 void ShowAbsyn::visitOperatorTrait(OperatorTrait* p) {} //abstract class
 
@@ -6667,18 +6668,6 @@ void ShowAbsyn::visitEPos(EPos* p)
   bufAppend(']');
   bufAppend(')');
 }
-void ShowAbsyn::visitEUnaryOperator(EUnaryOperator* p)
-{
-  bufAppend('(');
-  bufAppend("EUnaryOperator");
-  bufAppend(' ');
-  visitIdent(p->operator_);
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->expression_)  p->expression_->accept(this);
-  bufAppend(']');
-  bufAppend(')');
-}
 void ShowAbsyn::visitEMul(EMul* p)
 {
   bufAppend('(');
@@ -6745,18 +6734,6 @@ void ShowAbsyn::visitERSh(ERSh* p)
   bufAppend("ERSh");
   bufAppend(' ');
   p->expression_1->accept(this);
-  bufAppend(' ');
-  p->expression_2->accept(this);
-  bufAppend(')');
-}
-void ShowAbsyn::visitEBinaryOperator(EBinaryOperator* p)
-{
-  bufAppend('(');
-  bufAppend("EBinaryOperator");
-  bufAppend(' ');
-  p->expression_1->accept(this);
-  bufAppend(' ');
-  visitIdent(p->operator_);
   bufAppend(' ');
   p->expression_2->accept(this);
   bufAppend(')');
@@ -6889,22 +6866,6 @@ void ShowAbsyn::visitEConditional(EConditional* p)
   p->expression_1->accept(this);
   bufAppend(' ');
   p->expression_2->accept(this);
-  bufAppend(' ');
-  p->expression_3->accept(this);
-  bufAppend(')');
-}
-void ShowAbsyn::visitETernaryOperator(ETernaryOperator* p)
-{
-  bufAppend('(');
-  bufAppend("ETernaryOperator");
-  bufAppend(' ');
-  p->expression_1->accept(this);
-  bufAppend(' ');
-  p->operatorname_1->accept(this);
-  bufAppend(' ');
-  p->expression_2->accept(this);
-  bufAppend(' ');
-  p->operatorname_2->accept(this);
   bufAppend(' ');
   p->expression_3->accept(this);
   bufAppend(')');

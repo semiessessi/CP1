@@ -14,7 +14,7 @@ class OperatorFinder
 
 public:
 
-    virtual void visitTBDOperator(DOperator *p)
+    virtual void visitADOperator(DOperator *p)
     {
         OperatorVisitor v;
         v.typeOwner = mxCurrentTypeScopeVisitor.szName;
@@ -22,12 +22,12 @@ public:
         p->accept( &v );
         OperatorInfo info;
         info.szLLVMName = operatorNameMangle( v.name.c_str(), v.typeOwner, v.parameterTypes.size() );
-        OperatorInfo* pInfo = findOperatorInfo( info );
-        pInfo->szCPName = v.name;
-        pInfo->szTypeOwner = v.typeOwner;
-        pInfo->szTypeReturn = v.typeReturn;
-        pInfo->szLLVMName = info.szLLVMName;
-        pInfo->aszParameterTypes = v.parameterTypes;
+        OperatorInfo& pInfo = findOperatorInfo( info );
+        pInfo.szCPName = v.name;
+        pInfo.szTypeOwner = v.typeOwner;
+        pInfo.szTypeReturn = v.typeReturn;
+        pInfo.szLLVMName = info.szLLVMName;
+        pInfo.aszParameterTypes = v.parameterTypes;
     }
 
     std::string emitLLVM()

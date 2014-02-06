@@ -334,28 +334,6 @@ PFunction *PFunction::clone() const {
   return new PFunction(*this);
 }
 
-/********************   ONOp    ********************/
-ONOp::ONOp(Operator p1) { operator_ = p1; }
-ONOp::ONOp(const ONOp & other) {   operator_ = other.operator_;
-
-}
-ONOp &ONOp::operator=(const ONOp & other) {
-  ONOp tmp(other);
-  swap(tmp);
-  return *this;
-}
-void ONOp::swap(ONOp & other) {
-  std::swap(operator_, other.operator_);
-
-}
-
-ONOp::~ONOp() { }
-
-void ONOp::accept(Visitor *v) { v->visitONOp(this); }
-ONOp *ONOp::clone() const {
-  return new ONOp(*this);
-}
-
 /********************   ONLnot    ********************/
 ONLnot::ONLnot() { }
 ONLnot::ONLnot(const ONLnot & other) { 
@@ -456,6 +434,26 @@ ONMul *ONMul::clone() const {
   return new ONMul(*this);
 }
 
+/********************   ONExp    ********************/
+ONExp::ONExp() { }
+ONExp::ONExp(const ONExp & other) { 
+}
+ONExp &ONExp::operator=(const ONExp & other) {
+  ONExp tmp(other);
+  swap(tmp);
+  return *this;
+}
+void ONExp::swap(ONExp & other) {
+
+}
+
+ONExp::~ONExp() { }
+
+void ONExp::accept(Visitor *v) { v->visitONExp(this); }
+ONExp *ONExp::clone() const {
+  return new ONExp(*this);
+}
+
 /********************   ONDiv    ********************/
 ONDiv::ONDiv() { }
 ONDiv::ONDiv(const ONDiv & other) { 
@@ -474,6 +472,26 @@ ONDiv::~ONDiv() { }
 void ONDiv::accept(Visitor *v) { v->visitONDiv(this); }
 ONDiv *ONDiv::clone() const {
   return new ONDiv(*this);
+}
+
+/********************   ONRDiv    ********************/
+ONRDiv::ONRDiv() { }
+ONRDiv::ONRDiv(const ONRDiv & other) { 
+}
+ONRDiv &ONRDiv::operator=(const ONRDiv & other) {
+  ONRDiv tmp(other);
+  swap(tmp);
+  return *this;
+}
+void ONRDiv::swap(ONRDiv & other) {
+
+}
+
+ONRDiv::~ONRDiv() { }
+
+void ONRDiv::accept(Visitor *v) { v->visitONRDiv(this); }
+ONRDiv *ONRDiv::clone() const {
+  return new ONRDiv(*this);
 }
 
 /********************   ONMod    ********************/
@@ -814,6 +832,46 @@ ONLxor::~ONLxor() { }
 void ONLxor::accept(Visitor *v) { v->visitONLxor(this); }
 ONLxor *ONLxor::clone() const {
   return new ONLxor(*this);
+}
+
+/********************   ONRight    ********************/
+ONRight::ONRight() { }
+ONRight::ONRight(const ONRight & other) { 
+}
+ONRight &ONRight::operator=(const ONRight & other) {
+  ONRight tmp(other);
+  swap(tmp);
+  return *this;
+}
+void ONRight::swap(ONRight & other) {
+
+}
+
+ONRight::~ONRight() { }
+
+void ONRight::accept(Visitor *v) { v->visitONRight(this); }
+ONRight *ONRight::clone() const {
+  return new ONRight(*this);
+}
+
+/********************   ONLeft    ********************/
+ONLeft::ONLeft() { }
+ONLeft::ONLeft(const ONLeft & other) { 
+}
+ONLeft &ONLeft::operator=(const ONLeft & other) {
+  ONLeft tmp(other);
+  swap(tmp);
+  return *this;
+}
+void ONLeft::swap(ONLeft & other) {
+
+}
+
+ONLeft::~ONLeft() { }
+
+void ONLeft::accept(Visitor *v) { v->visitONLeft(this); }
+ONLeft *ONLeft::clone() const {
+  return new ONLeft(*this);
 }
 
 /********************   OTIdentity    ********************/
@@ -5216,30 +5274,6 @@ EPos *EPos::clone() const {
   return new EPos(*this);
 }
 
-/********************   EUnaryOperator    ********************/
-EUnaryOperator::EUnaryOperator(Operator p1, Expression *p2) { operator_ = p1; expression_ = p2; }
-EUnaryOperator::EUnaryOperator(const EUnaryOperator & other) {   operator_ = other.operator_;
-  expression_ = other.expression_->clone();
-
-}
-EUnaryOperator &EUnaryOperator::operator=(const EUnaryOperator & other) {
-  EUnaryOperator tmp(other);
-  swap(tmp);
-  return *this;
-}
-void EUnaryOperator::swap(EUnaryOperator & other) {
-  std::swap(operator_, other.operator_);
-  std::swap(expression_, other.expression_);
-
-}
-
-EUnaryOperator::~EUnaryOperator() { delete(expression_); }
-
-void EUnaryOperator::accept(Visitor *v) { v->visitEUnaryOperator(this); }
-EUnaryOperator *EUnaryOperator::clone() const {
-  return new EUnaryOperator(*this);
-}
-
 /********************   EMul    ********************/
 EMul::EMul(Expression *p1, Expression *p2) { expression_1 = p1; expression_2 = p2; }
 EMul::EMul(const EMul & other) {   expression_1 = other.expression_1->clone();
@@ -5406,32 +5440,6 @@ ERSh::~ERSh() { delete(expression_1); delete(expression_2); }
 void ERSh::accept(Visitor *v) { v->visitERSh(this); }
 ERSh *ERSh::clone() const {
   return new ERSh(*this);
-}
-
-/********************   EBinaryOperator    ********************/
-EBinaryOperator::EBinaryOperator(Expression *p1, Operator p2, Expression *p3) { expression_1 = p1; operator_ = p2; expression_2 = p3; }
-EBinaryOperator::EBinaryOperator(const EBinaryOperator & other) {   expression_1 = other.expression_1->clone();
-  operator_ = other.operator_;
-  expression_2 = other.expression_2->clone();
-
-}
-EBinaryOperator &EBinaryOperator::operator=(const EBinaryOperator & other) {
-  EBinaryOperator tmp(other);
-  swap(tmp);
-  return *this;
-}
-void EBinaryOperator::swap(EBinaryOperator & other) {
-  std::swap(expression_1, other.expression_1);
-  std::swap(operator_, other.operator_);
-  std::swap(expression_2, other.expression_2);
-
-}
-
-EBinaryOperator::~EBinaryOperator() { delete(expression_1); delete(expression_2); }
-
-void EBinaryOperator::accept(Visitor *v) { v->visitEBinaryOperator(this); }
-EBinaryOperator *EBinaryOperator::clone() const {
-  return new EBinaryOperator(*this);
 }
 
 /********************   ELT    ********************/
@@ -5746,36 +5754,6 @@ EConditional::~EConditional() { delete(expression_1); delete(expression_2); dele
 void EConditional::accept(Visitor *v) { v->visitEConditional(this); }
 EConditional *EConditional::clone() const {
   return new EConditional(*this);
-}
-
-/********************   ETernaryOperator    ********************/
-ETernaryOperator::ETernaryOperator(Expression *p1, OperatorName *p2, Expression *p3, OperatorName *p4, Expression *p5) { expression_1 = p1; operatorname_1 = p2; expression_2 = p3; operatorname_2 = p4; expression_3 = p5; }
-ETernaryOperator::ETernaryOperator(const ETernaryOperator & other) {   expression_1 = other.expression_1->clone();
-  operatorname_1 = other.operatorname_1->clone();
-  expression_2 = other.expression_2->clone();
-  operatorname_2 = other.operatorname_2->clone();
-  expression_3 = other.expression_3->clone();
-
-}
-ETernaryOperator &ETernaryOperator::operator=(const ETernaryOperator & other) {
-  ETernaryOperator tmp(other);
-  swap(tmp);
-  return *this;
-}
-void ETernaryOperator::swap(ETernaryOperator & other) {
-  std::swap(expression_1, other.expression_1);
-  std::swap(operatorname_1, other.operatorname_1);
-  std::swap(expression_2, other.expression_2);
-  std::swap(operatorname_2, other.operatorname_2);
-  std::swap(expression_3, other.expression_3);
-
-}
-
-ETernaryOperator::~ETernaryOperator() { delete(expression_1); delete(operatorname_1); delete(expression_2); delete(operatorname_2); delete(expression_3); }
-
-void ETernaryOperator::accept(Visitor *v) { v->visitETernaryOperator(this); }
-ETernaryOperator *ETernaryOperator::clone() const {
-  return new ETernaryOperator(*this);
 }
 
 /********************   EAssign    ********************/

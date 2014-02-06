@@ -22,13 +22,15 @@ DVariable.					Declaration				::= [VariableSpecifier] Type Ident ";" ;
 -- PDefaultFunction.			Prototype				::= [FunctionSpecifier] Ident "(" [ParameterDeclaration] ")" ";" ;
 PFunction.					Prototype				::= [FunctionSpecifier] Type Ident "(" [ParameterDeclaration] ")" ";" ;
 
-ONOp.						OperatorName            ::= Operator;
+-- ONOp.						OperatorName            ::= Operator;
 ONLnot.						OperatorName		    ::= "!" ;
 ONPreInc.					OperatorName		    ::= "++" ;
 ONPreDec.					OperatorName		    ::= "--" ;
 ONBnot.						OperatorName		    ::= "~" ;
 ONMul.						OperatorName		    ::= "*" ;
+ONExp.					    OperatorName		    ::= "**" ;
 ONDiv.						OperatorName		    ::= "/" ;
+ONRDiv.						OperatorName		    ::= "\\" ;
 ONMod.						OperatorName		    ::= "%" ;
 ONAdd.						OperatorName		    ::= "+" ;
 ONSub.						OperatorName		    ::= "-" ;
@@ -46,6 +48,8 @@ ONBxor.						OperatorName		    ::= "^" ;
 ONLand.						OperatorName		    ::= "&&" ;
 ONLor.						OperatorName		    ::= "||" ;
 ONLxor.						OperatorName		    ::= "^^" ;
+ONRight.					OperatorName		    ::= "->" ;
+ONLeft.						OperatorName		    ::= "<-" ;
 
 OTIdentity.					OperatorTrait           ::= "identity" Type OperatorName Expression ;
 
@@ -277,7 +281,7 @@ EPreDec.					Expression9		        ::= "--" RValue ;
 ENeg.						Expression9		        ::= "-" Expression10 ;
 EBnot.						Expression9		        ::= "~" Expression10 ;
 EPos.						Expression9		        ::= "+" Expression10 ;
-EUnaryOperator.				Expression9				::= Operator Expression10 ;
+-- EUnaryOperator.				Expression9				::= Operator Expression10 ;
 
 EMul.						Expression8		        ::= Expression8 "*" Expression9 ;
 EDiv.						Expression8		        ::= Expression8 "/" Expression9 ;
@@ -288,7 +292,7 @@ ESub.						Expression7		        ::= Expression7 "-" Expression8 ;
 
 ELSh.						Expression6		        ::= Expression6 "<<" Expression7 ;
 ERSh.						Expression6		        ::= Expression6 ">>" Expression7 ;
-EBinaryOperator.			Expression6				::= Expression6 Operator Expression7 ;
+-- EBinaryOperator.			Expression6				::= Expression6 Operator Expression7 ;
 
 ELT.						Expression5		        ::= Expression6 "<" Expression6 ;
 EGT.						Expression5		        ::= Expression6 ">" Expression6 ;
@@ -307,7 +311,7 @@ ELor.						Expression2		        ::= Expression3 "||" Expression3 ;
 ELxor.						Expression2		        ::= Expression3 "^^" Expression3 ;
 
 EConditional.  				Expression1  	        ::= Expression2 "?" Expression2 ":" Expression2 ;
-ETernaryOperator.  			Expression1  			::= Expression2 OperatorName Expression2 OperatorName Expression2 ;
+-- ETernaryOperator.  			Expression1  			::= Expression2 OperatorName Expression2 OperatorName Expression2 ;
 
 EAssign. 					Expression		        ::= RValue "=" Expression ;
 EAddAssign.					Expression		        ::= RValue "+=" Expression ;

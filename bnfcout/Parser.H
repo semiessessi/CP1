@@ -271,9 +271,13 @@ typedef union
 #define _SYMB_205 464
 #define _SYMB_206 465
 #define _SYMB_207 466
-#define _INTEGER_ 467
-#define _DOUBLE_ 468
-#define _IDENT_ 469
+#define _SYMB_208 467
+#define _SYMB_209 468
+#define _SYMB_210 469
+#define _SYMB_211 470
+#define _INTEGER_ 471
+#define _DOUBLE_ 472
+#define _IDENT_ 473
 
 extern YYSTYPE yylval;
 Code* pCode(FILE *inp);

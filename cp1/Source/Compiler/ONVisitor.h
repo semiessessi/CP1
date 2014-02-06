@@ -18,7 +18,7 @@ public:
 		operatorName = "";
 	}
 
-    virtual void visitONOp(ONOp *p)         { operatorName = p->operator_; }
+    //virtual void visitONOp(ONOp *p)         { operatorName = p->operator_; }
     virtual void visitONLnot(ONLnot *p)     { operatorName = "!"; }
     virtual void visitONPreInc(ONPreInc *p) { operatorName = "++"; }
     virtual void visitONPreDec(ONPreDec *p) { operatorName = "--"; }
@@ -42,7 +42,11 @@ public:
     virtual void visitONLand(ONLand *p)     { operatorName = "&&"; }
     virtual void visitONLor(ONLor *p)       { operatorName = "||"; }
     virtual void visitONLxor(ONLxor *p)     { operatorName = "^^"; }
-
+    virtual void visitONExp(ONExp *p)     { operatorName = "**"; }
+    virtual void visitONRDiv(ONRDiv *p)     { operatorName = "\\"; }
+    virtual void visitONLeft(ONLeft *p)     { operatorName = "<-"; }
+    virtual void visitONRight(ONRight *p)     { operatorName = "->"; }
+    
     std::string operatorName;
 };
 

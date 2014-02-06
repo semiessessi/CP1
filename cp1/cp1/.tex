@@ -120,18 +120,20 @@ The symbols used in C:\Users\Semi\Documents\cp1\cp1\cp1\ are the following: \\
 {\symb{;}} &{\symb{\{}} &{\symb{\}}} \\
 {\symb{(}} &{\symb{)}} &{\symb{{$=$}}} \\
 {\symb{!}} &{\symb{{$+$}{$+$}}} &{\symb{{$-$}{$-$}}} \\
-{\symb{\~{}}} &{\symb{*}} &{\symb{/}} \\
-{\symb{\%}} &{\symb{{$+$}}} &{\symb{{$-$}}} \\
-{\symb{{$<$}{$<$}}} &{\symb{{$>$}{$>$}}} &{\symb{{$<$}}} \\
-{\symb{{$>$}}} &{\symb{{$<$}{$=$}}} &{\symb{{$>$}{$=$}}} \\
-{\symb{{$=$}{$=$}}} &{\symb{!{$=$}}} &{\symb{\&}} \\
-{\symb{{$|$}}} &{\symb{\^}} &{\symb{\&\&}} \\
-{\symb{{$|$}{$|$}}} &{\symb{\^\^}} &{\symb{[}} \\
-{\symb{]}} &{\symb{.}} &{\symb{,}} \\
-{\symb{?}} &{\symb{:}} &{\symb{{$+$}{$=$}}} \\
-{\symb{{$-$}{$=$}}} &{\symb{*{$=$}}} &{\symb{/{$=$}}} \\
-{\symb{\%{$=$}}} &{\symb{\&{$=$}}} &{\symb{{$|$}{$=$}}} \\
-{\symb{\^{$=$}}} &{\symb{{$<$}{$<$}{$=$}}} &{\symb{{$>$}{$>$}{$=$}}} \\
+{\symb{\~{}}} &{\symb{*}} &{\symb{**}} \\
+{\symb{/}} &{\symb{$\backslash$}} &{\symb{\%}} \\
+{\symb{{$+$}}} &{\symb{{$-$}}} &{\symb{{$<$}{$<$}}} \\
+{\symb{{$>$}{$>$}}} &{\symb{{$<$}}} &{\symb{{$>$}}} \\
+{\symb{{$<$}{$=$}}} &{\symb{{$>$}{$=$}}} &{\symb{{$=$}{$=$}}} \\
+{\symb{!{$=$}}} &{\symb{\&}} &{\symb{{$|$}}} \\
+{\symb{\^}} &{\symb{\&\&}} &{\symb{{$|$}{$|$}}} \\
+{\symb{\^\^}} &{\symb{{$-$}{$>$}}} &{\symb{{$<$}{$-$}}} \\
+{\symb{[}} &{\symb{]}} &{\symb{.}} \\
+{\symb{,}} &{\symb{?}} &{\symb{:}} \\
+{\symb{{$+$}{$=$}}} &{\symb{{$-$}{$=$}}} &{\symb{*{$=$}}} \\
+{\symb{/{$=$}}} &{\symb{\%{$=$}}} &{\symb{\&{$=$}}} \\
+{\symb{{$|$}{$=$}}} &{\symb{\^{$=$}}} &{\symb{{$<$}{$<$}{$=$}}} \\
+{\symb{{$>$}{$>$}{$=$}}} & & \\
 \end{tabular}\\
 
 \subsection*{Comments}
@@ -169,13 +171,14 @@ All other symbols are terminals.\\
 \end{tabular}\\
 
 \begin{tabular}{lll}
-{\nonterminal{OperatorName}} & {\arrow}  &{\nonterminal{Operator}}  \\
- & {\delimit}  &{\terminal{!}}  \\
+{\nonterminal{OperatorName}} & {\arrow}  &{\terminal{!}}  \\
  & {\delimit}  &{\terminal{{$+$}{$+$}}}  \\
  & {\delimit}  &{\terminal{{$-$}{$-$}}}  \\
  & {\delimit}  &{\terminal{\~{}}}  \\
  & {\delimit}  &{\terminal{*}}  \\
+ & {\delimit}  &{\terminal{**}}  \\
  & {\delimit}  &{\terminal{/}}  \\
+ & {\delimit}  &{\terminal{$\backslash$}}  \\
  & {\delimit}  &{\terminal{\%}}  \\
  & {\delimit}  &{\terminal{{$+$}}}  \\
  & {\delimit}  &{\terminal{{$-$}}}  \\
@@ -193,6 +196,8 @@ All other symbols are terminals.\\
  & {\delimit}  &{\terminal{\&\&}}  \\
  & {\delimit}  &{\terminal{{$|$}{$|$}}}  \\
  & {\delimit}  &{\terminal{\^\^}}  \\
+ & {\delimit}  &{\terminal{{$-$}{$>$}}}  \\
+ & {\delimit}  &{\terminal{{$<$}{$-$}}}  \\
 \end{tabular}\\
 
 \begin{tabular}{lll}
@@ -422,7 +427,6 @@ All other symbols are terminals.\\
  & {\delimit}  &{\terminal{{$-$}}} {\nonterminal{Expression10}}  \\
  & {\delimit}  &{\terminal{\~{}}} {\nonterminal{Expression10}}  \\
  & {\delimit}  &{\terminal{{$+$}}} {\nonterminal{Expression10}}  \\
- & {\delimit}  &{\nonterminal{Operator}} {\nonterminal{Expression10}}  \\
  & {\delimit}  &{\nonterminal{Expression10}}  \\
 \end{tabular}\\
 
@@ -442,7 +446,6 @@ All other symbols are terminals.\\
 \begin{tabular}{lll}
 {\nonterminal{Expression6}} & {\arrow}  &{\nonterminal{Expression6}} {\terminal{{$<$}{$<$}}} {\nonterminal{Expression7}}  \\
  & {\delimit}  &{\nonterminal{Expression6}} {\terminal{{$>$}{$>$}}} {\nonterminal{Expression7}}  \\
- & {\delimit}  &{\nonterminal{Expression6}} {\nonterminal{Operator}} {\nonterminal{Expression7}}  \\
  & {\delimit}  &{\nonterminal{Expression7}}  \\
 \end{tabular}\\
 
@@ -476,7 +479,6 @@ All other symbols are terminals.\\
 
 \begin{tabular}{lll}
 {\nonterminal{Expression1}} & {\arrow}  &{\nonterminal{Expression2}} {\terminal{?}} {\nonterminal{Expression2}} {\terminal{:}} {\nonterminal{Expression2}}  \\
- & {\delimit}  &{\nonterminal{Expression2}} {\nonterminal{OperatorName}} {\nonterminal{Expression2}} {\nonterminal{OperatorName}} {\nonterminal{Expression2}}  \\
  & {\delimit}  &{\nonterminal{Expression2}}  \\
 \end{tabular}\\
 

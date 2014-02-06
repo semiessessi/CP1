@@ -29,13 +29,14 @@ class DExtern;
 class DIVariable;
 class DVariable;
 class PFunction;
-class ONOp;
 class ONLnot;
 class ONPreInc;
 class ONPreDec;
 class ONBnot;
 class ONMul;
+class ONExp;
 class ONDiv;
+class ONRDiv;
 class ONMod;
 class ONAdd;
 class ONSub;
@@ -53,6 +54,8 @@ class ONBxor;
 class ONLand;
 class ONLor;
 class ONLxor;
+class ONRight;
+class ONLeft;
 class OTIdentity;
 class FSEntryPoint;
 class FSPure;
@@ -241,7 +244,6 @@ class EPreDec;
 class ENeg;
 class EBnot;
 class EPos;
-class EUnaryOperator;
 class EMul;
 class EDiv;
 class EMod;
@@ -249,7 +251,6 @@ class EAdd;
 class ESub;
 class ELSh;
 class ERSh;
-class EBinaryOperator;
 class ELT;
 class EGT;
 class ELE;
@@ -263,7 +264,6 @@ class ELand;
 class ELor;
 class ELxor;
 class EConditional;
-class ETernaryOperator;
 class EAssign;
 class EAddAssign;
 class ESubAssign;
@@ -322,13 +322,14 @@ class Visitor
   virtual void visitDIVariable(DIVariable *p) = 0;
   virtual void visitDVariable(DVariable *p) = 0;
   virtual void visitPFunction(PFunction *p) = 0;
-  virtual void visitONOp(ONOp *p) = 0;
   virtual void visitONLnot(ONLnot *p) = 0;
   virtual void visitONPreInc(ONPreInc *p) = 0;
   virtual void visitONPreDec(ONPreDec *p) = 0;
   virtual void visitONBnot(ONBnot *p) = 0;
   virtual void visitONMul(ONMul *p) = 0;
+  virtual void visitONExp(ONExp *p) = 0;
   virtual void visitONDiv(ONDiv *p) = 0;
+  virtual void visitONRDiv(ONRDiv *p) = 0;
   virtual void visitONMod(ONMod *p) = 0;
   virtual void visitONAdd(ONAdd *p) = 0;
   virtual void visitONSub(ONSub *p) = 0;
@@ -346,6 +347,8 @@ class Visitor
   virtual void visitONLand(ONLand *p) = 0;
   virtual void visitONLor(ONLor *p) = 0;
   virtual void visitONLxor(ONLxor *p) = 0;
+  virtual void visitONRight(ONRight *p) = 0;
+  virtual void visitONLeft(ONLeft *p) = 0;
   virtual void visitOTIdentity(OTIdentity *p) = 0;
   virtual void visitFSEntryPoint(FSEntryPoint *p) = 0;
   virtual void visitFSPure(FSPure *p) = 0;
@@ -534,7 +537,6 @@ class Visitor
   virtual void visitENeg(ENeg *p) = 0;
   virtual void visitEBnot(EBnot *p) = 0;
   virtual void visitEPos(EPos *p) = 0;
-  virtual void visitEUnaryOperator(EUnaryOperator *p) = 0;
   virtual void visitEMul(EMul *p) = 0;
   virtual void visitEDiv(EDiv *p) = 0;
   virtual void visitEMod(EMod *p) = 0;
@@ -542,7 +544,6 @@ class Visitor
   virtual void visitESub(ESub *p) = 0;
   virtual void visitELSh(ELSh *p) = 0;
   virtual void visitERSh(ERSh *p) = 0;
-  virtual void visitEBinaryOperator(EBinaryOperator *p) = 0;
   virtual void visitELT(ELT *p) = 0;
   virtual void visitEGT(EGT *p) = 0;
   virtual void visitELE(ELE *p) = 0;
@@ -556,7 +557,6 @@ class Visitor
   virtual void visitELor(ELor *p) = 0;
   virtual void visitELxor(ELxor *p) = 0;
   virtual void visitEConditional(EConditional *p) = 0;
-  virtual void visitETernaryOperator(ETernaryOperator *p) = 0;
   virtual void visitEAssign(EAssign *p) = 0;
   virtual void visitEAddAssign(EAddAssign *p) = 0;
   virtual void visitESubAssign(ESubAssign *p) = 0;
@@ -847,20 +847,6 @@ public:
   virtual OperatorName *clone() const = 0;
 };
 
-class ONOp : public OperatorName
-{
- public:
-  Operator operator_;
-
-  ONOp(const ONOp &);
-  ONOp &operator=(const ONOp &);
-  ONOp(Operator p1);
-  ~ONOp();
-  virtual void accept(Visitor *v);
-  virtual  ONOp  *clone() const;
-  void swap(ONOp &);
-};
-
 class ONLnot : public OperatorName
 {
  public:
@@ -926,6 +912,19 @@ class ONMul : public OperatorName
   void swap(ONMul &);
 };
 
+class ONExp : public OperatorName
+{
+ public:
+
+  ONExp(const ONExp &);
+  ONExp &operator=(const ONExp &);
+  ONExp();
+  ~ONExp();
+  virtual void accept(Visitor *v);
+  virtual  ONExp  *clone() const;
+  void swap(ONExp &);
+};
+
 class ONDiv : public OperatorName
 {
  public:
@@ -937,6 +936,19 @@ class ONDiv : public OperatorName
   virtual void accept(Visitor *v);
   virtual  ONDiv  *clone() const;
   void swap(ONDiv &);
+};
+
+class ONRDiv : public OperatorName
+{
+ public:
+
+  ONRDiv(const ONRDiv &);
+  ONRDiv &operator=(const ONRDiv &);
+  ONRDiv();
+  ~ONRDiv();
+  virtual void accept(Visitor *v);
+  virtual  ONRDiv  *clone() const;
+  void swap(ONRDiv &);
 };
 
 class ONMod : public OperatorName
@@ -1158,6 +1170,32 @@ class ONLxor : public OperatorName
   virtual void accept(Visitor *v);
   virtual  ONLxor  *clone() const;
   void swap(ONLxor &);
+};
+
+class ONRight : public OperatorName
+{
+ public:
+
+  ONRight(const ONRight &);
+  ONRight &operator=(const ONRight &);
+  ONRight();
+  ~ONRight();
+  virtual void accept(Visitor *v);
+  virtual  ONRight  *clone() const;
+  void swap(ONRight &);
+};
+
+class ONLeft : public OperatorName
+{
+ public:
+
+  ONLeft(const ONLeft &);
+  ONLeft &operator=(const ONLeft &);
+  ONLeft();
+  ~ONLeft();
+  virtual void accept(Visitor *v);
+  virtual  ONLeft  *clone() const;
+  void swap(ONLeft &);
 };
 
 
@@ -3871,21 +3909,6 @@ class EPos : public Expression
   void swap(EPos &);
 };
 
-class EUnaryOperator : public Expression
-{
- public:
-  Operator operator_;
-  Expression *expression_;
-
-  EUnaryOperator(const EUnaryOperator &);
-  EUnaryOperator &operator=(const EUnaryOperator &);
-  EUnaryOperator(Operator p1, Expression *p2);
-  ~EUnaryOperator();
-  virtual void accept(Visitor *v);
-  virtual  EUnaryOperator  *clone() const;
-  void swap(EUnaryOperator &);
-};
-
 class EMul : public Expression
 {
  public:
@@ -3982,21 +4005,6 @@ class ERSh : public Expression
   virtual void accept(Visitor *v);
   virtual  ERSh  *clone() const;
   void swap(ERSh &);
-};
-
-class EBinaryOperator : public Expression
-{
- public:
-  Expression *expression_1, *expression_2;
-  Operator operator_;
-
-  EBinaryOperator(const EBinaryOperator &);
-  EBinaryOperator &operator=(const EBinaryOperator &);
-  EBinaryOperator(Expression *p1, Operator p2, Expression *p3);
-  ~EBinaryOperator();
-  virtual void accept(Visitor *v);
-  virtual  EBinaryOperator  *clone() const;
-  void swap(EBinaryOperator &);
 };
 
 class ELT : public Expression
@@ -4179,21 +4187,6 @@ class EConditional : public Expression
   virtual void accept(Visitor *v);
   virtual  EConditional  *clone() const;
   void swap(EConditional &);
-};
-
-class ETernaryOperator : public Expression
-{
- public:
-  Expression *expression_1, *expression_2, *expression_3;
-  OperatorName *operatorname_1, *operatorname_2;
-
-  ETernaryOperator(const ETernaryOperator &);
-  ETernaryOperator &operator=(const ETernaryOperator &);
-  ETernaryOperator(Expression *p1, OperatorName *p2, Expression *p3, OperatorName *p4, Expression *p5);
-  ~ETernaryOperator();
-  virtual void accept(Visitor *v);
-  virtual  ETernaryOperator  *clone() const;
-  void swap(ETernaryOperator &);
 };
 
 class EAssign : public Expression

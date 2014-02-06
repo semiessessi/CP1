@@ -117,7 +117,7 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   virtual void visitESub(ESub *p);
   virtual void visitELSh(ELSh *p);
   virtual void visitERSh(ERSh *p);
-  virtual void visitEBinaryOperator(EBinaryOperator *p);
+  //virtual void visitEBinaryOperator(EBinaryOperator *p);
   //virtual void visitELT(ELT *p) {}
   //virtual void visitEGT(EGT *p) {}
   //virtual void visitELE(ELE *p) {}

@@ -130,13 +130,6 @@ void Skeleton::visitPFunction(PFunction* pfunction)
 
 void Skeleton::visitOperatorName(OperatorName* operatorname) {} //abstract class
 
-void Skeleton::visitONOp(ONOp* onop)
-{
-  /* Code For ONOp Goes Here */
-
-  visitOperator(onop->operator_);
-}
-
 void Skeleton::visitONLnot(ONLnot* onlnot)
 {
   /* Code For ONLnot Goes Here */
@@ -167,9 +160,21 @@ void Skeleton::visitONMul(ONMul* onmul)
 
 }
 
+void Skeleton::visitONExp(ONExp* onexp)
+{
+  /* Code For ONExp Goes Here */
+
+}
+
 void Skeleton::visitONDiv(ONDiv* ondiv)
 {
   /* Code For ONDiv Goes Here */
+
+}
+
+void Skeleton::visitONRDiv(ONRDiv* onrdiv)
+{
+  /* Code For ONRDiv Goes Here */
 
 }
 
@@ -272,6 +277,18 @@ void Skeleton::visitONLor(ONLor* onlor)
 void Skeleton::visitONLxor(ONLxor* onlxor)
 {
   /* Code For ONLxor Goes Here */
+
+}
+
+void Skeleton::visitONRight(ONRight* onright)
+{
+  /* Code For ONRight Goes Here */
+
+}
+
+void Skeleton::visitONLeft(ONLeft* onleft)
+{
+  /* Code For ONLeft Goes Here */
 
 }
 
@@ -1745,14 +1762,6 @@ void Skeleton::visitEPos(EPos* epos)
   epos->expression_->accept(this);
 }
 
-void Skeleton::visitEUnaryOperator(EUnaryOperator* eunaryoperator)
-{
-  /* Code For EUnaryOperator Goes Here */
-
-  visitOperator(eunaryoperator->operator_);
-  eunaryoperator->expression_->accept(this);
-}
-
 void Skeleton::visitEMul(EMul* emul)
 {
   /* Code For EMul Goes Here */
@@ -1807,15 +1816,6 @@ void Skeleton::visitERSh(ERSh* ersh)
 
   ersh->expression_1->accept(this);
   ersh->expression_2->accept(this);
-}
-
-void Skeleton::visitEBinaryOperator(EBinaryOperator* ebinaryoperator)
-{
-  /* Code For EBinaryOperator Goes Here */
-
-  ebinaryoperator->expression_1->accept(this);
-  visitOperator(ebinaryoperator->operator_);
-  ebinaryoperator->expression_2->accept(this);
 }
 
 void Skeleton::visitELT(ELT* elt)
@@ -1921,17 +1921,6 @@ void Skeleton::visitEConditional(EConditional* econditional)
   econditional->expression_1->accept(this);
   econditional->expression_2->accept(this);
   econditional->expression_3->accept(this);
-}
-
-void Skeleton::visitETernaryOperator(ETernaryOperator* eternaryoperator)
-{
-  /* Code For ETernaryOperator Goes Here */
-
-  eternaryoperator->expression_1->accept(this);
-  eternaryoperator->operatorname_1->accept(this);
-  eternaryoperator->expression_2->accept(this);
-  eternaryoperator->operatorname_2->accept(this);
-  eternaryoperator->expression_3->accept(this);
 }
 
 void Skeleton::visitEAssign(EAssign* eassign)

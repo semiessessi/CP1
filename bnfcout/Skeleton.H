@@ -26,13 +26,14 @@ class Skeleton : public Visitor
   void visitPrototype(Prototype* prototype); /* abstract class */
   void visitPFunction(PFunction* pfunction);
   void visitOperatorName(OperatorName* operatorname); /* abstract class */
-  void visitONOp(ONOp* onop);
   void visitONLnot(ONLnot* onlnot);
   void visitONPreInc(ONPreInc* onpreinc);
   void visitONPreDec(ONPreDec* onpredec);
   void visitONBnot(ONBnot* onbnot);
   void visitONMul(ONMul* onmul);
+  void visitONExp(ONExp* onexp);
   void visitONDiv(ONDiv* ondiv);
+  void visitONRDiv(ONRDiv* onrdiv);
   void visitONMod(ONMod* onmod);
   void visitONAdd(ONAdd* onadd);
   void visitONSub(ONSub* onsub);
@@ -50,6 +51,8 @@ class Skeleton : public Visitor
   void visitONLand(ONLand* onland);
   void visitONLor(ONLor* onlor);
   void visitONLxor(ONLxor* onlxor);
+  void visitONRight(ONRight* onright);
+  void visitONLeft(ONLeft* onleft);
   void visitOperatorTrait(OperatorTrait* operatortrait); /* abstract class */
   void visitOTIdentity(OTIdentity* otidentity);
   void visitFunctionSpecifier(FunctionSpecifier* functionspecifier); /* abstract class */
@@ -249,7 +252,6 @@ class Skeleton : public Visitor
   void visitENeg(ENeg* eneg);
   void visitEBnot(EBnot* ebnot);
   void visitEPos(EPos* epos);
-  void visitEUnaryOperator(EUnaryOperator* eunaryoperator);
   void visitEMul(EMul* emul);
   void visitEDiv(EDiv* ediv);
   void visitEMod(EMod* emod);
@@ -257,7 +259,6 @@ class Skeleton : public Visitor
   void visitESub(ESub* esub);
   void visitELSh(ELSh* elsh);
   void visitERSh(ERSh* ersh);
-  void visitEBinaryOperator(EBinaryOperator* ebinaryoperator);
   void visitELT(ELT* elt);
   void visitEGT(EGT* egt);
   void visitELE(ELE* ele);
@@ -271,7 +272,6 @@ class Skeleton : public Visitor
   void visitELor(ELor* elor);
   void visitELxor(ELxor* elxor);
   void visitEConditional(EConditional* econditional);
-  void visitETernaryOperator(ETernaryOperator* eternaryoperator);
   void visitEAssign(EAssign* eassign);
   void visitEAddAssign(EAddAssign* eaddassign);
   void visitESubAssign(ESubAssign* esubassign);

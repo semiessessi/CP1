@@ -32,7 +32,7 @@ struct OperatorInfo
     }
 };
 
-OperatorInfo* findOperatorInfo( OperatorInfo& info );
+OperatorInfo& findOperatorInfo( OperatorInfo& info );
 
 extern std::map< std::string, OperatorInfo > gxOperatorMap;
 
