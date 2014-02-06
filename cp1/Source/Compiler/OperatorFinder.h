@@ -14,11 +14,11 @@ class OperatorFinder
 
 public:
 
-    virtual void visitADOperator(DOperator *p)
+    virtual void visitDOperator(DOperator *p)
     {
         OperatorVisitor v;
-        v.typeOwner = mxCurrentTypeScopeVisitor.szName;
-        v.typeReturn = mxCurrentTypeScopeVisitor.szName;
+        v.typeOwner = "i32";//mxCurrentTypeScopeVisitor.szName;
+        v.typeReturn = "i32";//mxCurrentTypeScopeVisitor.szName;
         p->accept( &v );
         OperatorInfo info;
         info.szLLVMName = operatorNameMangle( v.name.c_str(), v.typeOwner, v.parameterTypes.size() );
@@ -36,11 +36,11 @@ public:
         
         for( std::map< std::string, OperatorInfo >::iterator it = gxOperatorMap.begin(); it != gxOperatorMap.end(); ++it )
         {
-            out += "declare %";
+            out += "declare ";
             out += it->second.szTypeReturn;
-            out += " ";
+            out += " @";
             out += it->first;
-            out += "\r\n";
+            out += "()\r\n";
         }
         
         return out;
