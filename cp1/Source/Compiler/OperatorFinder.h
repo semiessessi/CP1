@@ -21,7 +21,7 @@ public:
         v.typeReturn = "i32";//mxCurrentTypeScopeVisitor.szName;
         p->accept( &v );
         OperatorInfo info;
-        info.szLLVMName = operatorNameMangle( v.name.c_str(), v.typeOwner, v.parameterTypes.size() );
+        info.szLLVMName = operatorNameMangle( v.name.c_str(), v.typeOwner, v.parameterTypes );
         OperatorInfo& pInfo = findOperatorInfo( info );
         pInfo.szCPName = v.name;
         pInfo.szTypeOwner = v.typeOwner;

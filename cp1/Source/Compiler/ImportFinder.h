@@ -1,6 +1,7 @@
 #ifndef IMPORT_FINDER_H
 #define IMPORT_FINDER_H
 
+#include <algorithm>
 #include <string>
 #include <vector>
 
@@ -19,8 +20,9 @@ public:
 				return;
 			}
 		}
-		
-		maszImports.push_back( p->ident_ );
+        std::string s = p->ident_;
+		std::replace( s.begin(), s.end(), '.', '\\');
+		maszImports.push_back( s );
 	}
 	
 	virtual void visitDExpose( DExpose *p )

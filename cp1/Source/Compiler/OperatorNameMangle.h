@@ -2,7 +2,7 @@
 #define OPERATOR_NAME_MANGLE_H
 
 #include <string>
-
+#include <vector>
 // token Operator ( ( '+' | '-' | '=' | '&' | '^' | '|' | '/' | '%' | '*' | '>' | '<' | '!' | '~' | '?' | ':' ) * ) ;
 
 static inline std::string operatorNameMangle( const char* szOperator, std::string szType, const int iParameterCount )
@@ -36,6 +36,18 @@ static inline std::string operatorNameMangle( const char* szOperator, std::strin
 	}
 
 	return out;
+}
+
+static inline std::string operatorNameMangle( const char* szOperator, std::string szType, std::vector< std::string > axParameterTypes )
+{
+    std::string szOut = operatorNameMangle( szOperator, szType, axParameterTypes.size() );
+    for( size_t i = 0; i < axParameterTypes.size(); ++i )
+    {
+        szOut += "_";
+        szOut += axParameterTypes[ i ];
+    }
+    
+    return szOut;
 }
 
 #endif
