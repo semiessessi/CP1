@@ -1,6 +1,7 @@
 #include "LLVMTransform.h"
 
 #include "../ONVisitor.h"
+#include "../OperatorFinder.h"
 #include "../OperatorNameMangle.h"
 #include "../ParameterInfo.h"
 #include "../ParameterVisitor.h"
@@ -120,12 +121,7 @@ void LLVMTransformVisitor::visitFunction( const char* const llvmReturnTypeName, 
 	out += " ) nounwind\r\n{\r\n";
 	++siTabLevel;
 	// parse code...
-	ListStatement* pSList = statements;
-	while( pSList )
-	{
-		pSList->statement_->accept( this );
-		pSList = pSList->liststatement_;
-	}
+	visitFunctionBody( statements );
 
 	if( std::string( llvmReturnTypeName ) == "void" )
 	{
@@ -138,6 +134,16 @@ void LLVMTransformVisitor::visitFunction( const char* const llvmReturnTypeName, 
 
 	out += "}\r\n";
 	--siTabLevel;
+}
+
+void LLVMTransformVisitor::visitFunctionBody( ListStatement* statements )
+{
+    ListStatement* pSList = statements;
+	while( pSList )
+	{
+		pSList->statement_->accept( this );
+		pSList = pSList->liststatement_;
+	}
 }
 
 void LLVMTransformVisitor::visitDTypeDecl(DTypeDecl *p)
@@ -154,24 +160,45 @@ void LLVMTransformVisitor::visitDTypeDecl(DTypeDecl *p)
 
 void LLVMTransformVisitor::visitDOperator(DOperator *p)
 {
-	// SE: TODO: ...
-	///*
-    int iParameterCount = 0;
+	OperatorInfo& info = OperatorFinder::FindOperator( p );
+    
+    out += "define private fastcc ";
+    out += info.szTypeReturn;
+    gszCurrentlyDesiredType = info.szTypeReturn.c_str();
+    out += " @";
+    out += info.szLLVMName;
+    out += "( ";
     ListParameterDeclaration* pList = p->listparameterdeclaration_;
-	while( pList )
-	{
-		++iParameterCount;
+    for( size_t i = 0; i < info.aszParameterTypes.size(); ++i )
+    {
+        if( info.aszParameterTypes[ i ] )
+        {
+            out += info.aszParameterTypes[ i ]->ShortLLVMName();
+        }
+        else
+        {
+            out += info.szTypeReturn;
+        }
+        
+        ParameterVisitor p;
+		pList->parameterdeclaration_->accept( &p );
+		out += " %_dot_";
+		out += p.szName;
+        
+        if( i < ( info.aszParameterTypes.size() - 1 ) )
+        {
+            out += ", ";
+        }
+        
         pList = pList->listparameterdeclaration_;
-	}
-	//*/
-	out += "\r\n; operator ";
-    ONVisitor ov;
-    p->operatorname_->accept( &ov );
-	out += ov.operatorName;
-	out += "\r\n";
-	sszCurrentFunctionName = operatorNameMangle( ov.operatorName.c_str(), "i32", iParameterCount );
-	// SE: TODO - type
-	visitFunction( "i32", sszCurrentFunctionName.c_str(), p->listparameterdeclaration_, p->liststatement_ );
+    }
+    out += " ) nounwind\r\n{\r\n";
+    
+    ++siTabLevel;
+    visitFunctionBody( p->liststatement_ );
+    --siTabLevel;
+    
+    out += "}\r\n";
 }
 
 void LLVMTransformVisitor::visitSExpression(SExpression *p)

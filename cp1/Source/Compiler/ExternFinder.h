@@ -75,7 +75,7 @@ public:
 		}
 
 		szExtern += " )";
-		szExtern += "\ndefine ";
+		szExtern += "\ndefine private fastcc ";
 		
 		p->type_->accept( this );
 
@@ -185,6 +185,10 @@ public:
 	{
 		// for now assume we know all about pointer and i32 with hacks...
 		if( std::string( szIdent ) == "pointer" )
+		{
+			return "i8*";
+		}
+        else if( std::string( szIdent ) == "address" )
 		{
 			return "i8*";
 		}

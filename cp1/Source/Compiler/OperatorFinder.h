@@ -14,7 +14,7 @@ class OperatorFinder
 
 public:
 
-    virtual void visitDOperator(DOperator *p)
+    static OperatorInfo& FindOperator( DOperator *p )
     {
         OperatorVisitor v;
         DetailedTypeVisitor tv;
@@ -30,12 +30,20 @@ public:
         p->accept( &v );
         OperatorInfo info;
         info.szLLVMName = operatorNameMangle( v.name.c_str(), v.typeOwner, v.parameterTypes );
-        OperatorInfo& pInfo = findOperatorInfo( info );
-        pInfo.szCPName = v.name;
-        pInfo.szTypeOwner = v.typeOwner;
-        pInfo.szTypeReturn = v.typeReturn;
-        pInfo.szLLVMName = info.szLLVMName;
-        pInfo.aszParameterTypes = v.parameterTypes;
+        
+        OperatorInfo& rInfo = findOperatorInfo( info );
+        rInfo.szCPName = v.name;
+        rInfo.szTypeOwner = v.typeOwner;
+        rInfo.szTypeReturn = v.typeReturn;
+        rInfo.szLLVMName = info.szLLVMName;
+        rInfo.aszParameterTypes = v.parameterTypes;
+        
+        return rInfo;
+    }
+    
+    virtual void visitDOperator(DOperator *p)
+    {
+        OperatorInfo& pInfo = FindOperator( p );
     }
 
     std::string emitLLVM()
@@ -44,7 +52,7 @@ public:
         
         for( std::map< std::string, OperatorInfo >::iterator it = gxOperatorMap.begin(); it != gxOperatorMap.end(); ++it )
         {
-            out += "declare ";
+            out += "; declare private fastcc ";
             out += it->second.szTypeReturn;
             out += " @";
             out += it->first;

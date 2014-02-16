@@ -17,7 +17,9 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   virtual void visitDFunction(DFunction *p);
 
   void visitFunction( const char* const llvmReturnTypeName, const char* const functionIdentifier, ListParameterDeclaration* parameters, ListStatement* statements );
-
+    
+  void visitFunctionBody( ListStatement* statements );
+    
   virtual void visitDTypeDecl(DTypeDecl *p);
   //virtual void visitTBDOperator(TBDOperator *p);
   virtual void visitDOperator(DOperator *p);
