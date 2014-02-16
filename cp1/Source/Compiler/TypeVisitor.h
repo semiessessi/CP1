@@ -50,6 +50,10 @@ class DetailedTypeVisitor
 : public DescendingCompilerVisitor
 {
 
+private:
+
+    std::string mszCurrentNamespace;
+
 public:
 
     DetailedTypeInfo* pxTypeInfo;
@@ -57,7 +61,18 @@ public:
     DetailedTypeVisitor() : DescendingCompilerVisitor()
     {
         pxTypeInfo = 0;
+        mszCurrentNamespace = "_dot_";
     }
+    
+    virtual void visitDNamespace( DNamespace *p )
+	{
+		mszCurrentNamespace += p->ident_;
+		mszCurrentNamespace += "_dot_";
+		
+		DescendingCompilerVisitor::visitDNamespace( p );
+		
+		mszCurrentNamespace.resize( mszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_ ) );
+	}
     
     virtual void visitTAddress( TAddress* p )
 	{
@@ -79,13 +94,13 @@ public:
     
     virtual void visitTCustom( TCustom* p )
 	{
-        bool bAlreadyInMap = DetailedTypeInfo::AlreadyInMap( p->ident_ );
-        pxTypeInfo = DetailedTypeInfo::Find( p->ident_ );
+        bool bAlreadyInMap = DetailedTypeInfo::AlreadyInMap( mszCurrentNamespace + p->ident_ );
+        pxTypeInfo = DetailedTypeInfo::Find( mszCurrentNamespace + p->ident_ );
         if( !bAlreadyInMap )
         {
-            pxTypeInfo->szCPName = p->ident_;
+            pxTypeInfo->szCPName = mszCurrentNamespace + p->ident_;
             pxTypeInfo->szLLVMName = "%";
-            pxTypeInfo->szLLVMName += p->ident_;
+            pxTypeInfo->szLLVMName += mszCurrentNamespace + p->ident_;
             pxTypeInfo->bDefined = false;
         }
 	}
@@ -127,7 +142,7 @@ public:
     
     virtual void visitDTypeDecl( DTypeDecl* p )
     {
-        DetailedTypeInfo* pxNewTypeInfo = DetailedTypeInfo::Find( p->ident_ );
+        DetailedTypeInfo* pxNewTypeInfo = DetailedTypeInfo::Find( mszCurrentNamespace + p->ident_ );
         
         DetailedTypeVisitor v;
         p->type_->accept( &v );
@@ -141,7 +156,7 @@ public:
         
         *pxNewTypeInfo = *v.pxTypeInfo;
         
-        pxNewTypeInfo->szCPName = p->ident_;
+        pxNewTypeInfo->szCPName = mszCurrentNamespace + p->ident_;
         pxNewTypeInfo->bDefined = true;
         pxNewTypeInfo->bTypedef = true;
     }
