@@ -48,7 +48,24 @@ public:
             out += it->second.szTypeReturn;
             out += " @";
             out += it->first;
-            out += "()\r\n";
+            out += "( ";
+            for( size_t i = 0; i < it->second.aszParameterTypes.size(); ++i )
+            {
+                if( it->second.aszParameterTypes[ i ] )
+                {
+                    out += it->second.aszParameterTypes[ i ]->ShortLLVMName();
+                }
+                else
+                {
+                    out += it->second.szTypeReturn;
+                }
+                
+                if( i < ( it->second.aszParameterTypes.size() - 1 ) )
+                {
+                    out += ", ";
+                }
+            }
+            out += " )\r\n";
         }
         
         return out;
