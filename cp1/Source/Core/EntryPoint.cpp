@@ -358,9 +358,9 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
         giantCompilationUnit += dtv.emitLLVM();
         giantCompilationUnit += "\r\n";
 
-        giantCompilationUnit += "; operators\r\n";
-        giantCompilationUnit += of.emitLLVM();
-        giantCompilationUnit += "\r\n";
+        //giantCompilationUnit += "; operators\r\n";
+        //giantCompilationUnit += of.emitLLVM();
+        //giantCompilationUnit += "\r\n";
 
 		giantCompilationUnit += "; externs\r\n";
 		giantCompilationUnit += ef.emitLLVM();
