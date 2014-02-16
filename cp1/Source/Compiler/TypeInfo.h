@@ -37,6 +37,7 @@ struct DetailedTypeInfo
     bool bFloat;
     
     bool bDefined;
+    bool bTypedef;
 
     DetailedTypeInfo()
     {
@@ -51,6 +52,7 @@ struct DetailedTypeInfo
         bFloat = false;
         
         bDefined = false;
+        bTypedef = false;
     }
     
     static bool AlreadyInMap( const std::string& key ) { return sxTypeMap.find( key ) != sxTypeMap.end(); }
@@ -92,6 +94,34 @@ struct DetailedTypeInfo
         return pxArrayType->DependsOn( info );
     }
     
+    std::string ShortLLVMName()
+    {
+        std::string ret = "";
+        
+        if( bTypedef )
+        {
+            ret += "%";
+            ret += szCPName;
+        }
+        else
+        {
+            if( pxArrayType && ( iArrayDimension > 0 ) )
+            {
+                ret += "[ ";
+                ret += std::to_string( iArrayDimension );
+                ret += " x ";
+                ret += pxArrayType->ShortLLVMName();
+                ret += " ]";
+            }
+            else
+            {
+                ret += szLLVMName;
+            }
+        }
+        
+        return ret;
+    }
+    
     std::string FullLLVMName()
     {
         if( pxArrayType && ( iArrayDimension > 0 ) )
@@ -120,12 +150,7 @@ struct DetailedTypeInfo
         std::string out = "";
         for( std::map< std::string, DetailedTypeInfo* >::iterator it = sxTypeMap.begin(); it != sxTypeMap.end(); ++it )
         {
-            if( it->first.compare( 0, 4, "byte" ) == 0 )
-            {
-                continue;
-            }
-            
-            if( it->first.compare( 0, 4, "address" ) == 0 )
+            if( !it->second->bTypedef )
             {
                 continue;
             }
@@ -149,7 +174,7 @@ struct DetailedTypeInfo
             
             if( it->second->iArrayDimension != 0 )
             {
-                verboseInfo( 2, "dimension %d ", it->second->iArrayDimension );
+                verboseInfo( 2, "with dimension %d ", it->second->iArrayDimension );
             }
             
             verboseInfo( 2, "\n" );

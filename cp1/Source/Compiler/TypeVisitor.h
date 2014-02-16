@@ -143,6 +143,7 @@ public:
         
         pxNewTypeInfo->szCPName = p->ident_;
         pxNewTypeInfo->bDefined = true;
+        pxNewTypeInfo->bTypedef = true;
     }
     
     std::string emitLLVM()
