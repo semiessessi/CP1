@@ -372,14 +372,12 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 			{
 				LLVMTransformVisitor l;
 				l.out = "; LLVM IR generated from ";
-				l.out += szCurrentFile;
+				l.out += aszFilenames[ i ];
 				l.out += " by CP1 - Experimental compiler\r\n";
 				l.out += "\r\n";
 
 				apCode[ i ]->accept( &l );
 
-				std::string szLLVMFilename = szCurrentFile;
-				szLLVMFilename.append( ".llvm" );
                 giantCompilationUnit += l.out;
                 giantCompilationUnit += "\r\n";
 			}
