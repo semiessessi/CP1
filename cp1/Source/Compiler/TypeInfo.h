@@ -94,6 +94,13 @@ struct DetailedTypeInfo
         return pxArrayType->DependsOn( info );
     }
     
+    std::string MangledName()
+    {
+        std::string ret = szCPName;
+        
+        return ret;
+    }
+    
     std::string ShortLLVMName()
     {
         std::string ret = "";

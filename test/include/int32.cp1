@@ -78,7 +78,7 @@ pure commutative associative selfinverse int32 ^( a, b )
     // return cmp_ge_4b( a, b );
 // }
 
-// pure bool <=( int32 a, int32 b )
-// {
-    // return cmp_le_4b( a, b );
-// }
+//pure bool <=( int32 a, int32 b )
+//{
+//    return cmp_le_4b( a, b );
+//}

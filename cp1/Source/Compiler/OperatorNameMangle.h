@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 // token Operator ( ( '+' | '-' | '=' | '&' | '^' | '|' | '/' | '%' | '*' | '>' | '<' | '!' | '~' | '?' | ':' ) * ) ;
+#include "TypeInfo.h"
 
 static inline std::string operatorNameMangle( const char* szOperator, std::string szType, const int iParameterCount )
 {
@@ -38,13 +39,20 @@ static inline std::string operatorNameMangle( const char* szOperator, std::strin
 	return out;
 }
 
-static inline std::string operatorNameMangle( const char* szOperator, std::string szType, std::vector< std::string > axParameterTypes )
+static inline std::string operatorNameMangle( const char* szOperator, std::string szType, std::vector< DetailedTypeInfo* > axParameterTypes )
 {
     std::string szOut = operatorNameMangle( szOperator, szType, axParameterTypes.size() );
     for( size_t i = 0; i < axParameterTypes.size(); ++i )
     {
         szOut += "_";
-        szOut += axParameterTypes[ i ];
+        if( axParameterTypes[ i ] )
+        {
+            szOut += axParameterTypes[ i ]->MangledName();
+        }
+        else
+        {
+            szOut += szType;
+        }
     }
     
     return szOut;

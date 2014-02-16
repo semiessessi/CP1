@@ -64,7 +64,15 @@ void LLVMTransformVisitor::visitDDefaultFunction( DDefaultFunction *p )
 
 void LLVMTransformVisitor::visitDFunction(DFunction *p)
 {
-	visitFunction( "<implement this!>", p->ident_, p->listparameterdeclaration_, p->liststatement_ );
+    DetailedTypeVisitor v;
+    p->type_->accept( &v );
+    std::string typeName = "<implement this!>";
+    if( v.pxTypeInfo )
+    {
+        typeName = v.pxTypeInfo->ShortLLVMName();
+    }
+    
+	visitFunction( typeName.c_str(), p->ident_, p->listparameterdeclaration_, p->liststatement_ );
 }
 
 void LLVMTransformVisitor::visitFunction( const char* const llvmReturnTypeName, const char* const functionIdentifier, ListParameterDeclaration* parameters, ListStatement* statements )

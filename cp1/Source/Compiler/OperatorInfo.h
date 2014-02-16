@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+#include "TypeInfo.h"
+
 struct OperatorInfo
 {
     std::string szCPName;
@@ -12,7 +14,7 @@ struct OperatorInfo
     std::string szTypeReturn;
     std::string szLLVMName;
 
-    std::vector< std::string > aszParameterTypes;
+    std::vector< DetailedTypeInfo* > aszParameterTypes;
 
     std::vector< std::string > aszInverses;
 

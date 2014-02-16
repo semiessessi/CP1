@@ -17,8 +17,16 @@ public:
     virtual void visitDOperator(DOperator *p)
     {
         OperatorVisitor v;
-        v.typeOwner = "i32";//mxCurrentTypeScopeVisitor.szName;
-        v.typeReturn = "i32";//mxCurrentTypeScopeVisitor.szName;
+        DetailedTypeVisitor tv;
+        p->type_->accept( &tv );
+        v.typeOwner = "i8";
+        v.typeReturn = "i8";
+        if( tv.pxTypeInfo )
+        {
+            v.typeOwner = tv.pxTypeInfo->MangledName();
+            v.typeReturn = tv.pxTypeInfo->ShortLLVMName();
+        }
+        
         p->accept( &v );
         OperatorInfo info;
         info.szLLVMName = operatorNameMangle( v.name.c_str(), v.typeOwner, v.parameterTypes );
