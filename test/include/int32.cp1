@@ -1,6 +1,6 @@
 //import bool;
 
-align< 4 > type byte[ 4 ] int32;
+align< 4 > integer type byte[ 4 ] int32;
 
 identity int32 + 0;
 identity int32 * 1;
@@ -53,12 +53,12 @@ pure commutative associative selfinverse int32 ^( a, b )
 	return xor_4b( a, b );
 }
 
-// pure bool ==( int32 a, int32 b )
+// pure commutative bool ==( int32 a, int32 b )
 // {
     // return cmp_4b( a, b );
 // }
 
-// pure bool !=( int32 a, int32 b )
+// pure commutative bool !=( int32 a, int32 b )
 // {
     // return cmp_ne_4b( a, b );
 // }

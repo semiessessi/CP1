@@ -292,7 +292,16 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 				apCode[ i ]->accept( &tf );
             }
         }
-
+        
+        DetailedTypeVisitor dtv;
+        for( size_t i = 0; i < apCode.size(); ++i )
+		{
+        	if( apCode[ i ] )
+			{
+				apCode[ i ]->accept( &dtv );
+            }
+        }
+        
 		if( gxSwitches.infoVerbosity > 1 )
         {
 			printf( "Looking for constants...\n" );
@@ -345,7 +354,8 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
         giantCompilationUnit += "\r\n";
         
         giantCompilationUnit += "; types\r\n";
-        giantCompilationUnit += tf.emitLLVM();
+        //giantCompilationUnit += tf.emitLLVM();
+        giantCompilationUnit += dtv.emitLLVM();
         giantCompilationUnit += "\r\n";
 
         giantCompilationUnit += "; operators\r\n";

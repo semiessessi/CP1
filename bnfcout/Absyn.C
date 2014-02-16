@@ -1126,9 +1126,50 @@ TSGeneric *TSGeneric::clone() const {
   return new TSGeneric(*this);
 }
 
+/********************   TSInteger    ********************/
+TSInteger::TSInteger() { }
+TSInteger::TSInteger(const TSInteger & other) { 
+}
+TSInteger &TSInteger::operator=(const TSInteger & other) {
+  TSInteger tmp(other);
+  swap(tmp);
+  return *this;
+}
+void TSInteger::swap(TSInteger & other) {
+
+}
+
+TSInteger::~TSInteger() { }
+
+void TSInteger::accept(Visitor *v) { v->visitTSInteger(this); }
+TSInteger *TSInteger::clone() const {
+  return new TSInteger(*this);
+}
+
+/********************   TSReal    ********************/
+TSReal::TSReal() { }
+TSReal::TSReal(const TSReal & other) { 
+}
+TSReal &TSReal::operator=(const TSReal & other) {
+  TSReal tmp(other);
+  swap(tmp);
+  return *this;
+}
+void TSReal::swap(TSReal & other) {
+
+}
+
+TSReal::~TSReal() { }
+
+void TSReal::accept(Visitor *v) { v->visitTSReal(this); }
+TSReal *TSReal::clone() const {
+  return new TSReal(*this);
+}
+
 /********************   TSGParam    ********************/
-TSGParam::TSGParam(Ident p1) { ident_ = p1; }
-TSGParam::TSGParam(const TSGParam & other) {   ident_ = other.ident_;
+TSGParam::TSGParam(Type *p1, Ident p2) { type_ = p1; ident_ = p2; }
+TSGParam::TSGParam(const TSGParam & other) {   type_ = other.type_->clone();
+  ident_ = other.ident_;
 
 }
 TSGParam &TSGParam::operator=(const TSGParam & other) {
@@ -1137,11 +1178,12 @@ TSGParam &TSGParam::operator=(const TSGParam & other) {
   return *this;
 }
 void TSGParam::swap(TSGParam & other) {
+  std::swap(type_, other.type_);
   std::swap(ident_, other.ident_);
 
 }
 
-TSGParam::~TSGParam() { }
+TSGParam::~TSGParam() { delete(type_); }
 
 void TSGParam::accept(Visitor *v) { v->visitTSGParam(this); }
 TSGParam *TSGParam::clone() const {
@@ -1278,6 +1320,26 @@ TStruct *TStruct::clone() const {
   return new TStruct(*this);
 }
 
+/********************   TType    ********************/
+TType::TType() { }
+TType::TType(const TType & other) { 
+}
+TType &TType::operator=(const TType & other) {
+  TType tmp(other);
+  swap(tmp);
+  return *this;
+}
+void TType::swap(TType & other) {
+
+}
+
+TType::~TType() { }
+
+void TType::accept(Visitor *v) { v->visitTType(this); }
+TType *TType::clone() const {
+  return new TType(*this);
+}
+
 /********************   SMDMemberDeclaration    ********************/
 SMDMemberDeclaration::SMDMemberDeclaration(Type *p1, Ident p2) { type_ = p1; ident_ = p2; }
 SMDMemberDeclaration::SMDMemberDeclaration(const SMDMemberDeclaration & other) {   type_ = other.type_->clone();
@@ -1300,28 +1362,6 @@ SMDMemberDeclaration::~SMDMemberDeclaration() { delete(type_); }
 void SMDMemberDeclaration::accept(Visitor *v) { v->visitSMDMemberDeclaration(this); }
 SMDMemberDeclaration *SMDMemberDeclaration::clone() const {
   return new SMDMemberDeclaration(*this);
-}
-
-/********************   SMDAnonMemberDeclaration    ********************/
-SMDAnonMemberDeclaration::SMDAnonMemberDeclaration(Type *p1) { type_ = p1; }
-SMDAnonMemberDeclaration::SMDAnonMemberDeclaration(const SMDAnonMemberDeclaration & other) {   type_ = other.type_->clone();
-
-}
-SMDAnonMemberDeclaration &SMDAnonMemberDeclaration::operator=(const SMDAnonMemberDeclaration & other) {
-  SMDAnonMemberDeclaration tmp(other);
-  swap(tmp);
-  return *this;
-}
-void SMDAnonMemberDeclaration::swap(SMDAnonMemberDeclaration & other) {
-  std::swap(type_, other.type_);
-
-}
-
-SMDAnonMemberDeclaration::~SMDAnonMemberDeclaration() { delete(type_); }
-
-void SMDAnonMemberDeclaration::accept(Visitor *v) { v->visitSMDAnonMemberDeclaration(this); }
-SMDAnonMemberDeclaration *SMDAnonMemberDeclaration::clone() const {
-  return new SMDAnonMemberDeclaration(*this);
 }
 
 /********************   PDAutoParameter    ********************/

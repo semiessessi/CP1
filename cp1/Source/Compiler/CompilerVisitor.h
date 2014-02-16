@@ -59,6 +59,8 @@ class CompilerVisitor : public Visitor
   virtual void visitFSSelfInverse( FSSelfInverse *p ) {}
   virtual void visitTSAlign( TSAlign* p ) {}
   virtual void visitTSGeneric( TSGeneric* p ) {}
+  virtual void visitTSInteger( TSInteger* p ) {}
+  virtual void visitTSReal( TSReal* p ) {}
   virtual void visitTSGParam( TSGParam* p ) {}
   virtual void visitVSConst(VSConst *p) {}
   virtual void visitTAddress(TAddress *p) {}
@@ -67,8 +69,9 @@ class CompilerVisitor : public Visitor
   virtual void visitTStruct(TStruct *p) {}
   virtual void visitTFixedArray(TFixedArray *p) {}
   virtual void visitTGenericArray( TGenericArray* p ) {}
+  virtual void visitTType(TType *p) {}
   virtual void visitSMDMemberDeclaration( SMDMemberDeclaration *p ) {}
-  virtual void visitSMDAnonMemberDeclaration( SMDAnonMemberDeclaration *p ) {}
+  //virtual void visitSMDAnonMemberDeclaration( SMDAnonMemberDeclaration *p ) {}
   virtual void visitSReturn(SReturn *p) {}
   virtual void visitSExpression(SExpression *p) {}
   virtual void visitSScope(SScope *p) {}

@@ -780,6 +780,30 @@ void PrintAbsyn::visitTSGeneric(TSGeneric* p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitTSInteger(TSInteger* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render("integer");
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTSReal(TSReal* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render("real");
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitGenericParam(GenericParam*p) {} //abstract class
 
 void PrintAbsyn::visitTSGParam(TSGParam* p)
@@ -787,7 +811,7 @@ void PrintAbsyn::visitTSGParam(TSGParam* p)
   int oldi = _i_;
   if (oldi > 0) render(_L_PAREN);
 
-  render("type");
+  _i_ = 0; p->type_->accept(this);
   visitIdent(p->ident_);
 
   if (oldi > 0) render(_R_PAREN);
@@ -876,6 +900,18 @@ void PrintAbsyn::visitTStruct(TStruct* p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitTType(TType* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render("type");
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitStructMemberDeclaration(StructMemberDeclaration*p) {} //abstract class
 
 void PrintAbsyn::visitSMDMemberDeclaration(SMDMemberDeclaration* p)
@@ -885,19 +921,6 @@ void PrintAbsyn::visitSMDMemberDeclaration(SMDMemberDeclaration* p)
 
   _i_ = 0; p->type_->accept(this);
   visitIdent(p->ident_);
-  render(';');
-
-  if (oldi > 0) render(_R_PAREN);
-
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitSMDAnonMemberDeclaration(SMDAnonMemberDeclaration* p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(_L_PAREN);
-
-  _i_ = 0; p->type_->accept(this);
   render(';');
 
   if (oldi > 0) render(_R_PAREN);
@@ -4709,12 +4732,24 @@ void ShowAbsyn::visitTSGeneric(TSGeneric* p)
   bufAppend(' ');
   bufAppend(')');
 }
+void ShowAbsyn::visitTSInteger(TSInteger* p)
+{
+  bufAppend("TSInteger");
+}
+void ShowAbsyn::visitTSReal(TSReal* p)
+{
+  bufAppend("TSReal");
+}
 void ShowAbsyn::visitGenericParam(GenericParam* p) {} //abstract class
 
 void ShowAbsyn::visitTSGParam(TSGParam* p)
 {
   bufAppend('(');
   bufAppend("TSGParam");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
   bufAppend(' ');
   visitIdent(p->ident_);
   bufAppend(')');
@@ -4772,6 +4807,10 @@ void ShowAbsyn::visitTStruct(TStruct* p)
   bufAppend(' ');
   bufAppend(')');
 }
+void ShowAbsyn::visitTType(TType* p)
+{
+  bufAppend("TType");
+}
 void ShowAbsyn::visitStructMemberDeclaration(StructMemberDeclaration* p) {} //abstract class
 
 void ShowAbsyn::visitSMDMemberDeclaration(SMDMemberDeclaration* p)
@@ -4784,17 +4823,6 @@ void ShowAbsyn::visitSMDMemberDeclaration(SMDMemberDeclaration* p)
   bufAppend(']');
   bufAppend(' ');
   visitIdent(p->ident_);
-  bufAppend(' ');
-  bufAppend(')');
-}
-void ShowAbsyn::visitSMDAnonMemberDeclaration(SMDAnonMemberDeclaration* p)
-{
-  bufAppend('(');
-  bufAppend("SMDAnonMemberDeclaration");
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->type_)  p->type_->accept(this);
-  bufAppend(']');
   bufAppend(' ');
   bufAppend(')');
 }

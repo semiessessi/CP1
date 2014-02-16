@@ -88,6 +88,8 @@ class PrintAbsyn : public Visitor
   void visitTypeSpecifier(TypeSpecifier *p); /* abstract class */
   void visitTSAlign(TSAlign *p);
   void visitTSGeneric(TSGeneric *p);
+  void visitTSInteger(TSInteger *p);
+  void visitTSReal(TSReal *p);
   void visitGenericParam(GenericParam *p); /* abstract class */
   void visitTSGParam(TSGParam *p);
   void visitType(Type *p); /* abstract class */
@@ -97,9 +99,9 @@ class PrintAbsyn : public Visitor
   void visitTFixedArray(TFixedArray *p);
   void visitTGenericArray(TGenericArray *p);
   void visitTStruct(TStruct *p);
+  void visitTType(TType *p);
   void visitStructMemberDeclaration(StructMemberDeclaration *p); /* abstract class */
   void visitSMDMemberDeclaration(SMDMemberDeclaration *p);
-  void visitSMDAnonMemberDeclaration(SMDAnonMemberDeclaration *p);
   void visitParameterDeclaration(ParameterDeclaration *p); /* abstract class */
   void visitPDAutoParameter(PDAutoParameter *p);
   void visitPDTypedParameter(PDTypedParameter *p);
@@ -441,6 +443,8 @@ class ShowAbsyn : public Visitor
   void visitTypeSpecifier(TypeSpecifier *p); /* abstract class */
   void visitTSAlign(TSAlign *p);
   void visitTSGeneric(TSGeneric *p);
+  void visitTSInteger(TSInteger *p);
+  void visitTSReal(TSReal *p);
   void visitGenericParam(GenericParam *p); /* abstract class */
   void visitTSGParam(TSGParam *p);
   void visitType(Type *p); /* abstract class */
@@ -450,9 +454,9 @@ class ShowAbsyn : public Visitor
   void visitTFixedArray(TFixedArray *p);
   void visitTGenericArray(TGenericArray *p);
   void visitTStruct(TStruct *p);
+  void visitTType(TType *p);
   void visitStructMemberDeclaration(StructMemberDeclaration *p); /* abstract class */
   void visitSMDMemberDeclaration(SMDMemberDeclaration *p);
-  void visitSMDAnonMemberDeclaration(SMDAnonMemberDeclaration *p);
   void visitParameterDeclaration(ParameterDeclaration *p); /* abstract class */
   void visitPDAutoParameter(PDAutoParameter *p);
   void visitPDTypedParameter(PDTypedParameter *p);

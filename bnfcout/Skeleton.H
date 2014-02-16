@@ -69,6 +69,8 @@ class Skeleton : public Visitor
   void visitTypeSpecifier(TypeSpecifier* typespecifier); /* abstract class */
   void visitTSAlign(TSAlign* tsalign);
   void visitTSGeneric(TSGeneric* tsgeneric);
+  void visitTSInteger(TSInteger* tsinteger);
+  void visitTSReal(TSReal* tsreal);
   void visitGenericParam(GenericParam* genericparam); /* abstract class */
   void visitTSGParam(TSGParam* tsgparam);
   void visitType(Type* type); /* abstract class */
@@ -78,9 +80,9 @@ class Skeleton : public Visitor
   void visitTFixedArray(TFixedArray* tfixedarray);
   void visitTGenericArray(TGenericArray* tgenericarray);
   void visitTStruct(TStruct* tstruct);
+  void visitTType(TType* ttype);
   void visitStructMemberDeclaration(StructMemberDeclaration* structmemberdeclaration); /* abstract class */
   void visitSMDMemberDeclaration(SMDMemberDeclaration* smdmemberdeclaration);
-  void visitSMDAnonMemberDeclaration(SMDAnonMemberDeclaration* smdanonmemberdeclaration);
   void visitParameterDeclaration(ParameterDeclaration* parameterdeclaration); /* abstract class */
   void visitPDAutoParameter(PDAutoParameter* pdautoparameter);
   void visitPDTypedParameter(PDTypedParameter* pdtypedparameter);

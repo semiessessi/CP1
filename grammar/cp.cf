@@ -66,8 +66,10 @@ VSConst.					VariableSpecifier		::= "const" ;
 
 TSAlign.                    TypeSpecifier           ::= "align" "<" Integer ">" ;
 TSGeneric.                  TypeSpecifier           ::= "generic" "<" [GenericParam] ">" ;
+TSInteger.                  TypeSpecifier           ::= "integer" ;
+TSReal.                     TypeSpecifier           ::= "real" ;
 
-TSGParam.                   GenericParam            ::= "type" Ident ;
+TSGParam.                   GenericParam            ::= Type Ident ;
 
 TAddress.					Type					::= "address" ;
 TByte.						Type					::= "byte" ;
@@ -75,9 +77,9 @@ TCustom.					Type					::= Ident ;
 TFixedArray.				Type					::= Type "[" Integer "]" ;
 TGenericArray.				Type					::= Type "[" "]" ;
 TStruct.					Type					::= "{" [StructMemberDeclaration] ";" "}" ;
+TType.					    Type					::= "type" ;
 
 SMDMemberDeclaration.		StructMemberDeclaration	::= Type Ident ";" ;
-SMDAnonMemberDeclaration.	StructMemberDeclaration	::= Type ";" ;
 
 PDAutoParameter.			ParameterDeclaration	::= [VariableSpecifier] Ident ;
 PDTypedParameter.			ParameterDeclaration	::= [VariableSpecifier] Type Ident ;

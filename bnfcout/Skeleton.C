@@ -378,12 +378,25 @@ void Skeleton::visitTSGeneric(TSGeneric* tsgeneric)
   if (tsgeneric->listgenericparam_) {tsgeneric->listgenericparam_->accept(this);}
 }
 
+void Skeleton::visitTSInteger(TSInteger* tsinteger)
+{
+  /* Code For TSInteger Goes Here */
+
+}
+
+void Skeleton::visitTSReal(TSReal* tsreal)
+{
+  /* Code For TSReal Goes Here */
+
+}
+
 void Skeleton::visitGenericParam(GenericParam* genericparam) {} //abstract class
 
 void Skeleton::visitTSGParam(TSGParam* tsgparam)
 {
   /* Code For TSGParam Goes Here */
 
+  tsgparam->type_->accept(this);
   visitIdent(tsgparam->ident_);
 }
 
@@ -430,6 +443,12 @@ void Skeleton::visitTStruct(TStruct* tstruct)
   if (tstruct->liststructmemberdeclaration_) {tstruct->liststructmemberdeclaration_->accept(this);}
 }
 
+void Skeleton::visitTType(TType* ttype)
+{
+  /* Code For TType Goes Here */
+
+}
+
 void Skeleton::visitStructMemberDeclaration(StructMemberDeclaration* structmemberdeclaration) {} //abstract class
 
 void Skeleton::visitSMDMemberDeclaration(SMDMemberDeclaration* smdmemberdeclaration)
@@ -438,13 +457,6 @@ void Skeleton::visitSMDMemberDeclaration(SMDMemberDeclaration* smdmemberdeclarat
 
   smdmemberdeclaration->type_->accept(this);
   visitIdent(smdmemberdeclaration->ident_);
-}
-
-void Skeleton::visitSMDAnonMemberDeclaration(SMDAnonMemberDeclaration* smdanonmemberdeclaration)
-{
-  /* Code For SMDAnonMemberDeclaration Goes Here */
-
-  smdanonmemberdeclaration->type_->accept(this);
 }
 
 void Skeleton::visitParameterDeclaration(ParameterDeclaration* parameterdeclaration) {} //abstract class

@@ -68,6 +68,8 @@ class FSSelfInverse;
 class VSConst;
 class TSAlign;
 class TSGeneric;
+class TSInteger;
+class TSReal;
 class TSGParam;
 class TAddress;
 class TByte;
@@ -75,8 +77,8 @@ class TCustom;
 class TFixedArray;
 class TGenericArray;
 class TStruct;
+class TType;
 class SMDMemberDeclaration;
-class SMDAnonMemberDeclaration;
 class PDAutoParameter;
 class PDTypedParameter;
 class SReturn;
@@ -361,6 +363,8 @@ class Visitor
   virtual void visitVSConst(VSConst *p) = 0;
   virtual void visitTSAlign(TSAlign *p) = 0;
   virtual void visitTSGeneric(TSGeneric *p) = 0;
+  virtual void visitTSInteger(TSInteger *p) = 0;
+  virtual void visitTSReal(TSReal *p) = 0;
   virtual void visitTSGParam(TSGParam *p) = 0;
   virtual void visitTAddress(TAddress *p) = 0;
   virtual void visitTByte(TByte *p) = 0;
@@ -368,8 +372,8 @@ class Visitor
   virtual void visitTFixedArray(TFixedArray *p) = 0;
   virtual void visitTGenericArray(TGenericArray *p) = 0;
   virtual void visitTStruct(TStruct *p) = 0;
+  virtual void visitTType(TType *p) = 0;
   virtual void visitSMDMemberDeclaration(SMDMemberDeclaration *p) = 0;
-  virtual void visitSMDAnonMemberDeclaration(SMDAnonMemberDeclaration *p) = 0;
   virtual void visitPDAutoParameter(PDAutoParameter *p) = 0;
   virtual void visitPDTypedParameter(PDTypedParameter *p) = 0;
   virtual void visitSReturn(SReturn *p) = 0;
@@ -1384,6 +1388,32 @@ class TSGeneric : public TypeSpecifier
   void swap(TSGeneric &);
 };
 
+class TSInteger : public TypeSpecifier
+{
+ public:
+
+  TSInteger(const TSInteger &);
+  TSInteger &operator=(const TSInteger &);
+  TSInteger();
+  ~TSInteger();
+  virtual void accept(Visitor *v);
+  virtual  TSInteger  *clone() const;
+  void swap(TSInteger &);
+};
+
+class TSReal : public TypeSpecifier
+{
+ public:
+
+  TSReal(const TSReal &);
+  TSReal &operator=(const TSReal &);
+  TSReal();
+  ~TSReal();
+  virtual void accept(Visitor *v);
+  virtual  TSReal  *clone() const;
+  void swap(TSReal &);
+};
+
 
 class GenericParam : public Visitable {
 public:
@@ -1393,11 +1423,12 @@ public:
 class TSGParam : public GenericParam
 {
  public:
+  Type *type_;
   Ident ident_;
 
   TSGParam(const TSGParam &);
   TSGParam &operator=(const TSGParam &);
-  TSGParam(Ident p1);
+  TSGParam(Type *p1, Ident p2);
   ~TSGParam();
   virtual void accept(Visitor *v);
   virtual  TSGParam  *clone() const;
@@ -1493,6 +1524,19 @@ class TStruct : public Type
   void swap(TStruct &);
 };
 
+class TType : public Type
+{
+ public:
+
+  TType(const TType &);
+  TType &operator=(const TType &);
+  TType();
+  ~TType();
+  virtual void accept(Visitor *v);
+  virtual  TType  *clone() const;
+  void swap(TType &);
+};
+
 
 class StructMemberDeclaration : public Visitable {
 public:
@@ -1512,20 +1556,6 @@ class SMDMemberDeclaration : public StructMemberDeclaration
   virtual void accept(Visitor *v);
   virtual  SMDMemberDeclaration  *clone() const;
   void swap(SMDMemberDeclaration &);
-};
-
-class SMDAnonMemberDeclaration : public StructMemberDeclaration
-{
- public:
-  Type *type_;
-
-  SMDAnonMemberDeclaration(const SMDAnonMemberDeclaration &);
-  SMDAnonMemberDeclaration &operator=(const SMDAnonMemberDeclaration &);
-  SMDAnonMemberDeclaration(Type *p1);
-  ~SMDAnonMemberDeclaration();
-  virtual void accept(Visitor *v);
-  virtual  SMDAnonMemberDeclaration  *clone() const;
-  void swap(SMDAnonMemberDeclaration &);
 };
 
 
