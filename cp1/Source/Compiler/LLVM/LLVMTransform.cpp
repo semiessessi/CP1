@@ -19,6 +19,13 @@ TypeVisitor sxCurrentTypeScopeVisitor;
 std::string sszCurrentFunctionName = "";
 std::string sszCurrentNamespace = "_dot_";
 
+struct Local
+{
+    DetailedTypeInfo* pType;
+    std::string szLLVMIdent;
+};
+std::map< std::string, Local > gxLocals;
+
 extern std::map< std::string, std::string > gszStrings;
 
 std::string stringFromInt( int i )
@@ -100,6 +107,9 @@ void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnTy
         parameterTypes.push_back( dtv.pxTypeInfo );
     }
     
+    std::map< std::string, Local > oldLocals = gxLocals;
+    gxLocals.clear();
+    
     for( size_t i = 0; i < parameterTypes.size(); ++i )
     {
         if( parameterTypes[ i ] )
@@ -108,6 +118,7 @@ void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnTy
         }
         else
         {
+            parameterTypes[ i ] = tv.pxTypeInfo;
             out += typeReturn;
         }
         
@@ -115,6 +126,9 @@ void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnTy
 		pList->parameterdeclaration_->accept( &p );
 		out += " %_dot_";
 		out += p.szName;
+        std::string szLLVMIdent = std::string( "%_dot_" ) + p.szName;
+        gxLocals[ szLLVMIdent ].szLLVMIdent = szLLVMIdent;
+        gxLocals[ szLLVMIdent ].pType = parameterTypes[ i ];
         
         if( i < ( parameterTypes.size() - 1 ) )
         {
@@ -140,6 +154,8 @@ void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnTy
     --siTabLevel;
     
     out += "}\r\n";
+    
+    gxLocals = oldLocals;
 }
 
 void LLVMTransformVisitor::visitFunctionBody( ListStatement* statements )
@@ -167,7 +183,8 @@ void LLVMTransformVisitor::visitDTypeDecl(DTypeDecl *p)
 void LLVMTransformVisitor::visitDOperator(DOperator *p)
 {
 	OperatorInfo& info = OperatorFinder::FindOperator( p );
-    
+    std::map< std::string, Local > oldLocals = gxLocals;
+    gxLocals.clear();
     out += "define private ";
     out += info.szTypeReturn;
     gszCurrentlyDesiredType = info.szTypeReturn.c_str();
@@ -183,6 +200,7 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
         }
         else
         {
+            info.aszParameterTypes[ i ] = info.pTypeReturn;
             out += info.szTypeReturn;
         }
         
@@ -190,7 +208,9 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
 		pList->parameterdeclaration_->accept( &p );
 		out += " %_dot_";
 		out += p.szName;
-        
+        std::string szLLVMIdent = std::string( "%_dot_" ) + p.szName;
+        gxLocals[ szLLVMIdent ].szLLVMIdent = szLLVMIdent;
+        gxLocals[ szLLVMIdent ].pType = info.aszParameterTypes[ i ];
         if( i < ( info.aszParameterTypes.size() - 1 ) )
         {
             out += ", ";
@@ -205,6 +225,8 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
     --siTabLevel;
     
     out += "}\r\n";
+    
+    gxLocals = oldLocals;
 }
 
 void LLVMTransformVisitor::visitSExpression(SExpression *p)
@@ -529,9 +551,23 @@ void LLVMTransformVisitor::visitERValue(ERValue *p)
         }
         out += "%r";
         out += stringFromInt( siTempCounter );
-        out += " = bitcast i32 %";
-        out += v.readString;
-        out += " to i32\r\n";
+        std::string id = std::string( "%" ) + v.readString;
+        if( gxLocals.find( id ) != gxLocals.end() )
+        {
+            out += " = bitcast ";
+            out += gxLocals[ id ].pType->ShortLLVMName();
+            out += " ";
+            out += id;
+            out += " to ";
+            out += gxLocals[ id ].pType->ShortLLVMName();
+            out += "\r\n";
+        }
+        else
+        {
+            out += " = bitcast <unknown-type> ";
+            out += id;
+            out += " to <unknown-type>\r\n";
+        }
         //out += " = %";
         //out += v.readString[ 0 ];
         //out += "\r\n";
@@ -556,6 +592,25 @@ void LLVMTransformVisitor::visitEString( EString* p )
         out += it->second;
         out += ", i64 0, i64 0\r\n";
     }
+}
+
+void LLVMTransformVisitor::visitESimpleCall( ESimpleCall* p )
+{
+	RVVisitor rvv;
+	p->rvalue_->accept( &rvv );
+    
+    for( int i = 0; i < siTabLevel; ++i )
+	{
+		out += "\t";
+	}
+    
+    // SE - TODO: types
+    out += "%r";
+    out += stringFromInt( siTempCounter );
+    out += " = ";
+	out += "call i32 @";
+	out += rvv.readString;
+	out += "()\r\n";
 }
 
 void LLVMTransformVisitor::visitECall( ECall* p )
@@ -583,6 +638,9 @@ void LLVMTransformVisitor::visitECall( ECall* p )
 		out += "\t";
 	}
     
+    out += "%r";
+    out += stringFromInt( siTempCounter );
+    out += " = ";
 	out += "call i32 @";
 	out += rvv.readString;
 	out += "(";

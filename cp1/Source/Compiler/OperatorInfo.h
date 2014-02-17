@@ -13,7 +13,7 @@ struct OperatorInfo
     std::string szTypeOwner;
     std::string szTypeReturn;
     std::string szLLVMName;
-
+    DetailedTypeInfo* pTypeReturn;
     std::vector< DetailedTypeInfo* > aszParameterTypes;
 
     std::vector< std::string > aszInverses;

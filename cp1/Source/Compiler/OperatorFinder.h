@@ -43,6 +43,7 @@ public:
         rInfo.szTypeReturn = v.typeReturn;
         rInfo.szLLVMName = info.szLLVMName;
         rInfo.aszParameterTypes = v.parameterTypes;
+        rInfo.pTypeReturn = tv.pxTypeInfo;
         
         return rInfo;
     }
