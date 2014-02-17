@@ -104,7 +104,7 @@ public:
 		
 		mbNameParams = false;
 		int iNumParams = miParam;
-		szExtern += " ) nounwind";
+		szExtern += " ) nounwind alwaysinline";
 		szExtern += "\n{";
 		szExtern += "\n\t%e" + std::to_string( miUnique );
 		szExtern += " = call ";
