@@ -14,6 +14,12 @@ class OperatorFinder
 
 public:
 
+    // use the mangled form of the symbol, e.g. "a" for &, "pp" for ++, "mg" for -> etc.
+    static std::vector< OperatorInfo > FindOperators( std::string mangledSymbol )
+    {
+        return findOperatorInfoBySymbol( mangledSymbol );
+    }
+    
     static OperatorInfo& FindOperator( DOperator *p )
     {
         OperatorVisitor v;

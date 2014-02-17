@@ -35,6 +35,7 @@ struct OperatorInfo
 };
 
 OperatorInfo& findOperatorInfo( OperatorInfo& info );
+std::vector< OperatorInfo > findOperatorInfoBySymbol( std::string mangledSymbol );
 
 extern std::map< std::string, OperatorInfo > gxOperatorMap;
 
