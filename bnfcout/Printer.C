@@ -232,6 +232,26 @@ void PrintAbsyn::visitDTypeDecl(DTypeDecl* p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitDTypeConv(DTypeConv* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  _i_ = 0; p->type_1->accept(this);
+  if(p->listconversionspecifier_) {_i_ = 0; p->listconversionspecifier_->accept(this);}  render("convert");
+  render('(');
+  render("const");
+  _i_ = 0; p->type_2->accept(this);
+  visitIdent(p->ident_);
+  render(')');
+  render('{');
+  if(p->liststatement_) {_i_ = 0; p->liststatement_->accept(this);}  render('}');
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitDExtern(DExtern* p)
 {
   int oldi = _i_;
@@ -729,6 +749,44 @@ void PrintAbsyn::visitFSSelfInverse(FSSelfInverse* p)
   if (oldi > 0) render(_L_PAREN);
 
   render("selfinverse");
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitConversionSpecifier(ConversionSpecifier*p) {} //abstract class
+
+void PrintAbsyn::visitCSUp(CSUp* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render("up");
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitCSDown(CSDown* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render("down");
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitCSImplicit(CSImplicit* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render("implicit");
 
   if (oldi > 0) render(_R_PAREN);
 
@@ -1434,6 +1492,19 @@ void PrintAbsyn::visitEPostDec(EPostDec* p)
 
   _i_ = 0; p->rvalue_->accept(this);
   render("--");
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEAddress(EAddress* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render('&');
+  _i_ = 11; p->expression_->accept(this);
 
   if (oldi > 10) render(_R_PAREN);
 
@@ -4152,6 +4223,25 @@ void PrintAbsyn::visitListTypeSpecifier(ListTypeSpecifier *listtypespecifier)
   }
 }
 
+void PrintAbsyn::visitListConversionSpecifier(ListConversionSpecifier *listconversionspecifier)
+{
+  while(listconversionspecifier!= 0)
+  {
+    if (listconversionspecifier->listconversionspecifier_ == 0)
+    {
+      listconversionspecifier->conversionspecifier_->accept(this);
+      render("");
+      listconversionspecifier = 0;
+    }
+    else
+    {
+      listconversionspecifier->conversionspecifier_->accept(this);
+      render("");
+      listconversionspecifier = listconversionspecifier->listconversionspecifier_;
+    }
+  }
+}
+
 void PrintAbsyn::visitListFunctionSpecifier(ListFunctionSpecifier *listfunctionspecifier)
 {
   while(listfunctionspecifier!= 0)
@@ -4463,6 +4553,27 @@ void ShowAbsyn::visitDTypeDecl(DTypeDecl* p)
   bufAppend(' ');
   bufAppend(')');
 }
+void ShowAbsyn::visitDTypeConv(DTypeConv* p)
+{
+  bufAppend('(');
+  bufAppend("DTypeConv");
+  bufAppend(' ');
+  p->type_1->accept(this);
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listconversionspecifier_)  p->listconversionspecifier_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->type_2->accept(this);
+  bufAppend(' ');
+  visitIdent(p->ident_);
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->liststatement_)  p->liststatement_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
 void ShowAbsyn::visitDExtern(DExtern* p)
 {
   bufAppend('(');
@@ -4703,6 +4814,20 @@ void ShowAbsyn::visitFSInverse(FSInverse* p)
 void ShowAbsyn::visitFSSelfInverse(FSSelfInverse* p)
 {
   bufAppend("FSSelfInverse");
+}
+void ShowAbsyn::visitConversionSpecifier(ConversionSpecifier* p) {} //abstract class
+
+void ShowAbsyn::visitCSUp(CSUp* p)
+{
+  bufAppend("CSUp");
+}
+void ShowAbsyn::visitCSDown(CSDown* p)
+{
+  bufAppend("CSDown");
+}
+void ShowAbsyn::visitCSImplicit(CSImplicit* p)
+{
+  bufAppend("CSImplicit");
 }
 void ShowAbsyn::visitVariableSpecifier(VariableSpecifier* p) {} //abstract class
 
@@ -5248,6 +5373,16 @@ void ShowAbsyn::visitEPostDec(EPostDec* p)
   if (p->rvalue_)  p->rvalue_->accept(this);
   bufAppend(']');
   bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEAddress(EAddress* p)
+{
+  bufAppend('(');
+  bufAppend("EAddress");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->expression_)  p->expression_->accept(this);
+  bufAppend(']');
   bufAppend(')');
 }
 void ShowAbsyn::visitEIntrinAddB(EIntrinAddB* p)
@@ -7120,6 +7255,24 @@ void ShowAbsyn::visitListTypeSpecifier(ListTypeSpecifier *listtypespecifier)
     {
       listtypespecifier->typespecifier_->accept(this);
       listtypespecifier = 0;
+    }
+  }
+}
+
+void ShowAbsyn::visitListConversionSpecifier(ListConversionSpecifier *listconversionspecifier)
+{
+  while(listconversionspecifier!= 0)
+  {
+    if (listconversionspecifier->listconversionspecifier_)
+    {
+      listconversionspecifier->conversionspecifier_->accept(this);
+      bufAppend(", ");
+      listconversionspecifier = listconversionspecifier->listconversionspecifier_;
+    }
+    else
+    {
+      listconversionspecifier->conversionspecifier_->accept(this);
+      listconversionspecifier = 0;
     }
   }
 }

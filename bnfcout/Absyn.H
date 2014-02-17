@@ -25,6 +25,7 @@ class DFunction;
 class DOperator;
 class DOperatorInfo;
 class DTypeDecl;
+class DTypeConv;
 class DExtern;
 class DIVariable;
 class DVariable;
@@ -65,6 +66,9 @@ class FSCommutative;
 class FSAntiCommutative;
 class FSInverse;
 class FSSelfInverse;
+class CSUp;
+class CSDown;
+class CSImplicit;
 class VSConst;
 class TSAlign;
 class TSGeneric;
@@ -114,6 +118,7 @@ class ESimpleCall;
 class ECall;
 class EPostInc;
 class EPostDec;
+class EAddress;
 class EIntrinAddB;
 class EIntrinSubB;
 class EIntrinMulB;
@@ -281,6 +286,7 @@ class ListTLDeclaration;
 class ListDeclaration;
 class ListStatement;
 class ListTypeSpecifier;
+class ListConversionSpecifier;
 class ListFunctionSpecifier;
 class ListVariableSpecifier;
 class ListStructMemberDeclaration;
@@ -294,6 +300,7 @@ class Prototype;
 class OperatorName;
 class OperatorTrait;
 class FunctionSpecifier;
+class ConversionSpecifier;
 class VariableSpecifier;
 class TypeSpecifier;
 class GenericParam;
@@ -320,6 +327,7 @@ class Visitor
   virtual void visitDOperator(DOperator *p) = 0;
   virtual void visitDOperatorInfo(DOperatorInfo *p) = 0;
   virtual void visitDTypeDecl(DTypeDecl *p) = 0;
+  virtual void visitDTypeConv(DTypeConv *p) = 0;
   virtual void visitDExtern(DExtern *p) = 0;
   virtual void visitDIVariable(DIVariable *p) = 0;
   virtual void visitDVariable(DVariable *p) = 0;
@@ -360,6 +368,9 @@ class Visitor
   virtual void visitFSAntiCommutative(FSAntiCommutative *p) = 0;
   virtual void visitFSInverse(FSInverse *p) = 0;
   virtual void visitFSSelfInverse(FSSelfInverse *p) = 0;
+  virtual void visitCSUp(CSUp *p) = 0;
+  virtual void visitCSDown(CSDown *p) = 0;
+  virtual void visitCSImplicit(CSImplicit *p) = 0;
   virtual void visitVSConst(VSConst *p) = 0;
   virtual void visitTSAlign(TSAlign *p) = 0;
   virtual void visitTSGeneric(TSGeneric *p) = 0;
@@ -409,6 +420,7 @@ class Visitor
   virtual void visitECall(ECall *p) = 0;
   virtual void visitEPostInc(EPostInc *p) = 0;
   virtual void visitEPostDec(EPostDec *p) = 0;
+  virtual void visitEAddress(EAddress *p) = 0;
   virtual void visitEIntrinAddB(EIntrinAddB *p) = 0;
   virtual void visitEIntrinSubB(EIntrinSubB *p) = 0;
   virtual void visitEIntrinMulB(EIntrinMulB *p) = 0;
@@ -576,6 +588,7 @@ class Visitor
   virtual void visitListDeclaration(ListDeclaration *p) = 0;
   virtual void visitListStatement(ListStatement *p) = 0;
   virtual void visitListTypeSpecifier(ListTypeSpecifier *p) = 0;
+  virtual void visitListConversionSpecifier(ListConversionSpecifier *p) = 0;
   virtual void visitListFunctionSpecifier(ListFunctionSpecifier *p) = 0;
   virtual void visitListVariableSpecifier(ListVariableSpecifier *p) = 0;
   virtual void visitListStructMemberDeclaration(ListStructMemberDeclaration *p) = 0;
@@ -589,6 +602,7 @@ class Visitor
   virtual void visitOperatorName(OperatorName *p) = 0;
   virtual void visitOperatorTrait(OperatorTrait *p) = 0;
   virtual void visitFunctionSpecifier(FunctionSpecifier *p) = 0;
+  virtual void visitConversionSpecifier(ConversionSpecifier *p) = 0;
   virtual void visitVariableSpecifier(VariableSpecifier *p) = 0;
   virtual void visitTypeSpecifier(TypeSpecifier *p) = 0;
   virtual void visitGenericParam(GenericParam *p) = 0;
@@ -773,6 +787,23 @@ class DTypeDecl : public Declaration
   virtual void accept(Visitor *v);
   virtual  DTypeDecl  *clone() const;
   void swap(DTypeDecl &);
+};
+
+class DTypeConv : public Declaration
+{
+ public:
+  Type *type_1, *type_2;
+  ListConversionSpecifier *listconversionspecifier_;
+  Ident ident_;
+  ListStatement *liststatement_;
+
+  DTypeConv(const DTypeConv &);
+  DTypeConv &operator=(const DTypeConv &);
+  DTypeConv(Type *p1, ListConversionSpecifier *p2, Type *p3, Ident p4, ListStatement *p5);
+  ~DTypeConv();
+  virtual void accept(Visitor *v);
+  virtual  DTypeConv  *clone() const;
+  void swap(DTypeConv &);
 };
 
 class DExtern : public Declaration
@@ -1333,6 +1364,51 @@ class FSSelfInverse : public FunctionSpecifier
   virtual void accept(Visitor *v);
   virtual  FSSelfInverse  *clone() const;
   void swap(FSSelfInverse &);
+};
+
+
+class ConversionSpecifier : public Visitable {
+public:
+  virtual ConversionSpecifier *clone() const = 0;
+};
+
+class CSUp : public ConversionSpecifier
+{
+ public:
+
+  CSUp(const CSUp &);
+  CSUp &operator=(const CSUp &);
+  CSUp();
+  ~CSUp();
+  virtual void accept(Visitor *v);
+  virtual  CSUp  *clone() const;
+  void swap(CSUp &);
+};
+
+class CSDown : public ConversionSpecifier
+{
+ public:
+
+  CSDown(const CSDown &);
+  CSDown &operator=(const CSDown &);
+  CSDown();
+  ~CSDown();
+  virtual void accept(Visitor *v);
+  virtual  CSDown  *clone() const;
+  void swap(CSDown &);
+};
+
+class CSImplicit : public ConversionSpecifier
+{
+ public:
+
+  CSImplicit(const CSImplicit &);
+  CSImplicit &operator=(const CSImplicit &);
+  CSImplicit();
+  ~CSImplicit();
+  virtual void accept(Visitor *v);
+  virtual  CSImplicit  *clone() const;
+  void swap(CSImplicit &);
 };
 
 
@@ -2089,6 +2165,20 @@ class EPostDec : public Expression
   virtual void accept(Visitor *v);
   virtual  EPostDec  *clone() const;
   void swap(EPostDec &);
+};
+
+class EAddress : public Expression
+{
+ public:
+  Expression *expression_;
+
+  EAddress(const EAddress &);
+  EAddress &operator=(const EAddress &);
+  EAddress(Expression *p1);
+  ~EAddress();
+  virtual void accept(Visitor *v);
+  virtual  EAddress  *clone() const;
+  void swap(EAddress &);
 };
 
 class EIntrinAddB : public Expression
@@ -4452,6 +4542,23 @@ class ListTypeSpecifier : public Visitable
   virtual void accept(Visitor *v);
   virtual ListTypeSpecifier *clone() const;
   void swap(ListTypeSpecifier &);
+};
+class ListConversionSpecifier : public Visitable
+{
+ public:
+  ConversionSpecifier *conversionspecifier_;
+  ListConversionSpecifier *listconversionspecifier_;
+
+  ListConversionSpecifier(const ListConversionSpecifier &);
+  ListConversionSpecifier &operator=(const ListConversionSpecifier &);
+  ListConversionSpecifier(ConversionSpecifier *p1, ListConversionSpecifier *p2);
+  ListConversionSpecifier(ConversionSpecifier *p);
+  ~ListConversionSpecifier();
+  ListConversionSpecifier* reverse();
+  ListConversionSpecifier* reverse(ListConversionSpecifier *l);
+  virtual void accept(Visitor *v);
+  virtual ListConversionSpecifier *clone() const;
+  void swap(ListConversionSpecifier &);
 };
 class ListFunctionSpecifier : public Visitable
 {

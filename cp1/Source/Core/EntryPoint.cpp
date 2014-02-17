@@ -125,6 +125,7 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 
         std::string giantCompilationUnit = "";
         
+        verboseInfo( 1, "Parsing all input files...\n" );
         std::vector< Code* > apCode;
         apCode.resize( aszFilenames.size() );
 		for( size_t i = 0; i < aszFilenames.size(); ++i )
@@ -151,6 +152,7 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 		}
 
 		// find all imports and resolve
+        verboseInfo( 1, "Parsing all imported files...\n" );
 		for( size_t i = 0; i < apCode.size(); ++i )
 		{
 			ImportFinder f;
@@ -261,10 +263,7 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 				if( epf.getIdentifier() )
 				{
 					epFound = true;
-                    if( gxSwitches.infoVerbosity > 1 )
-                    {
-                        printf( "Found entrypoint \"%s\"\n", epf.getIdentifier() );
-                    }
+                    verboseInfo( 2, "Found entrypoint \"%s\"\n", epf.getIdentifier() );
                     break;
 				}
             }
@@ -279,10 +278,7 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 
 		// find things...
         
-		if( gxSwitches.infoVerbosity > 1 )
-        {
-			printf( "Looking for types...\n" );
-		}
+		verboseInfo( 2, "Finding types...\n" );
 		
         TypeFinder tf;
         for( size_t i = 0; i < apCode.size(); ++i )
@@ -293,6 +289,8 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
             }
         }
         
+        verboseInfo( 2, "Finding types in more detail...\n" );
+        
         DetailedTypeVisitor dtv;
         for( size_t i = 0; i < apCode.size(); ++i )
 		{
@@ -302,10 +300,7 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
             }
         }
         
-		if( gxSwitches.infoVerbosity > 1 )
-        {
-			printf( "Looking for constants...\n" );
-		}
+		verboseInfo( 2, "Finding constants...\n" );
 		
         ConstantFinder cf;
         for( size_t i = 0; i < apCode.size(); ++i )
@@ -316,10 +311,7 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
             }
         }
         
-		if( gxSwitches.infoVerbosity > 1 )
-        {
-			printf( "Looking for operators...\n" );
-		}
+		verboseInfo( 2, "Finding operators...\n" );
 		
         OperatorFinder of;
         for( size_t i = 0; i < apCode.size(); ++i )
@@ -330,10 +322,7 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
             }
         }
 
-		if( gxSwitches.infoVerbosity > 1 )
-        {
-			printf( "Looking for externs...\n" );
-		}
+		verboseInfo( 2, "Finding externs...\n" );
 		
 		ExternFinder ef;
 		for( size_t i = 0; i < apCode.size(); ++i )
@@ -344,10 +333,7 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 			}
 		}
 
-		if( gxSwitches.infoVerbosity > 0 )
-        {
-			printf( "Emitting LLVM...\n" );
-		}
+		verboseInfo( 1, "Emitting LLVM...\n" );
 		
         giantCompilationUnit += "; constant data\r\n";
         giantCompilationUnit += cf.emitLLVM();
@@ -413,10 +399,7 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 		params += " temp.ll";
 		system( params.c_str() );
 		
-		if( gxSwitches.infoVerbosity > 0 )
-		{
-			printf( "Linking with GCC...\n" );
-		}
+		verboseInfo( 1, "Linking with GCC...\n" );
 		
 		system( "gcc temp.o -O3 -oa.exe\n" );
 	}

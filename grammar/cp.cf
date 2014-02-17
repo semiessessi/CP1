@@ -15,6 +15,7 @@ DFunction.					Declaration				::= [FunctionSpecifier] Type Ident "(" [ParameterD
 DOperator.					Declaration				::= [FunctionSpecifier] Type OperatorName "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
 DOperatorInfo.				Declaration				::= OperatorTrait ";" ;
 DTypeDecl.					Declaration				::= [TypeSpecifier] "type" Type Ident ";" ;
+DTypeConv.                  Declaration             ::= Type [ConversionSpecifier] "convert" "(" "const" Type Ident ")" "{" [Statement] "}" ;
 DExtern.					Declaration				::= "extern" Prototype ;
 DIVariable.					Declaration				::= [VariableSpecifier] Type Ident "=" Expression ";" ;
 DVariable.					Declaration				::= [VariableSpecifier] Type Ident ";" ;
@@ -61,6 +62,10 @@ FSCommutative.				FunctionSpecifier		::= "commutative" ;
 FSAntiCommutative.			FunctionSpecifier		::= "anticommutative" ;
 FSInverse.					FunctionSpecifier		::= "inverse" OperatorName ;
 FSSelfInverse.				FunctionSpecifier		::= "selfinverse" ;
+
+CSUp.                       ConversionSpecifier     ::= "up" ;
+CSDown.                     ConversionSpecifier     ::= "down" ;
+CSImplicit.                 ConversionSpecifier     ::= "implicit" ;
 
 VSConst.					VariableSpecifier		::= "const" ;
 
@@ -128,6 +133,7 @@ ESimpleCall.				Expression10			::= RValue "(" ")" ;
 ECall.						Expression10			::= RValue "(" [Expression] ")" ;
 EPostInc.					Expression10	        ::= RValue "++" ;
 EPostDec.					Expression10	        ::= RValue "--" ;
+EAddress.					Expression10	        ::= "&" Expression11 ;
 
 {-
 
@@ -333,6 +339,7 @@ terminator TLDeclaration "" ;
 terminator Declaration "" ;
 terminator Statement "" ;
 terminator TypeSpecifier "" ;
+terminator ConversionSpecifier "" ;
 terminator FunctionSpecifier "" ;
 terminator VariableSpecifier "" ;
 terminator StructMemberDeclaration "" ;

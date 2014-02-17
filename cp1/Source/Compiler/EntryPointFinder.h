@@ -80,7 +80,7 @@ public:
         mpDefaultFunction = 0;
         mszCurrentNamespace = "_dot_";
     }
-	const char* getIdentifier() const { return szIdentifier.c_str(); }
+	const char* getIdentifier() const { return ( szIdentifier == "" ) ? 0 : szIdentifier.c_str(); }
     
     std::string emitLLVM()
     {

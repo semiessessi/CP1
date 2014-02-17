@@ -39,6 +39,7 @@ class PrintAbsyn : public Visitor
   void visitDOperator(DOperator *p);
   void visitDOperatorInfo(DOperatorInfo *p);
   void visitDTypeDecl(DTypeDecl *p);
+  void visitDTypeConv(DTypeConv *p);
   void visitDExtern(DExtern *p);
   void visitDIVariable(DIVariable *p);
   void visitDVariable(DVariable *p);
@@ -83,6 +84,10 @@ class PrintAbsyn : public Visitor
   void visitFSAntiCommutative(FSAntiCommutative *p);
   void visitFSInverse(FSInverse *p);
   void visitFSSelfInverse(FSSelfInverse *p);
+  void visitConversionSpecifier(ConversionSpecifier *p); /* abstract class */
+  void visitCSUp(CSUp *p);
+  void visitCSDown(CSDown *p);
+  void visitCSImplicit(CSImplicit *p);
   void visitVariableSpecifier(VariableSpecifier *p); /* abstract class */
   void visitVSConst(VSConst *p);
   void visitTypeSpecifier(TypeSpecifier *p); /* abstract class */
@@ -141,6 +146,7 @@ class PrintAbsyn : public Visitor
   void visitECall(ECall *p);
   void visitEPostInc(EPostInc *p);
   void visitEPostDec(EPostDec *p);
+  void visitEAddress(EAddress *p);
   void visitEIntrinAddB(EIntrinAddB *p);
   void visitEIntrinSubB(EIntrinSubB *p);
   void visitEIntrinMulB(EIntrinMulB *p);
@@ -308,6 +314,7 @@ class PrintAbsyn : public Visitor
   void visitListDeclaration(ListDeclaration* p);
   void visitListStatement(ListStatement* p);
   void visitListTypeSpecifier(ListTypeSpecifier* p);
+  void visitListConversionSpecifier(ListConversionSpecifier* p);
   void visitListFunctionSpecifier(ListFunctionSpecifier* p);
   void visitListVariableSpecifier(ListVariableSpecifier* p);
   void visitListStructMemberDeclaration(ListStructMemberDeclaration* p);
@@ -394,6 +401,7 @@ class ShowAbsyn : public Visitor
   void visitDOperator(DOperator *p);
   void visitDOperatorInfo(DOperatorInfo *p);
   void visitDTypeDecl(DTypeDecl *p);
+  void visitDTypeConv(DTypeConv *p);
   void visitDExtern(DExtern *p);
   void visitDIVariable(DIVariable *p);
   void visitDVariable(DVariable *p);
@@ -438,6 +446,10 @@ class ShowAbsyn : public Visitor
   void visitFSAntiCommutative(FSAntiCommutative *p);
   void visitFSInverse(FSInverse *p);
   void visitFSSelfInverse(FSSelfInverse *p);
+  void visitConversionSpecifier(ConversionSpecifier *p); /* abstract class */
+  void visitCSUp(CSUp *p);
+  void visitCSDown(CSDown *p);
+  void visitCSImplicit(CSImplicit *p);
   void visitVariableSpecifier(VariableSpecifier *p); /* abstract class */
   void visitVSConst(VSConst *p);
   void visitTypeSpecifier(TypeSpecifier *p); /* abstract class */
@@ -496,6 +508,7 @@ class ShowAbsyn : public Visitor
   void visitECall(ECall *p);
   void visitEPostInc(EPostInc *p);
   void visitEPostDec(EPostDec *p);
+  void visitEAddress(EAddress *p);
   void visitEIntrinAddB(EIntrinAddB *p);
   void visitEIntrinSubB(EIntrinSubB *p);
   void visitEIntrinMulB(EIntrinMulB *p);
@@ -663,6 +676,7 @@ class ShowAbsyn : public Visitor
   void visitListDeclaration(ListDeclaration* p);
   void visitListStatement(ListStatement* p);
   void visitListTypeSpecifier(ListTypeSpecifier* p);
+  void visitListConversionSpecifier(ListConversionSpecifier* p);
   void visitListFunctionSpecifier(ListFunctionSpecifier* p);
   void visitListVariableSpecifier(ListVariableSpecifier* p);
   void visitListStructMemberDeclaration(ListStructMemberDeclaration* p);

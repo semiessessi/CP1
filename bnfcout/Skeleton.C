@@ -90,6 +90,17 @@ void Skeleton::visitDTypeDecl(DTypeDecl* dtypedecl)
   visitIdent(dtypedecl->ident_);
 }
 
+void Skeleton::visitDTypeConv(DTypeConv* dtypeconv)
+{
+  /* Code For DTypeConv Goes Here */
+
+  dtypeconv->type_1->accept(this);
+  if (dtypeconv->listconversionspecifier_) {dtypeconv->listconversionspecifier_->accept(this);}
+  dtypeconv->type_2->accept(this);
+  visitIdent(dtypeconv->ident_);
+  if (dtypeconv->liststatement_) {dtypeconv->liststatement_->accept(this);}
+}
+
 void Skeleton::visitDExtern(DExtern* dextern)
 {
   /* Code For DExtern Goes Here */
@@ -351,6 +362,26 @@ void Skeleton::visitFSInverse(FSInverse* fsinverse)
 void Skeleton::visitFSSelfInverse(FSSelfInverse* fsselfinverse)
 {
   /* Code For FSSelfInverse Goes Here */
+
+}
+
+void Skeleton::visitConversionSpecifier(ConversionSpecifier* conversionspecifier) {} //abstract class
+
+void Skeleton::visitCSUp(CSUp* csup)
+{
+  /* Code For CSUp Goes Here */
+
+}
+
+void Skeleton::visitCSDown(CSDown* csdown)
+{
+  /* Code For CSDown Goes Here */
+
+}
+
+void Skeleton::visitCSImplicit(CSImplicit* csimplicit)
+{
+  /* Code For CSImplicit Goes Here */
 
 }
 
@@ -732,6 +763,13 @@ void Skeleton::visitEPostDec(EPostDec* epostdec)
   /* Code For EPostDec Goes Here */
 
   epostdec->rvalue_->accept(this);
+}
+
+void Skeleton::visitEAddress(EAddress* eaddress)
+{
+  /* Code For EAddress Goes Here */
+
+  eaddress->expression_->accept(this);
 }
 
 void Skeleton::visitEIntrinAddB(EIntrinAddB* eintrinaddb)
@@ -2060,6 +2098,16 @@ void Skeleton::visitListTypeSpecifier(ListTypeSpecifier* listtypespecifier)
     /* Code For ListTypeSpecifier Goes Here */
     listtypespecifier->typespecifier_->accept(this);
     listtypespecifier = listtypespecifier->listtypespecifier_;
+  }
+}
+
+void Skeleton::visitListConversionSpecifier(ListConversionSpecifier* listconversionspecifier)
+{
+  while(listconversionspecifier!= 0)
+  {
+    /* Code For ListConversionSpecifier Goes Here */
+    listconversionspecifier->conversionspecifier_->accept(this);
+    listconversionspecifier = listconversionspecifier->listconversionspecifier_;
   }
 }
 

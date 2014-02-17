@@ -12,6 +12,7 @@ class CompilerVisitor : public Visitor
   virtual void visitDFunction(DFunction *p) {}
   virtual void visitDDefaultFunction( DDefaultFunction *p ) {}
   virtual void visitDTypeDecl(DTypeDecl *p) {}
+  virtual void visitDTypeConv( DTypeConv *p ) {}
   virtual void visitDImport( DImport *p ) {}
   virtual void visitDExpose( DExpose *p ) {}
   virtual void visitDExtern( DExtern *p ) {}
@@ -62,6 +63,9 @@ class CompilerVisitor : public Visitor
   virtual void visitTSInteger( TSInteger* p ) {}
   virtual void visitTSReal( TSReal* p ) {}
   virtual void visitTSGParam( TSGParam* p ) {}
+  virtual void visitCSUp( CSUp *p ) {}
+  virtual void visitCSDown( CSDown *p ) {}
+  virtual void visitCSImplicit( CSImplicit *p ) {}
   virtual void visitVSConst(VSConst *p) {}
   virtual void visitTAddress(TAddress *p) {}
   virtual void visitTByte(TByte *p) {}
@@ -102,6 +106,7 @@ class CompilerVisitor : public Visitor
   virtual void visitELComp(ELComp *p) {}
   virtual void visitEIndex(EIndex *p) {}
   virtual void visitERValue(ERValue *p) {}
+  virtual void visitEAddress(EAddress *p) {}
   virtual void visitESimpleCall(ESimpleCall *p) {}
   virtual void visitECall(ECall *p) {}
   virtual void visitEPostInc(EPostInc *p) {}
@@ -281,6 +286,7 @@ class CompilerVisitor : public Visitor
   virtual void visitListFunctionSpecifier(ListFunctionSpecifier *p) {}
   virtual void visitListTypeSpecifier(ListTypeSpecifier *p) {}
   virtual void visitListVariableSpecifier(ListVariableSpecifier *p) {}
+  virtual void visitListConversionSpecifier(ListConversionSpecifier *p) {}
   virtual void visitListParameterDeclaration(ListParameterDeclaration *p) {}
   virtual void visitListExpression(ListExpression *p) {}
   virtual void visitListGenericParam(ListGenericParam *p) {}
@@ -295,6 +301,7 @@ class CompilerVisitor : public Visitor
   virtual void visitFunctionSpecifier(FunctionSpecifier *p) {}
   virtual void visitTypeSpecifier(TypeSpecifier *p) {}
   virtual void visitVariableSpecifier(VariableSpecifier *p) {}
+  virtual void visitConversionSpecifier(ConversionSpecifier *p) {}
   virtual void visitType(Type *p) {}
   virtual void visitStatement(Statement *p) {}
   virtual void visitParameterDeclaration(ParameterDeclaration *p) {}

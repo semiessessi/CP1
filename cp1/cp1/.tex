@@ -76,11 +76,12 @@ The reserved words used in C:\Users\Semi\Documents\cp1\cp1\cp1\ are the followin
 {\reserved{cmp\_lt\_4b}} &{\reserved{cmp\_lt\_8b}} &{\reserved{cmp\_lt\_b}} \\
 {\reserved{cmp\_ne\_2b}} &{\reserved{cmp\_ne\_4b}} &{\reserved{cmp\_ne\_8b}} \\
 {\reserved{cmp\_ne\_b}} &{\reserved{commutative}} &{\reserved{const}} \\
-{\reserved{continue}} &{\reserved{div\_2f}} &{\reserved{div\_4f}} \\
-{\reserved{div\_4f4}} &{\reserved{div\_8f}} &{\reserved{each}} \\
-{\reserved{else}} &{\reserved{entrypoint}} &{\reserved{expose}} \\
-{\reserved{extern}} &{\reserved{for}} &{\reserved{generic}} \\
-{\reserved{identity}} &{\reserved{if}} &{\reserved{import}} \\
+{\reserved{continue}} &{\reserved{convert}} &{\reserved{div\_2f}} \\
+{\reserved{div\_4f}} &{\reserved{div\_4f4}} &{\reserved{div\_8f}} \\
+{\reserved{down}} &{\reserved{each}} &{\reserved{else}} \\
+{\reserved{entrypoint}} &{\reserved{expose}} &{\reserved{extern}} \\
+{\reserved{for}} &{\reserved{generic}} &{\reserved{identity}} \\
+{\reserved{if}} &{\reserved{implicit}} &{\reserved{import}} \\
 {\reserved{in}} &{\reserved{inline}} &{\reserved{integer}} \\
 {\reserved{inverse}} &{\reserved{lshr\_2b}} &{\reserved{lshr\_4b}} \\
 {\reserved{lshr\_8b}} &{\reserved{lshr\_b}} &{\reserved{lshr\_b4}} \\
@@ -108,10 +109,11 @@ The reserved words used in C:\Users\Semi\Documents\cp1\cp1\cp1\ are the followin
 {\reserved{sub\_b8}} &{\reserved{type}} &{\reserved{udiv\_2b}} \\
 {\reserved{udiv\_4b}} &{\reserved{udiv\_8b}} &{\reserved{udiv\_b}} \\
 {\reserved{udiv\_b4}} &{\reserved{udiv\_b8}} &{\reserved{until}} \\
-{\reserved{urem\_2b}} &{\reserved{urem\_4b}} &{\reserved{urem\_8b}} \\
-{\reserved{urem\_b}} &{\reserved{urem\_b4}} &{\reserved{urem\_b8}} \\
-{\reserved{where}} &{\reserved{while}} &{\reserved{xor\_2b}} \\
-{\reserved{xor\_4b}} &{\reserved{xor\_8b}} &{\reserved{xor\_b}} \\
+{\reserved{up}} &{\reserved{urem\_2b}} &{\reserved{urem\_4b}} \\
+{\reserved{urem\_8b}} &{\reserved{urem\_b}} &{\reserved{urem\_b4}} \\
+{\reserved{urem\_b8}} &{\reserved{where}} &{\reserved{while}} \\
+{\reserved{xor\_2b}} &{\reserved{xor\_4b}} &{\reserved{xor\_8b}} \\
+{\reserved{xor\_b}} & & \\
 \end{tabular}\\
 
 The symbols used in C:\Users\Semi\Documents\cp1\cp1\cp1\ are the following: \\
@@ -161,6 +163,7 @@ All other symbols are terminals.\\
  & {\delimit}  &{\nonterminal{ListFunctionSpecifier}} {\nonterminal{Type}} {\nonterminal{OperatorName}} {\terminal{(}} {\nonterminal{ListParameterDeclaration}} {\terminal{)}} {\terminal{\{}} {\nonterminal{ListStatement}} {\terminal{\}}}  \\
  & {\delimit}  &{\nonterminal{OperatorTrait}} {\terminal{;}}  \\
  & {\delimit}  &{\nonterminal{ListTypeSpecifier}} {\terminal{type}} {\nonterminal{Type}} {\nonterminal{Ident}} {\terminal{;}}  \\
+ & {\delimit}  &{\nonterminal{Type}} {\nonterminal{ListConversionSpecifier}} {\terminal{convert}} {\terminal{(}} {\terminal{const}} {\nonterminal{Type}} {\nonterminal{Ident}} {\terminal{)}} {\terminal{\{}} {\nonterminal{ListStatement}} {\terminal{\}}}  \\
  & {\delimit}  &{\terminal{extern}} {\nonterminal{Prototype}}  \\
  & {\delimit}  &{\nonterminal{ListVariableSpecifier}} {\nonterminal{Type}} {\nonterminal{Ident}} {\terminal{{$=$}}} {\nonterminal{Expression}} {\terminal{;}}  \\
  & {\delimit}  &{\nonterminal{ListVariableSpecifier}} {\nonterminal{Type}} {\nonterminal{Ident}} {\terminal{;}}  \\
@@ -213,6 +216,12 @@ All other symbols are terminals.\\
  & {\delimit}  &{\terminal{anticommutative}}  \\
  & {\delimit}  &{\terminal{inverse}} {\nonterminal{OperatorName}}  \\
  & {\delimit}  &{\terminal{selfinverse}}  \\
+\end{tabular}\\
+
+\begin{tabular}{lll}
+{\nonterminal{ConversionSpecifier}} & {\arrow}  &{\terminal{up}}  \\
+ & {\delimit}  &{\terminal{down}}  \\
+ & {\delimit}  &{\terminal{implicit}}  \\
 \end{tabular}\\
 
 \begin{tabular}{lll}
@@ -293,6 +302,7 @@ All other symbols are terminals.\\
  & {\delimit}  &{\nonterminal{RValue}} {\terminal{(}} {\nonterminal{ListExpression}} {\terminal{)}}  \\
  & {\delimit}  &{\nonterminal{RValue}} {\terminal{{$+$}{$+$}}}  \\
  & {\delimit}  &{\nonterminal{RValue}} {\terminal{{$-$}{$-$}}}  \\
+ & {\delimit}  &{\terminal{\&}} {\nonterminal{Expression11}}  \\
  & {\delimit}  &{\terminal{add\_b}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\
  & {\delimit}  &{\terminal{sub\_b}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\
  & {\delimit}  &{\terminal{mul\_b}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\
@@ -517,6 +527,11 @@ All other symbols are terminals.\\
 \begin{tabular}{lll}
 {\nonterminal{ListTypeSpecifier}} & {\arrow}  &{\emptyP} \\
  & {\delimit}  &{\nonterminal{TypeSpecifier}} {\nonterminal{ListTypeSpecifier}}  \\
+\end{tabular}\\
+
+\begin{tabular}{lll}
+{\nonterminal{ListConversionSpecifier}} & {\arrow}  &{\emptyP} \\
+ & {\delimit}  &{\nonterminal{ConversionSpecifier}} {\nonterminal{ListConversionSpecifier}}  \\
 \end{tabular}\\
 
 \begin{tabular}{lll}

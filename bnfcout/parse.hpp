@@ -253,9 +253,13 @@
      _SYMB_211 = 470,
      _SYMB_212 = 471,
      _SYMB_213 = 472,
-     _INTEGER_ = 473,
-     _DOUBLE_ = 474,
-     _IDENT_ = 475
+     _SYMB_214 = 473,
+     _SYMB_215 = 474,
+     _SYMB_216 = 475,
+     _SYMB_217 = 476,
+     _INTEGER_ = 477,
+     _DOUBLE_ = 478,
+     _IDENT_ = 479
    };
 #endif
 
@@ -265,7 +269,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2638 of glr.c  */
-#line 522 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+#line 563 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
 
   int int_;
   char char_;
@@ -278,6 +282,7 @@ typedef union YYSTYPE
   OperatorName* operatorname_;
   OperatorTrait* operatortrait_;
   FunctionSpecifier* functionspecifier_;
+  ConversionSpecifier* conversionspecifier_;
   VariableSpecifier* variablespecifier_;
   TypeSpecifier* typespecifier_;
   GenericParam* genericparam_;
@@ -291,6 +296,7 @@ typedef union YYSTYPE
   ListDeclaration* listdeclaration_;
   ListStatement* liststatement_;
   ListTypeSpecifier* listtypespecifier_;
+  ListConversionSpecifier* listconversionspecifier_;
   ListFunctionSpecifier* listfunctionspecifier_;
   ListVariableSpecifier* listvariablespecifier_;
   ListStructMemberDeclaration* liststructmemberdeclaration_;
@@ -302,7 +308,7 @@ typedef union YYSTYPE
 
 
 /* Line 2638 of glr.c  */
-#line 306 "parse.hpp"
+#line 312 "parse.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 #endif

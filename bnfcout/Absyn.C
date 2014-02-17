@@ -230,6 +230,36 @@ DTypeDecl *DTypeDecl::clone() const {
   return new DTypeDecl(*this);
 }
 
+/********************   DTypeConv    ********************/
+DTypeConv::DTypeConv(Type *p1, ListConversionSpecifier *p2, Type *p3, Ident p4, ListStatement *p5) { type_1 = p1; listconversionspecifier_ = p2; type_2 = p3; ident_ = p4; liststatement_ = p5; }
+DTypeConv::DTypeConv(const DTypeConv & other) {   type_1 = other.type_1->clone();
+  listconversionspecifier_ = other.listconversionspecifier_->clone();
+  type_2 = other.type_2->clone();
+  ident_ = other.ident_;
+  liststatement_ = other.liststatement_->clone();
+
+}
+DTypeConv &DTypeConv::operator=(const DTypeConv & other) {
+  DTypeConv tmp(other);
+  swap(tmp);
+  return *this;
+}
+void DTypeConv::swap(DTypeConv & other) {
+  std::swap(type_1, other.type_1);
+  std::swap(listconversionspecifier_, other.listconversionspecifier_);
+  std::swap(type_2, other.type_2);
+  std::swap(ident_, other.ident_);
+  std::swap(liststatement_, other.liststatement_);
+
+}
+
+DTypeConv::~DTypeConv() { delete(type_1); delete(listconversionspecifier_); delete(type_2); delete(liststatement_); }
+
+void DTypeConv::accept(Visitor *v) { v->visitDTypeConv(this); }
+DTypeConv *DTypeConv::clone() const {
+  return new DTypeConv(*this);
+}
+
 /********************   DExtern    ********************/
 DExtern::DExtern(Prototype *p1) { prototype_ = p1; }
 DExtern::DExtern(const DExtern & other) {   prototype_ = other.prototype_->clone();
@@ -1060,6 +1090,66 @@ FSSelfInverse::~FSSelfInverse() { }
 void FSSelfInverse::accept(Visitor *v) { v->visitFSSelfInverse(this); }
 FSSelfInverse *FSSelfInverse::clone() const {
   return new FSSelfInverse(*this);
+}
+
+/********************   CSUp    ********************/
+CSUp::CSUp() { }
+CSUp::CSUp(const CSUp & other) { 
+}
+CSUp &CSUp::operator=(const CSUp & other) {
+  CSUp tmp(other);
+  swap(tmp);
+  return *this;
+}
+void CSUp::swap(CSUp & other) {
+
+}
+
+CSUp::~CSUp() { }
+
+void CSUp::accept(Visitor *v) { v->visitCSUp(this); }
+CSUp *CSUp::clone() const {
+  return new CSUp(*this);
+}
+
+/********************   CSDown    ********************/
+CSDown::CSDown() { }
+CSDown::CSDown(const CSDown & other) { 
+}
+CSDown &CSDown::operator=(const CSDown & other) {
+  CSDown tmp(other);
+  swap(tmp);
+  return *this;
+}
+void CSDown::swap(CSDown & other) {
+
+}
+
+CSDown::~CSDown() { }
+
+void CSDown::accept(Visitor *v) { v->visitCSDown(this); }
+CSDown *CSDown::clone() const {
+  return new CSDown(*this);
+}
+
+/********************   CSImplicit    ********************/
+CSImplicit::CSImplicit() { }
+CSImplicit::CSImplicit(const CSImplicit & other) { 
+}
+CSImplicit &CSImplicit::operator=(const CSImplicit & other) {
+  CSImplicit tmp(other);
+  swap(tmp);
+  return *this;
+}
+void CSImplicit::swap(CSImplicit & other) {
+
+}
+
+CSImplicit::~CSImplicit() { }
+
+void CSImplicit::accept(Visitor *v) { v->visitCSImplicit(this); }
+CSImplicit *CSImplicit::clone() const {
+  return new CSImplicit(*this);
 }
 
 /********************   VSConst    ********************/
@@ -2176,6 +2266,28 @@ EPostDec::~EPostDec() { delete(rvalue_); }
 void EPostDec::accept(Visitor *v) { v->visitEPostDec(this); }
 EPostDec *EPostDec::clone() const {
   return new EPostDec(*this);
+}
+
+/********************   EAddress    ********************/
+EAddress::EAddress(Expression *p1) { expression_ = p1; }
+EAddress::EAddress(const EAddress & other) {   expression_ = other.expression_->clone();
+
+}
+EAddress &EAddress::operator=(const EAddress & other) {
+  EAddress tmp(other);
+  swap(tmp);
+  return *this;
+}
+void EAddress::swap(EAddress & other) {
+  std::swap(expression_, other.expression_);
+
+}
+
+EAddress::~EAddress() { delete(expression_); }
+
+void EAddress::accept(Visitor *v) { v->visitEAddress(this); }
+EAddress *EAddress::clone() const {
+  return new EAddress(*this);
 }
 
 /********************   EIntrinAddB    ********************/
@@ -6278,6 +6390,61 @@ ListTypeSpecifier* ListTypeSpecifier::reverse(ListTypeSpecifier* prev)
 void ListTypeSpecifier::accept(Visitor *v) { v->visitListTypeSpecifier(this); }
 ListTypeSpecifier *ListTypeSpecifier::clone() const {
   return new ListTypeSpecifier(*this);
+}
+
+/********************   ListConversionSpecifier    ********************/
+ListConversionSpecifier::ListConversionSpecifier(ConversionSpecifier *p1, ListConversionSpecifier *p2) { conversionspecifier_ = p1; listconversionspecifier_ = p2; }
+ListConversionSpecifier::ListConversionSpecifier(const ListConversionSpecifier & other) {   conversionspecifier_ = other.conversionspecifier_->clone();
+  listconversionspecifier_ = other.listconversionspecifier_->clone();
+
+}
+ListConversionSpecifier &ListConversionSpecifier::operator=(const ListConversionSpecifier & other) {
+  ListConversionSpecifier tmp(other);
+  swap(tmp);
+  return *this;
+}
+void ListConversionSpecifier::swap(ListConversionSpecifier & other) {
+  std::swap(conversionspecifier_, other.conversionspecifier_);
+  std::swap(listconversionspecifier_, other.listconversionspecifier_);
+
+}
+
+ListConversionSpecifier::~ListConversionSpecifier() { delete(conversionspecifier_); delete(listconversionspecifier_); }
+ListConversionSpecifier::ListConversionSpecifier(ConversionSpecifier *p)
+{
+  conversionspecifier_ = p;
+  listconversionspecifier_= 0;
+}
+ListConversionSpecifier* ListConversionSpecifier::reverse()
+{
+  if (listconversionspecifier_ == 0) return this;
+  else
+  {
+    ListConversionSpecifier *tmp = listconversionspecifier_->reverse(this);
+    listconversionspecifier_ = 0;
+    return tmp;
+  }
+}
+
+ListConversionSpecifier* ListConversionSpecifier::reverse(ListConversionSpecifier* prev)
+{
+  if (listconversionspecifier_ == 0)
+  {
+    listconversionspecifier_ = prev;
+    return this;
+  }
+  else
+  {
+    ListConversionSpecifier *tmp = listconversionspecifier_->reverse(this);
+    listconversionspecifier_ = prev;
+    return tmp;
+  }
+}
+
+
+void ListConversionSpecifier::accept(Visitor *v) { v->visitListConversionSpecifier(this); }
+ListConversionSpecifier *ListConversionSpecifier::clone() const {
+  return new ListConversionSpecifier(*this);
 }
 
 /********************   ListFunctionSpecifier    ********************/
