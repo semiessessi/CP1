@@ -34,7 +34,7 @@ public:
 	
 	virtual void visitDExtern( DExtern *p )
 	{
-		maxFoundExterns.push_back( "declare " );
+		maxFoundExterns.push_back( "declare ccc " );
 		mpCurrentExtern = &( maxFoundExterns.back() );
 
 		p->prototype_->accept( this );
@@ -43,13 +43,6 @@ public:
 	virtual void visitPFunction( PFunction* p )
     {
 		std::string& szExtern = *mpCurrentExtern;
-
-		// add the return type with some assumptions
-		// SE: for now assume that everyone returns a i32...
-		// TODO: use type visitor etc...
-		//TypeVisitor tv;
-		//p->type_->accept( &tv );
-		//szExtern += tv.createLLVMTypename();
 
 		DetailedTypeVisitor v;
 		p->type_->accept( &v );
@@ -141,15 +134,6 @@ public:
 		++miUnique;
 	}
 
-	//virtual void visitPDefaultFunction( PDefaultFunction* p )
-	//{
-	//	std::string& szExtern = *mpCurrentExtern;
-	//	szExtern += "void @";
-	//	szExtern += p->ident_;
-
-	//	p->listparameterdeclaration_->accept( this );
-	//}
-
 	virtual void visitPDTypedParameter( PDTypedParameter* p )
 	{
         DetailedTypeVisitor v;
@@ -167,18 +151,6 @@ public:
         }
 	}
 
-	// virtual void visitTCustom( TCustom* p )
-	// {
-		// std::string& szExtern = *mpCurrentExtern;
-		// szExtern += hackyTypeConverter( p->ident_ );
-		// if( mbNameParams )
-		// {
-			// szExtern += " %a" + std::to_string( miParam );
-			// ++miParam;
-		// }
-		// szExtern += ",";
-	// }
-
 	std::string emitLLVM()
 	{
 		std::string szReturnValue = "";
@@ -189,29 +161,6 @@ public:
 		}
 
 		return szReturnValue;
-	}
-
-	const char* hackyTypeConverter( const char* const szIdent )
-	{
-		// for now assume we know all about pointer and i32 with hacks...
-		if( std::string( szIdent ) == "pointer" )
-		{
-			return "i8*";
-		}
-        else if( std::string( szIdent ) == "address" )
-		{
-			return "i8*";
-		}
-		else if( std::string( szIdent ) == "int32" )
-		{
-			return "i32";
-		}
-		else if( std::string( szIdent ) == "byte" )
-		{
-			return "i8";
-		}
-
-		return "<unknown-type>";
 	}
 
 	bool mbNameParams;
