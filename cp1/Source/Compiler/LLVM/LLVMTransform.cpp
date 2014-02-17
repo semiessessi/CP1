@@ -60,80 +60,86 @@ void LLVMTransformVisitor::visitDNamespace(DNamespace *p)
 
 void LLVMTransformVisitor::visitDDefaultFunction( DDefaultFunction *p )
 {
-	visitFunction( "void", p->ident_, p->listparameterdeclaration_, p->liststatement_ );
+    visitFunction( sszCurrentNamespace + p->ident_, 0, p->listparameterdeclaration_, p->liststatement_ );
 }
 
 void LLVMTransformVisitor::visitDFunction(DFunction *p)
-{
-    DetailedTypeVisitor v;
-    p->type_->accept( &v );
-    std::string typeName = "<implement this!>";
-    if( v.pxTypeInfo )
-    {
-        typeName = v.pxTypeInfo->ShortLLVMName();
-    }
-    
-	visitFunction( typeName.c_str(), p->ident_, p->listparameterdeclaration_, p->liststatement_ );
+{    
+	visitFunction( sszCurrentNamespace + p->ident_, p->type_, p->listparameterdeclaration_, p->liststatement_ );
 }
 
-void LLVMTransformVisitor::visitFunction( const char* const llvmReturnTypeName, const char* const functionIdentifier, ListParameterDeclaration* parameters, ListStatement* statements )
+void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnType, ListParameterDeclaration* parameters, ListStatement* statements )
 {
-	verboseInfo( 2, "Current function: %s ", functionIdentifier );
-	int iParameterCount = 0;
-	ListParameterDeclaration* pList = parameters;
-	while( pList )
-	{
-		++iParameterCount;
-		pList = pList->listparameterdeclaration_;
-	}
+    DetailedTypeVisitor tv;
+    if( returnType )
+    {
+        returnType->accept( &tv );
+    }
+    
+    std::string typeReturn = returnType ? "i8" : "void";
+    if( tv.pxTypeInfo )
+    {
+        typeReturn = tv.pxTypeInfo->ShortLLVMName();
+    }
+    out += "define private ";
+    out += typeReturn;
+    gszCurrentlyDesiredType = typeReturn.c_str();
+    out += " @";
+    out += szLLVMName;
+    out += "( ";
+    ListParameterDeclaration* pList = parameters;
 
-	verboseInfo( 2, " - has %d parameters\n", iParameterCount );
-	out += "\r\n; function ";
-	out += functionIdentifier;
-	out += "\r\n";
-	out += "define ";
-	std::string typeName = llvmReturnTypeName;
-	gszCurrentlyDesiredType = typeName.c_str();
-	out += typeName;
-	out += " @";
-	sszCurrentFunctionName = functionIdentifier;
-	out += sszCurrentFunctionName;
-	out += "( ";
-
-	pList = parameters;
-	while( pList )
-	{
-		ParameterVisitor p;
+    std::vector< DetailedTypeInfo* > parameterTypes;
+    ListParameterDeclaration* lp = pList;
+    while( lp && lp->parameterdeclaration_ )
+    {
+        DetailedTypeVisitor dtv;
+        lp->parameterdeclaration_->accept( &dtv );
+        lp = lp->listparameterdeclaration_;
+        
+        parameterTypes.push_back( dtv.pxTypeInfo );
+    }
+    
+    for( size_t i = 0; i < parameterTypes.size(); ++i )
+    {
+        if( parameterTypes[ i ] )
+        {
+            out += parameterTypes[ i ]->ShortLLVMName();
+        }
+        else
+        {
+            out += typeReturn;
+        }
+        
+        ParameterVisitor p;
 		pList->parameterdeclaration_->accept( &p );
-		/*
-			SE - TODO: types!!!
-		*/
-		out += typeName;
 		out += " %_dot_";
 		out += p.szName;
-		pList = pList->listparameterdeclaration_;
-		if( pList )
-		{
-			out += ", ";
-		}
-	}
-
-	out += " ) nounwind\r\n{\r\n";
-	++siTabLevel;
-	// parse code...
-	visitFunctionBody( statements );
-
-	if( std::string( llvmReturnTypeName ) == "void" )
-	{
-		for( int i = 0; i < siTabLevel; ++i )
-		{
-			out += "\t";
-		}
-		out += "ret void\r\n";
-	}
-
-	out += "}\r\n";
-	--siTabLevel;
+        
+        if( i < ( parameterTypes.size() - 1 ) )
+        {
+            out += ", ";
+        }
+        
+        pList = pList->listparameterdeclaration_;
+    }
+    out += " ) nounwind\r\n{\r\n";
+    
+    ++siTabLevel;
+    visitFunctionBody( statements );
+    
+    if( returnType == 0 )
+    {
+        for( int i = 0; i < siTabLevel; ++i )
+        {
+            out += "\t";
+        }
+        out += "ret void\r\n";
+    }
+    
+    --siTabLevel;
+    
+    out += "}\r\n";
 }
 
 void LLVMTransformVisitor::visitFunctionBody( ListStatement* statements )
@@ -162,7 +168,7 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
 {
 	OperatorInfo& info = OperatorFinder::FindOperator( p );
     
-    out += "define private fastcc ";
+    out += "define private ";
     out += info.szTypeReturn;
     gszCurrentlyDesiredType = info.szTypeReturn.c_str();
     out += " @";

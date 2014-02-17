@@ -251,11 +251,11 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 		
 		// find entry point
 		bool epFound = false;
+        EntryPointFinder epf;
         for( size_t i = 0; i < apCode.size(); ++i )
 		{
         	if( apCode[ i ] )
 			{
-				EntryPointFinder epf;
 				epf.start();
 				apCode[ i ]->accept( &epf );
 				if( epf.getIdentifier() )
@@ -361,6 +361,10 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
         //giantCompilationUnit += "; operators\r\n";
         //giantCompilationUnit += of.emitLLVM();
         //giantCompilationUnit += "\r\n";
+        
+        giantCompilationUnit += "; entrypoint stub\r\n";
+        giantCompilationUnit += epf.emitLLVM();
+        giantCompilationUnit += "\r\n";
 
 		giantCompilationUnit += "; externs\r\n";
 		giantCompilationUnit += ef.emitLLVM();

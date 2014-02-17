@@ -16,7 +16,7 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   virtual void visitDDefaultFunction(DDefaultFunction *p);
   virtual void visitDFunction(DFunction *p);
 
-  void visitFunction( const char* const llvmReturnTypeName, const char* const functionIdentifier, ListParameterDeclaration* parameters, ListStatement* statements );
+  void visitFunction( std::string szLLVMName, Type* returnType, ListParameterDeclaration* parameters, ListStatement* statements );
     
   void visitFunctionBody( ListStatement* statements );
     
