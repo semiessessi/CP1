@@ -171,6 +171,51 @@ public:
 class DetailedTypeInferer
 : public DescendingCompilerVisitor
 {
+
+private:
+
+    std::string mszCurrentNamespace;
+    
+public:
+
+    DetailedTypeInferer() : DescendingCompilerVisitor()
+    {
+        pxTypeInfo = 0;
+        mszCurrentNamespace = "_dot_";
+    }
+    
+    DetailedTypeInfo* pxTypeInfo;
+    
+    virtual void visitDNamespace( DNamespace *p )
+    {
+        mszCurrentNamespace += p->ident_;
+        mszCurrentNamespace += "_dot_";
+
+        DescendingCompilerVisitor::visitDNamespace( p );
+
+        mszCurrentNamespace.resize( mszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_ ) );
+    }
+    
+    virtual void visitEString( EString* p )
+    {
+        pxTypeInfo = DetailedTypeInfo::Find( "address" );
+    }
+    
+    virtual void visitEChar( EChar* p )
+    {
+        pxTypeInfo = DetailedTypeInfo::Find( "byte" );
+    }
+    
+    virtual void visitEDouble( EDouble* p )
+    {
+        //pxTypeInfo = DetailedTypeInfo::Find( "byte[ 8 ]" ); // SE - TODO: ...
+    }
+    
+    virtual void visitEInteger( EInteger* p )
+    {
+        pxTypeInfo = DetailedTypeInfo::Find( "byte" );
+    }
+
 }; 
 
 #endif
