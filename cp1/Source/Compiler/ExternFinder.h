@@ -51,7 +51,14 @@ public:
 		//p->type_->accept( &tv );
 		//szExtern += tv.createLLVMTypename();
 
-		p->type_->accept( this );
+		DetailedTypeVisitor v;
+		p->type_->accept( &v );
+        std::string szLLVMReturnType = "i32"; // SE - HACK: !!!
+        if( v.pxTypeInfo )
+        {
+            szLLVMReturnType = v.pxTypeInfo->ShortLLVMName();
+            szExtern += szLLVMReturnType;
+        }
 
 		if( szExtern.back() == ',' )
 		{
@@ -75,9 +82,9 @@ public:
 		}
 
 		szExtern += " )";
-		szExtern += "\ndefine private fastcc ";
+		szExtern += "\ndefine private ";
 		
-		p->type_->accept( this );
+		szExtern += szLLVMReturnType;
 
 		if( szExtern.back() == ',' )
 		{
@@ -108,12 +115,7 @@ public:
 		szExtern += "\n{";
 		szExtern += "\n\t%e" + std::to_string( miUnique );
 		szExtern += " = call ";
-		p->type_->accept( this );
-		if( szExtern.back() == ',' )
-		{
-			szExtern.pop_back();
-		}
-		
+		szExtern += szLLVMReturnType;
 		szExtern += " @";
 		szExtern += p->ident_;
 		szExtern += "( ";
@@ -132,11 +134,7 @@ public:
 		mbNameParams = false;
 		szExtern += " )";
 		szExtern += "\n\tret ";
-		p->type_->accept( this );
-		if( szExtern.back() == ',' )
-		{
-			szExtern.pop_back();
-		}
+		szExtern += szLLVMReturnType;
 		
 		szExtern += " %e" + std::to_string( miUnique );
 		szExtern += "\n}\n";
@@ -154,20 +152,32 @@ public:
 
 	virtual void visitPDTypedParameter( PDTypedParameter* p )
 	{
-		p->type_->accept( this );
+        DetailedTypeVisitor v;
+		p->type_->accept( &v );
+        if( v.pxTypeInfo )
+        {
+            std::string& szExtern = *mpCurrentExtern;
+            szExtern += v.pxTypeInfo->ShortLLVMName();
+            if( mbNameParams )
+            {
+                szExtern += " %a" + std::to_string( miParam );
+                ++miParam;
+            }
+            szExtern += ",";
+        }
 	}
 
-	virtual void visitTCustom( TCustom* p )
-	{
-		std::string& szExtern = *mpCurrentExtern;
-		szExtern += hackyTypeConverter( p->ident_ );
-		if( mbNameParams )
-		{
-			szExtern += " %a" + std::to_string( miParam );
-			++miParam;
-		}
-		szExtern += ",";
-	}
+	// virtual void visitTCustom( TCustom* p )
+	// {
+		// std::string& szExtern = *mpCurrentExtern;
+		// szExtern += hackyTypeConverter( p->ident_ );
+		// if( mbNameParams )
+		// {
+			// szExtern += " %a" + std::to_string( miParam );
+			// ++miParam;
+		// }
+		// szExtern += ",";
+	// }
 
 	std::string emitLLVM()
 	{

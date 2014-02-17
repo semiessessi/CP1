@@ -3,7 +3,7 @@ import int32;
 namespace cstd
 {
 
-extern int32 puts( pointer szString );
+extern int32 puts( address szString );
 extern int32 getchar();
 
 }
