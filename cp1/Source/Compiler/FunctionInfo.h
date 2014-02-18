@@ -11,7 +11,6 @@ struct FunctionInfo
 {
     std::string szCPName;
     std::string szTypeOwner;
-    std::string szTypeReturn;
     std::string szLLVMName;
     DetailedTypeInfo* pTypeReturn;
     std::vector< DetailedTypeInfo* > aszParameterTypes;
@@ -22,12 +21,13 @@ struct FunctionInfo
     : szCPName( "<unnamed-operator>" )
     , szLLVMName( "ERROR!" )
     , szTypeOwner( "<unnamed-type>" )
+    , pTypeReturn( 0 )
     , bPure( false )
     {
     }
 };
 
-FunctionInfo& FindFunction( std::string szIdent );
+FunctionInfo& FindFunctionInfo( std::string szIdent );
 
 extern std::map< std::string, FunctionInfo > gxFunctionMap;
 

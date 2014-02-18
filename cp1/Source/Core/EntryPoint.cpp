@@ -11,6 +11,7 @@
 #include "../Compiler/LLVM/LLVMTransform.h"
 #include "../Compiler/ConstantFinder.h"
 #include "../Compiler/ExternFinder.h"
+#include "../Compiler/FunctionFinder.h"
 #include "../Compiler/OperatorFinder.h"
 #include "../Compiler/TypeFinder.h"
 #include "../Compiler/ImportFinder.h"
@@ -322,6 +323,17 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
             }
         }
 
+        verboseInfo( 2, "Finding functions...\n" );
+		
+        FunctionFinder ff;
+        for( size_t i = 0; i < apCode.size(); ++i )
+		{
+        	if( apCode[ i ] )
+			{
+				apCode[ i ]->accept( &ff );
+            }
+        }
+        
 		verboseInfo( 2, "Finding externs...\n" );
 		
 		ExternFinder ef;

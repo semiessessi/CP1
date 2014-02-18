@@ -1,5 +1,6 @@
 #include "LLVMTransform.h"
 
+#include "../FunctionFinder.h"
 #include "../ONVisitor.h"
 #include "../OperatorFinder.h"
 #include "../OperatorNameMangle.h"
@@ -604,11 +605,17 @@ void LLVMTransformVisitor::visitESimpleCall( ESimpleCall* p )
 		out += "\t";
 	}
     
-    // SE - TODO: types
-    out += "%r";
-    out += stringFromInt( siTempCounter );
-    out += " = ";
-	out += "call i32 @";
+    FunctionInfo& finfo = FindFunctionInfo( rvv.readString );
+    
+    if( finfo.pTypeReturn )
+    {
+        out += "%r";
+        out += stringFromInt( siTempCounter );
+        out += " = ";
+    }
+	out += "call ";
+    out += finfo.pTypeReturn ? finfo.pTypeReturn->ShortLLVMName() : "void";
+    out += " @";
 	out += rvv.readString;
 	out += "()\r\n";
 }
@@ -638,10 +645,17 @@ void LLVMTransformVisitor::visitECall( ECall* p )
 		out += "\t";
 	}
     
-    out += "%r";
-    out += stringFromInt( siTempCounter );
-    out += " = ";
-	out += "call i32 @";
+    FunctionInfo& finfo = FindFunctionInfo( rvv.readString );
+    
+    if( finfo.pTypeReturn )
+    {
+        out += "%r";
+        out += stringFromInt( siTempCounter );
+        out += " = ";
+    }
+	out += "call ";
+    out += finfo.pTypeReturn ? finfo.pTypeReturn->ShortLLVMName() : "void";
+    out += " @";
 	out += rvv.readString;
 	out += "(";
 	
