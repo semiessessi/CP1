@@ -16,15 +16,12 @@ struct FunctionInfo
     DetailedTypeInfo* pTypeReturn;
     std::vector< DetailedTypeInfo* > aszParameterTypes;
 
-    std::vector< std::string > aszInverses;
-
     bool bPure;
 
     FunctionInfo()
     : szCPName( "<unnamed-operator>" )
     , szLLVMName( "ERROR!" )
     , szTypeOwner( "<unnamed-type>" )
-    , aszInverses()
     , bPure( false )
     {
     }

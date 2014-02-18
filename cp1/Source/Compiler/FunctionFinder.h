@@ -12,8 +12,24 @@ class FunctionFinder
 {
 
 public:
+    
+    static FunctionInfo& FindFunction( ListFunctionSpecifier* lfs, Type* returnType, std::string szIdent, ListParameterDeclaration* lpd )
+    {
+        DetailedTypeVisitor tv;
+        if( returnType )
+        {
+            returnType->accept( &tv );
+        }
+        
+        std::string szMangledName = szIdent;
+        FunctionInfo& rInfo = FindFunctionInfo( szMangledName );
+        rInfo.szCPName = szIdent;
+        rInfo.szLLVMName = szMangledName;
+        rInfo.pTypeReturn = tv.pxTypeInfo;
+        return rInfo;
+    }
+    
     /*
-    static FunctionInfo& FindFunction( DFunction *p )
     {
         OperatorVisitor v;
         DetailedTypeVisitor tv;
@@ -48,6 +64,16 @@ public:
         OperatorInfo& pInfo = FindOperator( p );
     }
     */
+    
+    virtual void visitDFunction( DFunction* p )
+    {
+        FindFunction( p->listfunctionspecifier_, p->type_, p->ident_, p->listparameterdeclaration_ );
+    }
+    
+    virtual void visitDDefaultFunction( DDefaultFunction* p )
+    {
+        FindFunction( p->listfunctionspecifier_, 0, p->ident_, p->listparameterdeclaration_ );
+    }
 };
 
 #endif
