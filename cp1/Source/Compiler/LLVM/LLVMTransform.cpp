@@ -534,9 +534,33 @@ void LLVMTransformVisitor::visitEInteger(EInteger *p)
     }
     out += "%r";
     out += stringFromInt( siTempCounter );
-    out += " = bitcast i32 ";
+    out += " = bitcast ";
+    if( static_cast< int >( static_cast< char >( p->integer_ ) ) == p->integer_ )
+    {
+        out += "i8";
+    }
+    else if( static_cast< int >( static_cast< short >( p->integer_ ) ) == p->integer_ )
+    {
+        out += "i16";
+    }
+    else
+    {
+        // SE - TODO: cycle through declared integral types until a large enough one exists
+        out += "i32";
+    }
+    out += " ";
     out += stringFromInt( p->integer_ );
-    out += " to i32\r\n";
+    out += " to ";
+    if( static_cast< int >( static_cast< char >( p->integer_ ) ) == p->integer_ )
+    {
+        out += "i8";
+    }
+    else
+    {
+        // SE - TODO: cycle through declared integral types until a large enough one exists
+        out += "i32";
+    }
+    out += "\r\n";
 }
 
 void LLVMTransformVisitor::visitERValue(ERValue *p)
