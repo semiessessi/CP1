@@ -717,8 +717,8 @@ void LLVMTransformVisitor::visitEOp( std::string szOperatorMangled, Expression* 
     DetailedTypeInfo* pLeftType = 0;
     if( pLeft )
     {
-        left = siTempCounter;
         pLeft->accept( this );
+        left = siTempCounter;
         ++siTempCounter;
         pLeftType = pCurrentType;
     }
@@ -726,8 +726,8 @@ void LLVMTransformVisitor::visitEOp( std::string szOperatorMangled, Expression* 
     DetailedTypeInfo* pRightType = 0;
     if( pRight )
     {
-        right = siTempCounter;
         pRight->accept( this );
+        right = siTempCounter;
         ++siTempCounter;
         pRightType = pCurrentType;
     }
@@ -793,17 +793,15 @@ void LLVMTransformVisitor::visitEIntrin( Expression* pLeft, Expression* pRight, 
 
     if( pLeft )
     {
-        left = siTempCounter;
         pLeft->accept( this );
+        left = siTempCounter;
         ++siTempCounter;
     }
     int right = -1;
     if( pRight )
     {
-        right = siTempCounter;
-
         pRight->accept( this );
-
+        right = siTempCounter;
 	    ++siTempCounter;
     }
 
@@ -844,10 +842,8 @@ void LLVMTransformVisitor::visitEIntrin( const char* const szLeft, Expression* p
     
     if( pRight )
     {
-        right = siTempCounter;
-
         pRight->accept( this );
-
+        right = siTempCounter;
 	    ++siTempCounter;
     }
 
