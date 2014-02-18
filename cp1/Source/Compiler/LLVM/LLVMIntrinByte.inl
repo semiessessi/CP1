@@ -1,7 +1,38 @@
+void LLVMTransformVisitor::visitEIntrinCEqB(EIntrinCEqB *p)
+{
+    visitEIntrin( p->expression_1, p->expression_2, "icmp eq", "i8", true );
+}
+
+void LLVMTransformVisitor::visitEIntrinCNeB(EIntrinCNeB *p)
+{
+    visitEIntrin( p->expression_1, p->expression_2, "icmp ne", "i8", true );
+}
+
+void LLVMTransformVisitor::visitEIntrinCLtB(EIntrinCLtB *p)
+{
+    visitEIntrin( p->expression_1, p->expression_2, "icmp lt", "i8", true );
+}
+
+void LLVMTransformVisitor::visitEIntrinCGtB(EIntrinCGtB *p)
+{
+    visitEIntrin( p->expression_1, p->expression_2, "icmp gt", "i8", true );
+}
+
+void LLVMTransformVisitor::visitEIntrinCLeB(EIntrinCLeB *p)
+{
+    visitEIntrin( p->expression_1, p->expression_2, "icmp le", "i8", true );
+}
+
+void LLVMTransformVisitor::visitEIntrinCGeB(EIntrinCGeB *p)
+{
+    visitEIntrin( p->expression_1, p->expression_2, "icmp ge", "i8", true );
+}
+
 void LLVMTransformVisitor::visitEIntrinAddB(EIntrinAddB *p)
 {
     visitEIntrin( p->expression_1, p->expression_2, "add", "i8" );
 }
+
 
 void LLVMTransformVisitor::visitEIntrinSubB(EIntrinSubB *p)
 {

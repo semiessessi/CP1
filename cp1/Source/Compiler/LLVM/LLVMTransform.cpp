@@ -264,7 +264,8 @@ void LLVMTransformVisitor::visitSIf( SIf *p )
     }
 	out += "%r";
 	out += std::to_string( siTempCounter );
-	out += " = icmp ne i32 %r";
+    // SE - TODO: error if type is not equivalent to byte (i.e. bool)
+	out += " = icmp ne i8 %r";
 	out += std::to_string( iCondition );
 	out += ", 0\n";
 	
@@ -302,7 +303,8 @@ void LLVMTransformVisitor::visitSIfElse( SIfElse *p )
     }
 	out += "%r";
 	out += std::to_string( siTempCounter );
-	out += " = icmp ne i32 %r";
+    // SE - TODO: error if type is not equivalent to byte (i.e. bool)
+	out += " = icmp ne i8 %r";
 	out += std::to_string( iCondition );
 	out += ", 0\n";
 	
@@ -454,7 +456,8 @@ void LLVMTransformVisitor::visitSWhile( SWhile *p )
         out += "\t";
     }
 	out += "%r" + std::to_string( iCompare );
-	out += " = icmp eq i32 %r" + std::to_string( iTest ) + ", 0\r\n";
+    // SE - TODO: error if type is not equivalent to byte (i.e. bool)
+	out += " = icmp eq i8 %r" + std::to_string( iTest ) + ", 0\r\n";
 	
 	for( int i = 0; i < siTabLevel; ++i )
     {
@@ -511,7 +514,8 @@ void LLVMTransformVisitor::visitSUntil( SUntil *p )
         out += "\t";
     }
 	out += "%r" + std::to_string( iCompare );
-	out += " = icmp ne i32 %r" + std::to_string( iTest ) + ", 0\r\n";
+    // SE - TODO: error if type is not equivalent to byte (i.e. bool)
+	out += " = icmp ne i8 %r" + std::to_string( iTest ) + ", 0\r\n";
 	
 	for( int i = 0; i < siTabLevel; ++i )
     {
@@ -538,15 +542,18 @@ void LLVMTransformVisitor::visitEInteger(EInteger *p)
     if( static_cast< int >( static_cast< char >( p->integer_ ) ) == p->integer_ )
     {
         out += "i8";
+        pCurrentType = DetailedTypeInfo::Find( "byte" );
     }
     else if( static_cast< int >( static_cast< short >( p->integer_ ) ) == p->integer_ )
     {
         out += "i16";
+        pCurrentType = DetailedTypeInfo::Find( "int16" ); // SE - TODO: ...
     }
     else
     {
         // SE - TODO: cycle through declared integral types until a large enough one exists
         out += "i32";
+        pCurrentType = DetailedTypeInfo::Find( "int32" ); // SE - TODO: ...
     }
     out += " ";
     out += stringFromInt( p->integer_ );
@@ -579,6 +586,7 @@ void LLVMTransformVisitor::visitERValue(ERValue *p)
         std::string id = std::string( "%" ) + v.readString;
         if( gxLocals.find( id ) != gxLocals.end() )
         {
+            pCurrentType = gxLocals[ id ].pType;
             out += " = bitcast ";
             out += gxLocals[ id ].pType->ShortLLVMName();
             out += " ";
@@ -589,6 +597,7 @@ void LLVMTransformVisitor::visitERValue(ERValue *p)
         }
         else
         {
+            pCurrentType = 0;
             out += " = bitcast <unknown-type> ";
             out += id;
             out += " to <unknown-type>\r\n";
@@ -630,7 +639,7 @@ void LLVMTransformVisitor::visitESimpleCall( ESimpleCall* p )
 	}
     
     FunctionInfo& finfo = FindFunctionInfo( rvv.readString );
-    
+    pCurrentType = finfo.pTypeReturn;
     if( finfo.pTypeReturn )
     {
         out += "%r";
@@ -670,7 +679,7 @@ void LLVMTransformVisitor::visitECall( ECall* p )
 	}
     
     FunctionInfo& finfo = FindFunctionInfo( rvv.readString );
-    
+    pCurrentType = finfo.pTypeReturn;
     if( finfo.pTypeReturn )
     {
         out += "%r";
@@ -701,7 +710,81 @@ void LLVMTransformVisitor::visitECall( ECall* p )
 
 }
 
-void LLVMTransformVisitor::visitEIntrin( Expression* pLeft, Expression* pRight, const char* szIntrinsic, const char* szType )
+void LLVMTransformVisitor::visitEOp( std::string szOperatorMangled, Expression* pLeft, Expression* pRight )
+{
+    int left = -1;
+
+    DetailedTypeInfo* pLeftType = 0;
+    if( pLeft )
+    {
+        left = siTempCounter;
+        pLeft->accept( this );
+        ++siTempCounter;
+        pLeftType = pCurrentType;
+    }
+    int right = -1;
+    DetailedTypeInfo* pRightType = 0;
+    if( pRight )
+    {
+        right = siTempCounter;
+        pRight->accept( this );
+        ++siTempCounter;
+        pRightType = pCurrentType;
+    }
+
+    for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+
+    std::vector< OperatorInfo > potentials = findOperatorInfoBySymbol( std::string( "_operator_" ) + szOperatorMangled );
+    
+    if( pLeftType && pRightType )
+    {
+        std::string szLookup = std::string( "_operator_" ) + szOperatorMangled + "_" + pLeftType->MangledName() + "_" + pRightType->MangledName();
+        potentials = findOperatorInfoBySymbol( szLookup );
+    }
+    else if( pLeftType )
+    {
+        std::string szLookup = std::string( "_operator_" ) + szOperatorMangled + "_" + pLeftType->MangledName();
+        potentials = findOperatorInfoBySymbol( szLookup );
+    }
+        
+    if( potentials.size() == 0 )
+    {
+        // SE - TODO: couldn't match operator (!)
+        return;
+    }
+    
+    // SE - TODO: find a match properly
+    int match = 0;
+    
+    pCurrentType = potentials[ match ].pTypeReturn;
+    out += "%r";
+    out += stringFromInt( siTempCounter );
+    out += " = call ";
+    out += potentials[ match ].szTypeReturn;
+    out += " @";
+    out += potentials[ match ].szLLVMName;
+    out += "( ";
+    pLeftType = potentials[ match ].aszParameterTypes[ 0 ];
+    pLeftType = pLeftType ? pLeftType : potentials[ match ].pTypeReturn;
+    out += pLeftType->ShortLLVMName();
+    out += " %r";
+    out += stringFromInt( left );
+    if( right != -1 )
+    {
+        out += ", ";
+        pRightType = potentials[ match ].aszParameterTypes[ 1 ];
+        pRightType = pRightType ? pRightType : potentials[ match ].pTypeReturn;
+        out += pRightType->ShortLLVMName();
+        out += " %r";
+        out += stringFromInt( right );
+    }
+    out += " )\r\n";
+}
+
+void LLVMTransformVisitor::visitEIntrin( Expression* pLeft, Expression* pRight, const char* szIntrinsic, const char* szType, bool boolean )
 {
     const char* oldType = gszCurrentlyDesiredType;
     gszCurrentlyDesiredType = szType;
@@ -745,9 +828,14 @@ void LLVMTransformVisitor::visitEIntrin( Expression* pLeft, Expression* pRight, 
     out += "\r\n";
 
     gszCurrentlyDesiredType = oldType;
+    
+    if( boolean )
+    {
+        fixBooleanIntrinsic( szType );
+    }
 }
 
-void LLVMTransformVisitor::visitEIntrin( const char* const szLeft, Expression* pRight, const char* szIntrinsic, const char* szType )
+void LLVMTransformVisitor::visitEIntrin( const char* const szLeft, Expression* pRight, const char* szIntrinsic, const char* szType, bool boolean )
 {
     const char* oldType = gszCurrentlyDesiredType;
     gszCurrentlyDesiredType = szType;
@@ -784,6 +872,29 @@ void LLVMTransformVisitor::visitEIntrin( const char* const szLeft, Expression* p
     out += "\r\n";
 
     gszCurrentlyDesiredType = oldType;
+    
+    if( boolean )
+    {
+        fixBooleanIntrinsic( szType );
+    }
+}
+
+void LLVMTransformVisitor::fixBooleanIntrinsic( const char* szType )
+{
+    // SE - TODO: doesn't quite work... need internet :/
+    for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+    
+    ++siTempCounter;
+    out += "%r";
+    out += stringFromInt( siTempCounter );
+    out += " = bitcast i1 %r";
+    out += stringFromInt( siTempCounter - 1 );
+    out += " to ";
+    out += szType;
+    out += "\r\n";;
 }
 
 #include "LLVMIntrinByte.inl"
@@ -791,149 +902,59 @@ void LLVMTransformVisitor::visitEIntrin( const char* const szLeft, Expression* p
 #include "LLVMIntrin4Byte.inl"
 #include "LLVMIntrin8Byte.inl"
 
+void LLVMTransformVisitor::visitEE( EE* p )
+{
+    visitEOp( "cee", p->expression_1, p->expression_2 );
+}
+
+void LLVMTransformVisitor::visitENE( ENE* p )
+{
+    visitEOp( "cne", p->expression_1, p->expression_2 );
+}
+
+void LLVMTransformVisitor::visitELT( ELT* p )
+{
+    visitEOp( "cl", p->expression_1, p->expression_2 );
+}
+
+void LLVMTransformVisitor::visitEGT( EGT* p )
+{
+    visitEOp( "cg", p->expression_1, p->expression_2 );
+}
+
+void LLVMTransformVisitor::visitELE( ELE* p )
+{
+    visitEOp( "cle", p->expression_1, p->expression_2 );
+}
+
+void LLVMTransformVisitor::visitEGE( EGE* p )
+{
+    visitEOp( "cge", p->expression_1, p->expression_2 );
+}
+
 void LLVMTransformVisitor::visitEMul(EMul *p)
 {
-	// are we operating on built-in types?
-	int left = siTempCounter;
-
-    p->expression_1->accept( this );
-
-    ++siTempCounter;
-
-    int right = siTempCounter;
-
-    p->expression_2->accept( this );
-
-	++siTempCounter;
-
-    for( int i = 0; i < siTabLevel; ++i )
-    {
-        out += "\t";
-    }
-    
-    out += "%r";
-    out += stringFromInt( siTempCounter );
-    out += " = mul i8 %r";
-    out += stringFromInt( left );
-    out += ", %r";
-    out += stringFromInt( right );
-    out += "\r\n";
+    visitEOp( "cm", p->expression_1, p->expression_2 );
 }
 
 void LLVMTransformVisitor::visitEDiv(EDiv *p)
 {
-    // are we operating on built-in types?
-	int left = siTempCounter;
-
-    p->expression_1->accept( this );
-
-    ++siTempCounter;
-
-    int right = siTempCounter;
-
-    p->expression_2->accept( this );
-
-	++siTempCounter;
-
-    for( int i = 0; i < siTabLevel; ++i )
-    {
-        out += "\t";
-    }
-    
-    out += "%r";
-    out += stringFromInt( siTempCounter );
-    out += " = udiv i8 %r";
-    out += stringFromInt( left );
-    out += ", %r";
-    out += stringFromInt( right );
-    out += "\r\n";
+    visitEOp( "cd", p->expression_1, p->expression_2 );
 }
 
 void LLVMTransformVisitor::visitEMod(EMod *p)
 {
-    // are we operating on built-in types?
-	int left = siTempCounter;
-
-    p->expression_1->accept( this );
-
-    ++siTempCounter;
-
-    int right = siTempCounter;
-
-    p->expression_2->accept( this );
-
-	++siTempCounter;
-
-    for( int i = 0; i < siTabLevel; ++i )
-    {
-        out += "\t";
-    }
-    
-    out += "%r";
-    out += stringFromInt( siTempCounter );
-    out += " = urem i8 %r";
-    out += stringFromInt( left );
-    out += ", %r";
-    out += stringFromInt( right );
-    out += "\r\n";
+    visitEOp( "cr", p->expression_1, p->expression_2 );
 }
 
 void LLVMTransformVisitor::visitEAdd(EAdd *p)
 {
-    // are we operating on built-in types?
-	int left = siTempCounter;
-
-    p->expression_1->accept( this );
-
-    ++siTempCounter;
-
-    int right = siTempCounter;
-
-    p->expression_2->accept( this );
-
-	++siTempCounter;
-
-    for( int i = 0; i < siTabLevel; ++i )
-    {
-        out += "\t";
-    }
-    
-    out += "%r";
-    out += stringFromInt( siTempCounter );
-    out += " = add i8 %r";
-    out += stringFromInt( left );
-    out += ", %r";
-    out += stringFromInt( right );
-    out += "\r\n";
+    visitEOp( "cp", p->expression_1, p->expression_2 );
 }
 
 void LLVMTransformVisitor::visitESub(ESub *p)
 {
-    // are we operating on built-in types?
-	int left = siTempCounter;
-
-    p->expression_1->accept( this );
-
-    ++siTempCounter;
-
-    int right = siTempCounter;
-
-    p->expression_2->accept( this );
-
-	++siTempCounter;
-
-    for( int i = 0; i < siTabLevel; ++i )
-    {
-        out += "\t";
-    }
-    
-    out += "%r";
-    out += stringFromInt( siTempCounter );
-    out += " = sub i8 %r";
-    out += stringFromInt( left );
-    out += ", %r";
-    out += stringFromInt( right );
-    out += "\r\n";
+    visitEOp( "cs", p->expression_1, p->expression_2 );
 }
 
 void LLVMTransformVisitor::visitELSh(ELSh *p)

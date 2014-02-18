@@ -2,13 +2,15 @@
 #define LLVM_TRANSFORM_H
 
 #include "../CompilerVisitor.h"
+#include "../TypeInfo.h"
 
 #include <string>
 
 class LLVMTransformVisitor : public DescendingCompilerVisitor
 {
+    DetailedTypeInfo* pCurrentType;
  public:
-  virtual ~LLVMTransformVisitor() { out = ""; }
+  virtual ~LLVMTransformVisitor() { out = ""; pCurrentType = 0; }
   virtual void visitMain(Main *p);
   
   virtual void visitDNamespace( DNamespace *p );
@@ -47,10 +49,18 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   virtual void visitERValue(ERValue *p);
   virtual void visitESimpleCall(ESimpleCall *p);
   virtual void visitECall( ECall *p );
-
-  void visitEIntrin( Expression* left, Expression* right, const char* szIntrinsic, const char* szType );
-  void visitEIntrin( const char* const szLeft, Expression* pRight, const char* szIntrinsic, const char* szType );
-
+  
+  void visitEOp( std::string szOperatorMangled, Expression* pLeft, Expression* pRight );
+  
+  void visitEIntrin( Expression* left, Expression* right, const char* szIntrinsic, const char* szType, bool boolean = false );
+  void visitEIntrin( const char* const szLeft, Expression* pRight, const char* szIntrinsic, const char* szType, bool boolean = false );
+  void fixBooleanIntrinsic( const char* szType ); 
+  virtual void visitEIntrinCEqB(EIntrinCEqB *p);
+  virtual void visitEIntrinCNeB(EIntrinCNeB *p);
+  virtual void visitEIntrinCLtB(EIntrinCLtB *p);
+  virtual void visitEIntrinCGtB(EIntrinCGtB *p);
+  virtual void visitEIntrinCLeB(EIntrinCLeB *p);
+  virtual void visitEIntrinCGeB(EIntrinCGeB *p);
   virtual void visitEIntrinAddB(EIntrinAddB *p);
   virtual void visitEIntrinSubB(EIntrinSubB *p);
   virtual void visitEIntrinMulB(EIntrinMulB *p);
@@ -112,6 +122,8 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   virtual void visitEIntrinNot8B(EIntrinNot8B *p);
   virtual void visitEIntrinNeg8B(EIntrinNeg8B *p);
   //virtual void visitEUnaryOperator(EUnaryOperator *p);
+  virtual void visitEE( EE* p );
+  virtual void visitENE( ENE* p );
   virtual void visitEMul(EMul *p);
   virtual void visitEDiv(EDiv *p);
   virtual void visitEMod(EMod *p);
@@ -120,12 +132,10 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   virtual void visitELSh(ELSh *p);
   virtual void visitERSh(ERSh *p);
   //virtual void visitEBinaryOperator(EBinaryOperator *p);
-  //virtual void visitELT(ELT *p) {}
-  //virtual void visitEGT(EGT *p) {}
-  //virtual void visitELE(ELE *p) {}
-  //virtual void visitEGE(EGE *p) {}
-  //virtual void visitEE(EE *p) {}
-  //virtual void visitENE(ENE *p) {}
+  virtual void visitELT(ELT *p);
+  virtual void visitEGT(EGT *p);
+  virtual void visitELE(ELE *p);
+  virtual void visitEGE(EGE *p);
   virtual void visitEBand(EBand *p);
   virtual void visitEBor(EBor *p);
   virtual void visitEBxor(EBxor *p);
@@ -160,6 +170,7 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   //virtual void visitString(String s);
 
   std::string out;
+
 };
 
 #endif
