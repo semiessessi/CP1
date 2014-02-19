@@ -1547,6 +1547,302 @@ void PrintAbsyn::visitEIntrinZExt(EIntrinZExt* p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitEIntrinAddI(EIntrinAddI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("add");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinSubI(EIntrinSubI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("sub");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinMulI(EIntrinMulI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("mul");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinUdivI(EIntrinUdivI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("udiv");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinSdivI(EIntrinSdivI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("sdiv");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinUremI(EIntrinUremI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("urem");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinSremI(EIntrinSremI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("srem");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinAndI(EIntrinAndI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("and");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinOrI(EIntrinOrI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("or");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinXorI(EIntrinXorI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("xor");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinShlI(EIntrinShlI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("shl");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinLshrI(EIntrinLshrI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("lshr");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinAshrI(EIntrinAshrI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("ashr");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinNotI(EIntrinNotI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("not");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinNegI(EIntrinNegI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("neg");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitEIntrinAddB(EIntrinAddB* p)
 {
   int oldi = _i_;
@@ -5440,6 +5736,231 @@ void ShowAbsyn::visitEIntrinZExt(EIntrinZExt* p)
 {
   bufAppend('(');
   bufAppend("EIntrinZExt");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->expression_)  p->expression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinAddI(EIntrinAddI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinAddI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinSubI(EIntrinSubI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinSubI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinMulI(EIntrinMulI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinMulI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinUdivI(EIntrinUdivI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinUdivI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinSdivI(EIntrinSdivI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinSdivI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinUremI(EIntrinUremI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinUremI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinSremI(EIntrinSremI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinSremI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinAndI(EIntrinAndI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinAndI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinOrI(EIntrinOrI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinOrI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinXorI(EIntrinXorI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinXorI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinShlI(EIntrinShlI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinShlI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinLshrI(EIntrinLshrI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinLshrI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinAshrI(EIntrinAshrI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinAshrI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinNotI(EIntrinNotI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinNotI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->expression_)  p->expression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinNegI(EIntrinNegI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinNegI");
   bufAppend(' ');
   bufAppend('[');
   if (p->type_)  p->type_->accept(this);

@@ -646,177 +646,192 @@ ListExpression* reverseListExpression(ListExpression *l)
 %token _SYMB_46    //   ^=
 %token _SYMB_47    //   <<=
 %token _SYMB_48    //   >>=
-%token _SYMB_49    //   add_2b
-%token _SYMB_50    //   add_2f
-%token _SYMB_51    //   add_4b
-%token _SYMB_52    //   add_4f
-%token _SYMB_53    //   add_4f4
-%token _SYMB_54    //   add_8b
-%token _SYMB_55    //   add_8f
-%token _SYMB_56    //   add_b
-%token _SYMB_57    //   add_b4
-%token _SYMB_58    //   add_b8
-%token _SYMB_59    //   address
-%token _SYMB_60    //   align
-%token _SYMB_61    //   all
-%token _SYMB_62    //   and_2b
-%token _SYMB_63    //   and_4b
-%token _SYMB_64    //   and_8b
-%token _SYMB_65    //   and_b
-%token _SYMB_66    //   anticommutative
-%token _SYMB_67    //   ashr_2b
-%token _SYMB_68    //   ashr_4b
-%token _SYMB_69    //   ashr_8b
-%token _SYMB_70    //   ashr_b
-%token _SYMB_71    //   ashr_b4
-%token _SYMB_72    //   ashr_b8
-%token _SYMB_73    //   associative
-%token _SYMB_74    //   break
-%token _SYMB_75    //   breakpoint
-%token _SYMB_76    //   byte
-%token _SYMB_77    //   cmp_2b
-%token _SYMB_78    //   cmp_4b
-%token _SYMB_79    //   cmp_8b
-%token _SYMB_80    //   cmp_b
-%token _SYMB_81    //   cmp_ge_2b
-%token _SYMB_82    //   cmp_ge_4b
-%token _SYMB_83    //   cmp_ge_8b
-%token _SYMB_84    //   cmp_ge_b
-%token _SYMB_85    //   cmp_gt_2b
-%token _SYMB_86    //   cmp_gt_4b
-%token _SYMB_87    //   cmp_gt_8b
-%token _SYMB_88    //   cmp_gt_b
-%token _SYMB_89    //   cmp_le_2b
-%token _SYMB_90    //   cmp_le_4b
-%token _SYMB_91    //   cmp_le_8b
-%token _SYMB_92    //   cmp_le_b
-%token _SYMB_93    //   cmp_lt_2b
-%token _SYMB_94    //   cmp_lt_4b
-%token _SYMB_95    //   cmp_lt_8b
-%token _SYMB_96    //   cmp_lt_b
-%token _SYMB_97    //   cmp_ne_2b
-%token _SYMB_98    //   cmp_ne_4b
-%token _SYMB_99    //   cmp_ne_8b
-%token _SYMB_100    //   cmp_ne_b
-%token _SYMB_101    //   commutative
-%token _SYMB_102    //   const
-%token _SYMB_103    //   continue
-%token _SYMB_104    //   convert
-%token _SYMB_105    //   div_2f
-%token _SYMB_106    //   div_4f
-%token _SYMB_107    //   div_4f4
-%token _SYMB_108    //   div_8f
-%token _SYMB_109    //   down
-%token _SYMB_110    //   each
-%token _SYMB_111    //   else
-%token _SYMB_112    //   entrypoint
-%token _SYMB_113    //   expose
-%token _SYMB_114    //   extern
-%token _SYMB_115    //   for
-%token _SYMB_116    //   generic
-%token _SYMB_117    //   identity
-%token _SYMB_118    //   if
-%token _SYMB_119    //   implicit
-%token _SYMB_120    //   import
-%token _SYMB_121    //   in
-%token _SYMB_122    //   inline
-%token _SYMB_123    //   integer
-%token _SYMB_124    //   inverse
-%token _SYMB_125    //   lshr_2b
-%token _SYMB_126    //   lshr_4b
-%token _SYMB_127    //   lshr_8b
-%token _SYMB_128    //   lshr_b
-%token _SYMB_129    //   lshr_b4
-%token _SYMB_130    //   lshr_b8
-%token _SYMB_131    //   mul_2b
-%token _SYMB_132    //   mul_2f
-%token _SYMB_133    //   mul_4b
-%token _SYMB_134    //   mul_4f
-%token _SYMB_135    //   mul_4f4
-%token _SYMB_136    //   mul_8b
-%token _SYMB_137    //   mul_8f
-%token _SYMB_138    //   mul_b
-%token _SYMB_139    //   mul_b4
-%token _SYMB_140    //   mul_b8
-%token _SYMB_141    //   namespace
-%token _SYMB_142    //   neg_2b
-%token _SYMB_143    //   neg_4b
-%token _SYMB_144    //   neg_8b
-%token _SYMB_145    //   neg_b
-%token _SYMB_146    //   neg_b4
-%token _SYMB_147    //   neg_b8
-%token _SYMB_148    //   not_2b
-%token _SYMB_149    //   not_4b
-%token _SYMB_150    //   not_8b
-%token _SYMB_151    //   not_b
-%token _SYMB_152    //   or_2b
-%token _SYMB_153    //   or_4b
-%token _SYMB_154    //   or_8b
-%token _SYMB_155    //   or_b
-%token _SYMB_156    //   pi
-%token _SYMB_157    //   pure
-%token _SYMB_158    //   real
-%token _SYMB_159    //   rem_2f
-%token _SYMB_160    //   rem_4f
-%token _SYMB_161    //   rem_4f4
-%token _SYMB_162    //   rem_8f
-%token _SYMB_163    //   repeat
-%token _SYMB_164    //   return
-%token _SYMB_165    //   sdiv_2b
-%token _SYMB_166    //   sdiv_4b
-%token _SYMB_167    //   sdiv_8b
-%token _SYMB_168    //   sdiv_b
-%token _SYMB_169    //   sdiv_b4
-%token _SYMB_170    //   sdiv_b8
-%token _SYMB_171    //   selfinverse
-%token _SYMB_172    //   shl_2b
-%token _SYMB_173    //   shl_4b
-%token _SYMB_174    //   shl_8b
-%token _SYMB_175    //   shl_b
-%token _SYMB_176    //   shl_b4
-%token _SYMB_177    //   shl_b8
-%token _SYMB_178    //   sign_extend
-%token _SYMB_179    //   srem_2b
-%token _SYMB_180    //   srem_4b
-%token _SYMB_181    //   srem_8b
-%token _SYMB_182    //   srem_b
-%token _SYMB_183    //   srem_b4
-%token _SYMB_184    //   srem_b8
-%token _SYMB_185    //   sub_2b
-%token _SYMB_186    //   sub_2f
-%token _SYMB_187    //   sub_4b
-%token _SYMB_188    //   sub_4f
-%token _SYMB_189    //   sub_4f4
-%token _SYMB_190    //   sub_8b
-%token _SYMB_191    //   sub_8f
-%token _SYMB_192    //   sub_b
-%token _SYMB_193    //   sub_b4
-%token _SYMB_194    //   sub_b8
-%token _SYMB_195    //   type
-%token _SYMB_196    //   udiv_2b
-%token _SYMB_197    //   udiv_4b
-%token _SYMB_198    //   udiv_8b
-%token _SYMB_199    //   udiv_b
-%token _SYMB_200    //   udiv_b4
-%token _SYMB_201    //   udiv_b8
-%token _SYMB_202    //   until
-%token _SYMB_203    //   up
-%token _SYMB_204    //   urem_2b
-%token _SYMB_205    //   urem_4b
-%token _SYMB_206    //   urem_8b
-%token _SYMB_207    //   urem_b
-%token _SYMB_208    //   urem_b4
-%token _SYMB_209    //   urem_b8
-%token _SYMB_210    //   where
-%token _SYMB_211    //   while
-%token _SYMB_212    //   xor_2b
-%token _SYMB_213    //   xor_4b
-%token _SYMB_214    //   xor_8b
-%token _SYMB_215    //   xor_b
-%token _SYMB_216    //   zero_extend
-%token<string_> _SYMB_217    //   CString
-%token<string_> _SYMB_218    //   CChar
-%token<string_> _SYMB_219    //   Operator
+%token _SYMB_49    //   add
+%token _SYMB_50    //   add_2b
+%token _SYMB_51    //   add_2f
+%token _SYMB_52    //   add_4b
+%token _SYMB_53    //   add_4f
+%token _SYMB_54    //   add_4f4
+%token _SYMB_55    //   add_8b
+%token _SYMB_56    //   add_8f
+%token _SYMB_57    //   add_b
+%token _SYMB_58    //   add_b4
+%token _SYMB_59    //   add_b8
+%token _SYMB_60    //   address
+%token _SYMB_61    //   align
+%token _SYMB_62    //   all
+%token _SYMB_63    //   and
+%token _SYMB_64    //   and_2b
+%token _SYMB_65    //   and_4b
+%token _SYMB_66    //   and_8b
+%token _SYMB_67    //   and_b
+%token _SYMB_68    //   anticommutative
+%token _SYMB_69    //   ashr
+%token _SYMB_70    //   ashr_2b
+%token _SYMB_71    //   ashr_4b
+%token _SYMB_72    //   ashr_8b
+%token _SYMB_73    //   ashr_b
+%token _SYMB_74    //   ashr_b4
+%token _SYMB_75    //   ashr_b8
+%token _SYMB_76    //   associative
+%token _SYMB_77    //   break
+%token _SYMB_78    //   breakpoint
+%token _SYMB_79    //   byte
+%token _SYMB_80    //   cmp_2b
+%token _SYMB_81    //   cmp_4b
+%token _SYMB_82    //   cmp_8b
+%token _SYMB_83    //   cmp_b
+%token _SYMB_84    //   cmp_ge_2b
+%token _SYMB_85    //   cmp_ge_4b
+%token _SYMB_86    //   cmp_ge_8b
+%token _SYMB_87    //   cmp_ge_b
+%token _SYMB_88    //   cmp_gt_2b
+%token _SYMB_89    //   cmp_gt_4b
+%token _SYMB_90    //   cmp_gt_8b
+%token _SYMB_91    //   cmp_gt_b
+%token _SYMB_92    //   cmp_le_2b
+%token _SYMB_93    //   cmp_le_4b
+%token _SYMB_94    //   cmp_le_8b
+%token _SYMB_95    //   cmp_le_b
+%token _SYMB_96    //   cmp_lt_2b
+%token _SYMB_97    //   cmp_lt_4b
+%token _SYMB_98    //   cmp_lt_8b
+%token _SYMB_99    //   cmp_lt_b
+%token _SYMB_100    //   cmp_ne_2b
+%token _SYMB_101    //   cmp_ne_4b
+%token _SYMB_102    //   cmp_ne_8b
+%token _SYMB_103    //   cmp_ne_b
+%token _SYMB_104    //   commutative
+%token _SYMB_105    //   const
+%token _SYMB_106    //   continue
+%token _SYMB_107    //   convert
+%token _SYMB_108    //   div_2f
+%token _SYMB_109    //   div_4f
+%token _SYMB_110    //   div_4f4
+%token _SYMB_111    //   div_8f
+%token _SYMB_112    //   down
+%token _SYMB_113    //   each
+%token _SYMB_114    //   else
+%token _SYMB_115    //   entrypoint
+%token _SYMB_116    //   expose
+%token _SYMB_117    //   extern
+%token _SYMB_118    //   for
+%token _SYMB_119    //   generic
+%token _SYMB_120    //   identity
+%token _SYMB_121    //   if
+%token _SYMB_122    //   implicit
+%token _SYMB_123    //   import
+%token _SYMB_124    //   in
+%token _SYMB_125    //   inline
+%token _SYMB_126    //   integer
+%token _SYMB_127    //   inverse
+%token _SYMB_128    //   lshr
+%token _SYMB_129    //   lshr_2b
+%token _SYMB_130    //   lshr_4b
+%token _SYMB_131    //   lshr_8b
+%token _SYMB_132    //   lshr_b
+%token _SYMB_133    //   lshr_b4
+%token _SYMB_134    //   lshr_b8
+%token _SYMB_135    //   mul
+%token _SYMB_136    //   mul_2b
+%token _SYMB_137    //   mul_2f
+%token _SYMB_138    //   mul_4b
+%token _SYMB_139    //   mul_4f
+%token _SYMB_140    //   mul_4f4
+%token _SYMB_141    //   mul_8b
+%token _SYMB_142    //   mul_8f
+%token _SYMB_143    //   mul_b
+%token _SYMB_144    //   mul_b4
+%token _SYMB_145    //   mul_b8
+%token _SYMB_146    //   namespace
+%token _SYMB_147    //   neg
+%token _SYMB_148    //   neg_2b
+%token _SYMB_149    //   neg_4b
+%token _SYMB_150    //   neg_8b
+%token _SYMB_151    //   neg_b
+%token _SYMB_152    //   neg_b4
+%token _SYMB_153    //   neg_b8
+%token _SYMB_154    //   not
+%token _SYMB_155    //   not_2b
+%token _SYMB_156    //   not_4b
+%token _SYMB_157    //   not_8b
+%token _SYMB_158    //   not_b
+%token _SYMB_159    //   or
+%token _SYMB_160    //   or_2b
+%token _SYMB_161    //   or_4b
+%token _SYMB_162    //   or_8b
+%token _SYMB_163    //   or_b
+%token _SYMB_164    //   pi
+%token _SYMB_165    //   pure
+%token _SYMB_166    //   real
+%token _SYMB_167    //   rem_2f
+%token _SYMB_168    //   rem_4f
+%token _SYMB_169    //   rem_4f4
+%token _SYMB_170    //   rem_8f
+%token _SYMB_171    //   repeat
+%token _SYMB_172    //   return
+%token _SYMB_173    //   sdiv
+%token _SYMB_174    //   sdiv_2b
+%token _SYMB_175    //   sdiv_4b
+%token _SYMB_176    //   sdiv_8b
+%token _SYMB_177    //   sdiv_b
+%token _SYMB_178    //   sdiv_b4
+%token _SYMB_179    //   sdiv_b8
+%token _SYMB_180    //   selfinverse
+%token _SYMB_181    //   shl
+%token _SYMB_182    //   shl_2b
+%token _SYMB_183    //   shl_4b
+%token _SYMB_184    //   shl_8b
+%token _SYMB_185    //   shl_b
+%token _SYMB_186    //   shl_b4
+%token _SYMB_187    //   shl_b8
+%token _SYMB_188    //   sign_extend
+%token _SYMB_189    //   srem
+%token _SYMB_190    //   srem_2b
+%token _SYMB_191    //   srem_4b
+%token _SYMB_192    //   srem_8b
+%token _SYMB_193    //   srem_b
+%token _SYMB_194    //   srem_b4
+%token _SYMB_195    //   srem_b8
+%token _SYMB_196    //   sub
+%token _SYMB_197    //   sub_2b
+%token _SYMB_198    //   sub_2f
+%token _SYMB_199    //   sub_4b
+%token _SYMB_200    //   sub_4f
+%token _SYMB_201    //   sub_4f4
+%token _SYMB_202    //   sub_8b
+%token _SYMB_203    //   sub_8f
+%token _SYMB_204    //   sub_b
+%token _SYMB_205    //   sub_b4
+%token _SYMB_206    //   sub_b8
+%token _SYMB_207    //   type
+%token _SYMB_208    //   udiv
+%token _SYMB_209    //   udiv_2b
+%token _SYMB_210    //   udiv_4b
+%token _SYMB_211    //   udiv_8b
+%token _SYMB_212    //   udiv_b
+%token _SYMB_213    //   udiv_b4
+%token _SYMB_214    //   udiv_b8
+%token _SYMB_215    //   until
+%token _SYMB_216    //   up
+%token _SYMB_217    //   urem
+%token _SYMB_218    //   urem_2b
+%token _SYMB_219    //   urem_4b
+%token _SYMB_220    //   urem_8b
+%token _SYMB_221    //   urem_b
+%token _SYMB_222    //   urem_b4
+%token _SYMB_223    //   urem_b8
+%token _SYMB_224    //   where
+%token _SYMB_225    //   while
+%token _SYMB_226    //   xor
+%token _SYMB_227    //   xor_2b
+%token _SYMB_228    //   xor_4b
+%token _SYMB_229    //   xor_8b
+%token _SYMB_230    //   xor_b
+%token _SYMB_231    //   zero_extend
+%token<string_> _SYMB_232    //   CString
+%token<string_> _SYMB_233    //   CChar
+%token<string_> _SYMB_234    //   Operator
 
 %type <code_> Code
 %type <tldeclaration_> TLDeclaration
@@ -867,17 +882,17 @@ ListExpression* reverseListExpression(ListExpression *l)
 %%
 Code : ListTLDeclaration ListDeclaration { $$ = new Main(reverseListTLDeclaration($1), reverseListDeclaration($2)); YY_RESULT_Code_= $$; } 
 ;
-TLDeclaration : _SYMB_120 _IDENT_ _SYMB_0 { $$ = new DImport($2);  } 
-  | _SYMB_113 _IDENT_ _SYMB_0 { $$ = new DExpose($2);  }
+TLDeclaration : _SYMB_123 _IDENT_ _SYMB_0 { $$ = new DImport($2);  } 
+  | _SYMB_116 _IDENT_ _SYMB_0 { $$ = new DExpose($2);  }
 ;
-Declaration : _SYMB_141 _IDENT_ _SYMB_1 ListDeclaration _SYMB_2 { $$ = new DNamespace($2, reverseListDeclaration($4));  } 
+Declaration : _SYMB_146 _IDENT_ _SYMB_1 ListDeclaration _SYMB_2 { $$ = new DNamespace($2, reverseListDeclaration($4));  } 
   | ListFunctionSpecifier _IDENT_ _SYMB_3 ListParameterDeclaration _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new DDefaultFunction(reverseListFunctionSpecifier($1), $2, $4, reverseListStatement($7));  }
   | ListFunctionSpecifier Type _IDENT_ _SYMB_3 ListParameterDeclaration _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new DFunction(reverseListFunctionSpecifier($1), $2, $3, $5, reverseListStatement($8));  }
   | ListFunctionSpecifier Type OperatorName _SYMB_3 ListParameterDeclaration _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new DOperator(reverseListFunctionSpecifier($1), $2, $3, $5, reverseListStatement($8));  }
   | OperatorTrait _SYMB_0 { $$ = new DOperatorInfo($1);  }
-  | ListTypeSpecifier _SYMB_195 Type _IDENT_ _SYMB_0 { $$ = new DTypeDecl(reverseListTypeSpecifier($1), $3, $4);  }
-  | Type ListConversionSpecifier _SYMB_104 _SYMB_3 _SYMB_102 Type _IDENT_ _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new DTypeConv($1, reverseListConversionSpecifier($2), $6, $7, reverseListStatement($10));  }
-  | _SYMB_114 Prototype { $$ = new DExtern($2);  }
+  | ListTypeSpecifier _SYMB_207 Type _IDENT_ _SYMB_0 { $$ = new DTypeDecl(reverseListTypeSpecifier($1), $3, $4);  }
+  | Type ListConversionSpecifier _SYMB_107 _SYMB_3 _SYMB_105 Type _IDENT_ _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new DTypeConv($1, reverseListConversionSpecifier($2), $6, $7, reverseListStatement($10));  }
+  | _SYMB_117 Prototype { $$ = new DExtern($2);  }
   | ListVariableSpecifier Type _IDENT_ _SYMB_5 Expression _SYMB_0 { $$ = new DIVariable(reverseListVariableSpecifier($1), $2, $3, $5);  }
   | ListVariableSpecifier Type _IDENT_ _SYMB_0 { $$ = new DVariable(reverseListVariableSpecifier($1), $2, $3);  }
 ;
@@ -911,57 +926,57 @@ OperatorName : _SYMB_6 { $$ = new ONLnot();  }
   | _SYMB_31 { $$ = new ONRight();  }
   | _SYMB_32 { $$ = new ONLeft();  }
 ;
-OperatorTrait : _SYMB_117 Type OperatorName Expression { $$ = new OTIdentity($2, $3, $4);  } 
+OperatorTrait : _SYMB_120 Type OperatorName Expression { $$ = new OTIdentity($2, $3, $4);  } 
 ;
-FunctionSpecifier : _SYMB_112 { $$ = new FSEntryPoint();  } 
-  | _SYMB_157 { $$ = new FSPure();  }
-  | _SYMB_122 { $$ = new FSInline();  }
-  | _SYMB_73 { $$ = new FSAssociative();  }
-  | _SYMB_101 { $$ = new FSCommutative();  }
-  | _SYMB_66 { $$ = new FSAntiCommutative();  }
-  | _SYMB_124 OperatorName { $$ = new FSInverse($2);  }
-  | _SYMB_171 { $$ = new FSSelfInverse();  }
+FunctionSpecifier : _SYMB_115 { $$ = new FSEntryPoint();  } 
+  | _SYMB_165 { $$ = new FSPure();  }
+  | _SYMB_125 { $$ = new FSInline();  }
+  | _SYMB_76 { $$ = new FSAssociative();  }
+  | _SYMB_104 { $$ = new FSCommutative();  }
+  | _SYMB_68 { $$ = new FSAntiCommutative();  }
+  | _SYMB_127 OperatorName { $$ = new FSInverse($2);  }
+  | _SYMB_180 { $$ = new FSSelfInverse();  }
 ;
-ConversionSpecifier : _SYMB_203 { $$ = new CSUp();  } 
-  | _SYMB_109 { $$ = new CSDown();  }
-  | _SYMB_119 { $$ = new CSImplicit();  }
+ConversionSpecifier : _SYMB_216 { $$ = new CSUp();  } 
+  | _SYMB_112 { $$ = new CSDown();  }
+  | _SYMB_122 { $$ = new CSImplicit();  }
 ;
-VariableSpecifier : _SYMB_102 { $$ = new VSConst();  } 
+VariableSpecifier : _SYMB_105 { $$ = new VSConst();  } 
 ;
-TypeSpecifier : _SYMB_60 _SYMB_19 _INTEGER_ _SYMB_20 { $$ = new TSAlign($3);  } 
-  | _SYMB_116 _SYMB_19 ListGenericParam _SYMB_20 { $$ = new TSGeneric($3);  }
-  | _SYMB_123 { $$ = new TSInteger();  }
-  | _SYMB_158 { $$ = new TSReal();  }
+TypeSpecifier : _SYMB_61 _SYMB_19 _INTEGER_ _SYMB_20 { $$ = new TSAlign($3);  } 
+  | _SYMB_119 _SYMB_19 ListGenericParam _SYMB_20 { $$ = new TSGeneric($3);  }
+  | _SYMB_126 { $$ = new TSInteger();  }
+  | _SYMB_166 { $$ = new TSReal();  }
 ;
 GenericParam : Type _IDENT_ { $$ = new TSGParam($1, $2);  } 
 ;
-Type : _SYMB_59 { $$ = new TAddress();  } 
-  | _SYMB_76 { $$ = new TByte();  }
+Type : _SYMB_60 { $$ = new TAddress();  } 
+  | _SYMB_79 { $$ = new TByte();  }
   | _IDENT_ { $$ = new TCustom($1);  }
   | Type _SYMB_33 _INTEGER_ _SYMB_34 { $$ = new TFixedArray($1, $3);  }
   | Type _SYMB_33 _SYMB_34 { $$ = new TGenericArray($1);  }
   | _SYMB_1 ListStructMemberDeclaration _SYMB_0 _SYMB_2 { $$ = new TStruct(reverseListStructMemberDeclaration($2));  }
-  | _SYMB_195 { $$ = new TType();  }
+  | _SYMB_207 { $$ = new TType();  }
 ;
 StructMemberDeclaration : Type _IDENT_ _SYMB_0 { $$ = new SMDMemberDeclaration($1, $2);  } 
 ;
 ParameterDeclaration : ListVariableSpecifier _IDENT_ { $$ = new PDAutoParameter(reverseListVariableSpecifier($1), $2);  } 
   | ListVariableSpecifier Type _IDENT_ { $$ = new PDTypedParameter(reverseListVariableSpecifier($1), $2, $3);  }
 ;
-Statement : _SYMB_164 Expression _SYMB_0 { $$ = new SReturn($2);  } 
+Statement : _SYMB_172 Expression _SYMB_0 { $$ = new SReturn($2);  } 
   | Expression _SYMB_0 { $$ = new SExpression($1);  }
   | _SYMB_1 ListStatement _SYMB_2 { $$ = new SScope(reverseListStatement($2));  }
-  | _SYMB_118 _SYMB_3 Expression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new SIf($3, reverseListStatement($6));  }
-  | _SYMB_118 _SYMB_3 Expression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 _SYMB_111 _SYMB_1 ListStatement _SYMB_2 { $$ = new SIfElse($3, reverseListStatement($6), reverseListStatement($10));  }
-  | _SYMB_163 _SYMB_3 Expression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new SLoop($3, reverseListStatement($6));  }
-  | _SYMB_211 _SYMB_3 Expression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new SWhile($3, reverseListStatement($6));  }
-  | _SYMB_202 _SYMB_3 Expression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new SUntil($3, reverseListStatement($6));  }
-  | _SYMB_115 _SYMB_3 ListExpression _SYMB_0 Expression _SYMB_0 ListExpression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new SFor($3, $5, $7, reverseListStatement($10));  }
-  | _SYMB_115 _SYMB_110 _SYMB_3 _IDENT_ _SYMB_121 Expression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new SForEach($4, $6, reverseListStatement($9));  }
-  | _SYMB_115 _SYMB_61 _SYMB_3 _IDENT_ _SYMB_121 Expression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new SForAll($4, $6, reverseListStatement($9));  }
-  | _SYMB_74 _SYMB_0 { $$ = new SBreak();  }
-  | _SYMB_103 _SYMB_0 { $$ = new SContinue();  }
-  | _SYMB_75 _SYMB_0 { $$ = new SBreakpoint();  }
+  | _SYMB_121 _SYMB_3 Expression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new SIf($3, reverseListStatement($6));  }
+  | _SYMB_121 _SYMB_3 Expression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 _SYMB_114 _SYMB_1 ListStatement _SYMB_2 { $$ = new SIfElse($3, reverseListStatement($6), reverseListStatement($10));  }
+  | _SYMB_171 _SYMB_3 Expression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new SLoop($3, reverseListStatement($6));  }
+  | _SYMB_225 _SYMB_3 Expression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new SWhile($3, reverseListStatement($6));  }
+  | _SYMB_215 _SYMB_3 Expression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new SUntil($3, reverseListStatement($6));  }
+  | _SYMB_118 _SYMB_3 ListExpression _SYMB_0 Expression _SYMB_0 ListExpression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new SFor($3, $5, $7, reverseListStatement($10));  }
+  | _SYMB_118 _SYMB_113 _SYMB_3 _IDENT_ _SYMB_124 Expression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new SForEach($4, $6, reverseListStatement($9));  }
+  | _SYMB_118 _SYMB_62 _SYMB_3 _IDENT_ _SYMB_124 Expression _SYMB_4 _SYMB_1 ListStatement _SYMB_2 { $$ = new SForAll($4, $6, reverseListStatement($9));  }
+  | _SYMB_77 _SYMB_0 { $$ = new SBreak();  }
+  | _SYMB_106 _SYMB_0 { $$ = new SContinue();  }
+  | _SYMB_78 _SYMB_0 { $$ = new SBreakpoint();  }
   | ListVariableSpecifier Type _IDENT_ _SYMB_5 Expression _SYMB_0 { $$ = new SIVariable(reverseListVariableSpecifier($1), $2, $3, $5);  }
   | ListVariableSpecifier Type _IDENT_ _SYMB_0 { $$ = new SVariable(reverseListVariableSpecifier($1), $2, $3);  }
 ;
@@ -970,150 +985,165 @@ RValue : _IDENT_ { $$ = new RVIdent($1);  }
 ;
 Expression11 : _DOUBLE_ { $$ = new EDouble($1);  } 
   | _INTEGER_ { $$ = new EInteger($1);  }
-  | _SYMB_217 { $$ = new EString($1);  }
-  | _SYMB_218 { $$ = new EChar($1);  }
-  | _SYMB_156 { $$ = new EPi();  }
+  | _SYMB_232 { $$ = new EString($1);  }
+  | _SYMB_233 { $$ = new EChar($1);  }
+  | _SYMB_164 { $$ = new EPi();  }
   | RValue { $$ = new ERValue($1);  }
   | _SYMB_3 Expression _SYMB_4 { $$ = $2;  }
 ;
 Expression10 : _SYMB_1 ListExpression _SYMB_2 { $$ = new EArray($2);  } 
   | _SYMB_33 ListExpression _SYMB_34 { $$ = new EList($2);  }
-  | _SYMB_1 Expression _SYMB_210 ListExpression _SYMB_2 { $$ = new EAComp($2, $4);  }
-  | _SYMB_33 Expression _SYMB_210 ListExpression _SYMB_34 { $$ = new ELComp($2, $4);  }
+  | _SYMB_1 Expression _SYMB_224 ListExpression _SYMB_2 { $$ = new EAComp($2, $4);  }
+  | _SYMB_33 Expression _SYMB_224 ListExpression _SYMB_34 { $$ = new ELComp($2, $4);  }
   | Expression _SYMB_33 Expression _SYMB_34 { $$ = new EIndex($1, $3);  }
   | RValue _SYMB_3 _SYMB_4 { $$ = new ESimpleCall($1);  }
   | RValue _SYMB_3 ListExpression _SYMB_4 { $$ = new ECall($1, $3);  }
   | RValue _SYMB_7 { $$ = new EPostInc($1);  }
   | RValue _SYMB_8 { $$ = new EPostDec($1);  }
   | _SYMB_25 Expression11 { $$ = new EAddress($2);  }
-  | _SYMB_178 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinSExt($3, $6);  }
-  | _SYMB_216 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinZExt($3, $6);  }
-  | _SYMB_56 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAddB($3, $5);  }
-  | _SYMB_192 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSubB($3, $5);  }
-  | _SYMB_138 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMulB($3, $5);  }
-  | _SYMB_199 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdivB($3, $5);  }
-  | _SYMB_168 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSdivB($3, $5);  }
-  | _SYMB_207 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUremB($3, $5);  }
-  | _SYMB_182 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSremB($3, $5);  }
-  | _SYMB_65 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAndB($3, $5);  }
-  | _SYMB_155 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinOrB($3, $5);  }
-  | _SYMB_215 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinXorB($3, $5);  }
-  | _SYMB_175 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinShlB($3, $5);  }
-  | _SYMB_128 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinLshrB($3, $5);  }
-  | _SYMB_70 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAshrB($3, $5);  }
-  | _SYMB_151 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNotB($3);  }
-  | _SYMB_145 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNegB($3);  }
-  | _SYMB_80 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCEqB($3, $5);  }
-  | _SYMB_100 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCNeB($3, $5);  }
-  | _SYMB_96 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLtB($3, $5);  }
-  | _SYMB_88 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGtB($3, $5);  }
-  | _SYMB_92 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLeB($3, $5);  }
-  | _SYMB_84 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGeB($3, $5);  }
-  | _SYMB_49 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAdd2B($3, $5);  }
-  | _SYMB_185 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSub2B($3, $5);  }
-  | _SYMB_131 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMul2B($3, $5);  }
-  | _SYMB_196 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdiv2B($3, $5);  }
-  | _SYMB_165 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSdiv2B($3, $5);  }
-  | _SYMB_204 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUrem2B($3, $5);  }
-  | _SYMB_179 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSrem2B($3, $5);  }
-  | _SYMB_62 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAnd2B($3, $5);  }
-  | _SYMB_152 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinOr2B($3, $5);  }
-  | _SYMB_212 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinXor2B($3, $5);  }
-  | _SYMB_172 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinShl2B($3, $5);  }
-  | _SYMB_125 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinLshr2B($3, $5);  }
-  | _SYMB_67 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAshr2B($3, $5);  }
-  | _SYMB_148 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNot2B($3);  }
-  | _SYMB_142 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNeg2B($3);  }
-  | _SYMB_77 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCEq2B($3, $5);  }
-  | _SYMB_97 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCNe2B($3, $5);  }
-  | _SYMB_93 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLt2B($3, $5);  }
-  | _SYMB_85 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGt2B($3, $5);  }
-  | _SYMB_89 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLe2B($3, $5);  }
-  | _SYMB_81 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGe2B($3, $5);  }
-  | _SYMB_51 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAdd4B($3, $5);  }
-  | _SYMB_187 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSub4B($3, $5);  }
-  | _SYMB_133 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMul4B($3, $5);  }
-  | _SYMB_197 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdiv4B($3, $5);  }
-  | _SYMB_166 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSdiv4B($3, $5);  }
-  | _SYMB_205 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUrem4B($3, $5);  }
-  | _SYMB_180 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSrem4B($3, $5);  }
-  | _SYMB_63 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAnd4B($3, $5);  }
-  | _SYMB_153 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinOr4B($3, $5);  }
-  | _SYMB_213 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinXor4B($3, $5);  }
-  | _SYMB_173 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinShl4B($3, $5);  }
-  | _SYMB_126 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinLshr4B($3, $5);  }
-  | _SYMB_68 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAshr4B($3, $5);  }
-  | _SYMB_149 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNot4B($3);  }
-  | _SYMB_143 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNeg4B($3);  }
-  | _SYMB_78 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCEq4B($3, $5);  }
-  | _SYMB_98 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCNe4B($3, $5);  }
-  | _SYMB_94 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLt4B($3, $5);  }
-  | _SYMB_86 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGt4B($3, $5);  }
-  | _SYMB_90 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLe4B($3, $5);  }
-  | _SYMB_82 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGe4B($3, $5);  }
-  | _SYMB_54 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAdd8B($3, $5);  }
-  | _SYMB_190 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSub8B($3, $5);  }
-  | _SYMB_136 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMul8B($3, $5);  }
-  | _SYMB_198 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdiv8B($3, $5);  }
-  | _SYMB_167 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSdiv8B($3, $5);  }
-  | _SYMB_206 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUrem8B($3, $5);  }
-  | _SYMB_181 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSrem8B($3, $5);  }
-  | _SYMB_64 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAnd8B($3, $5);  }
-  | _SYMB_154 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinOr8B($3, $5);  }
-  | _SYMB_214 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinXor8B($3, $5);  }
-  | _SYMB_174 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinShl8B($3, $5);  }
-  | _SYMB_127 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinLshr8B($3, $5);  }
-  | _SYMB_69 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAshr8B($3, $5);  }
-  | _SYMB_150 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNot8B($3);  }
-  | _SYMB_144 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNeg8B($3);  }
-  | _SYMB_79 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCEq8B($3, $5);  }
-  | _SYMB_99 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCNe8B($3, $5);  }
-  | _SYMB_95 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLt8B($3, $5);  }
-  | _SYMB_87 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGt8B($3, $5);  }
-  | _SYMB_91 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLe8B($3, $5);  }
-  | _SYMB_83 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGe8B($3, $5);  }
-  | _SYMB_57 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAddB4V($3, $5);  }
-  | _SYMB_193 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSubB4V($3, $5);  }
-  | _SYMB_139 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMulB4V($3, $5);  }
-  | _SYMB_200 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdivB4V($3, $5);  }
-  | _SYMB_169 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSdivB4V($3, $5);  }
-  | _SYMB_208 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUremB4V($3, $5);  }
-  | _SYMB_183 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSremB4V($3, $5);  }
-  | _SYMB_176 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinShlB4V($3, $5);  }
-  | _SYMB_129 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinLshrB4V($3, $5);  }
-  | _SYMB_71 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAshrB4V($3, $5);  }
-  | _SYMB_146 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNegB4V($3);  }
-  | _SYMB_58 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAddB8V($3, $5);  }
-  | _SYMB_194 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSubB8V($3, $5);  }
-  | _SYMB_140 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMulB8V($3, $5);  }
-  | _SYMB_201 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdivB8V($3, $5);  }
-  | _SYMB_170 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSdivB8V($3, $5);  }
-  | _SYMB_209 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUremB8V($3, $5);  }
-  | _SYMB_184 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSremB8V($3, $5);  }
-  | _SYMB_177 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinShlB8V($3, $5);  }
-  | _SYMB_130 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinLshrB8V($3, $5);  }
-  | _SYMB_72 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAshrB8V($3, $5);  }
-  | _SYMB_147 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNegB8V($3);  }
-  | _SYMB_50 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAdd2F($3, $5);  }
-  | _SYMB_186 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSub2F($3, $5);  }
-  | _SYMB_132 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMul2F($3, $5);  }
-  | _SYMB_105 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdiv2F($3, $5);  }
-  | _SYMB_159 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUrem2F($3, $5);  }
-  | _SYMB_52 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAdd4F($3, $5);  }
-  | _SYMB_188 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSub4F($3, $5);  }
-  | _SYMB_134 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMul4F($3, $5);  }
-  | _SYMB_106 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdiv4F($3, $5);  }
-  | _SYMB_160 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUrem4F($3, $5);  }
-  | _SYMB_55 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAdd8F($3, $5);  }
-  | _SYMB_191 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSub8F($3, $5);  }
-  | _SYMB_137 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMul8F($3, $5);  }
-  | _SYMB_108 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdiv8F($3, $5);  }
-  | _SYMB_162 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUrem8F($3, $5);  }
-  | _SYMB_53 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAdd4F4V($3, $5);  }
-  | _SYMB_189 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSub4F4V($3, $5);  }
-  | _SYMB_135 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMul4F4V($3, $5);  }
-  | _SYMB_107 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdiv4F4V($3, $5);  }
-  | _SYMB_161 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUrem4F4V($3, $5);  }
+  | _SYMB_188 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinSExt($3, $6);  }
+  | _SYMB_231 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinZExt($3, $6);  }
+  | _SYMB_49 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAddI($3, $6, $8);  }
+  | _SYMB_196 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSubI($3, $6, $8);  }
+  | _SYMB_135 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMulI($3, $6, $8);  }
+  | _SYMB_208 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdivI($3, $6, $8);  }
+  | _SYMB_173 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSdivI($3, $6, $8);  }
+  | _SYMB_217 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUremI($3, $6, $8);  }
+  | _SYMB_189 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSremI($3, $6, $8);  }
+  | _SYMB_63 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAndI($3, $6, $8);  }
+  | _SYMB_159 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinOrI($3, $6, $8);  }
+  | _SYMB_226 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinXorI($3, $6, $8);  }
+  | _SYMB_181 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinShlI($3, $6, $8);  }
+  | _SYMB_128 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinLshrI($3, $6, $8);  }
+  | _SYMB_69 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAshrI($3, $6, $8);  }
+  | _SYMB_154 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNotI($3, $6);  }
+  | _SYMB_147 _SYMB_19 Type _SYMB_20 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNegI($3, $6);  }
+  | _SYMB_57 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAddB($3, $5);  }
+  | _SYMB_204 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSubB($3, $5);  }
+  | _SYMB_143 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMulB($3, $5);  }
+  | _SYMB_212 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdivB($3, $5);  }
+  | _SYMB_177 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSdivB($3, $5);  }
+  | _SYMB_221 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUremB($3, $5);  }
+  | _SYMB_193 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSremB($3, $5);  }
+  | _SYMB_67 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAndB($3, $5);  }
+  | _SYMB_163 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinOrB($3, $5);  }
+  | _SYMB_230 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinXorB($3, $5);  }
+  | _SYMB_185 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinShlB($3, $5);  }
+  | _SYMB_132 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinLshrB($3, $5);  }
+  | _SYMB_73 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAshrB($3, $5);  }
+  | _SYMB_158 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNotB($3);  }
+  | _SYMB_151 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNegB($3);  }
+  | _SYMB_83 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCEqB($3, $5);  }
+  | _SYMB_103 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCNeB($3, $5);  }
+  | _SYMB_99 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLtB($3, $5);  }
+  | _SYMB_91 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGtB($3, $5);  }
+  | _SYMB_95 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLeB($3, $5);  }
+  | _SYMB_87 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGeB($3, $5);  }
+  | _SYMB_50 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAdd2B($3, $5);  }
+  | _SYMB_197 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSub2B($3, $5);  }
+  | _SYMB_136 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMul2B($3, $5);  }
+  | _SYMB_209 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdiv2B($3, $5);  }
+  | _SYMB_174 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSdiv2B($3, $5);  }
+  | _SYMB_218 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUrem2B($3, $5);  }
+  | _SYMB_190 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSrem2B($3, $5);  }
+  | _SYMB_64 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAnd2B($3, $5);  }
+  | _SYMB_160 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinOr2B($3, $5);  }
+  | _SYMB_227 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinXor2B($3, $5);  }
+  | _SYMB_182 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinShl2B($3, $5);  }
+  | _SYMB_129 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinLshr2B($3, $5);  }
+  | _SYMB_70 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAshr2B($3, $5);  }
+  | _SYMB_155 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNot2B($3);  }
+  | _SYMB_148 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNeg2B($3);  }
+  | _SYMB_80 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCEq2B($3, $5);  }
+  | _SYMB_100 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCNe2B($3, $5);  }
+  | _SYMB_96 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLt2B($3, $5);  }
+  | _SYMB_88 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGt2B($3, $5);  }
+  | _SYMB_92 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLe2B($3, $5);  }
+  | _SYMB_84 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGe2B($3, $5);  }
+  | _SYMB_52 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAdd4B($3, $5);  }
+  | _SYMB_199 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSub4B($3, $5);  }
+  | _SYMB_138 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMul4B($3, $5);  }
+  | _SYMB_210 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdiv4B($3, $5);  }
+  | _SYMB_175 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSdiv4B($3, $5);  }
+  | _SYMB_219 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUrem4B($3, $5);  }
+  | _SYMB_191 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSrem4B($3, $5);  }
+  | _SYMB_65 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAnd4B($3, $5);  }
+  | _SYMB_161 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinOr4B($3, $5);  }
+  | _SYMB_228 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinXor4B($3, $5);  }
+  | _SYMB_183 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinShl4B($3, $5);  }
+  | _SYMB_130 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinLshr4B($3, $5);  }
+  | _SYMB_71 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAshr4B($3, $5);  }
+  | _SYMB_156 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNot4B($3);  }
+  | _SYMB_149 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNeg4B($3);  }
+  | _SYMB_81 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCEq4B($3, $5);  }
+  | _SYMB_101 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCNe4B($3, $5);  }
+  | _SYMB_97 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLt4B($3, $5);  }
+  | _SYMB_89 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGt4B($3, $5);  }
+  | _SYMB_93 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLe4B($3, $5);  }
+  | _SYMB_85 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGe4B($3, $5);  }
+  | _SYMB_55 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAdd8B($3, $5);  }
+  | _SYMB_202 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSub8B($3, $5);  }
+  | _SYMB_141 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMul8B($3, $5);  }
+  | _SYMB_211 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdiv8B($3, $5);  }
+  | _SYMB_176 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSdiv8B($3, $5);  }
+  | _SYMB_220 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUrem8B($3, $5);  }
+  | _SYMB_192 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSrem8B($3, $5);  }
+  | _SYMB_66 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAnd8B($3, $5);  }
+  | _SYMB_162 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinOr8B($3, $5);  }
+  | _SYMB_229 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinXor8B($3, $5);  }
+  | _SYMB_184 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinShl8B($3, $5);  }
+  | _SYMB_131 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinLshr8B($3, $5);  }
+  | _SYMB_72 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAshr8B($3, $5);  }
+  | _SYMB_157 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNot8B($3);  }
+  | _SYMB_150 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNeg8B($3);  }
+  | _SYMB_82 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCEq8B($3, $5);  }
+  | _SYMB_102 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCNe8B($3, $5);  }
+  | _SYMB_98 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLt8B($3, $5);  }
+  | _SYMB_90 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGt8B($3, $5);  }
+  | _SYMB_94 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCLe8B($3, $5);  }
+  | _SYMB_86 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinCGe8B($3, $5);  }
+  | _SYMB_58 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAddB4V($3, $5);  }
+  | _SYMB_205 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSubB4V($3, $5);  }
+  | _SYMB_144 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMulB4V($3, $5);  }
+  | _SYMB_213 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdivB4V($3, $5);  }
+  | _SYMB_178 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSdivB4V($3, $5);  }
+  | _SYMB_222 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUremB4V($3, $5);  }
+  | _SYMB_194 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSremB4V($3, $5);  }
+  | _SYMB_186 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinShlB4V($3, $5);  }
+  | _SYMB_133 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinLshrB4V($3, $5);  }
+  | _SYMB_74 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAshrB4V($3, $5);  }
+  | _SYMB_152 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNegB4V($3);  }
+  | _SYMB_59 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAddB8V($3, $5);  }
+  | _SYMB_206 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSubB8V($3, $5);  }
+  | _SYMB_145 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMulB8V($3, $5);  }
+  | _SYMB_214 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdivB8V($3, $5);  }
+  | _SYMB_179 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSdivB8V($3, $5);  }
+  | _SYMB_223 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUremB8V($3, $5);  }
+  | _SYMB_195 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSremB8V($3, $5);  }
+  | _SYMB_187 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinShlB8V($3, $5);  }
+  | _SYMB_134 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinLshrB8V($3, $5);  }
+  | _SYMB_75 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAshrB8V($3, $5);  }
+  | _SYMB_153 _SYMB_3 Expression _SYMB_4 { $$ = new EIntrinNegB8V($3);  }
+  | _SYMB_51 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAdd2F($3, $5);  }
+  | _SYMB_198 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSub2F($3, $5);  }
+  | _SYMB_137 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMul2F($3, $5);  }
+  | _SYMB_108 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdiv2F($3, $5);  }
+  | _SYMB_167 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUrem2F($3, $5);  }
+  | _SYMB_53 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAdd4F($3, $5);  }
+  | _SYMB_200 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSub4F($3, $5);  }
+  | _SYMB_139 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMul4F($3, $5);  }
+  | _SYMB_109 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdiv4F($3, $5);  }
+  | _SYMB_168 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUrem4F($3, $5);  }
+  | _SYMB_56 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAdd8F($3, $5);  }
+  | _SYMB_203 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSub8F($3, $5);  }
+  | _SYMB_142 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMul8F($3, $5);  }
+  | _SYMB_111 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdiv8F($3, $5);  }
+  | _SYMB_170 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUrem8F($3, $5);  }
+  | _SYMB_54 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinAdd4F4V($3, $5);  }
+  | _SYMB_201 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinSub4F4V($3, $5);  }
+  | _SYMB_140 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinMul4F4V($3, $5);  }
+  | _SYMB_110 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUdiv4F4V($3, $5);  }
+  | _SYMB_169 _SYMB_3 Expression _SYMB_36 Expression _SYMB_4 { $$ = new EIntrinUrem4F4V($3, $5);  }
   | Expression11 { $$ = $1;  }
 ;
 Expression9 : _SYMB_6 Expression10 { $$ = new ELnot($2);  } 

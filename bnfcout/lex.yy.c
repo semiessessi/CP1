@@ -282,74 +282,74 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 	*yy_cp = '\0'; \
 	yy_c_buf_p = yy_cp;
 
-#define YY_NUM_RULES 232
-#define YY_END_OF_BUFFER 233
+#define YY_NUM_RULES 247
+#define YY_END_OF_BUFFER 248
 static yyconst short int yy_accept[588] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,  233,  232,  229,  231,
-      230,  229,    7,  231,   15,   26,  231,    4,    5,   11,
-       16,   37,   17,   36,   13,  227,   39,    1,   20,    6,
-       21,   38,  228,   34,   14,   35,   28,  228,  228,  228,
-      228,  228,  228,  228,  228,  228,  228,  228,  228,  228,
-      228,  228,  228,  228,  228,  228,  228,    2,   27,    3,
-       10,  221,  222,  221,    0,   25,    0,  223,   44,   29,
+        0,    0,    0,    0,    0,    0,  248,  247,  244,  246,
+      245,  244,    7,  246,   15,   26,  246,    4,    5,   11,
+       16,   37,   17,   36,   13,  242,   39,    1,   20,    6,
+       21,   38,  243,   34,   14,   35,   28,  243,  243,  243,
+      243,  243,  243,  243,  243,  243,  243,  243,  243,  243,
+      243,  243,  243,  243,  243,  243,  243,    2,   27,    3,
+       10,  236,  237,  236,    0,   25,    0,  238,   44,   29,
        45,    0,    0,   12,   42,    8,   40,    9,   41,   32,
-      219,    0,   43,    0,  227,   33,   18,   22,   24,   23,
+      234,    0,   43,    0,  242,   33,   18,   22,   24,   23,
 
-       19,  228,   47,   31,  228,  228,  228,  228,  228,  228,
-      228,  228,  228,  228,  228,  228,  228,  228,  228,  228,
-      228,  119,  228,  122,  228,  228,  228,  228,  228,  228,
-      157,  228,  228,  228,  228,  228,  228,  228,  228,  228,
-      228,  228,  204,  228,  228,  228,  228,   46,   30,  220,
-      225,  224,  224,    0,  218,  225,  226,   48,   49,  228,
-      228,   62,  228,  228,  228,  228,  228,  228,  228,  228,
-      228,  228,  228,  228,  228,  228,  228,  228,  116,  228,
-      228,  228,  228,  228,  228,  228,  228,  228,  228,  228,
-      228,  228,  228,  228,  228,  228,  228,  228,  228,  228,
+       19,  243,   47,   31,  243,  243,  243,  243,  243,  243,
+      243,  243,  243,  243,  243,  243,  243,  243,  243,  243,
+      243,  122,  243,  125,  243,  243,  243,  243,  243,  160,
+      165,  243,  243,  243,  243,  243,  243,  243,  243,  243,
+      243,  243,  217,  243,  243,  243,  243,   46,   30,  235,
+      240,  239,  239,    0,  233,  240,  241,   48,   49,   50,
+      243,   63,   64,  243,  243,  243,  243,  243,  243,  243,
+      243,  243,  243,  243,  243,  243,  243,  243,  119,  243,
+      243,  243,  243,  243,  243,  243,  136,  243,  148,  155,
+      243,  243,  243,  243,  243,  243,  243,  243,  182,  243,
 
-      228,  228,  228,  228,  228,  228,  228,  228,  228,  228,
-        0,  228,  228,  228,  228,  228,  228,  228,  228,   77,
-      228,  228,  228,  228,  228,  228,  110,  111,  112,  228,
-      228,  228,  228,  228,  228,  228,  228,  228,  228,  228,
-      228,  228,  228,  228,  228,  228,  228,  156,  158,  159,
-      228,  228,  228,  228,  228,  228,  228,  228,  228,  196,
-      228,  228,  228,  228,  228,  228,  228,    0,  226,  228,
-      228,  228,   57,  228,   61,  228,  228,  228,   66,  228,
-      228,  228,   75,  228,  228,  228,   81,  228,  228,  228,
-      228,  103,  228,  228,  228,  228,  228,  228,  228,  228,
+      243,  197,  243,  243,  243,  243,  243,  243,  227,  243,
+        0,  243,  243,  243,  243,  243,   70,  243,  243,   80,
+      243,  243,  243,  243,  243,  243,  113,  114,  115,  243,
+      243,  243,  243,  243,  243,  243,  243,  243,  243,  129,
+      243,  243,  243,  243,  243,  243,  243,  164,  166,  167,
+      243,  243,  243,  174,  243,  243,  243,  190,  243,  208,
+      209,  243,  218,  243,  243,  243,  243,    0,  241,  243,
+      243,  243,   58,  243,   62,  243,  243,  243,   68,  243,
+      243,  243,   78,  243,  243,  243,   84,  243,  243,  243,
+      243,  106,  243,  243,  243,  243,  243,  243,  243,  243,
 
-      228,  228,  228,  228,  228,  228,  228,  228,  228,  228,
-      228,  139,  228,  228,  228,  228,  146,  228,  228,  228,
-      152,  153,  154,  155,  228,  228,  228,  228,  228,  228,
-      228,  228,  228,  228,  176,  228,  228,  228,  228,  228,
-      193,  228,  203,  228,  211,  212,  228,  228,  228,  216,
-      228,   50,   51,   52,   53,   55,   56,   58,   59,  228,
-       63,   64,   65,  228,  228,  228,  228,   71,  228,  228,
-       78,   79,   80,  228,  228,  228,  228,  228,  228,  228,
-      228,  106,  107,  109,  228,  114,  115,  228,  228,  228,
-      121,  123,  228,  228,  228,  228,  228,  129,  132,  133,
+      243,  243,  243,  243,  243,  243,  243,  243,  243,  243,
+      243,  144,  243,  243,  243,  243,  152,  243,  243,  243,
+      159,  161,  162,  163,  243,  243,  243,  243,  243,  243,
+      243,  243,  243,  243,  186,  243,  243,  243,  243,  243,
+      205,  243,  216,  243,  225,  226,  243,  243,  243,  231,
+      243,   51,   52,   53,   54,   56,   57,   59,   60,  243,
+       65,   66,   67,  243,  243,  243,  243,   74,  243,  243,
+       81,   82,   83,  243,  243,  243,  243,  243,  243,  243,
+      243,  109,  110,  112,  243,  117,  118,  243,  243,  243,
+      124,  126,  243,  243,  243,  243,  243,  133,  137,  138,
 
-      134,  135,  137,  138,  140,  141,  228,  143,  144,  145,
-      147,  148,  149,  150,  151,  160,  161,  163,  164,  165,
-      228,  228,  228,  169,  228,  173,  174,  175,  177,  178,
-      228,  228,  228,  228,  183,  186,  187,  188,  189,  191,
-      192,  194,  195,  228,  228,  228,  200,  228,  228,  228,
-      208,  213,  214,  215,  228,   54,   60,  228,   68,   69,
-       70,   72,   73,  228,  228,  228,  228,  228,  228,  228,
-      228,  228,  105,  108,  228,  117,  228,  228,  124,  125,
-      126,  127,  128,  130,  131,  136,  228,  162,  166,  167,
-      168,  170,  171,  228,  228,  180,  181,  182,  184,  185,
+      139,  140,  142,  143,  145,  146,  243,  149,  150,  151,
+      153,  154,  156,  157,  158,  168,  169,  171,  172,  173,
+      243,  243,  243,  178,  243,  183,  184,  185,  187,  188,
+      243,  243,  243,  243,  194,  198,  199,  200,  201,  203,
+      204,  206,  207,  243,  243,  243,  213,  243,  243,  243,
+      222,  228,  229,  230,  243,   55,   61,  243,   71,   72,
+       73,   75,   76,  243,  243,  243,  243,  243,  243,  243,
+      243,  243,  108,  111,  243,  120,  243,  243,  127,  128,
+      130,  131,  132,  134,  135,  141,  243,  170,  175,  176,
+      177,  179,  180,  243,  243,  191,  192,  193,  195,  196,
 
-      190,  197,  198,  199,  201,  202,  205,  206,  207,  209,
-      210,  228,  228,  228,  228,  228,  228,  228,   85,  228,
-      228,  228,   89,  228,  228,  228,   93,  228,  228,  228,
-       97,  228,  228,  228,  101,  228,  104,  228,  118,  120,
-      228,  228,  228,  228,  228,  228,  228,   82,   83,   84,
-       86,   87,   88,   90,   91,   92,   94,   95,   96,   98,
-       99,  100,  228,  228,  142,  228,  228,  228,  228,  228,
-       76,  228,  113,  228,  228,  228,  228,   74,  102,  172,
-      179,  217,  228,  228,  228,   67,    0
+      202,  210,  211,  212,  214,  215,  219,  220,  221,  223,
+      224,  243,  243,  243,  243,  243,  243,  243,   88,  243,
+      243,  243,   92,  243,  243,  243,   96,  243,  243,  243,
+      100,  243,  243,  243,  104,  243,  107,  243,  121,  123,
+      243,  243,  243,  243,  243,  243,  243,   85,   86,   87,
+       89,   90,   91,   93,   94,   95,   97,   98,   99,  101,
+      102,  103,  243,  243,  147,  243,  243,  243,  243,  243,
+       79,  243,  116,  243,  243,  243,  243,   77,  105,  181,
+      189,  232,  243,  243,  243,   69,    0
     } ;
 
 static yyconst int yy_ec[256] =
@@ -2068,80 +2068,155 @@ return _SYMB_216;
 	YY_BREAK
 case 218:
 YY_RULE_SETUP
-#line 246 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
-++yy_mylinenumber ; 	 /* BNFC single-line comment */;
+#line 245 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _SYMB_217;
 	YY_BREAK
 case 219:
 YY_RULE_SETUP
-#line 247 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
-BEGIN COMMENT;
+#line 246 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _SYMB_218;
 	YY_BREAK
 case 220:
 YY_RULE_SETUP
-#line 248 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
-BEGIN YYINITIAL; return 0;
+#line 247 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _SYMB_219;
 	YY_BREAK
 case 221:
 YY_RULE_SETUP
-#line 249 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
-/* BNFC multi-line comment */;
+#line 248 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _SYMB_220;
 	YY_BREAK
 case 222:
 YY_RULE_SETUP
-#line 250 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
-++yy_mylinenumber ; 	 /* BNFC multi-line comment */;
+#line 249 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _SYMB_221;
 	YY_BREAK
 case 223:
 YY_RULE_SETUP
-#line 252 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
-yylval.string_ = strdup(yytext); return _SYMB_217;
+#line 250 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _SYMB_222;
 	YY_BREAK
 case 224:
 YY_RULE_SETUP
-#line 253 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
-yylval.string_ = strdup(yytext); return _SYMB_218;
+#line 251 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _SYMB_223;
 	YY_BREAK
 case 225:
 YY_RULE_SETUP
-#line 254 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
-yylval.string_ = strdup(yytext); return _SYMB_219;
+#line 252 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _SYMB_224;
 	YY_BREAK
 case 226:
 YY_RULE_SETUP
-#line 255 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
-yylval.double_ = atof(yytext); return _DOUBLE_;
+#line 253 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _SYMB_225;
 	YY_BREAK
 case 227:
 YY_RULE_SETUP
-#line 256 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
-yylval.int_ = atoi(yytext); return _INTEGER_;
+#line 254 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _SYMB_226;
 	YY_BREAK
 case 228:
 YY_RULE_SETUP
-#line 257 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
-yylval.string_ = strdup(yytext); return _IDENT_;
+#line 255 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _SYMB_227;
 	YY_BREAK
 case 229:
 YY_RULE_SETUP
-#line 258 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
-++yy_mylinenumber ;
+#line 256 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _SYMB_228;
 	YY_BREAK
 case 230:
 YY_RULE_SETUP
-#line 259 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
-/* ignore white space. */;
+#line 257 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _SYMB_229;
 	YY_BREAK
 case 231:
 YY_RULE_SETUP
-#line 260 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
-return _ERROR_;
+#line 258 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _SYMB_230;
 	YY_BREAK
 case 232:
 YY_RULE_SETUP
+#line 259 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _SYMB_231;
+	YY_BREAK
+case 233:
+YY_RULE_SETUP
 #line 261 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+++yy_mylinenumber ; 	 /* BNFC single-line comment */;
+	YY_BREAK
+case 234:
+YY_RULE_SETUP
+#line 262 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+BEGIN COMMENT;
+	YY_BREAK
+case 235:
+YY_RULE_SETUP
+#line 263 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+BEGIN YYINITIAL; return 0;
+	YY_BREAK
+case 236:
+YY_RULE_SETUP
+#line 264 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+/* BNFC multi-line comment */;
+	YY_BREAK
+case 237:
+YY_RULE_SETUP
+#line 265 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+++yy_mylinenumber ; 	 /* BNFC multi-line comment */;
+	YY_BREAK
+case 238:
+YY_RULE_SETUP
+#line 267 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+yylval.string_ = strdup(yytext); return _SYMB_232;
+	YY_BREAK
+case 239:
+YY_RULE_SETUP
+#line 268 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+yylval.string_ = strdup(yytext); return _SYMB_233;
+	YY_BREAK
+case 240:
+YY_RULE_SETUP
+#line 269 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+yylval.string_ = strdup(yytext); return _SYMB_234;
+	YY_BREAK
+case 241:
+YY_RULE_SETUP
+#line 270 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+yylval.double_ = atof(yytext); return _DOUBLE_;
+	YY_BREAK
+case 242:
+YY_RULE_SETUP
+#line 271 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+yylval.int_ = atoi(yytext); return _INTEGER_;
+	YY_BREAK
+case 243:
+YY_RULE_SETUP
+#line 272 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+yylval.string_ = strdup(yytext); return _IDENT_;
+	YY_BREAK
+case 244:
+YY_RULE_SETUP
+#line 273 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+++yy_mylinenumber ;
+	YY_BREAK
+case 245:
+YY_RULE_SETUP
+#line 274 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+/* ignore white space. */;
+	YY_BREAK
+case 246:
+YY_RULE_SETUP
+#line 275 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+return _ERROR_;
+	YY_BREAK
+case 247:
+YY_RULE_SETUP
+#line 276 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
 ECHO;
 	YY_BREAK
-#line 2145 "lex.yy.c"
+#line 2220 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(YYINITIAL):
 case YY_STATE_EOF(COMMENT):
@@ -3034,7 +3109,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 261 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
+#line 276 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.l"
 
 int initialize_lexer(FILE *inp) { yyin = inp; BEGIN YYINITIAL; return 0; }
 int yywrap(void) { return 1; }

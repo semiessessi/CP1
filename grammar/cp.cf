@@ -144,6 +144,22 @@ EAddress.					Expression10	        ::= "&" Expression11 ;
 EIntrinSExt.				Expression10	        ::= "sign_extend" "<" Type ">" "(" Expression ")" ;
 EIntrinZExt.				Expression10	        ::= "zero_extend" "<" Type ">" "(" Expression ")" ;
 
+EIntrinAddI.                Expression10            ::= "add" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinSubI.                Expression10            ::= "sub" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinMulI.                Expression10            ::= "mul" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinUdivI.               Expression10            ::= "udiv" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinSdivI.               Expression10            ::= "sdiv" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinUremI.               Expression10            ::= "urem" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinSremI.               Expression10            ::= "srem" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinAndI.				Expression10	        ::= "and" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinOrI.					Expression10	        ::= "or" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinXorI.				Expression10	        ::= "xor" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinShlI.				Expression10	        ::= "shl" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinLshrI.				Expression10	        ::= "lshr" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinAshrI.				Expression10	        ::= "ashr" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinNotI.				Expression10	        ::= "not" "<" Type ">" "(" Expression ")" ;
+EIntrinNegI.				Expression10	        ::= "neg" "<" Type ">" "(" Expression ")" ;
+
 EIntrinAddB.				Expression10	        ::= "add_b" "(" Expression "," Expression ")" ;
 EIntrinSubB.				Expression10	        ::= "sub_b" "(" Expression "," Expression ")" ;
 EIntrinMulB.				Expression10	        ::= "mul_b" "(" Expression "," Expression ")" ;

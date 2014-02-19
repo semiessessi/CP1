@@ -259,9 +259,24 @@
      _SYMB_217 = 476,
      _SYMB_218 = 477,
      _SYMB_219 = 478,
-     _INTEGER_ = 479,
-     _DOUBLE_ = 480,
-     _IDENT_ = 481
+     _SYMB_220 = 479,
+     _SYMB_221 = 480,
+     _SYMB_222 = 481,
+     _SYMB_223 = 482,
+     _SYMB_224 = 483,
+     _SYMB_225 = 484,
+     _SYMB_226 = 485,
+     _SYMB_227 = 486,
+     _SYMB_228 = 487,
+     _SYMB_229 = 488,
+     _SYMB_230 = 489,
+     _SYMB_231 = 490,
+     _SYMB_232 = 491,
+     _SYMB_233 = 492,
+     _SYMB_234 = 493,
+     _INTEGER_ = 494,
+     _DOUBLE_ = 495,
+     _IDENT_ = 496
    };
 #endif
 
@@ -310,7 +325,7 @@ typedef union YYSTYPE
 
 
 /* Line 2638 of glr.c  */
-#line 314 "parse.hpp"
+#line 329 "parse.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 #endif
