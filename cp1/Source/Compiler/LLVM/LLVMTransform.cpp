@@ -708,13 +708,13 @@ void LLVMTransformVisitor::visitEChar( EChar* p )
                     break;
                 }
                 default:
-                    out += std::to_string( static_cast< unsigned int >( p->cchar_[ 2 ] ) );
+                    out += std::to_string( static_cast< int >( p->cchar_[ 2 ] ) );
                     break;
             }
             break;
         };
         default:
-            out += std::to_string( static_cast< unsigned int >( p->cchar_[ 1 ] ) );
+            out += std::to_string( static_cast< int >( p->cchar_[ 1 ] ) );
             break;
     }
     out += " to i8\r\n";
@@ -1215,10 +1215,6 @@ void LLVMTransformVisitor::visitEIntrinZExt(EIntrinZExt *p)
 }
 
 #include "LLVMIntrinIG.inl"
-#include "LLVMIntrinByte.inl"
-#include "LLVMIntrin2Byte.inl"
-#include "LLVMIntrin4Byte.inl"
-#include "LLVMIntrin8Byte.inl"
 
 void LLVMTransformVisitor::visitEE( EE* p )
 {

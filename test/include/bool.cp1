@@ -9,25 +9,25 @@ identity int32 ^ false;
 
 pure commutative bool &&( a, b )
 {
-	return and_b( a, b );
+	return and< byte >( a, b );
 }
 
 pure commutative bool ||( a, b )
 {
-	return or_b( a, b );
+	return or< byte >( a, b );
 }
 
 pure commutative associative selfinverse bool ^^( a, b )
 {
-	return xor_b( a, b );
+	return xor< byte >( a, b );
 }
 
 pure bool ==( a, b )
 {
-    return cmp_b( a, b );
+    return cmp< byte >( a, b );
 }
 
 pure bool !=( a, b )
 {
-    return cmp_ne_b( a, b );
+    return cmp_ne< byte >( a, b );
 }
