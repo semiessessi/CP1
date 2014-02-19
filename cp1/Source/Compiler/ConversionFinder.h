@@ -82,7 +82,7 @@ public:
         for( size_t i = 0; i < mxAllConversions.size(); ++i )
         {
             if( ( mxAllConversions[ i ].pFrom->ShortLLVMName() == pFromType->ShortLLVMName() ) // SE - TODO: a more/less permissive test???
-                && ( mxAllConversions[ i ].pTo->ShortLLVMName() == pFromType->ShortLLVMName() ) ) // SE - TODO: a more/less permissive test???
+                && ( mxAllConversions[ i ].pTo->ShortLLVMName() == pToType->ShortLLVMName() ) ) // SE - TODO: a more/less permissive test???
             {
                 ret.push_back( mxAllConversions[ i ] );
             }
@@ -113,7 +113,7 @@ public:
         {
             if( mxAllConversions[ i ].bImplicit
                 && ( mxAllConversions[ i ].pFrom->ShortLLVMName() == pFromType->ShortLLVMName() ) // SE - TODO: a more/less permissive test???
-                && ( mxAllConversions[ i ].pTo->ShortLLVMName() == pFromType->ShortLLVMName() ) ) // SE - TODO: a more/less permissive test???
+                && ( mxAllConversions[ i ].pTo->ShortLLVMName() == pToType->ShortLLVMName() ) ) // SE - TODO: a more/less permissive test???
             {
                 ret.push_back( mxAllConversions[ i ] );
             }

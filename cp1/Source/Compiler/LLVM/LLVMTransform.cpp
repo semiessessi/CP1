@@ -838,8 +838,40 @@ void LLVMTransformVisitor::visitEOp( std::string szOperatorMangled, Expression* 
     {
         // SE - TODO: improve
         
-        // see if we can find one from allowed conversions on the types...
-        if( pLeftType )
+        // see if we can find one from allowed conversions on the types...        
+        if( pLeftType && pRightType )
+        {
+            std::vector< ConversionInfo > info = ConversionFinder::FindImplicitConversionsFrom( pRightType );
+            
+            // is the an operator that handles this type instead?
+            for( size_t i = 0; i < info.size(); ++i )
+            {
+                std::string szLookup = std::string( "_operator_" ) + szOperatorMangled + "_" + pLeftType->MangledName() + "_" + info[ i ].pTo->MangledName();
+                potentials = findOperatorInfoBySymbol( szLookup );
+                if( potentials.size() > 0 )
+                {
+                    for( int j = 0; j < siTabLevel; ++j )
+                    {
+                        out += "\t";
+                    }
+                    out += "%r";
+                    out += stringFromInt( siTempCounter );
+                    out += " = call ";
+                    out += info[ i ].pTo->ShortLLVMName();
+                    out += " @";
+                    out += info[ i ].MangledName();
+                    out += "( ";
+                    out += info[ i ].pFrom->ShortLLVMName();
+                    out += " %r";
+                    out += stringFromInt( right );
+                    out += " )\r\n";
+                    right = siTempCounter;
+                    ++siTempCounter;
+                    break;
+                }
+            }
+        }
+        else if( pLeftType )
         {
             std::vector< ConversionInfo > info = ConversionFinder::FindImplicitConversionsFrom( pLeftType );
             
@@ -850,23 +882,23 @@ void LLVMTransformVisitor::visitEOp( std::string szOperatorMangled, Expression* 
                 potentials = findOperatorInfoBySymbol( szLookup );
                 if( potentials.size() > 0 )
                 {
-                    break;
-                }
-            }
-        }
-        
-        if( pLeftType && pRightType )
-        {
-            std::vector< ConversionInfo > info = ConversionFinder::FindImplicitConversionsFrom( pRightType );
-            
-            // is the an operator that handles this type instead?
-            for( size_t i = 0; i < info.size(); ++i )
-            {
-                std::string szLookup = std::string( "_operator_" ) + szOperatorMangled + "_" + pLeftType->MangledName() + "_" + info[ i ].pTo->MangledName();
-                printf( "lookup: %s\n", szLookup.c_str() );
-                potentials = findOperatorInfoBySymbol( szLookup );
-                if( potentials.size() > 0 )
-                {
+                    for( int j = 0; j < siTabLevel; ++j )
+                    {
+                        out += "\t";
+                    }
+                    out += "%r";
+                    out += stringFromInt( siTempCounter );
+                    out += " = call ";
+                    out += info[ i ].pTo->ShortLLVMName();
+                    out += " @";
+                    out += info[ i ].MangledName();
+                    out += "( ";
+                    out += info[ i ].pFrom->ShortLLVMName();
+                    out += " %r";
+                    out += stringFromInt( left );
+                    out += " )\r\n";
+                    left = siTempCounter;
+                    ++siTempCounter;
                     break;
                 }
             }

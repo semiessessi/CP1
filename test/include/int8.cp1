@@ -1,0 +1,51 @@
+//import bool;
+
+//pure commutative associative bool ==( byte a, byte b )
+//{
+//    return cmp_b( a, b );
+//}
+
+//pure commutative associative bool !=( byte a, byte b )
+//{
+//    return cmp_ne_b( a, b );
+//}
+
+pure commutative associative byte +( a, b )
+{
+	return add_b( a, b );
+}
+
+pure anticommutative inverse + byte -( a, b )
+{
+	return sub_b( a, b );
+}
+
+pure commutative byte *( a, b )
+{
+	return mul_b( a, b );
+}
+
+pure byte /( a, b )
+{
+	return sdiv_b( a, b );
+}
+
+pure byte %( a, b )
+{
+	return srem_b( a, b );
+}
+
+pure commutative byte &( a, b )
+{
+	return and_b( a, b );
+}
+
+pure commutative byte |( a, b )
+{
+	return or_b( a, b );
+}
+
+pure commutative associative selfinverse byte ^( a, b )
+{
+	return xor_b( a, b );
+}

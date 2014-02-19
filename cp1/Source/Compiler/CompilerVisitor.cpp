@@ -144,6 +144,16 @@ void DescendingCompilerVisitor::visitDOperator(DOperator *p)
     }
 }
 
+void DescendingCompilerVisitor::visitDTypeConv(DTypeConv *p)
+{
+    ListStatement* pList = p->liststatement_;
+    while( pList )
+    {
+        pList->statement_->accept( this );
+        pList = pList->liststatement_;
+    }
+}
+
 void DescendingCompilerVisitor::visitPFunction( PFunction* p )
 {
 	ListParameterDeclaration* pListPD = p->listparameterdeclaration_;

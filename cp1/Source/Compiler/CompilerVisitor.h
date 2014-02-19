@@ -327,6 +327,7 @@ class DescendingCompilerVisitor : public CompilerVisitor
   virtual void visitDDefaultFunction(DDefaultFunction *p);
   virtual void visitDFunction(DFunction *p);
   virtual void visitDOperator(DOperator *p);
+  virtual void visitDTypeConv( DTypeConv *p );
   
   //virtual void visitPDefaultFunction( PDefaultFunction *p );
   virtual void visitPFunction( PFunction *p );
