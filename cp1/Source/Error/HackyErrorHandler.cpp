@@ -154,7 +154,10 @@ void yyerror(const char *str)
             if( f != -1 )
             {
 				printf( "   \t|-" );
-			    for( int i = 0; i < gpxLocation->last_column; ++i )
+                const int iLimit = ( gpxLocation->last_column < gaszLines[ yy_mylinenumber ].size() )
+                    ? gpxLocation->last_column
+                    : ( gpxLocation->first_column + 1 );
+			    for( int i = 0; i < iLimit; ++i )
 			    {
                     if( gaszLines[ yy_mylinenumber ].c_str()[ i ] == '\t' )
                     {
@@ -176,7 +179,10 @@ void yyerror(const char *str)
 				    printf( " " );
 			    }
                 printf( "|" );
-			    for( int i = gpxLocation->first_column; i < gpxLocation->last_column; ++i )
+                const int iLimit = ( gpxLocation->last_column < gaszLines[ yy_mylinenumber ].size() )
+                    ? gpxLocation->last_column
+                    : ( gpxLocation->first_column + 1 );
+			    for( int i = gpxLocation->first_column; i < iLimit; ++i )
 			    {
                     if( gaszLines[ yy_mylinenumber ].c_str()[ i ] == '\t' )
                     {
