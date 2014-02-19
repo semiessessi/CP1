@@ -145,6 +145,12 @@ class Skeleton : public Visitor
   void visitEIntrinAshrI(EIntrinAshrI* eintrinashri);
   void visitEIntrinNotI(EIntrinNotI* eintrinnoti);
   void visitEIntrinNegI(EIntrinNegI* eintrinnegi);
+  void visitEIntrinCEqI(EIntrinCEqI* eintrinceqi);
+  void visitEIntrinCNeI(EIntrinCNeI* eintrincnei);
+  void visitEIntrinCLtI(EIntrinCLtI* eintrinclti);
+  void visitEIntrinCGtI(EIntrinCGtI* eintrincgti);
+  void visitEIntrinCLeI(EIntrinCLeI* eintrinclei);
+  void visitEIntrinCGeI(EIntrinCGeI* eintrincgei);
   void visitEIntrinAddB(EIntrinAddB* eintrinaddb);
   void visitEIntrinSubB(EIntrinSubB* eintrinsubb);
   void visitEIntrinMulB(EIntrinMulB* eintrinmulb);

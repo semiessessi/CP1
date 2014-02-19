@@ -1843,6 +1843,126 @@ void PrintAbsyn::visitEIntrinNegI(EIntrinNegI* p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitEIntrinCEqI(EIntrinCEqI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("cmp");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinCNeI(EIntrinCNeI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("cmp_ne");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinCLtI(EIntrinCLtI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("cmp_lt");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinCGtI(EIntrinCGtI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("cmp_gt");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinCLeI(EIntrinCLeI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("cmp_le");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinCGeI(EIntrinCGeI* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("cmp_ge");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_1->accept(this);
+  render(',');
+  _i_ = 0; p->expression_2->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitEIntrinAddB(EIntrinAddB* p)
 {
   int oldi = _i_;
@@ -5969,6 +6089,96 @@ void ShowAbsyn::visitEIntrinNegI(EIntrinNegI* p)
   bufAppend('[');
   if (p->expression_)  p->expression_->accept(this);
   bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinCEqI(EIntrinCEqI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinCEqI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinCNeI(EIntrinCNeI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinCNeI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinCLtI(EIntrinCLtI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinCLtI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinCGtI(EIntrinCGtI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinCGtI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinCLeI(EIntrinCLeI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinCLeI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinCGeI(EIntrinCGeI* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinCGeI");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
   bufAppend(' ');
   bufAppend(')');
 }

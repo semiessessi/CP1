@@ -159,6 +159,12 @@ EIntrinLshrI.				Expression10	        ::= "lshr" "<" Type ">" "(" Expression ","
 EIntrinAshrI.				Expression10	        ::= "ashr" "<" Type ">" "(" Expression "," Expression ")" ;
 EIntrinNotI.				Expression10	        ::= "not" "<" Type ">" "(" Expression ")" ;
 EIntrinNegI.				Expression10	        ::= "neg" "<" Type ">" "(" Expression ")" ;
+EIntrinCEqI.				Expression10	        ::= "cmp" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinCNeI.				Expression10	        ::= "cmp_ne" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinCLtI.				Expression10	        ::= "cmp_lt" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinCGtI.				Expression10	        ::= "cmp_gt" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinCLeI.				Expression10	        ::= "cmp_le" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinCGeI.				Expression10	        ::= "cmp_ge" "<" Type ">" "(" Expression "," Expression ")" ;
 
 EIntrinAddB.				Expression10	        ::= "add_b" "(" Expression "," Expression ")" ;
 EIntrinSubB.				Expression10	        ::= "sub_b" "(" Expression "," Expression ")" ;

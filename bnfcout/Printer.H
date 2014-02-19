@@ -164,6 +164,12 @@ class PrintAbsyn : public Visitor
   void visitEIntrinAshrI(EIntrinAshrI *p);
   void visitEIntrinNotI(EIntrinNotI *p);
   void visitEIntrinNegI(EIntrinNegI *p);
+  void visitEIntrinCEqI(EIntrinCEqI *p);
+  void visitEIntrinCNeI(EIntrinCNeI *p);
+  void visitEIntrinCLtI(EIntrinCLtI *p);
+  void visitEIntrinCGtI(EIntrinCGtI *p);
+  void visitEIntrinCLeI(EIntrinCLeI *p);
+  void visitEIntrinCGeI(EIntrinCGeI *p);
   void visitEIntrinAddB(EIntrinAddB *p);
   void visitEIntrinSubB(EIntrinSubB *p);
   void visitEIntrinMulB(EIntrinMulB *p);
@@ -543,6 +549,12 @@ class ShowAbsyn : public Visitor
   void visitEIntrinAshrI(EIntrinAshrI *p);
   void visitEIntrinNotI(EIntrinNotI *p);
   void visitEIntrinNegI(EIntrinNegI *p);
+  void visitEIntrinCEqI(EIntrinCEqI *p);
+  void visitEIntrinCNeI(EIntrinCNeI *p);
+  void visitEIntrinCLtI(EIntrinCLtI *p);
+  void visitEIntrinCGtI(EIntrinCGtI *p);
+  void visitEIntrinCLeI(EIntrinCLeI *p);
+  void visitEIntrinCGeI(EIntrinCGeI *p);
   void visitEIntrinAddB(EIntrinAddB *p);
   void visitEIntrinSubB(EIntrinSubB *p);
   void visitEIntrinMulB(EIntrinMulB *p);

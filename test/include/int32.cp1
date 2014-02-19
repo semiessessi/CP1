@@ -10,77 +10,77 @@ identity int32 ^ 0;
 
 pure commutative associative int32 +( a, b )
 {
-	return add_4b( a, b );
+	return add< int32 >( a, b );
 }
 
-pure inverse + int32 -( a )
-{
-	return neg_4b( a );
-}
+//pure inverse + int32 -( a )
+//{
+//    return neg< int32 >( a );
+//}
 
 pure anticommutative inverse + int32 -( a, b )
 {
-	return sub_4b( a, b );
+	return sub< int32 >( a, b );
 }
 
 pure commutative int32 *( a, b )
 {
-	return mul_4b( a, b );
+	return mul< int32 >( a, b );
 }
 
 pure int32 /( a, b )
 {
-	return sdiv_4b( a, b );
+	return sdiv< int32 >( a, b );
 }
 
 pure int32 %( a, b )
 {
-	return srem_4b( a, b );
+	return srem< int32 >( a, b );
 }
 
 pure commutative int32 &( a, b )
 {
-	return and_4b( a, b );
+	return and< int32 >( a, b );
 }
 
 pure commutative int32 |( a, b )
 {
-	return or_4b( a, b );
+	return or< int32 >( a, b );
 }
 
 pure commutative associative selfinverse int32 ^( a, b )
 {
-	return xor_4b( a, b );
+	return xor< int32 >( a, b );
 }
 
 pure commutative bool ==( int32 a, int32 b )
 {
-    return cmp_4b( a, b );
+    return cmp< int32 >( a, b );
 }
 
 pure commutative bool !=( int32 a, int32 b )
 {
-    return cmp_ne_4b( a, b );
+    return cmp_ne< int32 >( a, b );
 }
 
 // pure bool >( int32 a, int32 b )
 // {
-    // return cmp_gt_4b( a, b );
+    // return cmp_gt< int32 >( a, b );
 // }
 
 // pure bool <( int32 a, int32 b )
 // {
-    // return cmp_lt_4b( a, b );
+    // return cmp_lt< int32 >( a, b );
 // }
 
-// pure bool >=( int32 a, int32 b )
-// {
-    // return cmp_ge_4b( a, b );
-// }
+//pure bool >=( int32 a, int32 b )
+//{
+//    return cmp_ge< int32 >( a, b );
+//}
 
 //pure bool <=( int32 a, int32 b )
 //{
-//    return cmp_le_4b( a, b );
+//    return cmp_le< int32 >( a, b );
 //}
 
 int32 implicit up convert( const byte b )

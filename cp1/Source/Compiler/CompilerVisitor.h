@@ -128,6 +128,12 @@ class CompilerVisitor : public Visitor
   virtual void visitEIntrinAshrI(EIntrinAshrI *p) {}
   virtual void visitEIntrinNotI(EIntrinNotI *p) {}
   virtual void visitEIntrinNegI(EIntrinNegI *p) {}
+  virtual void visitEIntrinCEqI(EIntrinCEqI *p) {}
+  virtual void visitEIntrinCNeI(EIntrinCNeI *p) {}
+  virtual void visitEIntrinCLtI(EIntrinCLtI *p) {}
+  virtual void visitEIntrinCGtI(EIntrinCGtI *p) {}
+  virtual void visitEIntrinCLeI(EIntrinCLeI *p) {}
+  virtual void visitEIntrinCGeI(EIntrinCGeI *p) {}
   virtual void visitEIntrinAddB(EIntrinAddB *p) {}
   virtual void visitEIntrinSubB(EIntrinSubB *p) {}
   virtual void visitEIntrinMulB(EIntrinMulB *p) {}

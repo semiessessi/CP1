@@ -62,6 +62,30 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   virtual void visitEIntrinSExt(EIntrinSExt *p);
   virtual void visitEIntrinZExt(EIntrinZExt *p);
   
+  void visitGenericIntIntrinsic( Expression* pLeft, Expression* pRight, std::string szIntrinsic, Type* pType, const bool bBoolean = false );
+  
+  virtual void visitEIntrinAddI(EIntrinAddI *p);
+  virtual void visitEIntrinSubI(EIntrinSubI *p);
+  virtual void visitEIntrinMulI(EIntrinMulI *p);
+  virtual void visitEIntrinUdivI(EIntrinUdivI *p);
+  virtual void visitEIntrinSdivI(EIntrinSdivI *p);
+  virtual void visitEIntrinUremI(EIntrinUremI *p);
+  virtual void visitEIntrinSremI(EIntrinSremI *p);
+  virtual void visitEIntrinAndI(EIntrinAndI *p);
+  virtual void visitEIntrinOrI(EIntrinOrI *p);
+  virtual void visitEIntrinXorI(EIntrinXorI *p);
+  virtual void visitEIntrinShlI(EIntrinShlI *p);
+  virtual void visitEIntrinLshrI(EIntrinLshrI *p);
+  virtual void visitEIntrinAshrI(EIntrinAshrI *p);
+  virtual void visitEIntrinNotI(EIntrinNotI *p);
+  virtual void visitEIntrinNegI(EIntrinNegI *p);
+  virtual void visitEIntrinCEqI(EIntrinCEqI *p);
+  virtual void visitEIntrinCNeI(EIntrinCNeI *p);
+  virtual void visitEIntrinCLtI(EIntrinCLtI *p);
+  virtual void visitEIntrinCGtI(EIntrinCGtI *p);
+  virtual void visitEIntrinCLeI(EIntrinCLeI *p);
+  virtual void visitEIntrinCGeI(EIntrinCGeI *p);
+  
   virtual void visitEIntrinCEqB(EIntrinCEqB *p);
   virtual void visitEIntrinCNeB(EIntrinCNeB *p);
   virtual void visitEIntrinCLtB(EIntrinCLtB *p);

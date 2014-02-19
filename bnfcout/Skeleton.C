@@ -921,6 +921,60 @@ void Skeleton::visitEIntrinNegI(EIntrinNegI* eintrinnegi)
   eintrinnegi->expression_->accept(this);
 }
 
+void Skeleton::visitEIntrinCEqI(EIntrinCEqI* eintrinceqi)
+{
+  /* Code For EIntrinCEqI Goes Here */
+
+  eintrinceqi->type_->accept(this);
+  eintrinceqi->expression_1->accept(this);
+  eintrinceqi->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCNeI(EIntrinCNeI* eintrincnei)
+{
+  /* Code For EIntrinCNeI Goes Here */
+
+  eintrincnei->type_->accept(this);
+  eintrincnei->expression_1->accept(this);
+  eintrincnei->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCLtI(EIntrinCLtI* eintrinclti)
+{
+  /* Code For EIntrinCLtI Goes Here */
+
+  eintrinclti->type_->accept(this);
+  eintrinclti->expression_1->accept(this);
+  eintrinclti->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCGtI(EIntrinCGtI* eintrincgti)
+{
+  /* Code For EIntrinCGtI Goes Here */
+
+  eintrincgti->type_->accept(this);
+  eintrincgti->expression_1->accept(this);
+  eintrincgti->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCLeI(EIntrinCLeI* eintrinclei)
+{
+  /* Code For EIntrinCLeI Goes Here */
+
+  eintrinclei->type_->accept(this);
+  eintrinclei->expression_1->accept(this);
+  eintrinclei->expression_2->accept(this);
+}
+
+void Skeleton::visitEIntrinCGeI(EIntrinCGeI* eintrincgei)
+{
+  /* Code For EIntrinCGeI Goes Here */
+
+  eintrincgei->type_->accept(this);
+  eintrincgei->expression_1->accept(this);
+  eintrincgei->expression_2->accept(this);
+}
+
 void Skeleton::visitEIntrinAddB(EIntrinAddB* eintrinaddb)
 {
   /* Code For EIntrinAddB Goes Here */

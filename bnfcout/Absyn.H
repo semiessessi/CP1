@@ -136,6 +136,12 @@ class EIntrinLshrI;
 class EIntrinAshrI;
 class EIntrinNotI;
 class EIntrinNegI;
+class EIntrinCEqI;
+class EIntrinCNeI;
+class EIntrinCLtI;
+class EIntrinCGtI;
+class EIntrinCLeI;
+class EIntrinCGeI;
 class EIntrinAddB;
 class EIntrinSubB;
 class EIntrinMulB;
@@ -455,6 +461,12 @@ class Visitor
   virtual void visitEIntrinAshrI(EIntrinAshrI *p) = 0;
   virtual void visitEIntrinNotI(EIntrinNotI *p) = 0;
   virtual void visitEIntrinNegI(EIntrinNegI *p) = 0;
+  virtual void visitEIntrinCEqI(EIntrinCEqI *p) = 0;
+  virtual void visitEIntrinCNeI(EIntrinCNeI *p) = 0;
+  virtual void visitEIntrinCLtI(EIntrinCLtI *p) = 0;
+  virtual void visitEIntrinCGtI(EIntrinCGtI *p) = 0;
+  virtual void visitEIntrinCLeI(EIntrinCLeI *p) = 0;
+  virtual void visitEIntrinCGeI(EIntrinCGeI *p) = 0;
   virtual void visitEIntrinAddB(EIntrinAddB *p) = 0;
   virtual void visitEIntrinSubB(EIntrinSubB *p) = 0;
   virtual void visitEIntrinMulB(EIntrinMulB *p) = 0;
@@ -2468,6 +2480,96 @@ class EIntrinNegI : public Expression
   virtual void accept(Visitor *v);
   virtual  EIntrinNegI  *clone() const;
   void swap(EIntrinNegI &);
+};
+
+class EIntrinCEqI : public Expression
+{
+ public:
+  Type *type_;
+  Expression *expression_1, *expression_2;
+
+  EIntrinCEqI(const EIntrinCEqI &);
+  EIntrinCEqI &operator=(const EIntrinCEqI &);
+  EIntrinCEqI(Type *p1, Expression *p2, Expression *p3);
+  ~EIntrinCEqI();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCEqI  *clone() const;
+  void swap(EIntrinCEqI &);
+};
+
+class EIntrinCNeI : public Expression
+{
+ public:
+  Type *type_;
+  Expression *expression_1, *expression_2;
+
+  EIntrinCNeI(const EIntrinCNeI &);
+  EIntrinCNeI &operator=(const EIntrinCNeI &);
+  EIntrinCNeI(Type *p1, Expression *p2, Expression *p3);
+  ~EIntrinCNeI();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCNeI  *clone() const;
+  void swap(EIntrinCNeI &);
+};
+
+class EIntrinCLtI : public Expression
+{
+ public:
+  Type *type_;
+  Expression *expression_1, *expression_2;
+
+  EIntrinCLtI(const EIntrinCLtI &);
+  EIntrinCLtI &operator=(const EIntrinCLtI &);
+  EIntrinCLtI(Type *p1, Expression *p2, Expression *p3);
+  ~EIntrinCLtI();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCLtI  *clone() const;
+  void swap(EIntrinCLtI &);
+};
+
+class EIntrinCGtI : public Expression
+{
+ public:
+  Type *type_;
+  Expression *expression_1, *expression_2;
+
+  EIntrinCGtI(const EIntrinCGtI &);
+  EIntrinCGtI &operator=(const EIntrinCGtI &);
+  EIntrinCGtI(Type *p1, Expression *p2, Expression *p3);
+  ~EIntrinCGtI();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCGtI  *clone() const;
+  void swap(EIntrinCGtI &);
+};
+
+class EIntrinCLeI : public Expression
+{
+ public:
+  Type *type_;
+  Expression *expression_1, *expression_2;
+
+  EIntrinCLeI(const EIntrinCLeI &);
+  EIntrinCLeI &operator=(const EIntrinCLeI &);
+  EIntrinCLeI(Type *p1, Expression *p2, Expression *p3);
+  ~EIntrinCLeI();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCLeI  *clone() const;
+  void swap(EIntrinCLeI &);
+};
+
+class EIntrinCGeI : public Expression
+{
+ public:
+  Type *type_;
+  Expression *expression_1, *expression_2;
+
+  EIntrinCGeI(const EIntrinCGeI &);
+  EIntrinCGeI &operator=(const EIntrinCGeI &);
+  EIntrinCGeI(Type *p1, Expression *p2, Expression *p3);
+  ~EIntrinCGeI();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCGeI  *clone() const;
+  void swap(EIntrinCGeI &);
 };
 
 class EIntrinAddB : public Expression

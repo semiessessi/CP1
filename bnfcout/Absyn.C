@@ -2724,6 +2724,162 @@ EIntrinNegI *EIntrinNegI::clone() const {
   return new EIntrinNegI(*this);
 }
 
+/********************   EIntrinCEqI    ********************/
+EIntrinCEqI::EIntrinCEqI(Type *p1, Expression *p2, Expression *p3) { type_ = p1; expression_1 = p2; expression_2 = p3; }
+EIntrinCEqI::EIntrinCEqI(const EIntrinCEqI & other) {   type_ = other.type_->clone();
+  expression_1 = other.expression_1->clone();
+  expression_2 = other.expression_2->clone();
+
+}
+EIntrinCEqI &EIntrinCEqI::operator=(const EIntrinCEqI & other) {
+  EIntrinCEqI tmp(other);
+  swap(tmp);
+  return *this;
+}
+void EIntrinCEqI::swap(EIntrinCEqI & other) {
+  std::swap(type_, other.type_);
+  std::swap(expression_1, other.expression_1);
+  std::swap(expression_2, other.expression_2);
+
+}
+
+EIntrinCEqI::~EIntrinCEqI() { delete(type_); delete(expression_1); delete(expression_2); }
+
+void EIntrinCEqI::accept(Visitor *v) { v->visitEIntrinCEqI(this); }
+EIntrinCEqI *EIntrinCEqI::clone() const {
+  return new EIntrinCEqI(*this);
+}
+
+/********************   EIntrinCNeI    ********************/
+EIntrinCNeI::EIntrinCNeI(Type *p1, Expression *p2, Expression *p3) { type_ = p1; expression_1 = p2; expression_2 = p3; }
+EIntrinCNeI::EIntrinCNeI(const EIntrinCNeI & other) {   type_ = other.type_->clone();
+  expression_1 = other.expression_1->clone();
+  expression_2 = other.expression_2->clone();
+
+}
+EIntrinCNeI &EIntrinCNeI::operator=(const EIntrinCNeI & other) {
+  EIntrinCNeI tmp(other);
+  swap(tmp);
+  return *this;
+}
+void EIntrinCNeI::swap(EIntrinCNeI & other) {
+  std::swap(type_, other.type_);
+  std::swap(expression_1, other.expression_1);
+  std::swap(expression_2, other.expression_2);
+
+}
+
+EIntrinCNeI::~EIntrinCNeI() { delete(type_); delete(expression_1); delete(expression_2); }
+
+void EIntrinCNeI::accept(Visitor *v) { v->visitEIntrinCNeI(this); }
+EIntrinCNeI *EIntrinCNeI::clone() const {
+  return new EIntrinCNeI(*this);
+}
+
+/********************   EIntrinCLtI    ********************/
+EIntrinCLtI::EIntrinCLtI(Type *p1, Expression *p2, Expression *p3) { type_ = p1; expression_1 = p2; expression_2 = p3; }
+EIntrinCLtI::EIntrinCLtI(const EIntrinCLtI & other) {   type_ = other.type_->clone();
+  expression_1 = other.expression_1->clone();
+  expression_2 = other.expression_2->clone();
+
+}
+EIntrinCLtI &EIntrinCLtI::operator=(const EIntrinCLtI & other) {
+  EIntrinCLtI tmp(other);
+  swap(tmp);
+  return *this;
+}
+void EIntrinCLtI::swap(EIntrinCLtI & other) {
+  std::swap(type_, other.type_);
+  std::swap(expression_1, other.expression_1);
+  std::swap(expression_2, other.expression_2);
+
+}
+
+EIntrinCLtI::~EIntrinCLtI() { delete(type_); delete(expression_1); delete(expression_2); }
+
+void EIntrinCLtI::accept(Visitor *v) { v->visitEIntrinCLtI(this); }
+EIntrinCLtI *EIntrinCLtI::clone() const {
+  return new EIntrinCLtI(*this);
+}
+
+/********************   EIntrinCGtI    ********************/
+EIntrinCGtI::EIntrinCGtI(Type *p1, Expression *p2, Expression *p3) { type_ = p1; expression_1 = p2; expression_2 = p3; }
+EIntrinCGtI::EIntrinCGtI(const EIntrinCGtI & other) {   type_ = other.type_->clone();
+  expression_1 = other.expression_1->clone();
+  expression_2 = other.expression_2->clone();
+
+}
+EIntrinCGtI &EIntrinCGtI::operator=(const EIntrinCGtI & other) {
+  EIntrinCGtI tmp(other);
+  swap(tmp);
+  return *this;
+}
+void EIntrinCGtI::swap(EIntrinCGtI & other) {
+  std::swap(type_, other.type_);
+  std::swap(expression_1, other.expression_1);
+  std::swap(expression_2, other.expression_2);
+
+}
+
+EIntrinCGtI::~EIntrinCGtI() { delete(type_); delete(expression_1); delete(expression_2); }
+
+void EIntrinCGtI::accept(Visitor *v) { v->visitEIntrinCGtI(this); }
+EIntrinCGtI *EIntrinCGtI::clone() const {
+  return new EIntrinCGtI(*this);
+}
+
+/********************   EIntrinCLeI    ********************/
+EIntrinCLeI::EIntrinCLeI(Type *p1, Expression *p2, Expression *p3) { type_ = p1; expression_1 = p2; expression_2 = p3; }
+EIntrinCLeI::EIntrinCLeI(const EIntrinCLeI & other) {   type_ = other.type_->clone();
+  expression_1 = other.expression_1->clone();
+  expression_2 = other.expression_2->clone();
+
+}
+EIntrinCLeI &EIntrinCLeI::operator=(const EIntrinCLeI & other) {
+  EIntrinCLeI tmp(other);
+  swap(tmp);
+  return *this;
+}
+void EIntrinCLeI::swap(EIntrinCLeI & other) {
+  std::swap(type_, other.type_);
+  std::swap(expression_1, other.expression_1);
+  std::swap(expression_2, other.expression_2);
+
+}
+
+EIntrinCLeI::~EIntrinCLeI() { delete(type_); delete(expression_1); delete(expression_2); }
+
+void EIntrinCLeI::accept(Visitor *v) { v->visitEIntrinCLeI(this); }
+EIntrinCLeI *EIntrinCLeI::clone() const {
+  return new EIntrinCLeI(*this);
+}
+
+/********************   EIntrinCGeI    ********************/
+EIntrinCGeI::EIntrinCGeI(Type *p1, Expression *p2, Expression *p3) { type_ = p1; expression_1 = p2; expression_2 = p3; }
+EIntrinCGeI::EIntrinCGeI(const EIntrinCGeI & other) {   type_ = other.type_->clone();
+  expression_1 = other.expression_1->clone();
+  expression_2 = other.expression_2->clone();
+
+}
+EIntrinCGeI &EIntrinCGeI::operator=(const EIntrinCGeI & other) {
+  EIntrinCGeI tmp(other);
+  swap(tmp);
+  return *this;
+}
+void EIntrinCGeI::swap(EIntrinCGeI & other) {
+  std::swap(type_, other.type_);
+  std::swap(expression_1, other.expression_1);
+  std::swap(expression_2, other.expression_2);
+
+}
+
+EIntrinCGeI::~EIntrinCGeI() { delete(type_); delete(expression_1); delete(expression_2); }
+
+void EIntrinCGeI::accept(Visitor *v) { v->visitEIntrinCGeI(this); }
+EIntrinCGeI *EIntrinCGeI::clone() const {
+  return new EIntrinCGeI(*this);
+}
+
 /********************   EIntrinAddB    ********************/
 EIntrinAddB::EIntrinAddB(Expression *p1, Expression *p2) { expression_1 = p1; expression_2 = p2; }
 EIntrinAddB::EIntrinAddB(const EIntrinAddB & other) {   expression_1 = other.expression_1->clone();

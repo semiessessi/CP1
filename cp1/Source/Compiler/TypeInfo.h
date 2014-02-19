@@ -190,6 +190,25 @@ struct DetailedTypeInfo
         return out;
     }
     
+    int Size() const
+    {
+        if( bByte )
+        {
+            return 1;
+        }
+        
+        if( pxArrayType && iArrayDimension )
+        {
+            return pxArrayType->Size() * iArrayDimension;
+        }
+        
+        // if( bTypedef )
+        // {
+        // }
+        
+        return 0;
+    }
+    
 private:
     
     static std::map< std::string, DetailedTypeInfo* > sxTypeMap;

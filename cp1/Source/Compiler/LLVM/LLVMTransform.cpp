@@ -261,11 +261,13 @@ void LLVMTransformVisitor::visitDTypeConv( DTypeConv* p )
         out += " @";
         out += specificInfo.MangledName();
         out += "( ";
-        out += specificInfo.pTo->ShortLLVMName();
+        out += specificInfo.pFrom->ShortLLVMName();
         std::string szLLVMIdent = std::string( "%_dot_" ) + p->ident_;
         gxLocals[ szLLVMIdent ].szCPIdent = p->ident_;
         gxLocals[ szLLVMIdent ].szLLVMIdent = szLLVMIdent;
         gxLocals[ szLLVMIdent ].pType = specificInfo.pFrom;
+        out += " ";
+        out += szLLVMIdent;
         out += " ) nounwind\r\n{\r\n";
     
         ++siTabLevel;
@@ -306,7 +308,7 @@ void LLVMTransformVisitor::visitSReturn(SReturn *p)
         out += "\t";
     }
 	out += "ret ";
-	out += gszCurrentlyDesiredType;
+	out += pCurrentType->ShortLLVMName();
 	out += " %r";
 	out += stringFromInt( siTempCounter );
 	++siTempCounter;
@@ -689,7 +691,7 @@ void LLVMTransformVisitor::visitEChar( EChar* p )
     out += "%r";
     out += stringFromInt( siTempCounter );
     out += " = bitcast i8 ";
-    out += stringFromInt( p->cchar_[ 0 ] ); // SE - TODO: escaping
+    out += stringFromInt( static_cast< unsigned int >( p->cchar_[ 1 ] ) ); // SE - TODO: escaping
     out += " to i8\r\n";
     
     pCurrentType = DetailedTypeInfo::Find( "byte" );
@@ -944,6 +946,61 @@ void LLVMTransformVisitor::visitEOp( std::string szOperatorMangled, Expression* 
     out += " )\r\n";
 }
 
+void LLVMTransformVisitor::visitGenericIntIntrinsic( Expression* pLeft, Expression* pRight, std::string szIntrinsic, Type* pType, const bool bBoolean )
+{
+    DetailedTypeVisitor dtv;
+    pType->accept( &dtv );
+    
+    if( dtv.pxTypeInfo == 0 )
+    {
+        compileError( 0 , "Unable to resolve type!\n" );
+        return;
+    }
+    
+    int left = -1;
+
+    if( pLeft )
+    {
+        pLeft->accept( this );
+        left = siTempCounter;
+        ++siTempCounter;
+    }
+    int right = -1;
+    if( pRight )
+    {
+        pRight->accept( this );
+        right = siTempCounter;
+	    ++siTempCounter;
+    }
+
+    for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+    
+    out += "%r";
+    out += std::to_string( siTempCounter );
+    out += " = ";
+    out += szIntrinsic;
+    out += " i";
+    out += std::to_string( dtv.pxTypeInfo->Size() * 8 );
+    out += " %r";
+    out += std::to_string( left );
+    if( right != -1 )
+    {
+        out += ", %r";
+        out += std::to_string( right );
+    }
+    out += "\r\n";
+    
+    pCurrentType = dtv.pxTypeInfo;
+    if( bBoolean )
+    {
+        fixBooleanIntrinsic( dtv.pxTypeInfo->ShortLLVMName().c_str() );
+        pCurrentType = DetailedTypeInfo::Find( "byte" );
+    }
+}
+
 void LLVMTransformVisitor::visitEIntrin( Expression* pLeft, Expression* pRight, const char* szIntrinsic, const char* szType, bool boolean )
 {
     const char* oldType = gszCurrentlyDesiredType;
@@ -1047,9 +1104,7 @@ void LLVMTransformVisitor::fixBooleanIntrinsic( const char* szType )
     out += stringFromInt( siTempCounter );
     out += " = zext i1 %r";
     out += stringFromInt( siTempCounter - 1 );
-    out += " to ";
-    out += szType;
-    out += "\r\n";;
+    out += " to i8\r\n";
 }
 
 void LLVMTransformVisitor::visitEIntrinSExt(EIntrinSExt *p)
@@ -1083,6 +1138,8 @@ void LLVMTransformVisitor::visitEIntrinSExt(EIntrinSExt *p)
     out += " to ";
     out += v.pxTypeInfo->ShortLLVMName();
     out += "\r\n";
+    
+    pCurrentType = v.pxTypeInfo;
 }
 
 void LLVMTransformVisitor::visitEIntrinZExt(EIntrinZExt *p)
@@ -1116,8 +1173,11 @@ void LLVMTransformVisitor::visitEIntrinZExt(EIntrinZExt *p)
     out += " to ";
     out += v.pxTypeInfo->ShortLLVMName();
     out += "\r\n";
+    
+    pCurrentType = v.pxTypeInfo;
 }
 
+#include "LLVMIntrinIG.inl"
 #include "LLVMIntrinByte.inl"
 #include "LLVMIntrin2Byte.inl"
 #include "LLVMIntrin4Byte.inl"

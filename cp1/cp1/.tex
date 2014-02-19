@@ -68,13 +68,15 @@ The reserved words used in C:\Users\Semi\Documents\cp1\cp1\cp1\ are the followin
 {\reserved{ashr\_2b}} &{\reserved{ashr\_4b}} &{\reserved{ashr\_8b}} \\
 {\reserved{ashr\_b}} &{\reserved{ashr\_b4}} &{\reserved{ashr\_b8}} \\
 {\reserved{associative}} &{\reserved{break}} &{\reserved{breakpoint}} \\
-{\reserved{byte}} &{\reserved{cmp\_2b}} &{\reserved{cmp\_4b}} \\
-{\reserved{cmp\_8b}} &{\reserved{cmp\_b}} &{\reserved{cmp\_ge\_2b}} \\
-{\reserved{cmp\_ge\_4b}} &{\reserved{cmp\_ge\_8b}} &{\reserved{cmp\_ge\_b}} \\
+{\reserved{byte}} &{\reserved{cmp}} &{\reserved{cmp\_2b}} \\
+{\reserved{cmp\_4b}} &{\reserved{cmp\_8b}} &{\reserved{cmp\_b}} \\
+{\reserved{cmp\_ge}} &{\reserved{cmp\_ge\_2b}} &{\reserved{cmp\_ge\_4b}} \\
+{\reserved{cmp\_ge\_8b}} &{\reserved{cmp\_ge\_b}} &{\reserved{cmp\_gt}} \\
 {\reserved{cmp\_gt\_2b}} &{\reserved{cmp\_gt\_4b}} &{\reserved{cmp\_gt\_8b}} \\
-{\reserved{cmp\_gt\_b}} &{\reserved{cmp\_le\_2b}} &{\reserved{cmp\_le\_4b}} \\
-{\reserved{cmp\_le\_8b}} &{\reserved{cmp\_le\_b}} &{\reserved{cmp\_lt\_2b}} \\
-{\reserved{cmp\_lt\_4b}} &{\reserved{cmp\_lt\_8b}} &{\reserved{cmp\_lt\_b}} \\
+{\reserved{cmp\_gt\_b}} &{\reserved{cmp\_le}} &{\reserved{cmp\_le\_2b}} \\
+{\reserved{cmp\_le\_4b}} &{\reserved{cmp\_le\_8b}} &{\reserved{cmp\_le\_b}} \\
+{\reserved{cmp\_lt}} &{\reserved{cmp\_lt\_2b}} &{\reserved{cmp\_lt\_4b}} \\
+{\reserved{cmp\_lt\_8b}} &{\reserved{cmp\_lt\_b}} &{\reserved{cmp\_ne}} \\
 {\reserved{cmp\_ne\_2b}} &{\reserved{cmp\_ne\_4b}} &{\reserved{cmp\_ne\_8b}} \\
 {\reserved{cmp\_ne\_b}} &{\reserved{commutative}} &{\reserved{const}} \\
 {\reserved{continue}} &{\reserved{convert}} &{\reserved{div\_2f}} \\
@@ -325,6 +327,12 @@ All other symbols are terminals.\\
  & {\delimit}  &{\terminal{ashr}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\
  & {\delimit}  &{\terminal{not}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{)}}  \\
  & {\delimit}  &{\terminal{neg}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{)}}  \\
+ & {\delimit}  &{\terminal{cmp}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\
+ & {\delimit}  &{\terminal{cmp\_ne}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\
+ & {\delimit}  &{\terminal{cmp\_lt}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\
+ & {\delimit}  &{\terminal{cmp\_gt}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\
+ & {\delimit}  &{\terminal{cmp\_le}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\
+ & {\delimit}  &{\terminal{cmp\_ge}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\
  & {\delimit}  &{\terminal{add\_b}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\
  & {\delimit}  &{\terminal{sub\_b}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\
  & {\delimit}  &{\terminal{mul\_b}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\

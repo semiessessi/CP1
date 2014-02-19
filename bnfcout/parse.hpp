@@ -274,9 +274,15 @@
      _SYMB_232 = 491,
      _SYMB_233 = 492,
      _SYMB_234 = 493,
-     _INTEGER_ = 494,
-     _DOUBLE_ = 495,
-     _IDENT_ = 496
+     _SYMB_235 = 494,
+     _SYMB_236 = 495,
+     _SYMB_237 = 496,
+     _SYMB_238 = 497,
+     _SYMB_239 = 498,
+     _SYMB_240 = 499,
+     _INTEGER_ = 500,
+     _DOUBLE_ = 501,
+     _IDENT_ = 502
    };
 #endif
 
@@ -325,7 +331,7 @@ typedef union YYSTYPE
 
 
 /* Line 2638 of glr.c  */
-#line 329 "parse.hpp"
+#line 335 "parse.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 #endif
