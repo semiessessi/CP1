@@ -34,6 +34,7 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   //virtual void visitTCustom(TCustom *p);
   //virtual void visitTArray(TArray *p);
   //virtual void visitTFixedArray(TFixedArray *p);
+  virtual void visitSIVariable(SIVariable* p);
   virtual void visitSReturn(SReturn *p);
   virtual void visitSExpression(SExpression *p);
   virtual void visitSIf(SIf *p);

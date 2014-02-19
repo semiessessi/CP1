@@ -13,6 +13,8 @@ extern std::string szCurrentFile;
 
 extern std::vector<std::string> gaszLines;
 
+bool gbPendingCompileError = false;
+
 extern YYLTYPE yylloc;
 extern YYLTYPE* gpxLocation;
 

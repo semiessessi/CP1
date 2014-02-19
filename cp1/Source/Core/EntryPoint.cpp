@@ -17,6 +17,7 @@
 #include "../Compiler/ImportFinder.h"
 
 #include "../Error/VerboseInfo.h"
+#include "../Error/CompileError.h"
 
 #include "../Optimisers/FirstPass.h"
 
@@ -400,6 +401,12 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 				goto mainExit;
 			}
 		}
+        
+        if( gbPendingCompileError )
+        {
+            printf( "Fatal error: Errors occured during compilation\n" );
+            goto mainExit;
+        }
 	
 		if( gxSwitches.infoVerbosity > 0 )
 		{

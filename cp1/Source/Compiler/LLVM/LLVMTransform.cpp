@@ -9,6 +9,7 @@
 #include "../RVVisitor.h"
 #include "../TypeVisitor.h"
 
+#include "../../Error/CompileError.h"
 #include "../../Error/VerboseInfo.h"
 
 #include <map>
@@ -23,6 +24,7 @@ std::string sszCurrentNamespace = "_dot_";
 struct Local
 {
     DetailedTypeInfo* pType;
+    std::string szCPIdent;
     std::string szLLVMIdent;
 };
 std::map< std::string, Local > gxLocals;
@@ -128,6 +130,7 @@ void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnTy
 		out += " %_dot_";
 		out += p.szName;
         std::string szLLVMIdent = std::string( "%_dot_" ) + p.szName;
+        gxLocals[ szLLVMIdent ].szCPIdent = p.szName;
         gxLocals[ szLLVMIdent ].szLLVMIdent = szLLVMIdent;
         gxLocals[ szLLVMIdent ].pType = parameterTypes[ i ];
         
@@ -210,6 +213,7 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
 		out += " %_dot_";
 		out += p.szName;
         std::string szLLVMIdent = std::string( "%_dot_" ) + p.szName;
+        gxLocals[ szLLVMIdent ].szCPIdent = p.szName;
         gxLocals[ szLLVMIdent ].szLLVMIdent = szLLVMIdent;
         gxLocals[ szLLVMIdent ].pType = info.aszParameterTypes[ i ];
         if( i < ( info.aszParameterTypes.size() - 1 ) )
@@ -233,6 +237,20 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
 void LLVMTransformVisitor::visitSExpression(SExpression *p)
 {
     p->expression_->accept( this );
+	++siTempCounter;
+}
+
+void LLVMTransformVisitor::visitSIVariable(SIVariable* p)
+{
+    p->expression_->accept( this );
+    
+    std::string szLLVMIdent = std::string( "%_dot_" ) + p->ident_;
+    gxLocals[ szLLVMIdent ].szCPIdent = p->ident_;
+    gxLocals[ szLLVMIdent ].szLLVMIdent = std::string( "%r" ) + std::to_string( siTempCounter );
+    DetailedTypeVisitor dtv;
+    p->type_->accept( &dtv );
+    gxLocals[ szLLVMIdent ].pType = dtv.pxTypeInfo;
+    
 	++siTempCounter;
 }
 
@@ -282,7 +300,10 @@ void LLVMTransformVisitor::visitSIf( SIf *p )
 	out += ", label %endif" + std::to_string( iIfCounter ) + "\r\n";
 	out += "\r\nifbody" + std::to_string( iIfCounter ) + ":\r\n";
 	++siTempCounter;
+    
+    std::map< std::string, Local > oldLocals = gxLocals;
 	p->liststatement_->accept( this );
+    gxLocals = oldLocals;
 	for( int i = 0; i < siTabLevel; ++i )
     {
         out += "\t";
@@ -321,14 +342,18 @@ void LLVMTransformVisitor::visitSIfElse( SIfElse *p )
 	out += ", label %elsebody" + std::to_string( iIfCounter ) + "\r\n";
 	out += "\r\nif2body" + std::to_string( iIfCounter ) + ":\r\n";
 	++siTempCounter;
+	std::map< std::string, Local > oldLocals = gxLocals;
 	p->liststatement_1->accept( this );
+    gxLocals = oldLocals;
 	for( int i = 0; i < siTabLevel; ++i )
     {
         out += "\t";
     }
 	out += "br label %endif2" + std::to_string( iIfCounter ) + "\r\n";
 	out += "\r\nelsebody" + std::to_string( iIfCounter ) + ":\r\n";
+	oldLocals = gxLocals;
 	p->liststatement_2->accept( this );
+    gxLocals = oldLocals;
 	for( int i = 0; i < siTabLevel; ++i )
     {
         out += "\t";
@@ -361,7 +386,9 @@ void LLVMTransformVisitor::visitSLoop( SLoop *p )
 	
 	out += "\r\nrepeatbody" + std::to_string( iRepeatCount ) + ":\r\n";
 	
+	std::map< std::string, Local > oldLocals = gxLocals;
 	p->liststatement_->accept( this );
+    gxLocals = oldLocals;
 	
 	for( int i = 0; i < siTabLevel; ++i )
     {
@@ -433,7 +460,9 @@ void LLVMTransformVisitor::visitSWhile( SWhile *p )
 	
 	out += "\r\nwhilebody" + std::to_string( iRepeatCount ) + ":\r\n";
 	
+	std::map< std::string, Local > oldLocals = gxLocals;
 	p->liststatement_->accept( this );
+    gxLocals = oldLocals;
 	
 	for( int i = 0; i < siTabLevel; ++i )
     {
@@ -491,7 +520,9 @@ void LLVMTransformVisitor::visitSUntil( SUntil *p )
 	
 	out += "\r\nuntilbody" + std::to_string( iRepeatCount ) + ":\r\n";
 	
+	std::map< std::string, Local > oldLocals = gxLocals;
 	p->liststatement_->accept( this );
+    gxLocals = oldLocals;
 	
 	for( int i = 0; i < siTabLevel; ++i )
     {
@@ -574,37 +605,33 @@ void LLVMTransformVisitor::visitERValue(ERValue *p)
 {
     RVVisitor v;
     p->rvalue_->accept( &v );
-    // TODO: more logic
-    if( v.bByte )
+
+    for( int i = 0; i < siTabLevel; ++i )
     {
-        for( int i = 0; i < siTabLevel; ++i )
-        {
-            out += "\t";
-        }
-        out += "%r";
-        out += stringFromInt( siTempCounter );
-        std::string id = std::string( "%" ) + v.readString;
-        if( gxLocals.find( id ) != gxLocals.end() )
-        {
-            pCurrentType = gxLocals[ id ].pType;
-            out += " = bitcast ";
-            out += gxLocals[ id ].pType->ShortLLVMName();
-            out += " ";
-            out += id;
-            out += " to ";
-            out += gxLocals[ id ].pType->ShortLLVMName();
-            out += "\r\n";
-        }
-        else
-        {
-            pCurrentType = 0;
-            out += " = bitcast <unknown-type> ";
-            out += id;
-            out += " to <unknown-type>\r\n";
-        }
-        //out += " = %";
-        //out += v.readString[ 0 ];
-        //out += "\r\n";
+        out += "\t";
+    }
+    out += "%r";
+    out += stringFromInt( siTempCounter );
+    std::string id = std::string( "%" ) + v.readString;
+    if( gxLocals.find( id ) != gxLocals.end() )
+    {
+        pCurrentType = gxLocals[ id ].pType;
+        out += " = bitcast ";
+        out += gxLocals[ id ].pType->ShortLLVMName();
+        out += " ";
+        out += gxLocals[ id ].szLLVMIdent;
+        out += " to ";
+        out += gxLocals[ id ].pType->ShortLLVMName();
+        out += "\r\n";
+        
+        gxLocals[ id ].szLLVMIdent = std::string( "%r" ) + std::to_string( siTempCounter );
+    }
+    else
+    {
+        pCurrentType = 0;
+        out += " = bitcast <unknown-type> ";
+        out += id;
+        out += " to <unknown-type>\r\n";
     }
 }
 
@@ -732,11 +759,6 @@ void LLVMTransformVisitor::visitEOp( std::string szOperatorMangled, Expression* 
         pRightType = pCurrentType;
     }
 
-    for( int i = 0; i < siTabLevel; ++i )
-    {
-        out += "\t";
-    }
-
     std::vector< OperatorInfo > potentials = findOperatorInfoBySymbol( std::string( "_operator_" ) + szOperatorMangled );
     
     if( pLeftType && pRightType )
@@ -752,12 +774,18 @@ void LLVMTransformVisitor::visitEOp( std::string szOperatorMangled, Expression* 
         
     if( potentials.size() == 0 )
     {
-        // SE - TODO: couldn't match operator (!)
+        // SE - TODO: improve
+        compileError( 0, "Unable to match operator!\n" );
         return;
     }
     
     // SE - TODO: find a match properly
     int match = 0;
+    
+    for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
     
     pCurrentType = potentials[ match ].pTypeReturn;
     out += "%r";
