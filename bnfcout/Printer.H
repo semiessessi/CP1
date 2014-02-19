@@ -147,6 +147,8 @@ class PrintAbsyn : public Visitor
   void visitEPostInc(EPostInc *p);
   void visitEPostDec(EPostDec *p);
   void visitEAddress(EAddress *p);
+  void visitEIntrinSExt(EIntrinSExt *p);
+  void visitEIntrinZExt(EIntrinZExt *p);
   void visitEIntrinAddB(EIntrinAddB *p);
   void visitEIntrinSubB(EIntrinSubB *p);
   void visitEIntrinMulB(EIntrinMulB *p);
@@ -509,6 +511,8 @@ class ShowAbsyn : public Visitor
   void visitEPostInc(EPostInc *p);
   void visitEPostDec(EPostDec *p);
   void visitEAddress(EAddress *p);
+  void visitEIntrinSExt(EIntrinSExt *p);
+  void visitEIntrinZExt(EIntrinZExt *p);
   void visitEIntrinAddB(EIntrinAddB *p);
   void visitEIntrinSubB(EIntrinSubB *p);
   void visitEIntrinMulB(EIntrinMulB *p);

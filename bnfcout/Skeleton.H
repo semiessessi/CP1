@@ -128,6 +128,8 @@ class Skeleton : public Visitor
   void visitEPostInc(EPostInc* epostinc);
   void visitEPostDec(EPostDec* epostdec);
   void visitEAddress(EAddress* eaddress);
+  void visitEIntrinSExt(EIntrinSExt* eintrinsext);
+  void visitEIntrinZExt(EIntrinZExt* eintrinzext);
   void visitEIntrinAddB(EIntrinAddB* eintrinaddb);
   void visitEIntrinSubB(EIntrinSubB* eintrinsubb);
   void visitEIntrinMulB(EIntrinMulB* eintrinmulb);

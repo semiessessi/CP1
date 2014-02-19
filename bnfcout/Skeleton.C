@@ -772,6 +772,22 @@ void Skeleton::visitEAddress(EAddress* eaddress)
   eaddress->expression_->accept(this);
 }
 
+void Skeleton::visitEIntrinSExt(EIntrinSExt* eintrinsext)
+{
+  /* Code For EIntrinSExt Goes Here */
+
+  eintrinsext->type_->accept(this);
+  eintrinsext->expression_->accept(this);
+}
+
+void Skeleton::visitEIntrinZExt(EIntrinZExt* eintrinzext)
+{
+  /* Code For EIntrinZExt Goes Here */
+
+  eintrinzext->type_->accept(this);
+  eintrinzext->expression_->accept(this);
+}
+
 void Skeleton::visitEIntrinAddB(EIntrinAddB* eintrinaddb)
 {
   /* Code For EIntrinAddB Goes Here */

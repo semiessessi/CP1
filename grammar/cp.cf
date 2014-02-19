@@ -141,6 +141,9 @@ EAddress.					Expression10	        ::= "&" Expression11 ;
 
 -}
 
+EIntrinSExt.				Expression10	        ::= "sign_extend" "<" Type ">" "(" Expression ")" ;
+EIntrinZExt.				Expression10	        ::= "zero_extend" "<" Type ">" "(" Expression ")" ;
+
 EIntrinAddB.				Expression10	        ::= "add_b" "(" Expression "," Expression ")" ;
 EIntrinSubB.				Expression10	        ::= "sub_b" "(" Expression "," Expression ")" ;
 EIntrinMulB.				Expression10	        ::= "mul_b" "(" Expression "," Expression ")" ;

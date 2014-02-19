@@ -922,8 +922,7 @@ void LLVMTransformVisitor::visitEIntrin( const char* const szLeft, Expression* p
 }
 
 void LLVMTransformVisitor::fixBooleanIntrinsic( const char* szType )
-{
-    // SE - TODO: doesn't quite work... need internet :/
+{    
     for( int i = 0; i < siTabLevel; ++i )
     {
         out += "\t";
@@ -937,6 +936,72 @@ void LLVMTransformVisitor::fixBooleanIntrinsic( const char* szType )
     out += " to ";
     out += szType;
     out += "\r\n";;
+}
+
+void LLVMTransformVisitor::visitEIntrinSExt(EIntrinSExt *p)
+{
+    ++siTempCounter;
+    DetailedTypeInfo* pType = 0;
+    int exprID = -1;
+    if( p->expression_ )
+    {
+        p->expression_->accept( this );
+        exprID = siTempCounter;
+        ++siTempCounter;
+        pType = pCurrentType;
+    }
+    
+    DetailedTypeInfo* pTargetType = 0;
+    DetailedTypeVisitor v;
+    p->type_->accept( &v );
+    
+    for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+    
+    out += "%r";
+    out += stringFromInt( siTempCounter );
+    out += " = sext ";
+    out += pType->ShortLLVMName();
+    out += " %r";
+    out += std::to_string( exprID );
+    out += " to ";
+    out += v.pxTypeInfo->ShortLLVMName();
+    out += "\r\n";
+}
+
+void LLVMTransformVisitor::visitEIntrinZExt(EIntrinZExt *p)
+{
+    ++siTempCounter;
+    DetailedTypeInfo* pType = 0;
+    int exprID = -1;
+    if( p->expression_ )
+    {
+        p->expression_->accept( this );
+        exprID = siTempCounter;
+        ++siTempCounter;
+        pType = pCurrentType;
+    }
+    
+    DetailedTypeInfo* pTargetType = 0;
+    DetailedTypeVisitor v;
+    p->type_->accept( &v );
+    
+    for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+    
+    out += "%r";
+    out += stringFromInt( siTempCounter );
+    out += " = zext ";
+    out += pType->ShortLLVMName();
+    out += " %r";
+    out += std::to_string( exprID );
+    out += " to ";
+    out += v.pxTypeInfo->ShortLLVMName();
+    out += "\r\n";
 }
 
 #include "LLVMIntrinByte.inl"

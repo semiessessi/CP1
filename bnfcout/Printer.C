@@ -1511,6 +1511,42 @@ void PrintAbsyn::visitEAddress(EAddress* p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitEIntrinSExt(EIntrinSExt* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("sign_extend");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinZExt(EIntrinZExt* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("zero_extend");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitEIntrinAddB(EIntrinAddB* p)
 {
   int oldi = _i_;
@@ -5383,6 +5419,36 @@ void ShowAbsyn::visitEAddress(EAddress* p)
   bufAppend('[');
   if (p->expression_)  p->expression_->accept(this);
   bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinSExt(EIntrinSExt* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinSExt");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->expression_)  p->expression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinZExt(EIntrinZExt* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinZExt");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->expression_)  p->expression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
   bufAppend(')');
 }
 void ShowAbsyn::visitEIntrinAddB(EIntrinAddB* p)
