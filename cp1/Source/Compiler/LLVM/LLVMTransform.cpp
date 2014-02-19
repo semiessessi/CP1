@@ -691,7 +691,32 @@ void LLVMTransformVisitor::visitEChar( EChar* p )
     out += "%r";
     out += stringFromInt( siTempCounter );
     out += " = bitcast i8 ";
-    out += stringFromInt( static_cast< unsigned int >( p->cchar_[ 1 ] ) ); // SE - TODO: escaping
+    switch( p->cchar_[ 1 ] )
+    {
+        case '\\':
+        {
+            switch( p->cchar_[ 2 ] )
+            {
+                case 'n':
+                {
+                    out += "13";
+                    break;
+                }
+                case 'r':
+                {
+                    out += "10";
+                    break;
+                }
+                default:
+                    out += std::to_string( static_cast< unsigned int >( p->cchar_[ 2 ] ) );
+                    break;
+            }
+            break;
+        };
+        default:
+            out += std::to_string( static_cast< unsigned int >( p->cchar_[ 1 ] ) );
+            break;
+    }
     out += " to i8\r\n";
     
     pCurrentType = DetailedTypeInfo::Find( "byte" );
@@ -729,7 +754,13 @@ void LLVMTransformVisitor::visitESimpleCall( ESimpleCall* p )
 		out += "\t";
 	}
     
-    FunctionInfo& finfo = FindFunctionInfo( rvv.readString );
+    std::string szFunctionName = rvv.readString;
+    if( !FunctionExists( szFunctionName ) )
+    {
+        szFunctionName = sszCurrentNamespace + szFunctionName;
+    }
+    
+    FunctionInfo& finfo = FindFunctionInfo( szFunctionName );
     pCurrentType = finfo.pTypeReturn;
     if( finfo.pTypeReturn )
     {
@@ -769,7 +800,13 @@ void LLVMTransformVisitor::visitECall( ECall* p )
 		out += "\t";
 	}
     
-    FunctionInfo& finfo = FindFunctionInfo( rvv.readString );
+    std::string szFunctionName = rvv.readString;
+    if( !FunctionExists( szFunctionName ) )
+    {
+        szFunctionName = sszCurrentNamespace + szFunctionName;
+    }
+    
+    FunctionInfo& finfo = FindFunctionInfo( szFunctionName );
     pCurrentType = finfo.pTypeReturn;
     if( finfo.pTypeReturn )
     {

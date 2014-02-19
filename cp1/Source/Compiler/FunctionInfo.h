@@ -28,6 +28,7 @@ struct FunctionInfo
 };
 
 FunctionInfo& FindFunctionInfo( std::string szIdent );
+bool FunctionExists( std::string szIdent );
 
 extern std::map< std::string, FunctionInfo > gxFunctionMap;
 

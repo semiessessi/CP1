@@ -16,3 +16,8 @@ FunctionInfo& FindFunctionInfo( std::string szLLVMName )
 {   
     return gxFunctionMap[ szLLVMName ];
 }
+
+bool FunctionExists( std::string szLLVMName )
+{   
+    return gxFunctionMap.find( szLLVMName ) != gxFunctionMap.end();
+}
