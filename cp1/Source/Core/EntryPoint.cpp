@@ -10,6 +10,7 @@
 #include "../Compiler/EntryPointFinder.h"
 #include "../Compiler/LLVM/LLVMTransform.h"
 #include "../Compiler/ConstantFinder.h"
+#include "../Compiler/ConversionFinder.h"
 #include "../Compiler/ExternFinder.h"
 #include "../Compiler/FunctionFinder.h"
 #include "../Compiler/OperatorFinder.h"
@@ -310,6 +311,17 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
         	if( apCode[ i ] )
 			{
 				apCode[ i ]->accept( &cf );
+            }
+        }
+        
+        verboseInfo( 2, "Finding type conversions...\n" );
+		
+        ConversionFinder cnf;
+        for( size_t i = 0; i < apCode.size(); ++i )
+		{
+        	if( apCode[ i ] )
+			{
+				apCode[ i ]->accept( &cnf );
             }
         }
         

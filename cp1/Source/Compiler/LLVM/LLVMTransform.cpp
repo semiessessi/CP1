@@ -1,5 +1,6 @@
 #include "LLVMTransform.h"
 
+#include "../ConversionFinder.h"
 #include "../FunctionFinder.h"
 #include "../ONVisitor.h"
 #include "../OperatorFinder.h"
@@ -232,6 +233,49 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
     out += "}\r\n";
     
     gxLocals = oldLocals;
+}
+
+void LLVMTransformVisitor::visitDTypeConv( DTypeConv* p )
+{
+    DetailedTypeVisitor v1;
+    p->type_1->accept( &v1 );
+    
+    DetailedTypeVisitor v2;
+    p->type_2->accept( &v2 );
+    
+    std::vector< ConversionInfo > info = ConversionFinder::FindConversionsBetween( v2.pxTypeInfo, v1.pxTypeInfo );
+    
+    if( info.size() == 0 )
+    {
+        compileError( 0, "Unable to find suitable type conversion!\n" );
+    }
+    else
+    {
+        ConversionInfo specificInfo = info[ 0 ];
+        
+        std::map< std::string, Local > oldLocals = gxLocals;
+        gxLocals.clear();
+        
+        out += "define private ";
+        out += specificInfo.pTo->ShortLLVMName();
+        out += " @";
+        out += specificInfo.MangledName();
+        out += "( ";
+        out += specificInfo.pTo->ShortLLVMName();
+        std::string szLLVMIdent = std::string( "%_dot_" ) + p->ident_;
+        gxLocals[ szLLVMIdent ].szCPIdent = p->ident_;
+        gxLocals[ szLLVMIdent ].szLLVMIdent = szLLVMIdent;
+        gxLocals[ szLLVMIdent ].pType = specificInfo.pFrom;
+        out += " ) nounwind\r\n{\r\n";
+    
+        ++siTabLevel;
+        visitFunctionBody( p->liststatement_ );
+        --siTabLevel;
+        
+        out += "}\r\n";
+        
+        gxLocals = oldLocals;
+    }    
 }
 
 void LLVMTransformVisitor::visitSExpression(SExpression *p)
@@ -793,8 +837,46 @@ void LLVMTransformVisitor::visitEOp( std::string szOperatorMangled, Expression* 
     if( potentials.size() == 0 )
     {
         // SE - TODO: improve
-        compileError( 0, "Unable to match operator!\n" );
-        return;
+        
+        // see if we can find one from allowed conversions on the types...
+        if( pLeftType )
+        {
+            std::vector< ConversionInfo > info = ConversionFinder::FindImplicitConversionsFrom( pLeftType );
+            
+            // is the an operator that handles this type instead?
+            for( size_t i = 0; i < info.size(); ++i )
+            {
+                std::string szLookup = std::string( "_operator_" ) + szOperatorMangled + "_" + info[ i ].pTo->MangledName() + "_" + pRightType->MangledName();
+                potentials = findOperatorInfoBySymbol( szLookup );
+                if( potentials.size() > 0 )
+                {
+                    break;
+                }
+            }
+        }
+        
+        if( pLeftType && pRightType )
+        {
+            std::vector< ConversionInfo > info = ConversionFinder::FindImplicitConversionsFrom( pRightType );
+            
+            // is the an operator that handles this type instead?
+            for( size_t i = 0; i < info.size(); ++i )
+            {
+                std::string szLookup = std::string( "_operator_" ) + szOperatorMangled + "_" + pLeftType->MangledName() + "_" + info[ i ].pTo->MangledName();
+                printf( "lookup: %s\n", szLookup.c_str() );
+                potentials = findOperatorInfoBySymbol( szLookup );
+                if( potentials.size() > 0 )
+                {
+                    break;
+                }
+            }
+        }
+        
+        if( potentials.size() == 0 )
+        {
+            compileError( 0, "Unable to match operator!\n" );
+            return;
+        }
     }
     
     // SE - TODO: find a match properly

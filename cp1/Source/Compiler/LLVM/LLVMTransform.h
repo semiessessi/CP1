@@ -25,6 +25,7 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   virtual void visitDTypeDecl(DTypeDecl *p);
   //virtual void visitTBDOperator(TBDOperator *p);
   virtual void visitDOperator(DOperator *p);
+  virtual void visitDTypeConv( DTypeConv* p );
   //virtual void visitTBDTypedOperator(TBDTypedOperator *p);
   //virtual void visitTBDTypedShortOperator(TBDTypedShortOperator *p);
   //virtual void visitFSEntryPoint(FSEntryPoint *p);

@@ -53,15 +53,15 @@ pure commutative associative selfinverse int32 ^( a, b )
 	return xor_4b( a, b );
 }
 
-// pure commutative bool ==( int32 a, int32 b )
-// {
-    // return cmp_4b( a, b );
-// }
+pure commutative bool ==( int32 a, int32 b )
+{
+    return cmp_4b( a, b );
+}
 
-// pure commutative bool !=( int32 a, int32 b )
-// {
-    // return cmp_ne_4b( a, b );
-// }
+pure commutative bool !=( int32 a, int32 b )
+{
+    return cmp_ne_4b( a, b );
+}
 
 // pure bool >( int32 a, int32 b )
 // {
@@ -82,3 +82,8 @@ pure commutative associative selfinverse int32 ^( a, b )
 //{
 //    return cmp_le_4b( a, b );
 //}
+
+int32 implicit up convert( const byte b )
+{
+    return sign_extend< int32 >( b );
+}
