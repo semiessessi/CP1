@@ -635,6 +635,22 @@ void LLVMTransformVisitor::visitERValue(ERValue *p)
     }
 }
 
+void LLVMTransformVisitor::visitEChar( EChar* p )
+{
+    for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+
+    out += "%r";
+    out += stringFromInt( siTempCounter );
+    out += " = bitcast i8 ";
+    out += stringFromInt( p->cchar_[ 0 ] ); // SE - TODO: escaping
+    out += " to i8\r\n";
+    
+    pCurrentType = DetailedTypeInfo::Find( "byte" );
+}
+
 void LLVMTransformVisitor::visitEString( EString* p )
 {
     std::map< std::string, std::string >::iterator it = gszStrings.find( p->cstring_ );
@@ -653,6 +669,8 @@ void LLVMTransformVisitor::visitEString( EString* p )
         out += it->second;
         out += ", i64 0, i64 0\r\n";
     }
+    
+    pCurrentType = DetailedTypeInfo::Find( "address" );
 }
 
 void LLVMTransformVisitor::visitESimpleCall( ESimpleCall* p )
@@ -914,7 +932,7 @@ void LLVMTransformVisitor::fixBooleanIntrinsic( const char* szType )
     ++siTempCounter;
     out += "%r";
     out += stringFromInt( siTempCounter );
-    out += " = bitcast i1 %r";
+    out += " = zext i1 %r";
     out += stringFromInt( siTempCounter - 1 );
     out += " to ";
     out += szType;

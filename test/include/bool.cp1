@@ -17,7 +17,7 @@ pure commutative bool ||( a, b )
 	return or_b( a, b );
 }
 
-pure commutative associative selfinverse bool ^( a, b )
+pure commutative associative selfinverse bool ^^( a, b )
 {
 	return xor_b( a, b );
 }
@@ -30,24 +30,4 @@ pure bool ==( a, b )
 pure bool !=( a, b )
 {
     return cmp_ne_b( a, b );
-}
-
-pure bool >( a, b )
-{
-    return cmp_gt_b( a, b );
-}
-
-pure bool <( a, b )
-{
-    return cmp_lt_b( a, b );
-}
-
-pure bool >=( a, b )
-{
-    return cmp_ge_b( a, b );
-}
-
-pure bool <=( a, b )
-{
-    return cmp_le_b( a, b );
 }

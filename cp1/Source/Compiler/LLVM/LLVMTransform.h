@@ -46,6 +46,7 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   virtual void visitEInteger(EInteger *p);
   //virtual void visitEIdentifier(EIdentifier *p);
   virtual void visitEString( EString* p );
+  virtual void visitEChar( EChar* p );
   //virtual void visitEPi(EPi *p);
   virtual void visitERValue(ERValue *p);
   virtual void visitESimpleCall(ESimpleCall *p);
