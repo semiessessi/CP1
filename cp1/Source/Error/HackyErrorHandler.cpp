@@ -201,7 +201,7 @@ void yyerror(const char *str)
             if( f != -1 )
             {
 				printf( "   \t|-" );
-                const int iLimit = ( gpxLocation->last_column < gaszLines[ yy_mylinenumber ].size() )
+                const int iLimit = ( gpxLocation->last_column < (int) gaszLines[ yy_mylinenumber ].size() )
                     ? gpxLocation->last_column
                     : ( gpxLocation->first_column + 1 );
 			    for( int i = 0; i < iLimit; ++i )
@@ -226,7 +226,7 @@ void yyerror(const char *str)
 				    printf( " " );
 			    }
                 printf( "|" );
-                const int iLimit = ( gpxLocation->last_column < gaszLines[ yy_mylinenumber ].size() )
+                const int iLimit = ( gpxLocation->last_column < (int) gaszLines[ yy_mylinenumber ].size() )
                     ? gpxLocation->last_column
                     : ( gpxLocation->first_column + 1 );
 			    for( int i = gpxLocation->first_column; i < iLimit; ++i )
