@@ -1291,147 +1291,27 @@ void LLVMTransformVisitor::visitESub(ESub *p)
 
 void LLVMTransformVisitor::visitELSh(ELSh *p)
 {
-    // are we operating on built-in types?
-	int left = siTempCounter;
-
-    p->expression_1->accept( this );
-
-    ++siTempCounter;
-
-    int right = siTempCounter;
-
-    p->expression_2->accept( this );
-
-	++siTempCounter;
-
-    for( int i = 0; i < siTabLevel; ++i )
-    {
-        out += "\t";
-    }
-    
-    out += "%r";
-    out += stringFromInt( siTempCounter );
-    out += " = shl i8 %r";
-    out += stringFromInt( left );
-    out += ", %r";
-    out += stringFromInt( right );
-    out += "\r\n";
+    visitEOp( "cgg", p->expression_1, p->expression_2 );
 }
 
 void LLVMTransformVisitor::visitERSh(ERSh *p)
 {
-    // are we operating on built-in types?
-	int left = siTempCounter;
-
-    p->expression_1->accept( this );
-
-    ++siTempCounter;
-
-    int right = siTempCounter;
-
-    p->expression_2->accept( this );
-
-	++siTempCounter;
-
-    for( int i = 0; i < siTabLevel; ++i )
-    {
-        out += "\t";
-    }
-    
-    out += "%r";
-    out += stringFromInt( siTempCounter );
-    out += " = lshr i8 %r";
-    out += stringFromInt( left );
-    out += ", %r";
-    out += stringFromInt( right );
-    out += "\r\n";
+    visitEOp( "cll", p->expression_1, p->expression_2 );
 }
 
 void LLVMTransformVisitor::visitEBand(EBand *p)
 {
-    // are we operating on built-in types?
-	int left = siTempCounter;
-
-    p->expression_1->accept( this );
-
-    ++siTempCounter;
-
-    int right = siTempCounter;
-
-    p->expression_2->accept( this );
-
-	++siTempCounter;
-
-    for( int i = 0; i < siTabLevel; ++i )
-    {
-        out += "\t";
-    }
-    
-    out += "%r";
-    out += stringFromInt( siTempCounter );
-    out += " = and i8 %r";
-    out += stringFromInt( left );
-    out += ", %r";
-    out += stringFromInt( right );
-    out += "\r\n";
+    visitEOp( "caa", p->expression_1, p->expression_2 );
 }
 
 void LLVMTransformVisitor::visitEBor(EBor *p)
 {
-    // are we operating on built-in types?
-	int left = siTempCounter;
-
-    p->expression_1->accept( this );
-
-    ++siTempCounter;
-
-    int right = siTempCounter;
-
-    p->expression_2->accept( this );
-
-	++siTempCounter;
-
-    for( int i = 0; i < siTabLevel; ++i )
-    {
-        out += "\t";
-    }
-    
-    out += "%r";
-    out += stringFromInt( siTempCounter );
-    out += " = or i8 %r";
-    out += stringFromInt( left );
-    out += ", %r";
-    out += stringFromInt( right );
-    out += ";\r\n";
+    visitEOp( "coo", p->expression_1, p->expression_2 );
 }
 
 void LLVMTransformVisitor::visitEBxor(EBxor *p)
 {
-    // are we operating on built-in types?
-	int left = siTempCounter;
-
-    p->expression_1->accept( this );
-
-    ++siTempCounter;
-
-    int right = siTempCounter;
-
-    p->expression_2->accept( this );
-
-	++siTempCounter;
-
-    for( int i = 0; i < siTabLevel; ++i )
-    {
-        out += "\t";
-    }
-    
-    out += "%r";
-    out += stringFromInt( siTempCounter );
-    out += " = xor i8 %r";
-    out += stringFromInt( left );
-    out += ", %r";
-    out += stringFromInt( right );
-    out += "\r\n";
+    visitEOp( "cxx", p->expression_1, p->expression_2 );
 }
 
 
