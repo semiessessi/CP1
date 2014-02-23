@@ -468,6 +468,11 @@ void LLVMTransformVisitor::visitSLoop( SLoop *p )
 	int iRepeatCount = siRepeatCounter;
 	++siRepeatCounter;
 	
+    for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "br label %repeat" + std::to_string( iRepeatCount ) + "\r\n";
 	out += "repeat" + std::to_string( iRepeatCount ) + ":\r\n";
 
 	p->expression_->accept( this );
