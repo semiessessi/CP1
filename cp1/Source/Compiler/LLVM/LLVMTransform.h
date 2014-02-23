@@ -61,6 +61,7 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   
   virtual void visitEIntrinSExt(EIntrinSExt *p);
   virtual void visitEIntrinZExt(EIntrinZExt *p);
+  virtual void visitEIntrinCast(EIntrinZExt *p);
   
   void visitGenericIntIntrinsic( Expression* pLeft, Expression* pRight, std::string szIntrinsic, Type* pType, const bool bBoolean = false );
   

@@ -794,6 +794,22 @@ void Skeleton::visitEIntrinZExt(EIntrinZExt* eintrinzext)
   eintrinzext->expression_->accept(this);
 }
 
+void Skeleton::visitEIntrinCast(EIntrinCast* eintrincast)
+{
+  /* Code For EIntrinCast Goes Here */
+
+  eintrincast->type_->accept(this);
+  eintrincast->expression_->accept(this);
+}
+
+void Skeleton::visitEIntrinConvert(EIntrinConvert* eintrinconvert)
+{
+  /* Code For EIntrinConvert Goes Here */
+
+  eintrinconvert->type_->accept(this);
+  eintrinconvert->expression_->accept(this);
+}
+
 void Skeleton::visitEIntrinAddI(EIntrinAddI* eintrinaddi)
 {
   /* Code For EIntrinAddI Goes Here */

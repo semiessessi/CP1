@@ -1232,6 +1232,41 @@ void LLVMTransformVisitor::visitEIntrinZExt(EIntrinZExt *p)
     pCurrentType = v.pxTypeInfo;
 }
 
+void LLVMTransformVisitor::visitEIntrinCast(EIntrinZExt *p)
+{
+    ++siTempCounter;
+    DetailedTypeInfo* pType = 0;
+    int exprID = -1;
+    if( p->expression_ )
+    {
+        p->expression_->accept( this );
+        exprID = siTempCounter;
+        ++siTempCounter;
+        pType = pCurrentType;
+    }
+    
+    DetailedTypeInfo* pTargetType = 0;
+    DetailedTypeVisitor v;
+    p->type_->accept( &v );
+    
+    for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+    
+    out += "%r";
+    out += stringFromInt( siTempCounter );
+    out += " = bitcast ";
+    out += pType->ShortLLVMName();
+    out += " %r";
+    out += std::to_string( exprID );
+    out += " to ";
+    out += v.pxTypeInfo->ShortLLVMName();
+    out += "\r\n";
+    
+    pCurrentType = v.pxTypeInfo;
+}
+
 #include "LLVMIntrinIG.inl"
 
 void LLVMTransformVisitor::visitEE( EE* p )

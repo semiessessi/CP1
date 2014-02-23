@@ -4,71 +4,71 @@ comment "/*" "*/" ;
 
 entrypoints Code ;
 
-Main. 						Code 					::= [TLDeclaration] [Declaration] ;
+Main.                       Code                    ::= [TLDeclaration] [Declaration] ;
 
-DImport.					TLDeclaration			::= "import" Ident ";" ;
-DExpose.					TLDeclaration			::= "expose" Ident ";" ;
+DImport.                    TLDeclaration           ::= "import" Ident ";" ;
+DExpose.                    TLDeclaration           ::= "expose" Ident ";" ;
 
-DNamespace.					Declaration				::= "namespace" Ident "{" [Declaration] "}" ;
-DDefaultFunction.			Declaration				::= [FunctionSpecifier] Ident "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
-DFunction.					Declaration				::= [FunctionSpecifier] Type Ident "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
-DOperator.					Declaration				::= [FunctionSpecifier] Type OperatorName "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
-DOperatorInfo.				Declaration				::= OperatorTrait ";" ;
-DTypeDecl.					Declaration				::= [TypeSpecifier] "type" Type Ident ";" ;
+DNamespace.                 Declaration             ::= "namespace" Ident "{" [Declaration] "}" ;
+DDefaultFunction.           Declaration             ::= [FunctionSpecifier] Ident "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
+DFunction.                  Declaration             ::= [FunctionSpecifier] Type Ident "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
+DOperator.                  Declaration             ::= [FunctionSpecifier] Type OperatorName "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
+DOperatorInfo.              Declaration             ::= OperatorTrait ";" ;
+DTypeDecl.                  Declaration             ::= [TypeSpecifier] "type" Type Ident ";" ;
 DTypeConv.                  Declaration             ::= Type [ConversionSpecifier] "convert" "(" "const" Type Ident ")" "{" [Statement] "}" ;
-DExtern.					Declaration				::= "extern" Prototype ;
-DIVariable.					Declaration				::= [VariableSpecifier] Type Ident "=" Expression ";" ;
-DVariable.					Declaration				::= [VariableSpecifier] Type Ident ";" ;
+DExtern.                    Declaration             ::= "extern" Prototype ;
+DIVariable.                 Declaration             ::= [VariableSpecifier] Type Ident "=" Expression ";" ;
+DVariable.                  Declaration             ::= [VariableSpecifier] Type Ident ";" ;
 
--- PDefaultFunction.			Prototype				::= [FunctionSpecifier] Ident "(" [ParameterDeclaration] ")" ";" ;
-PFunction.					Prototype				::= [FunctionSpecifier] Type Ident "(" [ParameterDeclaration] ")" ";" ;
+-- PDefaultFunction.            Prototype               ::= [FunctionSpecifier] Ident "(" [ParameterDeclaration] ")" ";" ;
+PFunction.                  Prototype               ::= [FunctionSpecifier] Type Ident "(" [ParameterDeclaration] ")" ";" ;
 
--- ONOp.						OperatorName            ::= Operator;
-ONLnot.						OperatorName		    ::= "!" ;
-ONPreInc.					OperatorName		    ::= "++" ;
-ONPreDec.					OperatorName		    ::= "--" ;
-ONBnot.						OperatorName		    ::= "~" ;
-ONMul.						OperatorName		    ::= "*" ;
-ONExp.					    OperatorName		    ::= "**" ;
-ONDiv.						OperatorName		    ::= "/" ;
-ONRDiv.						OperatorName		    ::= "\\" ;
-ONMod.						OperatorName		    ::= "%" ;
-ONAdd.						OperatorName		    ::= "+" ;
-ONSub.						OperatorName		    ::= "-" ;
-ONLSh.						OperatorName		    ::= "<<" ;
-ONRSh.						OperatorName		    ::= ">>" ;
-ONLT.						OperatorName		    ::= "<" ;
-ONGT.						OperatorName		    ::= ">" ;
-ONLE.						OperatorName		    ::= "<=" ;
-ONGE.						OperatorName		    ::= ">=" ;
-ONE.						OperatorName		    ::= "==" ;
-ONNE.						OperatorName		    ::= "!=" ;
-ONBand.						OperatorName		    ::= "&" ;
-ONBor.						OperatorName		    ::= "|" ;
-ONBxor.						OperatorName		    ::= "^" ;
-ONLand.						OperatorName		    ::= "&&" ;
-ONLor.						OperatorName		    ::= "||" ;
-ONLxor.						OperatorName		    ::= "^^" ;
-ONRight.					OperatorName		    ::= "->" ;
-ONLeft.						OperatorName		    ::= "<-" ;
+-- ONOp.                        OperatorName            ::= Operator;
+ONLnot.                     OperatorName            ::= "!" ;
+ONPreInc.                   OperatorName            ::= "++" ;
+ONPreDec.                   OperatorName            ::= "--" ;
+ONBnot.                     OperatorName            ::= "~" ;
+ONMul.                      OperatorName            ::= "*" ;
+ONExp.                      OperatorName            ::= "**" ;
+ONDiv.                      OperatorName            ::= "/" ;
+ONRDiv.                     OperatorName            ::= "\\" ;
+ONMod.                      OperatorName            ::= "%" ;
+ONAdd.                      OperatorName            ::= "+" ;
+ONSub.                      OperatorName            ::= "-" ;
+ONLSh.                      OperatorName            ::= "<<" ;
+ONRSh.                      OperatorName            ::= ">>" ;
+ONLT.                       OperatorName            ::= "<" ;
+ONGT.                       OperatorName            ::= ">" ;
+ONLE.                       OperatorName            ::= "<=" ;
+ONGE.                       OperatorName            ::= ">=" ;
+ONE.                        OperatorName            ::= "==" ;
+ONNE.                       OperatorName            ::= "!=" ;
+ONBand.                     OperatorName            ::= "&" ;
+ONBor.                      OperatorName            ::= "|" ;
+ONBxor.                     OperatorName            ::= "^" ;
+ONLand.                     OperatorName            ::= "&&" ;
+ONLor.                      OperatorName            ::= "||" ;
+ONLxor.                     OperatorName            ::= "^^" ;
+ONRight.                    OperatorName            ::= "->" ;
+ONLeft.                     OperatorName            ::= "<-" ;
 
-OTIdentity.					OperatorTrait           ::= "identity" Type OperatorName Expression ;
+OTIdentity.                 OperatorTrait           ::= "identity" Type OperatorName Expression ;
 
-FSEntryPoint.				FunctionSpecifier		::= "entrypoint" ;
-FSPure.						FunctionSpecifier		::= "pure" ;
-FSConst.					FunctionSpecifier		::= "const" ;
-FSInline.					FunctionSpecifier		::= "inline" ;
-FSAssociative.				FunctionSpecifier		::= "associative" ;
-FSCommutative.				FunctionSpecifier		::= "commutative" ;
-FSAntiCommutative.			FunctionSpecifier		::= "anticommutative" ;
-FSInverse.					FunctionSpecifier		::= "inverse" OperatorName ;
-FSSelfInverse.				FunctionSpecifier		::= "selfinverse" ;
+FSEntryPoint.               FunctionSpecifier       ::= "entrypoint" ;
+FSPure.                     FunctionSpecifier       ::= "pure" ;
+FSConst.                    FunctionSpecifier       ::= "const" ;
+FSInline.                   FunctionSpecifier       ::= "inline" ;
+FSAssociative.              FunctionSpecifier       ::= "associative" ;
+FSCommutative.              FunctionSpecifier       ::= "commutative" ;
+FSAntiCommutative.          FunctionSpecifier       ::= "anticommutative" ;
+FSInverse.                  FunctionSpecifier       ::= "inverse" OperatorName ;
+FSSelfInverse.              FunctionSpecifier       ::= "selfinverse" ;
 
 CSUp.                       ConversionSpecifier     ::= "up" ;
 CSDown.                     ConversionSpecifier     ::= "down" ;
 CSImplicit.                 ConversionSpecifier     ::= "implicit" ;
 
-VSConst.					VariableSpecifier		::= "const" ;
+VSConst.                    VariableSpecifier       ::= "const" ;
 
 TSAlign.                    TypeSpecifier           ::= "align" "<" Integer ">" ;
 TSGeneric.                  TypeSpecifier           ::= "generic" "<" [GenericParam] ">" ;
@@ -77,24 +77,24 @@ TSReal.                     TypeSpecifier           ::= "real" ;
 
 TSGParam.                   GenericParam            ::= Type Ident ;
 
-TAddress.					Type					::= "address" ;
-TByte.						Type					::= "byte" ;
-TCustom.					Type					::= Ident ;
-TFixedArray.				Type					::= Type "[" Integer "]" ;
-TGenericArray.				Type					::= Type "[" "]" ;
-TStruct.					Type					::= "{" [StructMemberDeclaration] ";" "}" ;
-TType.					    Type					::= "type" ;
+TAddress.                   Type                    ::= "address" ;
+TByte.                      Type                    ::= "byte" ;
+TCustom.                    Type                    ::= Ident ;
+TFixedArray.                Type                    ::= Type "[" Integer "]" ;
+TGenericArray.              Type                    ::= Type "[" "]" ;
+TStruct.                    Type                    ::= "{" [StructMemberDeclaration] ";" "}" ;
+TType.                      Type                    ::= "type" ;
 
-SMDMemberDeclaration.		StructMemberDeclaration	::= Type Ident ";" ;
+SMDMemberDeclaration.       StructMemberDeclaration ::= Type Ident ";" ;
 
-PDAutoParameter.			ParameterDeclaration	::= [VariableSpecifier] Ident ;
-PDTypedParameter.			ParameterDeclaration	::= [VariableSpecifier] Type Ident ;
+PDAutoParameter.            ParameterDeclaration    ::= [VariableSpecifier] Ident ;
+PDTypedParameter.           ParameterDeclaration    ::= [VariableSpecifier] Type Ident ;
  
-SReturn.					Statement				::= "return" Expression ";" ;
-SExpression.				Statement 				::= Expression ";" ;
-SScope.                     Statement 				::= "{" [Statement] "}" ;
-SIf.                        Statement 				::= "if" "(" Expression ")" "{" [Statement] "}" ;
-SIfElse.                    Statement 				::= "if" "(" Expression ")" "{" [Statement] "}" "else" "{" [Statement] "}" ;
+SReturn.                    Statement               ::= "return" Expression ";" ;
+SExpression.                Statement               ::= Expression ";" ;
+SScope.                     Statement               ::= "{" [Statement] "}" ;
+SIf.                        Statement               ::= "if" "(" Expression ")" "{" [Statement] "}" ;
+SIfElse.                    Statement               ::= "if" "(" Expression ")" "{" [Statement] "}" "else" "{" [Statement] "}" ;
 SLoop.                      Statement               ::= "repeat" "(" Expression ")" "{" [Statement] "}" ;
 SWhile.                     Statement               ::= "while" "(" Expression ")" "{" [Statement] "}" ;
 SUntil.                     Statement               ::= "until" "(" Expression ")" "{" [Statement] "}" ;
@@ -105,36 +105,36 @@ SBreak.                     Statement               ::= "break" ";" ;
 SContinue.                  Statement               ::= "continue" ";" ;
 SBreakpoint.                Statement               ::= "breakpoint" ";" ;
 -- don't quite allow all declarations...
---SDecl.						Statement				::= Declaration ;
---SDefaultFunction.			Statement				::= [FunctionSpecifier] Ident "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
---SFunction.					Statement				::= [FunctionSpecifier] Type Ident "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
---STypeDecl.					Statement				::= [TypeSpecifier] "type" Type Ident ";" ;
-SIVariable.					Statement				::= [VariableSpecifier] Type Ident "=" Expression ";" ;
-SVariable.					Statement				::= [VariableSpecifier] Type Ident ";" ;
+--SDecl.                        Statement               ::= Declaration ;
+--SDefaultFunction.         Statement               ::= [FunctionSpecifier] Ident "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
+--SFunction.                    Statement               ::= [FunctionSpecifier] Type Ident "(" [ParameterDeclaration] ")" "{" [Statement] "}" ;
+--STypeDecl.                    Statement               ::= [TypeSpecifier] "type" Type Ident ";" ;
+SIVariable.                 Statement               ::= [VariableSpecifier] Type Ident "=" Expression ";" ;
+SVariable.                  Statement               ::= [VariableSpecifier] Type Ident ";" ;
 
-RVIdent.					RValue                  ::= Ident ;
-RVQualified.				RValue					::= Ident "." RValue ;
+RVIdent.                    RValue                  ::= Ident ;
+RVQualified.                RValue                  ::= Ident "." RValue ;
 
-EDouble.					Expression11			::= Double ;
-EInteger.					Expression11			::= Integer ;
-EString.					Expression11			::= CString ;
-EChar.					    Expression11			::= CChar ;
-EPi.						Expression11			::= "pi" ;
-ERValue.					Expression11            ::= RValue ;
+EDouble.                    Expression11            ::= Double ;
+EInteger.                   Expression11            ::= Integer ;
+EString.                    Expression11            ::= CString ;
+EChar.                      Expression11            ::= CChar ;
+EPi.                        Expression11            ::= "pi" ;
+ERValue.                    Expression11            ::= RValue ;
 
-EArray.						Expression10			::= "{" [Expression] "}" ;
-EList.						Expression10			::= "[" [Expression] "]" ;
+EArray.                     Expression10            ::= "{" [Expression] "}" ;
+EList.                      Expression10            ::= "[" [Expression] "]" ;
 
-EAComp.						Expression10			::= "{" Expression "where" [Expression] "}" ;
-ELComp.						Expression10			::= "[" Expression "where" [Expression] "]" ;
+EAComp.                     Expression10            ::= "{" Expression "where" [Expression] "}" ;
+ELComp.                     Expression10            ::= "[" Expression "where" [Expression] "]" ;
 
-EIndex.						Expression10			::=  Expression "[" Expression "]" ;
+EIndex.                     Expression10            ::=  Expression "[" Expression "]" ;
 
-ESimpleCall.				Expression10			::= RValue "(" ")" ;
-ECall.						Expression10			::= RValue "(" [Expression] ")" ;
-EPostInc.					Expression10	        ::= RValue "++" ;
-EPostDec.					Expression10	        ::= RValue "--" ;
-EAddress.					Expression10	        ::= "&" Expression11 ;
+ESimpleCall.                Expression10            ::= RValue "(" ")" ;
+ECall.                      Expression10            ::= RValue "(" [Expression] ")" ;
+EPostInc.                   Expression10            ::= RValue "++" ;
+EPostDec.                   Expression10            ::= RValue "--" ;
+EAddress.                   Expression10            ::= "&" Expression11 ;
 
 {-
 
@@ -142,8 +142,10 @@ EAddress.					Expression10	        ::= "&" Expression11 ;
 
 -}
 
-EIntrinSExt.				Expression10	        ::= "sign_extend" "<" Type ">" "(" Expression ")" ;
-EIntrinZExt.				Expression10	        ::= "zero_extend" "<" Type ">" "(" Expression ")" ;
+EIntrinSExt.                Expression10            ::= "sign_extend" "<" Type ">" "(" Expression ")" ;
+EIntrinZExt.                Expression10            ::= "zero_extend" "<" Type ">" "(" Expression ")" ;
+EIntrinCast.                Expression10            ::= "cast" "<" Type ">" "(" Expression ")" ;
+EIntrinConvert.             Expression10            ::= "convert_to" "<" Type ">" "(" Expression ")" ;
 
 EIntrinAddI.                Expression10            ::= "add" "<" Type ">" "(" Expression "," Expression ")" ;
 EIntrinSubI.                Expression10            ::= "sub" "<" Type ">" "(" Expression "," Expression ")" ;
@@ -152,20 +154,20 @@ EIntrinUdivI.               Expression10            ::= "udiv" "<" Type ">" "(" 
 EIntrinSdivI.               Expression10            ::= "sdiv" "<" Type ">" "(" Expression "," Expression ")" ;
 EIntrinUremI.               Expression10            ::= "urem" "<" Type ">" "(" Expression "," Expression ")" ;
 EIntrinSremI.               Expression10            ::= "srem" "<" Type ">" "(" Expression "," Expression ")" ;
-EIntrinAndI.				Expression10	        ::= "and" "<" Type ">" "(" Expression "," Expression ")" ;
-EIntrinOrI.					Expression10	        ::= "or" "<" Type ">" "(" Expression "," Expression ")" ;
-EIntrinXorI.				Expression10	        ::= "xor" "<" Type ">" "(" Expression "," Expression ")" ;
-EIntrinShlI.				Expression10	        ::= "shl" "<" Type ">" "(" Expression "," Expression ")" ;
-EIntrinLshrI.				Expression10	        ::= "lshr" "<" Type ">" "(" Expression "," Expression ")" ;
-EIntrinAshrI.				Expression10	        ::= "ashr" "<" Type ">" "(" Expression "," Expression ")" ;
-EIntrinNotI.				Expression10	        ::= "not" "<" Type ">" "(" Expression ")" ;
-EIntrinNegI.				Expression10	        ::= "neg" "<" Type ">" "(" Expression ")" ;
-EIntrinCEqI.				Expression10	        ::= "cmp" "<" Type ">" "(" Expression "," Expression ")" ;
-EIntrinCNeI.				Expression10	        ::= "cmp_ne" "<" Type ">" "(" Expression "," Expression ")" ;
-EIntrinCLtI.				Expression10	        ::= "cmp_lt" "<" Type ">" "(" Expression "," Expression ")" ;
-EIntrinCGtI.				Expression10	        ::= "cmp_gt" "<" Type ">" "(" Expression "," Expression ")" ;
-EIntrinCLeI.				Expression10	        ::= "cmp_le" "<" Type ">" "(" Expression "," Expression ")" ;
-EIntrinCGeI.				Expression10	        ::= "cmp_ge" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinAndI.                Expression10            ::= "and" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinOrI.                 Expression10            ::= "or" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinXorI.                Expression10            ::= "xor" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinShlI.                Expression10            ::= "shl" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinLshrI.               Expression10            ::= "lshr" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinAshrI.               Expression10            ::= "ashr" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinNotI.                Expression10            ::= "not" "<" Type ">" "(" Expression ")" ;
+EIntrinNegI.                Expression10            ::= "neg" "<" Type ">" "(" Expression ")" ;
+EIntrinCEqI.                Expression10            ::= "cmp" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinCNeI.                Expression10            ::= "cmp_ne" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinCLtI.                Expression10            ::= "cmp_lt" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinCGtI.                Expression10            ::= "cmp_gt" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinCLeI.                Expression10            ::= "cmp_le" "<" Type ">" "(" Expression "," Expression ")" ;
+EIntrinCGeI.                Expression10            ::= "cmp_ge" "<" Type ">" "(" Expression "," Expression ")" ;
 
 {-
 
@@ -173,55 +175,55 @@ EIntrinCGeI.				Expression10	        ::= "cmp_ge" "<" Type ">" "(" Expression ",
 
 -}
 
-ELnot.						Expression9		        ::= "!" Expression10 ;
-EPreInc.					Expression9		        ::= "++" RValue ;
-EPreDec.					Expression9		        ::= "--" RValue ;
-ENeg.						Expression9		        ::= "-" Expression10 ;
-EBnot.						Expression9		        ::= "~" Expression10 ;
-EPos.						Expression9		        ::= "+" Expression10 ;
--- EUnaryOperator.				Expression9				::= Operator Expression10 ;
+ELnot.                      Expression9             ::= "!" Expression10 ;
+EPreInc.                    Expression9             ::= "++" RValue ;
+EPreDec.                    Expression9             ::= "--" RValue ;
+ENeg.                       Expression9             ::= "-" Expression10 ;
+EBnot.                      Expression9             ::= "~" Expression10 ;
+EPos.                       Expression9             ::= "+" Expression10 ;
+-- EUnaryOperator.              Expression9             ::= Operator Expression10 ;
 
-EMul.						Expression8		        ::= Expression8 "*" Expression9 ;
-EDiv.						Expression8		        ::= Expression8 "/" Expression9 ;
-EMod.						Expression8		        ::= Expression8 "%" Expression9 ;
+EMul.                       Expression8             ::= Expression8 "*" Expression9 ;
+EDiv.                       Expression8             ::= Expression8 "/" Expression9 ;
+EMod.                       Expression8             ::= Expression8 "%" Expression9 ;
 
-EAdd.						Expression7		        ::= Expression7 "+" Expression8 ;
-ESub.						Expression7		        ::= Expression7 "-" Expression8 ;
+EAdd.                       Expression7             ::= Expression7 "+" Expression8 ;
+ESub.                       Expression7             ::= Expression7 "-" Expression8 ;
 
-ELSh.						Expression6		        ::= Expression6 "<<" Expression7 ;
-ERSh.						Expression6		        ::= Expression6 ">>" Expression7 ;
--- EBinaryOperator.			Expression6				::= Expression6 Operator Expression7 ;
+ELSh.                       Expression6             ::= Expression6 "<<" Expression7 ;
+ERSh.                       Expression6             ::= Expression6 ">>" Expression7 ;
+-- EBinaryOperator.         Expression6             ::= Expression6 Operator Expression7 ;
 
-ELT.						Expression5		        ::= Expression6 "<" Expression6 ;
-EGT.						Expression5		        ::= Expression6 ">" Expression6 ;
-ELE.						Expression5		        ::= Expression6 "<=" Expression6 ;
-EGE.						Expression5		        ::= Expression6 ">=" Expression6 ;
+ELT.                        Expression5             ::= Expression6 "<" Expression6 ;
+EGT.                        Expression5             ::= Expression6 ">" Expression6 ;
+ELE.                        Expression5             ::= Expression6 "<=" Expression6 ;
+EGE.                        Expression5             ::= Expression6 ">=" Expression6 ;
 
-EE.							Expression4		        ::= Expression5 "==" Expression5 ;
-ENE.						Expression4		        ::= Expression5 "!=" Expression5 ;
+EE.                         Expression4             ::= Expression5 "==" Expression5 ;
+ENE.                        Expression4             ::= Expression5 "!=" Expression5 ;
 
-EBand.						Expression3		        ::= Expression3 "&" Expression4 ;
-EBor.						Expression3		        ::= Expression3 "|" Expression4 ;
-EBxor.						Expression3		        ::= Expression3 "^" Expression4 ;
+EBand.                      Expression3             ::= Expression3 "&" Expression4 ;
+EBor.                       Expression3             ::= Expression3 "|" Expression4 ;
+EBxor.                      Expression3             ::= Expression3 "^" Expression4 ;
 
-ELand.						Expression2		        ::= Expression3 "&&" Expression3 ;
-ELor.						Expression2		        ::= Expression3 "||" Expression3 ;
-ELxor.						Expression2		        ::= Expression3 "^^" Expression3 ;
+ELand.                      Expression2             ::= Expression3 "&&" Expression3 ;
+ELor.                       Expression2             ::= Expression3 "||" Expression3 ;
+ELxor.                      Expression2             ::= Expression3 "^^" Expression3 ;
 
-EConditional.  				Expression1  	        ::= Expression2 "?" Expression2 ":" Expression2 ;
--- ETernaryOperator.  			Expression1  			::= Expression2 OperatorName Expression2 OperatorName Expression2 ;
+EConditional.               Expression1             ::= Expression2 "?" Expression2 ":" Expression2 ;
+-- ETernaryOperator.            Expression1             ::= Expression2 OperatorName Expression2 OperatorName Expression2 ;
 
-EAssign. 					Expression		        ::= RValue "=" Expression ;
-EAddAssign.					Expression		        ::= RValue "+=" Expression ;
-ESubAssign.					Expression		        ::= RValue "-=" Expression ;
-EMulAssign.					Expression		        ::= RValue "*=" Expression ;
-EDivAssign.					Expression		        ::= RValue "/=" Expression ;
-EModAssign.					Expression		        ::= RValue "%=" Expression ;
-EAndAssign.					Expression		        ::= RValue "&=" Expression ;
-EOrAssign.					Expression		        ::= RValue "|=" Expression ;
-EXorAssign.					Expression		        ::= RValue "^=" Expression ;
-ELShAssign.					Expression		        ::= RValue "<<=" Expression ;
-ERShAssign.					Expression		        ::= RValue ">>=" Expression ;
+EAssign.                    Expression              ::= RValue "=" Expression ;
+EAddAssign.                 Expression              ::= RValue "+=" Expression ;
+ESubAssign.                 Expression              ::= RValue "-=" Expression ;
+EMulAssign.                 Expression              ::= RValue "*=" Expression ;
+EDivAssign.                 Expression              ::= RValue "/=" Expression ;
+EModAssign.                 Expression              ::= RValue "%=" Expression ;
+EAndAssign.                 Expression              ::= RValue "&=" Expression ;
+EOrAssign.                  Expression              ::= RValue "|=" Expression ;
+EXorAssign.                 Expression              ::= RValue "^=" Expression ;
+ELShAssign.                 Expression              ::= RValue "<<=" Expression ;
+ERShAssign.                 Expression              ::= RValue ">>=" Expression ;
 
 coercions Expression 11 ;
 

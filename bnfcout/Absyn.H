@@ -122,6 +122,8 @@ class EPostDec;
 class EAddress;
 class EIntrinSExt;
 class EIntrinZExt;
+class EIntrinCast;
+class EIntrinConvert;
 class EIntrinAddI;
 class EIntrinSubI;
 class EIntrinMulI;
@@ -322,6 +324,8 @@ class Visitor
   virtual void visitEAddress(EAddress *p) = 0;
   virtual void visitEIntrinSExt(EIntrinSExt *p) = 0;
   virtual void visitEIntrinZExt(EIntrinZExt *p) = 0;
+  virtual void visitEIntrinCast(EIntrinCast *p) = 0;
+  virtual void visitEIntrinConvert(EIntrinConvert *p) = 0;
   virtual void visitEIntrinAddI(EIntrinAddI *p) = 0;
   virtual void visitEIntrinSubI(EIntrinSubI *p) = 0;
   virtual void visitEIntrinMulI(EIntrinMulI *p) = 0;
@@ -2018,6 +2022,36 @@ class EIntrinZExt : public Expression
   virtual void accept(Visitor *v);
   virtual  EIntrinZExt  *clone() const;
   void swap(EIntrinZExt &);
+};
+
+class EIntrinCast : public Expression
+{
+ public:
+  Type *type_;
+  Expression *expression_;
+
+  EIntrinCast(const EIntrinCast &);
+  EIntrinCast &operator=(const EIntrinCast &);
+  EIntrinCast(Type *p1, Expression *p2);
+  ~EIntrinCast();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinCast  *clone() const;
+  void swap(EIntrinCast &);
+};
+
+class EIntrinConvert : public Expression
+{
+ public:
+  Type *type_;
+  Expression *expression_;
+
+  EIntrinConvert(const EIntrinConvert &);
+  EIntrinConvert &operator=(const EIntrinConvert &);
+  EIntrinConvert(Type *p1, Expression *p2);
+  ~EIntrinConvert();
+  virtual void accept(Visitor *v);
+  virtual  EIntrinConvert  *clone() const;
+  void swap(EIntrinConvert &);
 };
 
 class EIntrinAddI : public Expression

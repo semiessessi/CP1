@@ -61,24 +61,25 @@ The reserved words used in C:\Users\Semi\Documents\cp1\cp1\cp1\ are the followin
 {\reserved{add}} &{\reserved{address}} &{\reserved{align}} \\
 {\reserved{all}} &{\reserved{and}} &{\reserved{anticommutative}} \\
 {\reserved{ashr}} &{\reserved{associative}} &{\reserved{break}} \\
-{\reserved{breakpoint}} &{\reserved{byte}} &{\reserved{cmp}} \\
-{\reserved{cmp\_ge}} &{\reserved{cmp\_gt}} &{\reserved{cmp\_le}} \\
-{\reserved{cmp\_lt}} &{\reserved{cmp\_ne}} &{\reserved{commutative}} \\
-{\reserved{const}} &{\reserved{continue}} &{\reserved{convert}} \\
-{\reserved{down}} &{\reserved{each}} &{\reserved{else}} \\
-{\reserved{entrypoint}} &{\reserved{expose}} &{\reserved{extern}} \\
-{\reserved{for}} &{\reserved{generic}} &{\reserved{identity}} \\
-{\reserved{if}} &{\reserved{implicit}} &{\reserved{import}} \\
-{\reserved{in}} &{\reserved{inline}} &{\reserved{integer}} \\
-{\reserved{inverse}} &{\reserved{lshr}} &{\reserved{mul}} \\
-{\reserved{namespace}} &{\reserved{neg}} &{\reserved{not}} \\
-{\reserved{or}} &{\reserved{pi}} &{\reserved{pure}} \\
-{\reserved{real}} &{\reserved{repeat}} &{\reserved{return}} \\
-{\reserved{sdiv}} &{\reserved{selfinverse}} &{\reserved{shl}} \\
-{\reserved{sign\_extend}} &{\reserved{srem}} &{\reserved{sub}} \\
-{\reserved{type}} &{\reserved{udiv}} &{\reserved{until}} \\
-{\reserved{up}} &{\reserved{urem}} &{\reserved{where}} \\
-{\reserved{while}} &{\reserved{xor}} &{\reserved{zero\_extend}} \\
+{\reserved{breakpoint}} &{\reserved{byte}} &{\reserved{cast}} \\
+{\reserved{cmp}} &{\reserved{cmp\_ge}} &{\reserved{cmp\_gt}} \\
+{\reserved{cmp\_le}} &{\reserved{cmp\_lt}} &{\reserved{cmp\_ne}} \\
+{\reserved{commutative}} &{\reserved{const}} &{\reserved{continue}} \\
+{\reserved{convert}} &{\reserved{convert\_to}} &{\reserved{down}} \\
+{\reserved{each}} &{\reserved{else}} &{\reserved{entrypoint}} \\
+{\reserved{expose}} &{\reserved{extern}} &{\reserved{for}} \\
+{\reserved{generic}} &{\reserved{identity}} &{\reserved{if}} \\
+{\reserved{implicit}} &{\reserved{import}} &{\reserved{in}} \\
+{\reserved{inline}} &{\reserved{integer}} &{\reserved{inverse}} \\
+{\reserved{lshr}} &{\reserved{mul}} &{\reserved{namespace}} \\
+{\reserved{neg}} &{\reserved{not}} &{\reserved{or}} \\
+{\reserved{pi}} &{\reserved{pure}} &{\reserved{real}} \\
+{\reserved{repeat}} &{\reserved{return}} &{\reserved{sdiv}} \\
+{\reserved{selfinverse}} &{\reserved{shl}} &{\reserved{sign\_extend}} \\
+{\reserved{srem}} &{\reserved{sub}} &{\reserved{type}} \\
+{\reserved{udiv}} &{\reserved{until}} &{\reserved{up}} \\
+{\reserved{urem}} &{\reserved{where}} &{\reserved{while}} \\
+{\reserved{xor}} &{\reserved{zero\_extend}} & \\
 \end{tabular}\\
 
 The symbols used in C:\Users\Semi\Documents\cp1\cp1\cp1\ are the following: \\
@@ -271,6 +272,8 @@ All other symbols are terminals.\\
  & {\delimit}  &{\terminal{\&}} {\nonterminal{Expression11}}  \\
  & {\delimit}  &{\terminal{sign\_extend}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{)}}  \\
  & {\delimit}  &{\terminal{zero\_extend}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{)}}  \\
+ & {\delimit}  &{\terminal{cast}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{)}}  \\
+ & {\delimit}  &{\terminal{convert\_to}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{)}}  \\
  & {\delimit}  &{\terminal{add}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\
  & {\delimit}  &{\terminal{sub}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\
  & {\delimit}  &{\terminal{mul}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{,}} {\nonterminal{Expression}} {\terminal{)}}  \\

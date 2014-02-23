@@ -1559,6 +1559,42 @@ void PrintAbsyn::visitEIntrinZExt(EIntrinZExt* p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitEIntrinCast(EIntrinCast* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("cast");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIntrinConvert(EIntrinConvert* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  render("convert_to");
+  render('<');
+  _i_ = 0; p->type_->accept(this);
+  render('>');
+  render('(');
+  _i_ = 0; p->expression_->accept(this);
+  render(')');
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitEIntrinAddI(EIntrinAddI* p)
 {
   int oldi = _i_;
@@ -3750,6 +3786,36 @@ void ShowAbsyn::visitEIntrinZExt(EIntrinZExt* p)
 {
   bufAppend('(');
   bufAppend("EIntrinZExt");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->expression_)  p->expression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinCast(EIntrinCast* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinCast");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->expression_)  p->expression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIntrinConvert(EIntrinConvert* p)
+{
+  bufAppend('(');
+  bufAppend("EIntrinConvert");
   bufAppend(' ');
   bufAppend('[');
   if (p->type_)  p->type_->accept(this);

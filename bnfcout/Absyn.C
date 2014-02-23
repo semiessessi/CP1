@@ -2358,6 +2358,54 @@ EIntrinZExt *EIntrinZExt::clone() const {
   return new EIntrinZExt(*this);
 }
 
+/********************   EIntrinCast    ********************/
+EIntrinCast::EIntrinCast(Type *p1, Expression *p2) { type_ = p1; expression_ = p2; }
+EIntrinCast::EIntrinCast(const EIntrinCast & other) {   type_ = other.type_->clone();
+  expression_ = other.expression_->clone();
+
+}
+EIntrinCast &EIntrinCast::operator=(const EIntrinCast & other) {
+  EIntrinCast tmp(other);
+  swap(tmp);
+  return *this;
+}
+void EIntrinCast::swap(EIntrinCast & other) {
+  std::swap(type_, other.type_);
+  std::swap(expression_, other.expression_);
+
+}
+
+EIntrinCast::~EIntrinCast() { delete(type_); delete(expression_); }
+
+void EIntrinCast::accept(Visitor *v) { v->visitEIntrinCast(this); }
+EIntrinCast *EIntrinCast::clone() const {
+  return new EIntrinCast(*this);
+}
+
+/********************   EIntrinConvert    ********************/
+EIntrinConvert::EIntrinConvert(Type *p1, Expression *p2) { type_ = p1; expression_ = p2; }
+EIntrinConvert::EIntrinConvert(const EIntrinConvert & other) {   type_ = other.type_->clone();
+  expression_ = other.expression_->clone();
+
+}
+EIntrinConvert &EIntrinConvert::operator=(const EIntrinConvert & other) {
+  EIntrinConvert tmp(other);
+  swap(tmp);
+  return *this;
+}
+void EIntrinConvert::swap(EIntrinConvert & other) {
+  std::swap(type_, other.type_);
+  std::swap(expression_, other.expression_);
+
+}
+
+EIntrinConvert::~EIntrinConvert() { delete(type_); delete(expression_); }
+
+void EIntrinConvert::accept(Visitor *v) { v->visitEIntrinConvert(this); }
+EIntrinConvert *EIntrinConvert::clone() const {
+  return new EIntrinConvert(*this);
+}
+
 /********************   EIntrinAddI    ********************/
 EIntrinAddI::EIntrinAddI(Type *p1, Expression *p2, Expression *p3) { type_ = p1; expression_1 = p2; expression_2 = p3; }
 EIntrinAddI::EIntrinAddI(const EIntrinAddI & other) {   type_ = other.type_->clone();

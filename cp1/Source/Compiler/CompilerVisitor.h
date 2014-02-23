@@ -114,6 +114,8 @@ class CompilerVisitor : public Visitor
   virtual void visitEPostDec(EPostDec *p) {}
   virtual void visitEIntrinSExt(EIntrinSExt *p) {}
   virtual void visitEIntrinZExt(EIntrinZExt *p) {}
+  virtual void visitEIntrinCast(EIntrinCast *p) {}
+  virtual void visitEIntrinConvert(EIntrinConvert *p) {}
   virtual void visitEIntrinAddI(EIntrinAddI *p) {}
   virtual void visitEIntrinSubI(EIntrinSubI *p) {}
   virtual void visitEIntrinMulI(EIntrinMulI *p) {}
