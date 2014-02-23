@@ -9,6 +9,32 @@
 //#include "FunctionVisitor.h"
 #include "TypeVisitor.h"
 
+class FSVisitor
+: public DescendingCompilerVisitor
+{
+public:
+    FSVisitor()
+    : bPure( false )
+    , bConst( false )
+    , bInline( false )
+    , bAssociative( false )
+    , bCommutative( false )
+    {
+    }
+    
+    virtual void visitFSPure(FSPure *p) { bPure = true; }
+    virtual void visitFSConst(FSConst *p) { bConst = true; }
+    virtual void visitFSInline(FSInline *p) { bInline = true; }
+    virtual void visitFSAssociative( FSAssociative *p ) { bAssociative = true; }
+    virtual void visitFSCommutative( FSCommutative *p ) { bCommutative = true; }
+    
+    bool bPure;
+    bool bConst;
+    bool bInline;
+    bool bAssociative;
+    bool bCommutative;
+};
+
 class FunctionFinder
 : public DescendingCompilerVisitor
 {
@@ -32,11 +58,37 @@ public:
             returnType->accept( &tv );
         }
         
+        ListFunctionSpecifier* lf = lfs;
+        FSVisitor fsv;
+        while( lf && lf->functionspecifier_ )
+        {
+            lf->functionspecifier_->accept( &fsv );
+            lf = lf->listfunctionspecifier_;
+        }
+        
+        // SE - TODO: ...
+        
         std::string szMangledName = sszCurrentNamespace + szIdent;
         FunctionInfo& rInfo = FindFunctionInfo( szMangledName );
         rInfo.szCPName = szIdent;
         rInfo.szLLVMName = szMangledName;
         rInfo.pTypeReturn = tv.pxTypeInfo;
+        rInfo.bPure = fsv.bPure;
+        rInfo.bConst = fsv.bConst;
+        rInfo.bInline = fsv.bInline;
+        rInfo.bAssociative = fsv.bAssociative;
+        rInfo.bCommutative = fsv.bCommutative;
+        
+        rInfo.aszParameterTypes.clear();
+        ListParameterDeclaration* lp = lpd;
+        while( lp && lp->parameterdeclaration_ )
+        {
+            DetailedTypeVisitor dtv;
+            lp->parameterdeclaration_->accept( &dtv );
+            lp = lp->listparameterdeclaration_;
+            
+            rInfo.aszParameterTypes.push_back( dtv.pxTypeInfo );
+        }
         return rInfo;
     }
     

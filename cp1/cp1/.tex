@@ -96,12 +96,12 @@ The symbols used in C:\Users\Semi\Documents\cp1\cp1\cp1\ are the following: \\
 {\symb{!{$=$}}} &{\symb{\&}} &{\symb{{$|$}}} \\
 {\symb{\^}} &{\symb{\&\&}} &{\symb{{$|$}{$|$}}} \\
 {\symb{\^\^}} &{\symb{{$-$}{$>$}}} &{\symb{{$<$}{$-$}}} \\
-{\symb{[}} &{\symb{]}} &{\symb{.}} \\
-{\symb{,}} &{\symb{?}} &{\symb{:}} \\
-{\symb{{$+$}{$=$}}} &{\symb{{$-$}{$=$}}} &{\symb{*{$=$}}} \\
-{\symb{/{$=$}}} &{\symb{\%{$=$}}} &{\symb{\&{$=$}}} \\
-{\symb{{$|$}{$=$}}} &{\symb{\^{$=$}}} &{\symb{{$<$}{$<$}{$=$}}} \\
-{\symb{{$>$}{$>$}{$=$}}} & & \\
+{\symb{[}} &{\symb{]}} &{\symb{..}} \\
+{\symb{.}} &{\symb{,}} &{\symb{?}} \\
+{\symb{:}} &{\symb{{$+$}{$=$}}} &{\symb{{$-$}{$=$}}} \\
+{\symb{*{$=$}}} &{\symb{/{$=$}}} &{\symb{\%{$=$}}} \\
+{\symb{\&{$=$}}} &{\symb{{$|$}{$=$}}} &{\symb{\^{$=$}}} \\
+{\symb{{$<$}{$<$}{$=$}}} &{\symb{{$>$}{$>$}{$=$}}} & \\
 \end{tabular}\\
 
 \subsection*{Comments}
@@ -212,7 +212,10 @@ All other symbols are terminals.\\
  & {\delimit}  &{\nonterminal{Ident}}  \\
  & {\delimit}  &{\nonterminal{Type}} {\terminal{[}} {\nonterminal{Integer}} {\terminal{]}}  \\
  & {\delimit}  &{\nonterminal{Type}} {\terminal{[}} {\terminal{]}}  \\
+ & {\delimit}  &{\terminal{[}} {\nonterminal{Type}} {\terminal{]}}  \\
+ & {\delimit}  &{\terminal{[}} {\nonterminal{Type}} {\terminal{..}} {\terminal{]}}  \\
  & {\delimit}  &{\terminal{\{}} {\nonterminal{ListStructMemberDeclaration}} {\terminal{;}} {\terminal{\}}}  \\
+ & {\delimit}  &{\terminal{(}} {\nonterminal{ListType}} {\terminal{)}} {\terminal{{$-$}{$>$}}} {\nonterminal{Type}}  \\
  & {\delimit}  &{\terminal{type}}  \\
 \end{tabular}\\
 
@@ -270,6 +273,8 @@ All other symbols are terminals.\\
  & {\delimit}  &{\nonterminal{RValue}} {\terminal{{$+$}{$+$}}}  \\
  & {\delimit}  &{\nonterminal{RValue}} {\terminal{{$-$}{$-$}}}  \\
  & {\delimit}  &{\terminal{\&}} {\nonterminal{Expression11}}  \\
+ & {\delimit}  &{\nonterminal{Expression10}} {\terminal{{$<$}{$-$}}} {\nonterminal{Expression11}}  \\
+ & {\delimit}  &{\nonterminal{Expression10}} {\terminal{{$-$}{$>$}}} {\nonterminal{Expression11}}  \\
  & {\delimit}  &{\terminal{sign\_extend}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{)}}  \\
  & {\delimit}  &{\terminal{zero\_extend}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{)}}  \\
  & {\delimit}  &{\terminal{cast}} {\terminal{{$<$}}} {\nonterminal{Type}} {\terminal{{$>$}}} {\terminal{(}} {\nonterminal{Expression}} {\terminal{)}}  \\
@@ -310,6 +315,7 @@ All other symbols are terminals.\\
 
 \begin{tabular}{lll}
 {\nonterminal{Expression8}} & {\arrow}  &{\nonterminal{Expression8}} {\terminal{*}} {\nonterminal{Expression9}}  \\
+ & {\delimit}  &{\nonterminal{Expression8}} {\terminal{**}} {\nonterminal{Expression9}}  \\
  & {\delimit}  &{\nonterminal{Expression8}} {\terminal{/}} {\nonterminal{Expression9}}  \\
  & {\delimit}  &{\nonterminal{Expression8}} {\terminal{\%}} {\nonterminal{Expression9}}  \\
  & {\delimit}  &{\nonterminal{Expression9}}  \\
@@ -318,6 +324,8 @@ All other symbols are terminals.\\
 \begin{tabular}{lll}
 {\nonterminal{Expression7}} & {\arrow}  &{\nonterminal{Expression7}} {\terminal{{$+$}}} {\nonterminal{Expression8}}  \\
  & {\delimit}  &{\nonterminal{Expression7}} {\terminal{{$-$}}} {\nonterminal{Expression8}}  \\
+ & {\delimit}  &{\nonterminal{Expression7}} {\terminal{{$+$}{$+$}}} {\nonterminal{Expression8}}  \\
+ & {\delimit}  &{\nonterminal{Expression7}} {\terminal{{$-$}{$-$}}} {\nonterminal{Expression8}}  \\
  & {\delimit}  &{\nonterminal{Expression8}}  \\
 \end{tabular}\\
 
@@ -429,6 +437,12 @@ All other symbols are terminals.\\
 \begin{tabular}{lll}
 {\nonterminal{ListExpression}} & {\arrow}  &{\nonterminal{Expression}}  \\
  & {\delimit}  &{\nonterminal{Expression}} {\terminal{,}} {\nonterminal{ListExpression}}  \\
+\end{tabular}\\
+
+\begin{tabular}{lll}
+{\nonterminal{ListType}} & {\arrow}  &{\emptyP} \\
+ & {\delimit}  &{\nonterminal{Type}}  \\
+ & {\delimit}  &{\nonterminal{Type}} {\terminal{,}} {\nonterminal{ListType}}  \\
 \end{tabular}\\
 
 

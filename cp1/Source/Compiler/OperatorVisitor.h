@@ -53,6 +53,7 @@ public:
     }
     
     virtual void visitFSPure(FSPure *p) { bPure = true; }
+    virtual void visitFSConst(FSConst *p) { bConst = true; }
     virtual void visitFSInline(FSInline *p) { bInline = true; }
     virtual void visitFSAssociative( FSAssociative *p ) { bAssociative = true; }
     virtual void visitFSCommutative( FSCommutative *p ) { bCommutative = true; }

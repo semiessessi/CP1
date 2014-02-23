@@ -1408,6 +1408,50 @@ TGenericArray *TGenericArray::clone() const {
   return new TGenericArray(*this);
 }
 
+/********************   TList    ********************/
+TList::TList(Type *p1) { type_ = p1; }
+TList::TList(const TList & other) {   type_ = other.type_->clone();
+
+}
+TList &TList::operator=(const TList & other) {
+  TList tmp(other);
+  swap(tmp);
+  return *this;
+}
+void TList::swap(TList & other) {
+  std::swap(type_, other.type_);
+
+}
+
+TList::~TList() { delete(type_); }
+
+void TList::accept(Visitor *v) { v->visitTList(this); }
+TList *TList::clone() const {
+  return new TList(*this);
+}
+
+/********************   TInfiniteList    ********************/
+TInfiniteList::TInfiniteList(Type *p1) { type_ = p1; }
+TInfiniteList::TInfiniteList(const TInfiniteList & other) {   type_ = other.type_->clone();
+
+}
+TInfiniteList &TInfiniteList::operator=(const TInfiniteList & other) {
+  TInfiniteList tmp(other);
+  swap(tmp);
+  return *this;
+}
+void TInfiniteList::swap(TInfiniteList & other) {
+  std::swap(type_, other.type_);
+
+}
+
+TInfiniteList::~TInfiniteList() { delete(type_); }
+
+void TInfiniteList::accept(Visitor *v) { v->visitTInfiniteList(this); }
+TInfiniteList *TInfiniteList::clone() const {
+  return new TInfiniteList(*this);
+}
+
 /********************   TStruct    ********************/
 TStruct::TStruct(ListStructMemberDeclaration *p1) { liststructmemberdeclaration_ = p1; }
 TStruct::TStruct(const TStruct & other) {   liststructmemberdeclaration_ = other.liststructmemberdeclaration_->clone();
@@ -1428,6 +1472,30 @@ TStruct::~TStruct() { delete(liststructmemberdeclaration_); }
 void TStruct::accept(Visitor *v) { v->visitTStruct(this); }
 TStruct *TStruct::clone() const {
   return new TStruct(*this);
+}
+
+/********************   TFunction    ********************/
+TFunction::TFunction(ListType *p1, Type *p2) { listtype_ = p1; type_ = p2; }
+TFunction::TFunction(const TFunction & other) {   listtype_ = other.listtype_->clone();
+  type_ = other.type_->clone();
+
+}
+TFunction &TFunction::operator=(const TFunction & other) {
+  TFunction tmp(other);
+  swap(tmp);
+  return *this;
+}
+void TFunction::swap(TFunction & other) {
+  std::swap(listtype_, other.listtype_);
+  std::swap(type_, other.type_);
+
+}
+
+TFunction::~TFunction() { delete(listtype_); delete(type_); }
+
+void TFunction::accept(Visitor *v) { v->visitTFunction(this); }
+TFunction *TFunction::clone() const {
+  return new TFunction(*this);
 }
 
 /********************   TType    ********************/
@@ -2310,6 +2378,54 @@ EAddress *EAddress::clone() const {
   return new EAddress(*this);
 }
 
+/********************   ELeft    ********************/
+ELeft::ELeft(Expression *p1, Expression *p2) { expression_1 = p1; expression_2 = p2; }
+ELeft::ELeft(const ELeft & other) {   expression_1 = other.expression_1->clone();
+  expression_2 = other.expression_2->clone();
+
+}
+ELeft &ELeft::operator=(const ELeft & other) {
+  ELeft tmp(other);
+  swap(tmp);
+  return *this;
+}
+void ELeft::swap(ELeft & other) {
+  std::swap(expression_1, other.expression_1);
+  std::swap(expression_2, other.expression_2);
+
+}
+
+ELeft::~ELeft() { delete(expression_1); delete(expression_2); }
+
+void ELeft::accept(Visitor *v) { v->visitELeft(this); }
+ELeft *ELeft::clone() const {
+  return new ELeft(*this);
+}
+
+/********************   ERight    ********************/
+ERight::ERight(Expression *p1, Expression *p2) { expression_1 = p1; expression_2 = p2; }
+ERight::ERight(const ERight & other) {   expression_1 = other.expression_1->clone();
+  expression_2 = other.expression_2->clone();
+
+}
+ERight &ERight::operator=(const ERight & other) {
+  ERight tmp(other);
+  swap(tmp);
+  return *this;
+}
+void ERight::swap(ERight & other) {
+  std::swap(expression_1, other.expression_1);
+  std::swap(expression_2, other.expression_2);
+
+}
+
+ERight::~ERight() { delete(expression_1); delete(expression_2); }
+
+void ERight::accept(Visitor *v) { v->visitERight(this); }
+ERight *ERight::clone() const {
+  return new ERight(*this);
+}
+
 /********************   EIntrinSExt    ********************/
 EIntrinSExt::EIntrinSExt(Type *p1, Expression *p2) { type_ = p1; expression_ = p2; }
 EIntrinSExt::EIntrinSExt(const EIntrinSExt & other) {   type_ = other.type_->clone();
@@ -3104,6 +3220,30 @@ EMul *EMul::clone() const {
   return new EMul(*this);
 }
 
+/********************   EMulA    ********************/
+EMulA::EMulA(Expression *p1, Expression *p2) { expression_1 = p1; expression_2 = p2; }
+EMulA::EMulA(const EMulA & other) {   expression_1 = other.expression_1->clone();
+  expression_2 = other.expression_2->clone();
+
+}
+EMulA &EMulA::operator=(const EMulA & other) {
+  EMulA tmp(other);
+  swap(tmp);
+  return *this;
+}
+void EMulA::swap(EMulA & other) {
+  std::swap(expression_1, other.expression_1);
+  std::swap(expression_2, other.expression_2);
+
+}
+
+EMulA::~EMulA() { delete(expression_1); delete(expression_2); }
+
+void EMulA::accept(Visitor *v) { v->visitEMulA(this); }
+EMulA *EMulA::clone() const {
+  return new EMulA(*this);
+}
+
 /********************   EDiv    ********************/
 EDiv::EDiv(Expression *p1, Expression *p2) { expression_1 = p1; expression_2 = p2; }
 EDiv::EDiv(const EDiv & other) {   expression_1 = other.expression_1->clone();
@@ -3198,6 +3338,54 @@ ESub::~ESub() { delete(expression_1); delete(expression_2); }
 void ESub::accept(Visitor *v) { v->visitESub(this); }
 ESub *ESub::clone() const {
   return new ESub(*this);
+}
+
+/********************   EAddA    ********************/
+EAddA::EAddA(Expression *p1, Expression *p2) { expression_1 = p1; expression_2 = p2; }
+EAddA::EAddA(const EAddA & other) {   expression_1 = other.expression_1->clone();
+  expression_2 = other.expression_2->clone();
+
+}
+EAddA &EAddA::operator=(const EAddA & other) {
+  EAddA tmp(other);
+  swap(tmp);
+  return *this;
+}
+void EAddA::swap(EAddA & other) {
+  std::swap(expression_1, other.expression_1);
+  std::swap(expression_2, other.expression_2);
+
+}
+
+EAddA::~EAddA() { delete(expression_1); delete(expression_2); }
+
+void EAddA::accept(Visitor *v) { v->visitEAddA(this); }
+EAddA *EAddA::clone() const {
+  return new EAddA(*this);
+}
+
+/********************   ESubA    ********************/
+ESubA::ESubA(Expression *p1, Expression *p2) { expression_1 = p1; expression_2 = p2; }
+ESubA::ESubA(const ESubA & other) {   expression_1 = other.expression_1->clone();
+  expression_2 = other.expression_2->clone();
+
+}
+ESubA &ESubA::operator=(const ESubA & other) {
+  ESubA tmp(other);
+  swap(tmp);
+  return *this;
+}
+void ESubA::swap(ESubA & other) {
+  std::swap(expression_1, other.expression_1);
+  std::swap(expression_2, other.expression_2);
+
+}
+
+ESubA::~ESubA() { delete(expression_1); delete(expression_2); }
+
+void ESubA::accept(Visitor *v) { v->visitESubA(this); }
+ESubA *ESubA::clone() const {
+  return new ESubA(*this);
 }
 
 /********************   ELSh    ********************/
@@ -4429,6 +4617,61 @@ ListExpression* ListExpression::reverse(ListExpression* prev)
 void ListExpression::accept(Visitor *v) { v->visitListExpression(this); }
 ListExpression *ListExpression::clone() const {
   return new ListExpression(*this);
+}
+
+/********************   ListType    ********************/
+ListType::ListType(Type *p1, ListType *p2) { type_ = p1; listtype_ = p2; }
+ListType::ListType(const ListType & other) {   type_ = other.type_->clone();
+  listtype_ = other.listtype_->clone();
+
+}
+ListType &ListType::operator=(const ListType & other) {
+  ListType tmp(other);
+  swap(tmp);
+  return *this;
+}
+void ListType::swap(ListType & other) {
+  std::swap(type_, other.type_);
+  std::swap(listtype_, other.listtype_);
+
+}
+
+ListType::~ListType() { delete(type_); delete(listtype_); }
+ListType::ListType(Type *p)
+{
+  type_ = p;
+  listtype_= 0;
+}
+ListType* ListType::reverse()
+{
+  if (listtype_ == 0) return this;
+  else
+  {
+    ListType *tmp = listtype_->reverse(this);
+    listtype_ = 0;
+    return tmp;
+  }
+}
+
+ListType* ListType::reverse(ListType* prev)
+{
+  if (listtype_ == 0)
+  {
+    listtype_ = prev;
+    return this;
+  }
+  else
+  {
+    ListType *tmp = listtype_->reverse(this);
+    listtype_ = prev;
+    return tmp;
+  }
+}
+
+
+void ListType::accept(Visitor *v) { v->visitListType(this); }
+ListType *ListType::clone() const {
+  return new ListType(*this);
 }
 
 

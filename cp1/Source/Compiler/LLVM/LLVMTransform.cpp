@@ -81,6 +81,8 @@ void LLVMTransformVisitor::visitDFunction(DFunction *p)
 
 void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnType, ListParameterDeclaration* parameters, ListStatement* statements )
 {
+    FunctionInfo& info = FindFunctionInfo( szLLVMName );
+    
     DetailedTypeVisitor tv;
     if( returnType )
     {
@@ -92,7 +94,8 @@ void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnTy
     {
         typeReturn = tv.pxTypeInfo->ShortLLVMName();
     }
-    out += "define private ";
+    // SE - TODO: exportable function using ccc
+    out += "define private fastcc ";
     out += typeReturn;
     gszCurrentlyDesiredType = typeReturn.c_str();
     out += " @";
@@ -142,7 +145,25 @@ void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnTy
         
         pList = pList->listparameterdeclaration_;
     }
-    out += " ) nounwind\r\n{\r\n";
+    out += " ) ";
+    if( info.bInline )
+    {
+        out += "alwaysinline ";
+    }
+    if( info.bPure )
+    {
+        if( info.bConst )
+        {
+            // SE - TODO: warning 'pure' implies 'const'...
+        }
+        out += "readnone ";
+    }
+    else if( info.bConst )
+    {
+        out += "readonly ";
+    }
+    
+    out += "nounwind\r\n{\r\n";
     
     ++siTabLevel;
     visitFunctionBody( statements );
@@ -296,6 +317,11 @@ void LLVMTransformVisitor::visitDTypeConv( DTypeConv* p )
         
         gxLocals = oldLocals;
     }    
+}
+
+void LLVMTransformVisitor::visitDIVariable( DIVariable* p )
+{
+    // SE - TODO: ...
 }
 
 void LLVMTransformVisitor::visitSExpression(SExpression *p)
@@ -786,7 +812,7 @@ void LLVMTransformVisitor::visitESimpleCall( ESimpleCall* p )
         out += stringFromInt( siTempCounter );
         out += " = ";
     }
-	out += "call ";
+	out += "call fastcc ";
     out += finfo.pTypeReturn ? finfo.pTypeReturn->ShortLLVMName() : "void";
     out += " @";
 	out += rvv.readString;
@@ -832,11 +858,11 @@ void LLVMTransformVisitor::visitECall( ECall* p )
         out += stringFromInt( siTempCounter );
         out += " = ";
     }
-	out += "call ";
+	out += "call fastcc ";
     out += finfo.pTypeReturn ? finfo.pTypeReturn->ShortLLVMName() : "void";
     out += " @";
 	out += rvv.readString;
-	out += "(";
+	out += "( ";
 	
     
 	// SE - TODO: proper types...
@@ -844,7 +870,8 @@ void LLVMTransformVisitor::visitECall( ECall* p )
     for( int i = 0; i < iParameterCount; ++i )
     {
         // TODO: some kind of typing
-        out += " i8* %r";
+        out += finfo.aszParameterTypes[ i ]->ShortLLVMName();
+        out += " %r";
         out += stringFromInt( aiParameterTemps[ i ] );
         if( i < ( iParameterCount - 1 ) )
         {
@@ -1304,6 +1331,11 @@ void LLVMTransformVisitor::visitEMul(EMul *p)
     visitEOp( "cm", p->expression_1, p->expression_2 );
 }
 
+void LLVMTransformVisitor::visitEMulA(EMulA *p)
+{
+    visitEOp( "cmm", p->expression_1, p->expression_2 );
+}
+
 void LLVMTransformVisitor::visitEDiv(EDiv *p)
 {
     visitEOp( "cd", p->expression_1, p->expression_2 );
@@ -1319,9 +1351,19 @@ void LLVMTransformVisitor::visitEAdd(EAdd *p)
     visitEOp( "cp", p->expression_1, p->expression_2 );
 }
 
+void LLVMTransformVisitor::visitEAddA(EAddA *p)
+{
+    visitEOp( "cpp", p->expression_1, p->expression_2 );
+}
+
 void LLVMTransformVisitor::visitESub(ESub *p)
 {
     visitEOp( "cs", p->expression_1, p->expression_2 );
+}
+
+void LLVMTransformVisitor::visitESubA(ESubA *p)
+{
+    visitEOp( "css", p->expression_1, p->expression_2 );
 }
 
 void LLVMTransformVisitor::visitELSh(ELSh *p)
@@ -1334,21 +1376,45 @@ void LLVMTransformVisitor::visitERSh(ERSh *p)
     visitEOp( "cll", p->expression_1, p->expression_2 );
 }
 
+void LLVMTransformVisitor::visitELeft(ELeft *p)
+{
+    visitEOp( "cgs", p->expression_1, p->expression_2 );
+}
+
+void LLVMTransformVisitor::visitERight(ERight *p)
+{
+    visitEOp( "csl", p->expression_1, p->expression_2 );
+}
+
 void LLVMTransformVisitor::visitEBand(EBand *p)
 {
-    visitEOp( "caa", p->expression_1, p->expression_2 );
+    visitEOp( "ca", p->expression_1, p->expression_2 );
 }
 
 void LLVMTransformVisitor::visitEBor(EBor *p)
 {
-    visitEOp( "coo", p->expression_1, p->expression_2 );
+    visitEOp( "co", p->expression_1, p->expression_2 );
 }
 
 void LLVMTransformVisitor::visitEBxor(EBxor *p)
 {
-    visitEOp( "cxx", p->expression_1, p->expression_2 );
+    visitEOp( "cx", p->expression_1, p->expression_2 );
 }
 
+void LLVMTransformVisitor::visitELand(ELand *p)
+{
+    visitEOp( "caa", p->expression_1, p->expression_2 );
+}
+
+void LLVMTransformVisitor::visitELor(ELor *p)
+{
+    visitEOp( "coo", p->expression_1, p->expression_2 );
+}
+
+void LLVMTransformVisitor::visitELxor(ELxor *p)
+{
+    visitEOp( "cxx", p->expression_1, p->expression_2 );
+}
 
 // <result> = extractvalue {i32, float} %agg, 0    ; yields i32
 // %agg1 = insertvalue {i32, float} undef, i32 1, 0              ; yields {i32 1, float undef}

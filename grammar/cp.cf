@@ -82,7 +82,10 @@ TByte.                      Type                    ::= "byte" ;
 TCustom.                    Type                    ::= Ident ;
 TFixedArray.                Type                    ::= Type "[" Integer "]" ;
 TGenericArray.              Type                    ::= Type "[" "]" ;
+TList.                      Type                    ::= "[" Type "]" ;
+TInfiniteList.              Type                    ::= "[" Type ".." "]" ;
 TStruct.                    Type                    ::= "{" [StructMemberDeclaration] ";" "}" ;
+TFunction.                  Type                    ::= "(" [Type] ")" "->" Type  ;
 TType.                      Type                    ::= "type" ;
 
 SMDMemberDeclaration.       StructMemberDeclaration ::= Type Ident ";" ;
@@ -135,6 +138,8 @@ ECall.                      Expression10            ::= RValue "(" [Expression] 
 EPostInc.                   Expression10            ::= RValue "++" ;
 EPostDec.                   Expression10            ::= RValue "--" ;
 EAddress.                   Expression10            ::= "&" Expression11 ;
+ELeft.                      Expression10            ::= Expression10 "<-" Expression11 ;
+ERight.                     Expression10            ::= Expression10 "->" Expression11 ;
 
 {-
 
@@ -184,11 +189,17 @@ EPos.                       Expression9             ::= "+" Expression10 ;
 -- EUnaryOperator.              Expression9             ::= Operator Expression10 ;
 
 EMul.                       Expression8             ::= Expression8 "*" Expression9 ;
+EMulA.                      Expression8             ::= Expression8 "**" Expression9 ;
 EDiv.                       Expression8             ::= Expression8 "/" Expression9 ;
 EMod.                       Expression8             ::= Expression8 "%" Expression9 ;
 
+-- EMadd.                      Expression7             ::= Expression8 "*" Expression8 "+" Expression8 ;
+
 EAdd.                       Expression7             ::= Expression7 "+" Expression8 ;
 ESub.                       Expression7             ::= Expression7 "-" Expression8 ;
+
+EAddA.                      Expression7             ::= Expression7 "++" Expression8 ;
+ESubA.                      Expression7             ::= Expression7 "--" Expression8 ;
 
 ELSh.                       Expression6             ::= Expression6 "<<" Expression7 ;
 ERSh.                       Expression6             ::= Expression6 ">>" Expression7 ;
@@ -239,6 +250,7 @@ terminator StructMemberDeclaration "" ;
 separator nonempty GenericParam "," ;
 separator ParameterDeclaration "," ;
 separator nonempty Expression "," ;
+separator Type "," ;
 
 -- this is super generic and dangerous looking to me.... can it contain quotes?
 token CString '"' ( char )* '"' ;

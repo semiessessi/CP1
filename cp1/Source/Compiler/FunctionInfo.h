@@ -16,6 +16,11 @@ struct FunctionInfo
     std::vector< DetailedTypeInfo* > aszParameterTypes;
 
     bool bPure;
+    bool bConst;
+    bool bInline;
+    bool bAssociative;
+    bool bCommutative;
+    bool bUsed;
 
     FunctionInfo()
     : szCPName( "<unnamed-operator>" )
@@ -23,6 +28,11 @@ struct FunctionInfo
     , szTypeOwner( "<unnamed-type>" )
     , pTypeReturn( 0 )
     , bPure( false )
+    , bConst( false )
+    , bInline( false )
+    , bAssociative( false )
+    , bCommutative( false )
+    , bUsed( false )
     {
     }
 };

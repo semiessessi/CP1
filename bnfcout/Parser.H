@@ -29,6 +29,7 @@ class ListStructMemberDeclaration;
 class ListGenericParam;
 class ListParameterDeclaration;
 class ListExpression;
+class ListType;
 
 typedef union
 {
@@ -64,6 +65,7 @@ typedef union
   ListGenericParam* listgenericparam_;
   ListParameterDeclaration* listparameterdeclaration_;
   ListExpression* listexpression_;
+  ListType* listtype_;
 } YYSTYPE;
 
 #define _ERROR_ 258
@@ -184,9 +186,10 @@ typedef union
 #define _SYMB_114 373
 #define _SYMB_115 374
 #define _SYMB_116 375
-#define _INTEGER_ 376
-#define _DOUBLE_ 377
-#define _IDENT_ 378
+#define _SYMB_117 376
+#define _INTEGER_ 377
+#define _DOUBLE_ 378
+#define _IDENT_ 379
 
 extern YYSTYPE yylval;
 Code* pCode(FILE *inp);

@@ -473,11 +473,33 @@ void Skeleton::visitTGenericArray(TGenericArray* tgenericarray)
   tgenericarray->type_->accept(this);
 }
 
+void Skeleton::visitTList(TList* tlist)
+{
+  /* Code For TList Goes Here */
+
+  tlist->type_->accept(this);
+}
+
+void Skeleton::visitTInfiniteList(TInfiniteList* tinfinitelist)
+{
+  /* Code For TInfiniteList Goes Here */
+
+  tinfinitelist->type_->accept(this);
+}
+
 void Skeleton::visitTStruct(TStruct* tstruct)
 {
   /* Code For TStruct Goes Here */
 
   if (tstruct->liststructmemberdeclaration_) {tstruct->liststructmemberdeclaration_->accept(this);}
+}
+
+void Skeleton::visitTFunction(TFunction* tfunction)
+{
+  /* Code For TFunction Goes Here */
+
+  if (tfunction->listtype_) {tfunction->listtype_->accept(this);}
+  tfunction->type_->accept(this);
 }
 
 void Skeleton::visitTType(TType* ttype)
@@ -778,6 +800,22 @@ void Skeleton::visitEAddress(EAddress* eaddress)
   eaddress->expression_->accept(this);
 }
 
+void Skeleton::visitELeft(ELeft* eleft)
+{
+  /* Code For ELeft Goes Here */
+
+  eleft->expression_1->accept(this);
+  eleft->expression_2->accept(this);
+}
+
+void Skeleton::visitERight(ERight* eright)
+{
+  /* Code For ERight Goes Here */
+
+  eright->expression_1->accept(this);
+  eright->expression_2->accept(this);
+}
+
 void Skeleton::visitEIntrinSExt(EIntrinSExt* eintrinsext)
 {
   /* Code For EIntrinSExt Goes Here */
@@ -1047,6 +1085,14 @@ void Skeleton::visitEMul(EMul* emul)
   emul->expression_2->accept(this);
 }
 
+void Skeleton::visitEMulA(EMulA* emula)
+{
+  /* Code For EMulA Goes Here */
+
+  emula->expression_1->accept(this);
+  emula->expression_2->accept(this);
+}
+
 void Skeleton::visitEDiv(EDiv* ediv)
 {
   /* Code For EDiv Goes Here */
@@ -1077,6 +1123,22 @@ void Skeleton::visitESub(ESub* esub)
 
   esub->expression_1->accept(this);
   esub->expression_2->accept(this);
+}
+
+void Skeleton::visitEAddA(EAddA* eadda)
+{
+  /* Code For EAddA Goes Here */
+
+  eadda->expression_1->accept(this);
+  eadda->expression_2->accept(this);
+}
+
+void Skeleton::visitESubA(ESubA* esuba)
+{
+  /* Code For ESubA Goes Here */
+
+  esuba->expression_1->accept(this);
+  esuba->expression_2->accept(this);
 }
 
 void Skeleton::visitELSh(ELSh* elsh)
@@ -1395,6 +1457,16 @@ void Skeleton::visitListExpression(ListExpression* listexpression)
     /* Code For ListExpression Goes Here */
     listexpression->expression_->accept(this);
     listexpression = listexpression->listexpression_;
+  }
+}
+
+void Skeleton::visitListType(ListType* listtype)
+{
+  while(listtype!= 0)
+  {
+    /* Code For ListType Goes Here */
+    listtype->type_->accept(this);
+    listtype = listtype->listtype_;
   }
 }
 

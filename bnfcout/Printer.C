@@ -956,6 +956,35 @@ void PrintAbsyn::visitTGenericArray(TGenericArray* p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitTList(TList* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render('[');
+  _i_ = 0; p->type_->accept(this);
+  render(']');
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTInfiniteList(TInfiniteList* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render('[');
+  _i_ = 0; p->type_->accept(this);
+  render("..");
+  render(']');
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitTStruct(TStruct* p)
 {
   int oldi = _i_;
@@ -964,6 +993,21 @@ void PrintAbsyn::visitTStruct(TStruct* p)
   render('{');
   if(p->liststructmemberdeclaration_) {_i_ = 0; p->liststructmemberdeclaration_->accept(this);}  render(';');
   render('}');
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTFunction(TFunction* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render('(');
+  if(p->listtype_) {_i_ = 0; p->listtype_->accept(this);}  render(')');
+  render("->");
+  _i_ = 0; p->type_->accept(this);
 
   if (oldi > 0) render(_R_PAREN);
 
@@ -1517,6 +1561,34 @@ void PrintAbsyn::visitEAddress(EAddress* p)
 
   render('&');
   _i_ = 11; p->expression_->accept(this);
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitELeft(ELeft* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  _i_ = 10; p->expression_1->accept(this);
+  render("<-");
+  _i_ = 11; p->expression_2->accept(this);
+
+  if (oldi > 10) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitERight(ERight* p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(_L_PAREN);
+
+  _i_ = 10; p->expression_1->accept(this);
+  render("->");
+  _i_ = 11; p->expression_2->accept(this);
 
   if (oldi > 10) render(_R_PAREN);
 
@@ -2103,6 +2175,20 @@ void PrintAbsyn::visitEMul(EMul* p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitEMulA(EMulA* p)
+{
+  int oldi = _i_;
+  if (oldi > 8) render(_L_PAREN);
+
+  _i_ = 8; p->expression_1->accept(this);
+  render("**");
+  _i_ = 9; p->expression_2->accept(this);
+
+  if (oldi > 8) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitEDiv(EDiv* p)
 {
   int oldi = _i_;
@@ -2152,6 +2238,34 @@ void PrintAbsyn::visitESub(ESub* p)
 
   _i_ = 7; p->expression_1->accept(this);
   render('-');
+  _i_ = 8; p->expression_2->accept(this);
+
+  if (oldi > 7) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEAddA(EAddA* p)
+{
+  int oldi = _i_;
+  if (oldi > 7) render(_L_PAREN);
+
+  _i_ = 7; p->expression_1->accept(this);
+  render("++");
+  _i_ = 8; p->expression_2->accept(this);
+
+  if (oldi > 7) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitESubA(ESubA* p)
+{
+  int oldi = _i_;
+  if (oldi > 7) render(_L_PAREN);
+
+  _i_ = 7; p->expression_1->accept(this);
+  render("--");
   _i_ = 8; p->expression_2->accept(this);
 
   if (oldi > 7) render(_R_PAREN);
@@ -2734,6 +2848,25 @@ void PrintAbsyn::visitListExpression(ListExpression *listexpression)
   }
 }
 
+void PrintAbsyn::visitListType(ListType *listtype)
+{
+  while(listtype!= 0)
+  {
+    if (listtype->listtype_ == 0)
+    {
+      listtype->type_->accept(this);
+
+      listtype = 0;
+    }
+    else
+    {
+      listtype->type_->accept(this);
+      render(',');
+      listtype = listtype->listtype_;
+    }
+  }
+}
+
 void PrintAbsyn::visitInteger(Integer i)
 {
   char tmp[16];
@@ -3303,6 +3436,28 @@ void ShowAbsyn::visitTGenericArray(TGenericArray* p)
   bufAppend(' ');
   bufAppend(')');
 }
+void ShowAbsyn::visitTList(TList* p)
+{
+  bufAppend('(');
+  bufAppend("TList");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitTInfiniteList(TInfiniteList* p)
+{
+  bufAppend('(');
+  bufAppend("TInfiniteList");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
 void ShowAbsyn::visitTStruct(TStruct* p)
 {
   bufAppend('(');
@@ -3312,6 +3467,20 @@ void ShowAbsyn::visitTStruct(TStruct* p)
   if (p->liststructmemberdeclaration_)  p->liststructmemberdeclaration_->accept(this);
   bufAppend(']');
   bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitTFunction(TFunction* p)
+{
+  bufAppend('(');
+  bufAppend("TFunction");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listtype_)  p->listtype_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->type_)  p->type_->accept(this);
+  bufAppend(']');
   bufAppend(')');
 }
 void ShowAbsyn::visitTType(TType* p)
@@ -3767,6 +3936,26 @@ void ShowAbsyn::visitEAddress(EAddress* p)
   bufAppend(']');
   bufAppend(')');
 }
+void ShowAbsyn::visitELeft(ELeft* p)
+{
+  bufAppend('(');
+  bufAppend("ELeft");
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitERight(ERight* p)
+{
+  bufAppend('(');
+  bufAppend("ERight");
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(')');
+}
 void ShowAbsyn::visitEIntrinSExt(EIntrinSExt* p)
 {
   bufAppend('(');
@@ -4212,6 +4401,16 @@ void ShowAbsyn::visitEMul(EMul* p)
   p->expression_2->accept(this);
   bufAppend(')');
 }
+void ShowAbsyn::visitEMulA(EMulA* p)
+{
+  bufAppend('(');
+  bufAppend("EMulA");
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(')');
+}
 void ShowAbsyn::visitEDiv(EDiv* p)
 {
   bufAppend('(');
@@ -4246,6 +4445,26 @@ void ShowAbsyn::visitESub(ESub* p)
 {
   bufAppend('(');
   bufAppend("ESub");
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitEAddA(EAddA* p)
+{
+  bufAppend('(');
+  bufAppend("EAddA");
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitESubA(ESubA* p)
+{
+  bufAppend('(');
+  bufAppend("ESubA");
   bufAppend(' ');
   p->expression_1->accept(this);
   bufAppend(' ');
@@ -4752,6 +4971,24 @@ void ShowAbsyn::visitListExpression(ListExpression *listexpression)
     {
       listexpression->expression_->accept(this);
       listexpression = 0;
+    }
+  }
+}
+
+void ShowAbsyn::visitListType(ListType *listtype)
+{
+  while(listtype!= 0)
+  {
+    if (listtype->listtype_)
+    {
+      listtype->type_->accept(this);
+      bufAppend(", ");
+      listtype = listtype->listtype_;
+    }
+    else
+    {
+      listtype->type_->accept(this);
+      listtype = 0;
     }
   }
 }

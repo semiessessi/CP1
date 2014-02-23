@@ -75,7 +75,7 @@ public:
 		}
 
 		szExtern += " )";
-		szExtern += "\ndefine private ";
+		szExtern += "\ndefine private fastcc ";
 		
 		szExtern += szLLVMReturnType;
 

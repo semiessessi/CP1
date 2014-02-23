@@ -85,7 +85,10 @@ class Skeleton : public Visitor
   void visitTCustom(TCustom* tcustom);
   void visitTFixedArray(TFixedArray* tfixedarray);
   void visitTGenericArray(TGenericArray* tgenericarray);
+  void visitTList(TList* tlist);
+  void visitTInfiniteList(TInfiniteList* tinfinitelist);
   void visitTStruct(TStruct* tstruct);
+  void visitTFunction(TFunction* tfunction);
   void visitTType(TType* ttype);
   void visitStructMemberDeclaration(StructMemberDeclaration* structmemberdeclaration); /* abstract class */
   void visitSMDMemberDeclaration(SMDMemberDeclaration* smdmemberdeclaration);
@@ -129,6 +132,8 @@ class Skeleton : public Visitor
   void visitEPostInc(EPostInc* epostinc);
   void visitEPostDec(EPostDec* epostdec);
   void visitEAddress(EAddress* eaddress);
+  void visitELeft(ELeft* eleft);
+  void visitERight(ERight* eright);
   void visitEIntrinSExt(EIntrinSExt* eintrinsext);
   void visitEIntrinZExt(EIntrinZExt* eintrinzext);
   void visitEIntrinCast(EIntrinCast* eintrincast);
@@ -161,10 +166,13 @@ class Skeleton : public Visitor
   void visitEBnot(EBnot* ebnot);
   void visitEPos(EPos* epos);
   void visitEMul(EMul* emul);
+  void visitEMulA(EMulA* emula);
   void visitEDiv(EDiv* ediv);
   void visitEMod(EMod* emod);
   void visitEAdd(EAdd* eadd);
   void visitESub(ESub* esub);
+  void visitEAddA(EAddA* eadda);
+  void visitESubA(ESubA* esuba);
   void visitELSh(ELSh* elsh);
   void visitERSh(ERSh* ersh);
   void visitELT(ELT* elt);
@@ -191,7 +199,7 @@ class Skeleton : public Visitor
   void visitEXorAssign(EXorAssign* exorassign);
   void visitELShAssign(ELShAssign* elshassign);
   void visitERShAssign(ERShAssign* ershassign);
-  void visitListTLDeclaration(ListTLDeclaration* listtldeclaration);  void visitListDeclaration(ListDeclaration* listdeclaration);  void visitListStatement(ListStatement* liststatement);  void visitListTypeSpecifier(ListTypeSpecifier* listtypespecifier);  void visitListConversionSpecifier(ListConversionSpecifier* listconversionspecifier);  void visitListFunctionSpecifier(ListFunctionSpecifier* listfunctionspecifier);  void visitListVariableSpecifier(ListVariableSpecifier* listvariablespecifier);  void visitListStructMemberDeclaration(ListStructMemberDeclaration* liststructmemberdeclaration);  void visitListGenericParam(ListGenericParam* listgenericparam);  void visitListParameterDeclaration(ListParameterDeclaration* listparameterdeclaration);  void visitListExpression(ListExpression* listexpression);
+  void visitListTLDeclaration(ListTLDeclaration* listtldeclaration);  void visitListDeclaration(ListDeclaration* listdeclaration);  void visitListStatement(ListStatement* liststatement);  void visitListTypeSpecifier(ListTypeSpecifier* listtypespecifier);  void visitListConversionSpecifier(ListConversionSpecifier* listconversionspecifier);  void visitListFunctionSpecifier(ListFunctionSpecifier* listfunctionspecifier);  void visitListVariableSpecifier(ListVariableSpecifier* listvariablespecifier);  void visitListStructMemberDeclaration(ListStructMemberDeclaration* liststructmemberdeclaration);  void visitListGenericParam(ListGenericParam* listgenericparam);  void visitListParameterDeclaration(ListParameterDeclaration* listparameterdeclaration);  void visitListExpression(ListExpression* listexpression);  void visitListType(ListType* listtype);
   void visitCstring(CString p);  void visitCchar(CChar p);  void visitOperator(Operator p);
   void visitIdent(String s);
   void visitInteger(Integer i);

@@ -104,7 +104,10 @@ class PrintAbsyn : public Visitor
   void visitTCustom(TCustom *p);
   void visitTFixedArray(TFixedArray *p);
   void visitTGenericArray(TGenericArray *p);
+  void visitTList(TList *p);
+  void visitTInfiniteList(TInfiniteList *p);
   void visitTStruct(TStruct *p);
+  void visitTFunction(TFunction *p);
   void visitTType(TType *p);
   void visitStructMemberDeclaration(StructMemberDeclaration *p); /* abstract class */
   void visitSMDMemberDeclaration(SMDMemberDeclaration *p);
@@ -148,6 +151,8 @@ class PrintAbsyn : public Visitor
   void visitEPostInc(EPostInc *p);
   void visitEPostDec(EPostDec *p);
   void visitEAddress(EAddress *p);
+  void visitELeft(ELeft *p);
+  void visitERight(ERight *p);
   void visitEIntrinSExt(EIntrinSExt *p);
   void visitEIntrinZExt(EIntrinZExt *p);
   void visitEIntrinCast(EIntrinCast *p);
@@ -180,10 +185,13 @@ class PrintAbsyn : public Visitor
   void visitEBnot(EBnot *p);
   void visitEPos(EPos *p);
   void visitEMul(EMul *p);
+  void visitEMulA(EMulA *p);
   void visitEDiv(EDiv *p);
   void visitEMod(EMod *p);
   void visitEAdd(EAdd *p);
   void visitESub(ESub *p);
+  void visitEAddA(EAddA *p);
+  void visitESubA(ESubA *p);
   void visitELSh(ELSh *p);
   void visitERSh(ERSh *p);
   void visitELT(ELT *p);
@@ -221,6 +229,7 @@ class PrintAbsyn : public Visitor
   void visitListGenericParam(ListGenericParam* p);
   void visitListParameterDeclaration(ListParameterDeclaration* p);
   void visitListExpression(ListExpression* p);
+  void visitListType(ListType* p);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);
@@ -366,7 +375,10 @@ class ShowAbsyn : public Visitor
   void visitTCustom(TCustom *p);
   void visitTFixedArray(TFixedArray *p);
   void visitTGenericArray(TGenericArray *p);
+  void visitTList(TList *p);
+  void visitTInfiniteList(TInfiniteList *p);
   void visitTStruct(TStruct *p);
+  void visitTFunction(TFunction *p);
   void visitTType(TType *p);
   void visitStructMemberDeclaration(StructMemberDeclaration *p); /* abstract class */
   void visitSMDMemberDeclaration(SMDMemberDeclaration *p);
@@ -410,6 +422,8 @@ class ShowAbsyn : public Visitor
   void visitEPostInc(EPostInc *p);
   void visitEPostDec(EPostDec *p);
   void visitEAddress(EAddress *p);
+  void visitELeft(ELeft *p);
+  void visitERight(ERight *p);
   void visitEIntrinSExt(EIntrinSExt *p);
   void visitEIntrinZExt(EIntrinZExt *p);
   void visitEIntrinCast(EIntrinCast *p);
@@ -442,10 +456,13 @@ class ShowAbsyn : public Visitor
   void visitEBnot(EBnot *p);
   void visitEPos(EPos *p);
   void visitEMul(EMul *p);
+  void visitEMulA(EMulA *p);
   void visitEDiv(EDiv *p);
   void visitEMod(EMod *p);
   void visitEAdd(EAdd *p);
   void visitESub(ESub *p);
+  void visitEAddA(EAddA *p);
+  void visitESubA(ESubA *p);
   void visitELSh(ELSh *p);
   void visitERSh(ERSh *p);
   void visitELT(ELT *p);
@@ -483,6 +500,7 @@ class ShowAbsyn : public Visitor
   void visitListGenericParam(ListGenericParam* p);
   void visitListParameterDeclaration(ListParameterDeclaration* p);
   void visitListExpression(ListExpression* p);
+  void visitListType(ListType* p);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);

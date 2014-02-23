@@ -425,8 +425,8 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 			printf( "Compiling from generated LLVM...\n" );
 		}
 		
-		params += " -cppgen=program -filetype=obj";
-		//params += gxSwitches.optimisationLevel;
+		params += " -cppgen=program -filetype=obj -O=";
+		params += std::to_string( gxSwitches.optimisationLevel );
 		params += " temp.ll";
 		system( params.c_str() );
 		

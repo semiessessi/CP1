@@ -81,7 +81,10 @@ class TByte;
 class TCustom;
 class TFixedArray;
 class TGenericArray;
+class TList;
+class TInfiniteList;
 class TStruct;
+class TFunction;
 class TType;
 class SMDMemberDeclaration;
 class PDAutoParameter;
@@ -120,6 +123,8 @@ class ECall;
 class EPostInc;
 class EPostDec;
 class EAddress;
+class ELeft;
+class ERight;
 class EIntrinSExt;
 class EIntrinZExt;
 class EIntrinCast;
@@ -152,10 +157,13 @@ class ENeg;
 class EBnot;
 class EPos;
 class EMul;
+class EMulA;
 class EDiv;
 class EMod;
 class EAdd;
 class ESub;
+class EAddA;
+class ESubA;
 class ELSh;
 class ERSh;
 class ELT;
@@ -193,6 +201,7 @@ class ListStructMemberDeclaration;
 class ListGenericParam;
 class ListParameterDeclaration;
 class ListExpression;
+class ListType;
 class Code;
 class TLDeclaration;
 class Declaration;
@@ -283,7 +292,10 @@ class Visitor
   virtual void visitTCustom(TCustom *p) = 0;
   virtual void visitTFixedArray(TFixedArray *p) = 0;
   virtual void visitTGenericArray(TGenericArray *p) = 0;
+  virtual void visitTList(TList *p) = 0;
+  virtual void visitTInfiniteList(TInfiniteList *p) = 0;
   virtual void visitTStruct(TStruct *p) = 0;
+  virtual void visitTFunction(TFunction *p) = 0;
   virtual void visitTType(TType *p) = 0;
   virtual void visitSMDMemberDeclaration(SMDMemberDeclaration *p) = 0;
   virtual void visitPDAutoParameter(PDAutoParameter *p) = 0;
@@ -322,6 +334,8 @@ class Visitor
   virtual void visitEPostInc(EPostInc *p) = 0;
   virtual void visitEPostDec(EPostDec *p) = 0;
   virtual void visitEAddress(EAddress *p) = 0;
+  virtual void visitELeft(ELeft *p) = 0;
+  virtual void visitERight(ERight *p) = 0;
   virtual void visitEIntrinSExt(EIntrinSExt *p) = 0;
   virtual void visitEIntrinZExt(EIntrinZExt *p) = 0;
   virtual void visitEIntrinCast(EIntrinCast *p) = 0;
@@ -354,10 +368,13 @@ class Visitor
   virtual void visitEBnot(EBnot *p) = 0;
   virtual void visitEPos(EPos *p) = 0;
   virtual void visitEMul(EMul *p) = 0;
+  virtual void visitEMulA(EMulA *p) = 0;
   virtual void visitEDiv(EDiv *p) = 0;
   virtual void visitEMod(EMod *p) = 0;
   virtual void visitEAdd(EAdd *p) = 0;
   virtual void visitESub(ESub *p) = 0;
+  virtual void visitEAddA(EAddA *p) = 0;
+  virtual void visitESubA(ESubA *p) = 0;
   virtual void visitELSh(ELSh *p) = 0;
   virtual void visitERSh(ERSh *p) = 0;
   virtual void visitELT(ELT *p) = 0;
@@ -395,6 +412,7 @@ class Visitor
   virtual void visitListGenericParam(ListGenericParam *p) = 0;
   virtual void visitListParameterDeclaration(ListParameterDeclaration *p) = 0;
   virtual void visitListExpression(ListExpression *p) = 0;
+  virtual void visitListType(ListType *p) = 0;
   virtual void visitCode(Code *p) = 0;
   virtual void visitTLDeclaration(TLDeclaration *p) = 0;
   virtual void visitDeclaration(Declaration *p) = 0;
@@ -1399,6 +1417,34 @@ class TGenericArray : public Type
   void swap(TGenericArray &);
 };
 
+class TList : public Type
+{
+ public:
+  Type *type_;
+
+  TList(const TList &);
+  TList &operator=(const TList &);
+  TList(Type *p1);
+  ~TList();
+  virtual void accept(Visitor *v);
+  virtual  TList  *clone() const;
+  void swap(TList &);
+};
+
+class TInfiniteList : public Type
+{
+ public:
+  Type *type_;
+
+  TInfiniteList(const TInfiniteList &);
+  TInfiniteList &operator=(const TInfiniteList &);
+  TInfiniteList(Type *p1);
+  ~TInfiniteList();
+  virtual void accept(Visitor *v);
+  virtual  TInfiniteList  *clone() const;
+  void swap(TInfiniteList &);
+};
+
 class TStruct : public Type
 {
  public:
@@ -1411,6 +1457,21 @@ class TStruct : public Type
   virtual void accept(Visitor *v);
   virtual  TStruct  *clone() const;
   void swap(TStruct &);
+};
+
+class TFunction : public Type
+{
+ public:
+  ListType *listtype_;
+  Type *type_;
+
+  TFunction(const TFunction &);
+  TFunction &operator=(const TFunction &);
+  TFunction(ListType *p1, Type *p2);
+  ~TFunction();
+  virtual void accept(Visitor *v);
+  virtual  TFunction  *clone() const;
+  void swap(TFunction &);
 };
 
 class TType : public Type
@@ -1994,6 +2055,34 @@ class EAddress : public Expression
   void swap(EAddress &);
 };
 
+class ELeft : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  ELeft(const ELeft &);
+  ELeft &operator=(const ELeft &);
+  ELeft(Expression *p1, Expression *p2);
+  ~ELeft();
+  virtual void accept(Visitor *v);
+  virtual  ELeft  *clone() const;
+  void swap(ELeft &);
+};
+
+class ERight : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  ERight(const ERight &);
+  ERight &operator=(const ERight &);
+  ERight(Expression *p1, Expression *p2);
+  ~ERight();
+  virtual void accept(Visitor *v);
+  virtual  ERight  *clone() const;
+  void swap(ERight &);
+};
+
 class EIntrinSExt : public Expression
 {
  public:
@@ -2467,6 +2556,20 @@ class EMul : public Expression
   void swap(EMul &);
 };
 
+class EMulA : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EMulA(const EMulA &);
+  EMulA &operator=(const EMulA &);
+  EMulA(Expression *p1, Expression *p2);
+  ~EMulA();
+  virtual void accept(Visitor *v);
+  virtual  EMulA  *clone() const;
+  void swap(EMulA &);
+};
+
 class EDiv : public Expression
 {
  public:
@@ -2521,6 +2624,34 @@ class ESub : public Expression
   virtual void accept(Visitor *v);
   virtual  ESub  *clone() const;
   void swap(ESub &);
+};
+
+class EAddA : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  EAddA(const EAddA &);
+  EAddA &operator=(const EAddA &);
+  EAddA(Expression *p1, Expression *p2);
+  ~EAddA();
+  virtual void accept(Visitor *v);
+  virtual  EAddA  *clone() const;
+  void swap(EAddA &);
+};
+
+class ESubA : public Expression
+{
+ public:
+  Expression *expression_1, *expression_2;
+
+  ESubA(const ESubA &);
+  ESubA &operator=(const ESubA &);
+  ESubA(Expression *p1, Expression *p2);
+  ~ESubA();
+  virtual void accept(Visitor *v);
+  virtual  ESubA  *clone() const;
+  void swap(ESubA &);
 };
 
 class ELSh : public Expression
@@ -3085,6 +3216,23 @@ class ListExpression : public Visitable
   virtual void accept(Visitor *v);
   virtual ListExpression *clone() const;
   void swap(ListExpression &);
+};
+class ListType : public Visitable
+{
+ public:
+  Type *type_;
+  ListType *listtype_;
+
+  ListType(const ListType &);
+  ListType &operator=(const ListType &);
+  ListType(Type *p1, ListType *p2);
+  ListType(Type *p);
+  ~ListType();
+  ListType* reverse();
+  ListType* reverse(ListType *l);
+  virtual void accept(Visitor *v);
+  virtual ListType *clone() const;
+  void swap(ListType &);
 };
 
 

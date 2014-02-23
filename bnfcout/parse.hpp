@@ -156,9 +156,10 @@
      _SYMB_114 = 373,
      _SYMB_115 = 374,
      _SYMB_116 = 375,
-     _INTEGER_ = 376,
-     _DOUBLE_ = 377,
-     _IDENT_ = 378
+     _SYMB_117 = 376,
+     _INTEGER_ = 377,
+     _DOUBLE_ = 378,
+     _IDENT_ = 379
    };
 #endif
 
@@ -168,7 +169,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2638 of glr.c  */
-#line 563 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+#line 590 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
 
   int int_;
   char char_;
@@ -202,12 +203,13 @@ typedef union YYSTYPE
   ListGenericParam* listgenericparam_;
   ListParameterDeclaration* listparameterdeclaration_;
   ListExpression* listexpression_;
+  ListType* listtype_;
 
 
 
 
 /* Line 2638 of glr.c  */
-#line 211 "parse.hpp"
+#line 213 "parse.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 #endif

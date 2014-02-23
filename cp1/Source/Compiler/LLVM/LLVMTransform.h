@@ -23,9 +23,10 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   void visitFunctionBody( ListStatement* statements );
     
   virtual void visitDTypeDecl(DTypeDecl *p);
-  //virtual void visitTBDOperator(TBDOperator *p);
   virtual void visitDOperator(DOperator *p);
   virtual void visitDTypeConv( DTypeConv* p );
+  
+  virtual void visitDIVariable(DIVariable *p);
   //virtual void visitTBDTypedOperator(TBDTypedOperator *p);
   //virtual void visitTBDTypedShortOperator(TBDTypedShortOperator *p);
   //virtual void visitFSEntryPoint(FSEntryPoint *p);
@@ -91,12 +92,17 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   virtual void visitEE( EE* p );
   virtual void visitENE( ENE* p );
   virtual void visitEMul(EMul *p);
+  virtual void visitEMulA(EMulA *p);
   virtual void visitEDiv(EDiv *p);
   virtual void visitEMod(EMod *p);
   virtual void visitEAdd(EAdd *p);
+  virtual void visitEAddA(EAddA *p);
   virtual void visitESub(ESub *p);
+  virtual void visitESubA(ESubA *p);
   virtual void visitELSh(ELSh *p);
   virtual void visitERSh(ERSh *p);
+  virtual void visitELeft(ELeft *p);
+  virtual void visitERight(ERight *p);
   //virtual void visitEBinaryOperator(EBinaryOperator *p);
   virtual void visitELT(ELT *p);
   virtual void visitEGT(EGT *p);
@@ -105,9 +111,9 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   virtual void visitEBand(EBand *p);
   virtual void visitEBor(EBor *p);
   virtual void visitEBxor(EBxor *p);
-  //virtual void visitELand(ELand *p) {}
-  //virtual void visitELor(ELor *p) {}
-  //virtual void visitELxor(ELxor *p) {}
+  virtual void visitELand(ELand *p);
+  virtual void visitELor(ELor *p);
+  virtual void visitELxor(ELxor *p);
   //virtual void visitEConditional(EConditional *p) {}
   //virtual void visitETernaryOperator(ETernaryOperator *p);
   //virtual void visitPDAutoParameter(PDAutoParameter *p);
