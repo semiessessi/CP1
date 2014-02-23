@@ -6,9 +6,18 @@
 
 #include <string>
 
+struct Local
+{
+    DetailedTypeInfo* pType;
+    std::string szCPIdent;
+    std::string szLLVMIdent;
+};
+
 class LLVMTransformVisitor : public DescendingCompilerVisitor
 {
     DetailedTypeInfo* pCurrentType;
+    static int siTempCounter;
+    static int siTabLevel;
  public:
   virtual ~LLVMTransformVisitor() { out = ""; pCurrentType = 0; }
   virtual void visitMain(Main *p);
@@ -24,21 +33,15 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
     
   virtual void visitDTypeDecl(DTypeDecl *p);
   virtual void visitDOperator(DOperator *p);
-  virtual void visitDTypeConv( DTypeConv* p );
-  
+  virtual void visitDTypeConv( DTypeConv* p );  
   virtual void visitDIVariable(DIVariable *p);
-  //virtual void visitTBDTypedOperator(TBDTypedOperator *p);
-  //virtual void visitTBDTypedShortOperator(TBDTypedShortOperator *p);
-  //virtual void visitFSEntryPoint(FSEntryPoint *p);
-  //virtual void visitFSPure(FSPure *p);
-  //virtual void visitVSConst(VSConst *p);
-  //virtual void visitTByte(TByte *p);
-  //virtual void visitTCustom(TCustom *p);
-  //virtual void visitTArray(TArray *p);
-  //virtual void visitTFixedArray(TFixedArray *p);
+
   virtual void visitSIVariable(SIVariable* p);
   virtual void visitSReturn(SReturn *p);
   virtual void visitSExpression(SExpression *p);
+  
+  std::map< std::string, Local > handlePhiInstructions( std::map< std::string, Local > originalLocals, std::map< std::string, Local > locals1, std::map< std::string, Local > locals2, std::string szLabel1, std::string szLabel2 );
+  
   virtual void visitSIf(SIf *p);
   virtual void visitSIfElse(SIfElse *p);
   virtual void visitSLoop(SLoop *p);
@@ -51,6 +54,9 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   virtual void visitEChar( EChar* p );
   //virtual void visitEPi(EPi *p);
   virtual void visitERValue(ERValue *p);
+  
+  virtual void visitEAssign(EAssign* p);
+  
   virtual void visitESimpleCall(ESimpleCall *p);
   virtual void visitECall( ECall *p );
   

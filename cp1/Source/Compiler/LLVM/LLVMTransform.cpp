@@ -15,19 +15,13 @@
 
 #include <map>
 
-static int siTempCounter = 0;
-static int siTabLevel = 0;
+int LLVMTransformVisitor::siTempCounter = 0;
+int LLVMTransformVisitor::siTabLevel = 0;
 
 TypeVisitor sxCurrentTypeScopeVisitor;
 std::string sszCurrentFunctionName = "";
 std::string sszCurrentNamespace = "_dot_";
 
-struct Local
-{
-    DetailedTypeInfo* pType;
-    std::string szCPIdent;
-    std::string szLLVMIdent;
-};
 std::map< std::string, Local > gxLocals;
 
 extern std::map< std::string, std::string > gszStrings;
@@ -362,7 +356,19 @@ void LLVMTransformVisitor::visitSReturn(SReturn *p)
 
 void LLVMTransformVisitor::visitSIf( SIf *p )
 {
+    static int siIfCounter = 0;
+	int iIfCounter = siIfCounter;
+	++siIfCounter;
+    
+    for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+    out += "br label %ifcond" + std::to_string( iIfCounter ) + "\r\n";
+    out += "ifcond" + std::to_string( iIfCounter ) + ":\r\n";
+    
 	p->expression_->accept( this );
+    
 	// SE - TODO: types
 	int iCondition = siTempCounter;
 	++siTempCounter;
@@ -381,10 +387,7 @@ void LLVMTransformVisitor::visitSIf( SIf *p )
     {
         out += "\t";
     }
-	
-	static int siIfCounter = 0;
-	int iIfCounter = siIfCounter;
-	++siIfCounter;
+
 	out += "br i1 %r" + std::to_string( siTempCounter );
 	out += ", label %ifbody" + std::to_string( iIfCounter );
 	out += ", label %endif" + std::to_string( iIfCounter ) + "\r\n";
@@ -393,13 +396,14 @@ void LLVMTransformVisitor::visitSIf( SIf *p )
     
     std::map< std::string, Local > oldLocals = gxLocals;
 	p->liststatement_->accept( this );
-    gxLocals = oldLocals;
 	for( int i = 0; i < siTabLevel; ++i )
     {
         out += "\t";
     }
 	out += "br label %endif" + std::to_string( iIfCounter ) + "\r\n";
 	out += "\r\nendif" + std::to_string( iIfCounter ) + ":\r\n";
+    
+    gxLocals = handlePhiInstructions( oldLocals, oldLocals, gxLocals, "ifcond" + std::to_string( iIfCounter ), "ifbody" + std::to_string( iIfCounter ) );
 }
 
 void LLVMTransformVisitor::visitSIfElse( SIfElse *p )
@@ -433,23 +437,28 @@ void LLVMTransformVisitor::visitSIfElse( SIfElse *p )
 	out += "\r\nif2body" + std::to_string( iIfCounter ) + ":\r\n";
 	++siTempCounter;
 	std::map< std::string, Local > oldLocals = gxLocals;
+    
 	p->liststatement_1->accept( this );
+    std::map< std::string, Local > localsIf = gxLocals;
     gxLocals = oldLocals;
+    
 	for( int i = 0; i < siTabLevel; ++i )
     {
         out += "\t";
     }
 	out += "br label %endif2" + std::to_string( iIfCounter ) + "\r\n";
 	out += "\r\nelsebody" + std::to_string( iIfCounter ) + ":\r\n";
-	oldLocals = gxLocals;
 	p->liststatement_2->accept( this );
-    gxLocals = oldLocals;
+    std::map< std::string, Local > localsElse = gxLocals;
+
 	for( int i = 0; i < siTabLevel; ++i )
     {
         out += "\t";
     }
 	out += "br label %endif2" + std::to_string( iIfCounter ) + "\r\n";
 	out += "\r\nendif2" + std::to_string( iIfCounter ) + ":\r\n";
+    
+    gxLocals = handlePhiInstructions( oldLocals, localsIf, localsElse, "if2body" + std::to_string( iIfCounter ), "elsebody" + std::to_string( iIfCounter ) );
 }
 
 void LLVMTransformVisitor::visitSLoop( SLoop *p )
@@ -725,6 +734,61 @@ void LLVMTransformVisitor::visitERValue(ERValue *p)
     }
 }
 
+void LLVMTransformVisitor::visitEAssign(EAssign* p)
+{
+    ++siTempCounter;
+    DetailedTypeInfo* pType = 0;
+    int exprID = -1;
+    if( p->expression_ )
+    {
+        p->expression_->accept( this );
+        exprID = siTempCounter;
+        ++siTempCounter;
+        pType = pCurrentType;
+    }
+    
+    RVVisitor v;
+    p->rvalue_->accept( &v );
+    std::string id = std::string( "%" ) + v.readString;
+    if( gxLocals.find( id ) != gxLocals.end() )
+    {
+        Local& local = gxLocals[ id ];
+        
+        int finalID = exprID;
+        if( local.pType->ShortLLVMName() != pType->ShortLLVMName() )
+        {
+            std::vector< ConversionInfo > cinfos = ConversionFinder::FindImplicitConversionsBetween( pType, local.pType );
+            
+            if( cinfos.size() != 0 )
+            {
+                for( int j = 0; j < siTabLevel; ++j )
+                {
+                    out += "\t";
+                }
+                out += "%r";
+                out += stringFromInt( siTempCounter );
+                out += " = call fastcc ";
+                out += cinfos[ 0 ].pTo->ShortLLVMName();
+                out += " @";
+                out += cinfos[ 0 ].MangledName();
+                out += "( ";
+                out += cinfos[ 0 ].pFrom->ShortLLVMName();
+                out += " %r";
+                out += stringFromInt( exprID );
+                out += " )\r\n";
+                finalID = siTempCounter;
+                ++siTempCounter;
+            }
+            else
+            {
+                compileError( 0, "Unable to convert from %s to %s", pType->ShortLLVMName().c_str(), local.pType->ShortLLVMName().c_str() );
+            }
+        }
+        
+        local.szLLVMIdent = std::string( "%r" ) + std::to_string( finalID );
+    }
+}
+
 void LLVMTransformVisitor::visitEChar( EChar* p )
 {
     for( int i = 0; i < siTabLevel; ++i )
@@ -863,10 +927,7 @@ void LLVMTransformVisitor::visitECall( ECall* p )
     out += " @";
 	out += rvv.readString;
 	out += "( ";
-	
-    
-	// SE - TODO: proper types...
-    
+
     for( int i = 0; i < iParameterCount; ++i )
     {
         // TODO: some kind of typing

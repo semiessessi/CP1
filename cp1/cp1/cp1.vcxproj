@@ -123,6 +123,7 @@ $(SolutionDir)..\..\tools\sed.exe -i "s/void yyerror/extern void yyerror(const c
     </ClCompile>
     <ClCompile Include="..\Source\Compiler\CompilerVisitor.cpp" />
     <ClCompile Include="..\Source\Compiler\LLVM\LLVMTransform.cpp" />
+    <ClCompile Include="..\Source\Compiler\LLVM\LLVMPhi.cpp" />
     <ClCompile Include="..\Source\Compiler\OperatorInfo.cpp" />
     <ClCompile Include="..\Source\Compiler\FunctionInfo.cpp" />
     <ClCompile Include="..\Source\Compiler\ParameterInfo.cpp" />
