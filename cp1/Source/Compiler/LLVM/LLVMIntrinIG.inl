@@ -10,22 +10,22 @@ void LLVMTransformVisitor::visitEIntrinCNeI(EIntrinCNeI *p)
 
 void LLVMTransformVisitor::visitEIntrinCLtI(EIntrinCLtI *p)
 {
-    visitGenericIntIntrinsic( p->expression_1, p->expression_2, "icmp lt", p->type_, true );
+    visitGenericIntIntrinsic( p->expression_1, p->expression_2, "icmp slt", p->type_, true );
 }
 
 void LLVMTransformVisitor::visitEIntrinCGtI(EIntrinCGtI *p)
 {
-    visitGenericIntIntrinsic( p->expression_1, p->expression_2, "icmp gt", p->type_, true );
+    visitGenericIntIntrinsic( p->expression_1, p->expression_2, "icmp sgt", p->type_, true );
 }
 
 void LLVMTransformVisitor::visitEIntrinCLeI(EIntrinCLeI *p)
 {
-    visitGenericIntIntrinsic( p->expression_1, p->expression_2, "icmp le", p->type_, true );
+    visitGenericIntIntrinsic( p->expression_1, p->expression_2, "icmp sle", p->type_, true );
 }
 
 void LLVMTransformVisitor::visitEIntrinCGeI(EIntrinCGeI *p)
 {
-    visitGenericIntIntrinsic( p->expression_1, p->expression_2, "icmp ge", p->type_, true );
+    visitGenericIntIntrinsic( p->expression_1, p->expression_2, "icmp sge", p->type_, true );
 }
 
 void LLVMTransformVisitor::visitEIntrinAddI(EIntrinAddI *p)

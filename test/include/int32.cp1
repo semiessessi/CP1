@@ -63,25 +63,25 @@ pure commutative bool !=( int32 a, int32 b )
     return cmp_ne< int32 >( a, b );
 }
 
-// pure bool >( int32 a, int32 b )
-// {
-    // return cmp_gt< int32 >( a, b );
-// }
+pure bool >( int32 a, int32 b )
+{
+    return cmp_gt< int32 >( a, b );
+}
 
-// pure bool <( int32 a, int32 b )
-// {
-    // return cmp_lt< int32 >( a, b );
-// }
+pure bool <( int32 a, int32 b )
+{
+    return cmp_lt< int32 >( a, b );
+}
 
-//pure bool >=( int32 a, int32 b )
-//{
-//    return cmp_ge< int32 >( a, b );
-//}
+pure bool >=( int32 a, int32 b )
+{
+    return cmp_ge< int32 >( a, b );
+}
 
-//pure bool <=( int32 a, int32 b )
-//{
-//    return cmp_le< int32 >( a, b );
-//}
+pure bool <=( int32 a, int32 b )
+{
+    return cmp_le< int32 >( a, b );
+}
 
 int32 implicit up convert( const byte b )
 {
