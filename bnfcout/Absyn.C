@@ -970,6 +970,26 @@ FSPure *FSPure::clone() const {
   return new FSPure(*this);
 }
 
+/********************   FSConst    ********************/
+FSConst::FSConst() { }
+FSConst::FSConst(const FSConst & other) { 
+}
+FSConst &FSConst::operator=(const FSConst & other) {
+  FSConst tmp(other);
+  swap(tmp);
+  return *this;
+}
+void FSConst::swap(FSConst & other) {
+
+}
+
+FSConst::~FSConst() { }
+
+void FSConst::accept(Visitor *v) { v->visitFSConst(this); }
+FSConst *FSConst::clone() const {
+  return new FSConst(*this);
+}
+
 /********************   FSInline    ********************/
 FSInline::FSInline() { }
 FSInline::FSInline(const FSInline & other) { 

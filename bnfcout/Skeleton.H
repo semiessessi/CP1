@@ -59,6 +59,7 @@ class Skeleton : public Visitor
   void visitFunctionSpecifier(FunctionSpecifier* functionspecifier); /* abstract class */
   void visitFSEntryPoint(FSEntryPoint* fsentrypoint);
   void visitFSPure(FSPure* fspure);
+  void visitFSConst(FSConst* fsconst);
   void visitFSInline(FSInline* fsinline);
   void visitFSAssociative(FSAssociative* fsassociative);
   void visitFSCommutative(FSCommutative* fscommutative);

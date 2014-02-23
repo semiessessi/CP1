@@ -21,6 +21,10 @@ public:
         typeOwner = "";
         typeReturn = "";
         parameterTypes.clear();
+        bPure = false;
+        bInline = false;
+        bAssociative = false;
+        bCommutative = false;
 	}
 
     virtual void visitDOperator(DOperator *p)
@@ -28,6 +32,13 @@ public:
         ONVisitor ov;
         p->operatorname_->accept( &ov );
         name = ov.operatorName;
+        
+        ListFunctionSpecifier* lf = p->listfunctionspecifier_;
+        while( lf && lf->functionspecifier_ )
+        {
+            lf->functionspecifier_->accept( this );
+            lf = lf->listfunctionspecifier_;
+        }
         
         ListParameterDeclaration* lp = p->listparameterdeclaration_;
         while( lp && lp->parameterdeclaration_ )
@@ -40,6 +51,11 @@ public:
         }
 
     }
+    
+    virtual void visitFSPure(FSPure *p) { bPure = true; }
+    virtual void visitFSInline(FSInline *p) { bInline = true; }
+    virtual void visitFSAssociative( FSAssociative *p ) { bAssociative = true; }
+    virtual void visitFSCommutative( FSCommutative *p ) { bCommutative = true; }
 
     std::string name;
     std::string typeOwner;
@@ -47,6 +63,11 @@ public:
 
     std::vector < DetailedTypeInfo* > parameterTypes;
 
+    bool bPure;
+    bool bConst;
+    bool bInline;
+    bool bAssociative;
+    bool bCommutative;
 };
 
 #endif

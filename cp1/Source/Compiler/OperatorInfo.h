@@ -18,8 +18,11 @@ struct OperatorInfo
 
     std::vector< std::string > aszInverses;
 
-    bool bCommutative;
     bool bPure;
+    bool bConst;
+    bool bInline;
+    bool bAssociative;
+    bool bCommutative;
     bool bUsed;
 
     OperatorInfo()
@@ -27,8 +30,11 @@ struct OperatorInfo
     , szLLVMName( "ERROR!" )
     , szTypeOwner( "<unnamed-type>" )
     , aszInverses()
-    , bCommutative( false )
     , bPure( false )
+    , bConst( false )
+    , bInline( false )
+    , bAssociative( false )
+    , bCommutative( false )
     , bUsed( false )
     {
     }

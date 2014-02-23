@@ -52,6 +52,7 @@ class CompilerVisitor : public Visitor
   virtual void visitOTIdentity(OTIdentity *p) {}
   virtual void visitFSEntryPoint(FSEntryPoint *p) {}
   virtual void visitFSPure(FSPure *p) {}
+  virtual void visitFSConst(FSConst *p) {}
   virtual void visitFSInline(FSInline *p) {}
   virtual void visitFSAssociative( FSAssociative *p ) {}
   virtual void visitFSCommutative( FSCommutative *p ) {}

@@ -328,6 +328,12 @@ void Skeleton::visitFSPure(FSPure* fspure)
 
 }
 
+void Skeleton::visitFSConst(FSConst* fsconst)
+{
+  /* Code For FSConst Goes Here */
+
+}
+
 void Skeleton::visitFSInline(FSInline* fsinline)
 {
   /* Code For FSInline Goes Here */

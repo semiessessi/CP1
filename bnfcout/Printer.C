@@ -682,6 +682,18 @@ void PrintAbsyn::visitFSPure(FSPure* p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitFSConst(FSConst* p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render("const");
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitFSInline(FSInline* p)
 {
   int oldi = _i_;
@@ -3114,6 +3126,10 @@ void ShowAbsyn::visitFSEntryPoint(FSEntryPoint* p)
 void ShowAbsyn::visitFSPure(FSPure* p)
 {
   bufAppend("FSPure");
+}
+void ShowAbsyn::visitFSConst(FSConst* p)
+{
+  bufAppend("FSConst");
 }
 void ShowAbsyn::visitFSInline(FSInline* p)
 {

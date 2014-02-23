@@ -78,6 +78,7 @@ class PrintAbsyn : public Visitor
   void visitFunctionSpecifier(FunctionSpecifier *p); /* abstract class */
   void visitFSEntryPoint(FSEntryPoint *p);
   void visitFSPure(FSPure *p);
+  void visitFSConst(FSConst *p);
   void visitFSInline(FSInline *p);
   void visitFSAssociative(FSAssociative *p);
   void visitFSCommutative(FSCommutative *p);
@@ -337,6 +338,7 @@ class ShowAbsyn : public Visitor
   void visitFunctionSpecifier(FunctionSpecifier *p); /* abstract class */
   void visitFSEntryPoint(FSEntryPoint *p);
   void visitFSPure(FSPure *p);
+  void visitFSConst(FSConst *p);
   void visitFSInline(FSInline *p);
   void visitFSAssociative(FSAssociative *p);
   void visitFSCommutative(FSCommutative *p);

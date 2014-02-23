@@ -810,6 +810,7 @@ OperatorTrait : _SYMB_78 Type OperatorName Expression { $$ = new OTIdentity($2, 
 ;
 FunctionSpecifier : _SYMB_73 { $$ = new FSEntryPoint();  } 
   | _SYMB_93 { $$ = new FSPure();  }
+  | _SYMB_67 { $$ = new FSConst();  }
   | _SYMB_83 { $$ = new FSInline();  }
   | _SYMB_56 { $$ = new FSAssociative();  }
   | _SYMB_66 { $$ = new FSCommutative();  }

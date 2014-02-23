@@ -56,6 +56,7 @@ OTIdentity.					OperatorTrait           ::= "identity" Type OperatorName Express
 
 FSEntryPoint.				FunctionSpecifier		::= "entrypoint" ;
 FSPure.						FunctionSpecifier		::= "pure" ;
+FSConst.					FunctionSpecifier		::= "const" ;
 FSInline.					FunctionSpecifier		::= "inline" ;
 FSAssociative.				FunctionSpecifier		::= "associative" ;
 FSCommutative.				FunctionSpecifier		::= "commutative" ;

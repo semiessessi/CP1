@@ -39,6 +39,10 @@ public:
         
         OperatorInfo& rInfo = findOperatorInfo( info );
         rInfo.szCPName = v.name;
+        rInfo.bPure = v.bPure;
+        rInfo.bInline = v.bInline;
+        rInfo.bAssociative = v.bAssociative;
+        rInfo.bCommutative = v.bCommutative;
         rInfo.szTypeOwner = v.typeOwner;
         rInfo.szTypeReturn = v.typeReturn;
         rInfo.szLLVMName = info.szLLVMName;

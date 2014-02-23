@@ -60,6 +60,7 @@ class ONLeft;
 class OTIdentity;
 class FSEntryPoint;
 class FSPure;
+class FSConst;
 class FSInline;
 class FSAssociative;
 class FSCommutative;
@@ -259,6 +260,7 @@ class Visitor
   virtual void visitOTIdentity(OTIdentity *p) = 0;
   virtual void visitFSEntryPoint(FSEntryPoint *p) = 0;
   virtual void visitFSPure(FSPure *p) = 0;
+  virtual void visitFSConst(FSConst *p) = 0;
   virtual void visitFSInline(FSInline *p) = 0;
   virtual void visitFSAssociative(FSAssociative *p) = 0;
   virtual void visitFSCommutative(FSCommutative *p) = 0;
@@ -1079,6 +1081,19 @@ class FSPure : public FunctionSpecifier
   virtual void accept(Visitor *v);
   virtual  FSPure  *clone() const;
   void swap(FSPure &);
+};
+
+class FSConst : public FunctionSpecifier
+{
+ public:
+
+  FSConst(const FSConst &);
+  FSConst &operator=(const FSConst &);
+  FSConst();
+  ~FSConst();
+  virtual void accept(Visitor *v);
+  virtual  FSConst  *clone() const;
+  void swap(FSConst &);
 };
 
 class FSInline : public FunctionSpecifier

@@ -224,7 +224,25 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
         
         pList = pList->listparameterdeclaration_;
     }
-    out += " ) nounwind\r\n{\r\n";
+    out += " ) ";
+    if( info.bInline )
+    {
+        out += "alwaysinline ";
+    }
+    if( info.bPure )
+    {
+        if( info.bConst )
+        {
+            // SE - TODO: warning 'pure' implies 'const'...
+        }
+        out += "readnone ";
+    }
+    else if( info.bConst )
+    {
+        out += "readonly ";
+    }
+    
+    out += "nounwind\r\n{\r\n";
     
     ++siTabLevel;
     visitFunctionBody( p->liststatement_ );
