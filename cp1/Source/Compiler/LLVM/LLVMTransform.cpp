@@ -190,7 +190,7 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
 	OperatorInfo& info = OperatorFinder::FindOperator( p );
     std::map< std::string, Local > oldLocals = gxLocals;
     gxLocals.clear();
-    out += "define private ";
+    out += "define private fastcc ";
     out += info.szTypeReturn;
     gszCurrentlyDesiredType = info.szTypeReturn.c_str();
     out += " @";
@@ -248,7 +248,7 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
     visitFunctionBody( p->liststatement_ );
     --siTabLevel;
     
-    out += "}\r\n";
+    out += "}\r\n\r\n";
     
     gxLocals = oldLocals;
 }
@@ -274,7 +274,7 @@ void LLVMTransformVisitor::visitDTypeConv( DTypeConv* p )
         std::map< std::string, Local > oldLocals = gxLocals;
         gxLocals.clear();
         
-        out += "define private ";
+        out += "define private fastcc ";
         out += specificInfo.pTo->ShortLLVMName();
         out += " @";
         out += specificInfo.MangledName();
@@ -913,7 +913,7 @@ void LLVMTransformVisitor::visitEOp( std::string szOperatorMangled, Expression* 
                     }
                     out += "%r";
                     out += stringFromInt( siTempCounter );
-                    out += " = call ";
+                    out += " = call fastcc ";
                     out += info[ i ].pTo->ShortLLVMName();
                     out += " @";
                     out += info[ i ].MangledName();
@@ -945,7 +945,7 @@ void LLVMTransformVisitor::visitEOp( std::string szOperatorMangled, Expression* 
                     }
                     out += "%r";
                     out += stringFromInt( siTempCounter );
-                    out += " = call ";
+                    out += " = call fastcc ";
                     out += info[ i ].pTo->ShortLLVMName();
                     out += " @";
                     out += info[ i ].MangledName();
@@ -979,7 +979,7 @@ void LLVMTransformVisitor::visitEOp( std::string szOperatorMangled, Expression* 
     pCurrentType = potentials[ match ].pTypeReturn;
     out += "%r";
     out += stringFromInt( siTempCounter );
-    out += " = call ";
+    out += " = call fastcc ";
     out += potentials[ match ].szTypeReturn;
     out += " @";
     out += potentials[ match ].szLLVMName;
