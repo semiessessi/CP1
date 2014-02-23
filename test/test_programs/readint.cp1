@@ -1,0 +1,28 @@
+import cstd;
+
+displayint( int i )
+{
+    int copy = i;
+    while( copy > 0 )
+    {
+        putc( '0' + 
+    }
+}
+
+int readint()
+{
+    int ret = 0;
+    int char = '0';
+    while( char != '\n' )
+    {
+        ret *= 10;
+        ret += ( char - '0' );
+        char = cstd.getchar();
+    }
+}
+
+entrypoint main()
+{
+    cstd.puts( "Input a number:" );
+    displayint( readint() );
+}

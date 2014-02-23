@@ -1,0 +1,9 @@
+import cstd;
+
+entrypoint main()
+{
+    until( cstd.getchar() == 'x' )
+    {
+        cstd.puts( "not pressed x yet" );
+    }
+}

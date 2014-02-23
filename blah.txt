@@ -1,0 +1,312 @@
+CP1 - the quest for a better C
+
+My project of the moment is a programming language and compiler. I know I should be hard at work on games right now, both at work and out of work... but I do quite enjoy these tangents.
+
+CP1 started life as me trying to update the framework I used to build FridgeScript for modern tools. Before starting this I took a look at compiler development tools available. I tried ANTLR (both the latest and previous versions using ANTLRworks) for a while but the learning curve put me off - it might not really be that hard to learn and use but it felt much more difficult than necessary, even with the internet. I looked at the latest version of BNFC (I need to check the even newer one) and explored new flex and bison versions and integrating them with BNFC under Windows. I debated switching away from C/C++ and using Haskell - creating a quick toy language there is much easier - the terse functional style has a convenient mapping to BNF style grammars - and the libraries available are fantastic - like Alex and Parsec. 
+
+Initially I was just exploring curiosity about unfinished work. When FridgeScript was relatively fresh so was LLVM and after implementing FSAssembler to convert the x86/x87 assembly from FridgeScript into executable bytes in memory. As a tangent at the time I did make FridgeScript compile to an unexciting exe (mostly as a challenge in writing a PE .exe exporter) that returned 42. Its nature as a language for floating point operations limited it in that environment. The obvious next step seemed to be reworking it to target LLVM but it never happened...
+
+At some intervening point I had a second wave of curiosity about compilers and tried to implement a more complete language. I called it 'e++' follwing the spirit of C(++) vs. D and wanting to be better than any of the combinations. This was an abortive attempt that didn't last very long - it was basically a modified FridgeScript to have support for working with bytes, integers and strings... This never got further than producing executables that output 42 either. However I did take a look into LLVM and found very little of genuine use. Getting the code and building for Linux was - as is often the case with open source projects - as straightforward as such things can be. Doing anything under Windows was undocumented and poorly supported - which also sadly seems to be the case with many open source projects. I didn't actually do anything at that point with LLVM.
+
+So, wind forward to last month and I picked up the remains of e++ and FridgeScript. The e++ project config still worked although updating the tools involved seemed tricky - again due to the lack of Windows versions that were useful or consistent enough. GnuWin32's flex and bison seem not to have been updated in a considerable length of time - what's more the bison install is broken and needed manual fixing. I managed to wrap all that stuff into a batch file though... one to configure the build system (fix the bison install) and another to build the project using msbuild - primarily as a workaround to new Visual Studio 2013 express not being able to open the VS 2010 project. Little did I know how this would turn out later... but I digress.
+
+This time getting LLVM to work for me was slightly less painful - but still far too challenging for something which is considered 'mainstream' software now. I managed to find some pre-built executables along with many stories about the pains of trying to get it to build. I never even bothered trying to build it - the executables worked fine for me for now. I invented this fiction that I would update LLVM later and build it myself as a proper library so that I could make a real compiler instead of a Frankenstein's monster.
+
+Once I got a bare minimum building I took some steps back and - against the spirit of Programming Motherfucker - did some thinking and design. Unlike past projects I decided the name was unimportant - CP1 is simply 'compiler project 1'.
+
+At any rate - after some thought about planning I ended up with a vague plan to implement the language around getting test programs to run and three lists of problems to be addressed to define the language - things I like in C/C++, things I dislike about C/C++ and things I want in C/C++ that aren't there.
+
+Things I like:
+
+The idea that you should only pay for what you use
+You can do almost anything the machine can do - when you can't inline assembler is available to leverage the novelty instructions required.
+The C style maps very well to how hardware and the von Neumann architecture works - functions and scopes visually communicate jumps and branches, instructions are sequential and well defined (modulo optimisation) and types mirror their layout in memory
+The library interface - C++ name mangling is a bit special, but C libraries are ubiquitous - the interface is so good that every mainstream language supports it or uses it for itself
+C style infix expressions - RPN is an arse of a notation, a hack for programmers to be able to write less code if ever there was one
+Safety is optional - you are free to shoot yourself in the foot
+
+Things I dislike:
+
+The fact that you pay for lots of things you don't use
+The preprocessor
+String handling in C stdlib and C++ STL is, frankly, an embarrassment
+Being able to reason about stacks, calling conventions and memory layout where no external interface is concerned
+The lack of an operator ^^ despite it being functionally equivalent to != for booleans
+C++'s object orientation is a bit crusty around the edges - there are gotchas and confusions about constructors, operators, type conversions, consts, volatiles and statics...
+C++ templates are a hack
+Compile times
+Cryptic error message - even from Clang
+Safety is optional - you are free to shoot yourself in the foot
+
+Things I want:
+
+Less language - more standard library, no built-in operators, intrinsics or types where possible
+Everything is bytes - I want a cleaner way to use that than void*
+No built-in operators (if possible)
+A richer set of functional features - being able to combine functions to create new ones etc.
+A richer set of features for types - enough to make RTTI and late binding stuff in the standard library as well as compile-time, static inheritance as an alternative to the vtable style approach and to open up other implementations currently achievable only through metaprogramming tricks in C++ (e.g. a list of types at compile time)
+A strong, platform agnostic, set of intrinsics
+Constraints on generic parameters - partly for the compiler, partly for auto-complete
+'Automatic' differentiation and integration (entirely in the standard library using the rich function and type features)
+No forward declares - its always bugged the crap out of me that this trivial problem remains in C/C++, also how it can constrain beginners who simply don't know it exists
+Some code equivalent to Einstein summation notation because two nested loops is too much verbosity for matrix multiplication
+A better 'include' one with control over what gets exposed and that doesn't require pragma once, header guards or other hacks to make it 'idempotent' as the C standard calls it (can be included many times with no difference to being included once)
+A 'const' the compiler can and will trust, in a similar vein other annotations for the compiler things like 'pure' and 'commutative' for functions
+Tools to allow the compiler to leverage the mathematical structure defined by a program - e.g. to know that the byte type and the operator + form a group where 0 is the identity
+Faster than C!!!! (its not a pipe dream and I want to prove it by example! embarrassing that today we are still s slow as C imo!)
+Safety - but I want to be able to shoot myself in the foot if I want to too...
+
+This is quite a pile of stuff - too much to properly go through and discuss without that being a total snoozefest. Even though I did this token amount of design and thought through a few implementations of various ideas I went with Programming Motherfucker and trying to make "Hello world!" - all of it, the language required to describe it, the program code and the compiler functionality to compile it. This took a surprising amount of features - many of which I temporarily short circuited - and also many because I chose a very 'full' implementation:
+
+int32.cp1:
+type byte[ 4 ] int32;
+
+cstd.cp1:
+
+import int32;
+
+namespace cstd
+{
+
+    extern int32 puts( pointer p );
+
+}
+
+hello.cp1
+
+import cstd;
+
+entrypoint main()
+{
+    cstd.puts( "Hello world!" );
+}
+
+Proper features implemented:
+lexer and parser (obvious)
+function name mangling
+using namespaces for name mangling
+external linkage
+import - the better include I wanted
+functions
+function calls
+parser error reporting with file, line and column as well as rendering the code with some arrow marking the error location
+
+Unused features i implemented and tested by examining LLVM IR:
+operator definition
+(it turns out broken) if/else, while, until and simple loops
+return statement (return 42 was the original test...)
+a load of intrinsics for integer operations
+
+There were some cheats involved:
+all function parameters are treated as pointers to bytes
+pointer is a hacky built-in type until there is enough standard library to dispose of it
+string constants compile to loading a pointer to a byte instead of an array of bytes
+all types assumed to be int32 (i32 in LLVM)
+entrypoint keyword did nothing
+
+One of my early and more ambitious decisions changed after I made this, pointer became the inbuilt type 'address' and I resigned myself to losing the absolute purity of everything being a byte or combinations of them defined in the standard library. After more thought and work I believe this was a good decision - a type system gains power by becoming richer and decoupling itself from the representations. Relaxing this allows me to have functions and types as types, and as proper abstractions - rather than things which are tied to being represented with bytes.
+
+The next test program proved to be considerably more challenging, and I actually changed it repeatedly to try and make the problem smaller.
+
+bool.cp1:
+
+type byte bool;
+
+const bool true = 1;
+const bool false = 0;
+
+identity int32 & true;
+identity int32 | false;
+identity int32 ^ false;
+
+pure commutative bool &&( a, b )
+{
+	return and< byte >( a, b );
+}
+
+pure commutative bool ||( a, b )
+{
+	return or< byte >( a, b );
+}
+
+pure commutative associative selfinverse bool ^^( a, b )
+{
+	return xor< byte >( a, b );
+}
+
+pure bool ==( a, b )
+{
+    return cmp< byte >( a, b );
+}
+
+pure bool !=( a, b )
+{
+    return cmp_ne< byte >( a, b );
+}
+
+int32.cp1:
+
+import bool;
+
+align< 4 > integer type byte[ 4 ] int32;
+
+identity int32 + 0;
+identity int32 * 1;
+identity int32 & 255;
+identity int32 | 0;
+identity int32 ^ 0;
+
+pure commutative associative int32 +( a, b )
+{
+	return add< int32 >( a, b );
+}
+
+//pure inverse + int32 -( a )
+//{
+//    return neg< int32 >( a );
+//}
+
+pure anticommutative inverse + int32 -( a, b )
+{
+	return sub< int32 >( a, b );
+}
+
+pure commutative int32 *( a, b )
+{
+	return mul< int32 >( a, b );
+}
+
+pure int32 /( a, b )
+{
+	return sdiv< int32 >( a, b );
+}
+
+pure int32 %( a, b )
+{
+	return srem< int32 >( a, b );
+}
+
+pure commutative int32 &( a, b )
+{
+	return and< int32 >( a, b );
+}
+
+pure commutative int32 |( a, b )
+{
+	return or< int32 >( a, b );
+}
+
+pure commutative associative selfinverse int32 ^( a, b )
+{
+	return xor< int32 >( a, b );
+}
+
+pure commutative bool ==( int32 a, int32 b )
+{
+    return cmp< int32 >( a, b );
+}
+
+pure commutative bool !=( int32 a, int32 b )
+{
+    return cmp_ne< int32 >( a, b );
+}
+
+// pure bool >( int32 a, int32 b )
+// {
+    // return cmp_gt< int32 >( a, b );
+// }
+
+// pure bool <( int32 a, int32 b )
+// {
+    // return cmp_lt< int32 >( a, b );
+// }
+
+//pure bool >=( int32 a, int32 b )
+//{
+//    return cmp_ge< int32 >( a, b );
+//}
+
+//pure bool <=( int32 a, int32 b )
+//{
+//    return cmp_le< int32 >( a, b );
+//}
+
+int32 implicit up convert( const byte b )
+{
+    return sign_extend< int32 >( b );
+}
+
+cstd.cp1:
+
+import int32;
+
+namespace cstd
+{
+
+extern int32 puts( address szString );
+extern int32 getchar();
+
+}
+
+
+test.cp1:
+
+import cstd;
+
+entrypoint main()
+{
+    until( cstd.getchar() == 'x' )
+    {
+        cstd.puts( "not pressed x yet" );
+    }
+}
+
+So, initially this was an if/else statement, then a while loop and there were many combinations of using variables and not as well as trying xor for the equality check. After fiddling with these variations it became apparent that my lack of real consideration of SSA was the cause. I need to revisit and properly replace the flow control structure implementations... but the if statement and until loops would work correctly provided there were no writes happening inside those scopes.
+
+Proper features implemented:
+boolean intrinsics
+operator name mangling
+some more types
+type inference
+character constants
+integer constants
+custom type conversions (no syntax to call an explicit conversion yet - I'm thinking about convert< T > and convert_to< T >)
+integer type specifier - for type checking intrinsics and simplifying LLVM IR by using i32 instead of [4 x i8]
+address type
+array type storage (but very few supporting language features - e.g. indexing)
+struct type info (but no storage or supporting language features)
+entrypoint keyword
+operator resolution including automatic type conversion and correct parameter types
+very simple compile error reporting for unmatched types and operators
+
+
+Unused features I implemented and tested but they didn't get used in the final program:
+integer intrinsics
+local variables
+scopes interacting with local variables correctly
+a zero byte error inducing type type
+stub for optimisation passes
+lots of grammar extensions to get ready for arrays, lists, generics, global variables, optimisation and more...
+
+Some cheats remained, others were removed, new ones appeared:
+all function parameters are treated as pointers to bytes
+string constants compile to loading a pointer to a byte instead of an array of bytes
+identity, commutative, inverse and other function decoration keywords do nothing (except entrypoint)
+global variables do nothing
+const is only enforced by the type conversion syntax - it does nothing yet
+
+This is really quite a powerful language now - by the standards of my previous toy languages and things like evallib, FridgeScript and most DSLs I've used. If you are willing to use operators as a hacky alternative to the functions which don't pass parameters properly you can do a scary amount. Recursion works (although fastcc seems to make everything crash so I don't think I'm getting tail recursion optimisations yet) which allows for some kinds of string parsing using cstd.getchar(). The lack of array and string functionality has become a serious blocker now - lots of rich functionality is available but inaccessible. It is now possible to, for example, write a program that will compute the GCD of two integers - but there is no way for a user to input integers yet (barring piles of if statements).
+
+This is definitely my next challenge - to implement the GCD for the standard library. This will require that I finish the functions to the same standard as the operators, fix the flow control structures, add array indexing, add the address-of operator/intrinsic and fix string constants to be byte arrays rather than addresses. I may have to change my mind about the example, insert cheats or complete more features but it seems like a good next step - one that makes the language genuinely usable for console apps that only have to take a user input and spit out an output. Time to write a 'Learn CP1 in 30 days' book...
+
+I have since considered other names for the language since CP1 is a bit rubbish, and belongs to the compiler really... every time I run the compiler I get a little reminder that its still got a work in progress name. Taking a cue from the C, C++, C# trend I am considering C' - because its sort of in the C family, but different - like how x and x' are different. Taking a separate cue from the C family I'm also considering LL++ because really this whole language depends on LLVM, and whilst its hidden from view, the language provides high-level constructs to build LLVM IR in terms of abstractions. C' is favourite atm - despite its arrogance in claiming to belong to that prestigious family - LL++ would involve me talking to the LLVM guys and possibly jumping through hoops - I might find out later, but I think its unlikely they would want some unrelated work to leech off of their name somehow - which means I would throw the idea away. Some less serious ideas include:
+
+Cb - C flat, because C# is just too... sharp. Also because nobody has a 'flat' key on their keyboard
+Subjective-C - because I don't really need a reason for a name
+Kenya - because I have never had coffee from Java, but plenty from Kenya, alternatives include Colombia and Brazil
+Diamond - because its shinier, more brilliant and more valuable than Ruby
+Cobra - because cobras are way cooler than pythons
+Rascal - because Pascal is just too straight laced for me
+Fivetran - because four trans are just not enough
+NHP - because NHP is not a hypertext processor - NHP is high performance
+Vecta - because there is a joke in there somewhere about Scala
