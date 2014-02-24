@@ -3,7 +3,35 @@ import int32;
 namespace cstd
 {
 
-extern int32 puts( address szString );
+// stdio.h
+extern int32 clearerr();
+extern int32 fclose( address pFile );
+extern int32 feof( address pFile );
+extern int32 ferror( address pFile );
+extern int32 fflush( address pFile );
+extern int32 fgetc( address pFile );
+extern int32 fgetpos( address pFile, address pPos );
+extern address fgets( address szString, int32 limit, address pFile );
+extern address fopen( address szPath, address szMode );
+// fprintf
+extern int32 fputc( int32 iChar, address pFile );
+extern int32 fputs( address szString, address pFile );
+extern int32 fread( address pDestination, int32 size, int32 count, address pFile );
+extern address freopen( address szPath, address szMode, address pFile );
+// fscanf
+extern int32 fseek( address pFile, int32 offset, int32 origin );
+extern int32 fsetpos( address pFile, address pPos );
+extern int32 ftell( address pFile );
+extern int32 fwrite( address pSource, int32 size, int32 count, address pFile );
+extern int32 getc( address pFile );
 extern int32 getchar();
-
+extern int32 perror( address szString );
+extern int32 putchar( int32 iChar );
+extern int32 puts( address szString );
+extern int32 remove( address szFilename );
+extern int32 rewind( address pFile );
+// scanf
+// printf
+extern address tmpfile();
+extern address tmpnam( address szDestination );
 }

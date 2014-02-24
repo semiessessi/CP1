@@ -254,6 +254,7 @@ class DescendingCompilerVisitor : public CompilerVisitor
   virtual void visitSForEach(SForEach *p) {}
   virtual void visitSForAll(SForAll *p) {}
   //virtual void visitSDecl(SDecl* p);
+  virtual void visitSIVariable( SIVariable *p );
   virtual void visitECall(ECall *p);
   // virtual void visitEPostInc(EPostInc *p) {}
   // virtual void visitEPostDec(EPostDec *p) {}

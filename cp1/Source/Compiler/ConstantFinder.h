@@ -11,7 +11,7 @@ class ConstantFinder : public DescendingCompilerVisitor
 
 public:
 
-    ConstantFinder()
+    ConstantFinder() : DescendingCompilerVisitor()
     {
         miConstantID = 0;
     }

@@ -1,0 +1,11 @@
+//generic < T > type T class;
+
+//left< 0 > attribute< class > inherit< T > where T is class< U >
+//{
+//    T parent;
+//}
+
+//left< 1 > attribute< class > dynamic
+//{
+//    type dynamic_type;
+//}

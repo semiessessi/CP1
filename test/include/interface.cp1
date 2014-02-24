@@ -1,0 +1,11 @@
+//generic < T > type T interface;
+
+//left< 0 > attribute< class > implements< T > where T is class< U >
+//{
+//    T parent;
+//}
+
+//left< 1 > attribute< class > dynamic
+//{
+//    type dynamic_type;
+//}

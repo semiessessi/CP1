@@ -1,0 +1,62 @@
+import cstd;
+
+int32 readint()
+{
+    return readint_r( zero_extend< int32 >( 0 ) );
+}
+
+int32 readint_r( int32 val )
+{
+    int32 char = cstd.getchar();
+    if( ( char < '0' ) || ( char > '9' ) )
+    {
+        return val;
+    }
+    
+    return readint_r( val * 10 + ( char - '0' ) );
+}
+
+void putint( int32 val )
+{
+    putint_r( val, 1000000000, 0 );
+}
+
+void putint_r( int32 val, int32 test, bool written )
+{
+    if( test > 0 )
+    {
+        int32 digit = val / test;
+        if( ( digit > 0 ) || written )
+        {
+            cstd.putchar( digit + '0' );
+            int32 newval = val - digit * test;
+            putint_r( newval, test / 10, 1 );
+        }
+        else
+        {
+            putint_r( val, test / 10, 0 );
+        }
+    }
+}
+
+int32 gcd( a, b )
+{
+    if( b == 0 )
+    {
+       return a;
+    }
+    
+    return gcd( b, a % b );
+}
+
+entrypoint gcd_test()
+{
+    cstd.puts( "Input a number:" );
+    int32 a = readint();
+    
+    cstd.puts( "Input another number:" );
+    int32 b = readint();
+    
+    cstd.puts( "GCD:" );
+    putint( gcd( a, b ) );
+}

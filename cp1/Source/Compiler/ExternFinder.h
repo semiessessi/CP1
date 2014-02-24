@@ -61,7 +61,7 @@ public:
 		// then the function name...
 		szExtern += " @";
 		szExtern += p->ident_;
-		szExtern += "( ";
+		szExtern += "(";
 
 		verboseInfo( 3, "Visiting parameter declaration\n" );
 		if( p->listparameterdeclaration_ )
@@ -87,7 +87,7 @@ public:
 		// then the function name...
 		szExtern += " @";
 		szExtern += mszCurrentNamespace + p->ident_;
-		szExtern += "( ";
+		szExtern += "(";
 		
 		mbNameParams = true;
 		miParam = 0;
@@ -141,6 +141,7 @@ public:
         if( v.pxTypeInfo )
         {
             std::string& szExtern = *mpCurrentExtern;
+            szExtern += " ";
             szExtern += v.pxTypeInfo->ShortLLVMName();
             if( mbNameParams )
             {

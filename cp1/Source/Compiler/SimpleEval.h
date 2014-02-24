@@ -8,7 +8,7 @@ class SimpleEval
 public:
     
     SimpleEval()
-    : bSimple( true )
+    : bSimple( false )
     , bRValue( false )
     , bInt( false )
     , szLLVMValue( "i8 0" )
@@ -48,7 +48,15 @@ public:
     virtual void visitEIntrinCLeI(EIntrinCLeI *p) { bSimple = false; }
     virtual void visitEIntrinCGeI(EIntrinCGeI *p) { bSimple = false; }
   
-    virtual void visitEInteger(EInteger *p) { iValue = p->integer_; bInt = true; }
+    void SetInt( int iInt )
+    {
+        iValue = iInt;
+        bInt = true;
+        bSimple = true;
+    }
+    
+    virtual void visitEInteger(EInteger *p) { SetInt( p->integer_ ); }
+    virtual void visitEChar(EChar *p) { SetInt( static_cast< int >( p->cchar_[ 0 ] ) ); }
     
     virtual void visitEE( EE* p ) { bSimple = false; }
     virtual void visitENE( ENE* p ) { bSimple = false; }

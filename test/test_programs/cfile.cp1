@@ -1,0 +1,8 @@
+import cstd;
+
+entrypoint c_file_test()
+{
+    address pFile = cstd.fopen( "test.txt", "wb" );
+    cstd.fwrite( "Hello world!", 13, 1, pFile );
+    cstd.fclose( pFile );
+}

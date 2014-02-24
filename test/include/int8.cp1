@@ -1,51 +1,71 @@
-//import bool;
+import bool;
 
-//pure commutative associative bool ==( byte a, byte b )
-//{
-//    return cmp_b( a, b );
-//}
+pure commutative associative bool ==( byte a, byte b )
+{
+    return cmp< byte >( a, b );
+}
 
-//pure commutative associative bool !=( byte a, byte b )
-//{
-//    return cmp_ne_b( a, b );
-//}
+pure commutative associative bool !=( byte a, byte b )
+{
+    return cmp_ne< byte >( a, b );
+}
 
 pure commutative associative byte +( a, b )
 {
-	return add_b( a, b );
+	return add< byte >( a, b );
 }
 
 pure anticommutative inverse + byte -( a, b )
 {
-	return sub_b( a, b );
+	return sub< byte >( a, b );
 }
 
 pure commutative byte *( a, b )
 {
-	return mul_b( a, b );
+	return mul< byte >( a, b );
 }
 
 pure byte /( a, b )
 {
-	return sdiv_b( a, b );
+	return sdiv< byte >( a, b );
 }
 
 pure byte %( a, b )
 {
-	return srem_b( a, b );
+	return srem< byte >( a, b );
 }
 
 pure commutative byte &( a, b )
 {
-	return and_b( a, b );
+	return and< byte >( a, b );
 }
 
 pure commutative byte |( a, b )
 {
-	return or_b( a, b );
+	return or< byte >( a, b );
 }
 
 pure commutative associative selfinverse byte ^( a, b )
 {
-	return xor_b( a, b );
+	return xor< byte >( a, b );
+}
+
+pure bool >( byte a, byte b )
+{
+    return cmp_gt< byte >( a, b );
+}
+
+pure bool <( byte a, byte b )
+{
+    return cmp_lt< byte >( a, b );
+}
+
+pure bool >=( byte a, byte b )
+{
+    return cmp_ge< byte >( a, b );
+}
+
+pure bool <=( byte a, byte b )
+{
+    return cmp_le< byte >( a, b );
 }

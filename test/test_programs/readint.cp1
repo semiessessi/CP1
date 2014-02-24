@@ -1,28 +1,33 @@
 import cstd;
 
-displayint( int i )
+int32 readint()
 {
-    int copy = i;
-    while( copy > 0 )
-    {
-        putc( '0' + 
-    }
+    return readint_r( zero_extend< int32 >( 0 ) );
 }
 
-int readint()
+int32 readint_r( int32 val )
 {
-    int ret = 0;
-    int char = '0';
-    while( char != '\n' )
+    int32 char = cstd.getchar();
+    if( ( char < '0' ) || ( char > '9' ) )
     {
-        ret *= 10;
-        ret += ( char - '0' );
-        char = cstd.getchar();
+        return val;
     }
+    
+    return readint_r( val * 10 + ( char - '0' ) );
 }
 
 entrypoint main()
 {
     cstd.puts( "Input a number:" );
-    displayint( readint() );
+    int32 int = readint();
+    
+    if( int == 42 )
+    {
+        cstd.puts( "You entered 42!" );
+    }
+    
+    // if( int == 77777 )
+    // {
+        // cstd.puts( "You entered 77777!" );
+    // }
 }

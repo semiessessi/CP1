@@ -1,1 +1,168 @@
+import int32;
+
 type byte[] string;
+
+//string implicit up convert( const int32 b )
+//{
+//    return //...
+//}
+
+// SE - NOTE: the plan so far means that functions which are pure can't allocate underneath...
+// so a lot of these that could be pure or const are not...
+
+// string capitalise( string a )
+// {
+    // string szReturnValue = "";
+    // szReturnValue.size = a.size + b.size - 1;
+    
+    // for( int32 i = 0; i < a.size; ++i )
+    // {
+        ...
+    // }
+    
+    // return szReturnValue;
+// }
+
+// string string.capitalised()
+// {
+    // return capitalize( this );
+// }
+
+// remove any strings passed in as parameters
+
+//string.chomp( string a )
+//{
+//}
+
+//string.chomp( ... )
+//{
+//}
+
+string.clear()
+{
+    this.size = 1;
+    this[ 0 ] = 0;
+}
+
+string concatenate( string a, string b )
+{
+    string szReturnValue = "";
+    szReturnValue.size = a.size + b.size - 1;
+    
+    for( int32 i = 0; i < a.size; ++i )
+    {
+        szReturnValue[ i ] = a[ i ]; 
+    }
+    
+    for( int32 i = a.size; i < szReturnValue.size; ++i )
+    {
+        szReturnValue[ i ] = b[ i - a.size ];
+    }
+    
+    return szReturnValue;
+}
+
+const string.count_if( byte char )
+{
+    int32 iCount = 0;
+    for( int32 i = 0; i < this.length(); ++i )
+    {
+        if( this[ i ] == char )
+        {
+            ++iCount;
+        }
+    }
+    
+    return iCount;
+}
+
+// const bool ends_with( string s )
+// {
+// }
+
+//const byte first()
+//{
+//    return this[ 0 ];
+//}
+
+// foldl
+// SE - this might need to be made better...
+// the generic built in T.identity< f > can resolve in theory if we can
+// pull the loop apart to work out where it is used and error if its not
+// a parameter to a call to f ... and
+// think about left and right identities etc.
+// maybe get tail recursion working and make this recursive...
+//const generic< T > T string.foldl( ( T, byte ) -> T f, T initialValue = T.identity< f >  )
+//{
+//    T returnValue = initialValue;
+//    for( int32 i = 0; i < this.size; ++i )
+//    {
+//        returnValue = f( returnValue, this[ i ] );
+//    }
+//
+//    return returnValue;
+//}
+
+// foldr
+//const generic< T > T string.foldr( ( byte, T ) -> T f, T initialValue = T.identity< f >  )
+//{
+//    T returnValue = initialValue;
+//    for( int32 i = this.size - 1; i >= 0; --i )
+//    {
+//        returnValue = f( this[ i ], returnValue );
+//    }
+//
+//    return returnValue;
+//}
+
+//const bool is_empty()
+//{
+//    return this.size <= 1;
+//}
+
+//const byte last()
+//{
+//    return this[ this.size - 1 ];
+//}
+
+//const int32 string.length()
+//{
+//    return this.size - 1;
+//}
+
+// lower case
+//string.lower()
+//{
+//}
+
+//string.regex( regex a, match b )
+//{
+//}
+
+//string.replace( string a, string b )
+//{
+//}
+
+//string.replace_first( string a, string b )
+//{
+//}
+
+// reverse
+//string.reverse()
+//{
+//}
+
+// split
+//string[] string.split( string szDelimiter )
+//{
+//}
+
+// swap case
+//string.swap_case()
+//{
+//}
+
+// upper case
+//string.upper()
+//{
+//}

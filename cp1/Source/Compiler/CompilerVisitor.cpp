@@ -212,16 +212,21 @@ void DescendingCompilerVisitor::visitSUntil( SUntil *p )
     p->liststatement_->accept( this );  
 }
 
+void DescendingCompilerVisitor::visitSIVariable( SIVariable *p )
+{
+    p->expression_->accept( this );
+}
+
 void DescendingCompilerVisitor::visitECall( ECall *p )
 {
-    p->listexpression_->accept( this );
+    visitListExpression( p->listexpression_ );
     
 }
 
 void DescendingCompilerVisitor::visitListExpression( ListExpression* p )
 {
 	ListExpression* pListExpressions = p;
-	while( pListExpressions )
+	while( pListExpressions && pListExpressions->expression_ )
 	{
 		pListExpressions->expression_->accept( this );
 		pListExpressions = pListExpressions->listexpression_;

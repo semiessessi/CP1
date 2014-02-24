@@ -357,6 +357,8 @@ void LLVMTransformVisitor::visitSReturn(SReturn *p)
 
 void LLVMTransformVisitor::visitSIf( SIf *p )
 {
+    // SE - TODO: handle return and break...
+    
     static int siIfCounter = 0;
 	int iIfCounter = siIfCounter;
 	++siIfCounter;
@@ -409,6 +411,8 @@ void LLVMTransformVisitor::visitSIf( SIf *p )
 
 void LLVMTransformVisitor::visitSIfElse( SIfElse *p )
 {
+    // SE - TODO: handle return and break...
+    
 	p->expression_->accept( this );
 	// SE - TODO: types
 	int iCondition = siTempCounter;
@@ -733,7 +737,7 @@ void LLVMTransformVisitor::visitERValue(ERValue *p)
         out += gxLocals[ id ].pType->ShortLLVMName();
         out += "\r\n";
         
-        gxLocals[ id ].szLLVMIdent = std::string( "%r" ) + std::to_string( siTempCounter );
+        //gxLocals[ id ].szLLVMIdent = std::string( "%r" ) + std::to_string( siTempCounter );
     }
     else
     {
@@ -904,10 +908,10 @@ void LLVMTransformVisitor::visitECall( ECall* p )
     
     // count our parameters and work out what vars to chuck them in
     ListExpression* pList = p->listexpression_;
-	while( pList )
+	while( pList && pList->expression_ )
 	{
-        aiParameterTemps[ iParameterCount ] = siTempCounter;
         pList->expression_->accept( this );
+        aiParameterTemps[ iParameterCount ] = siTempCounter;
         pList = pList->listexpression_;
         ++siTempCounter;
         ++iParameterCount;
@@ -946,7 +950,7 @@ void LLVMTransformVisitor::visitECall( ECall* p )
         out += stringFromInt( aiParameterTemps[ i ] );
         if( i < ( iParameterCount - 1 ) )
         {
-            out += ",";
+            out += ", ";
         }
     }
 

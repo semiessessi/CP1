@@ -1,0 +1,54 @@
+import cstd;
+
+int32 readint()
+{
+    return readint_r( zero_extend< int32 >( 0 ) );
+}
+
+int32 readint_r( int32 val )
+{
+    int32 char = cstd.getchar();
+    if( ( char < '0' ) || ( char > '9' ) )
+    {
+        return val;
+    }
+    
+    return readint_r( val * 10 + ( char - '0' ) );
+}
+
+primetest_r( int32 p, int32 t )
+{
+    if( ( p % t ) == 0 )
+    {
+        cstd.puts( "Not prime!" );
+    }
+    else
+    {
+        if( ( t + 2 ) < p )
+        {
+            primetest_r( p, t + 2 );
+        }
+        else
+        {
+            cstd.puts( "Prime!" );
+        }
+    }
+}
+
+primetest( int32 p )
+{
+    if( ( p & 1 ) == 0 )
+    {
+        cstd.puts( "Not prime!" );
+    }
+    else
+    {
+        primetest_r( p, zero_extend< int32 >( 3 ) );
+    }
+}
+
+entrypoint prime_test()
+{
+    cstd.puts( "Input a number:" );
+    primetest( readint() );
+}

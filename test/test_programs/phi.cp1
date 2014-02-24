@@ -1,0 +1,99 @@
+import cstd;
+
+entrypoint phi_test()
+{
+    testif();
+    testifelse();
+    // testrepeat();
+}
+
+testif()
+{
+    int32 a = zero_extend< int32 >( 3 );
+    if( a == 3 )
+    {
+        a = 1;
+    }
+    
+    if( a == 1 )
+    {
+        cstd.puts( "a is 1 - correct" );
+    }
+    else
+    {
+        cstd.puts( "a is not 1 - incorrect - if may not be dealing with locals properly" );
+    }
+    
+    a = zero_extend< int32 >( 5 );
+    if( a == 3 )
+    {
+        a = 1;
+    }
+    
+    if( a == 5 )
+    {
+        cstd.puts( "a is 5 - correct" );
+    }
+    else
+    {
+        cstd.puts( "a is not 5 - incorrect - if may not be dealing with locals properly" );
+    }
+}
+
+testifelse()
+{
+    int32 b = zero_extend< int32 >( 3 );
+    if( b != 3 )
+    {
+        b = 1;
+    }
+    else
+    {
+        b = 2;
+    }
+    
+    if( b == 2 )
+    {
+        cstd.puts( "b is 2 - correct" );
+    }
+    else
+    {
+        cstd.puts( "b is not 2 - incorrect - if-else may not be dealing with locals properly" );
+    }
+    
+    if( b == 2 )
+    {
+        b = 1;
+    }
+    else
+    {
+        b = 2;
+    }
+    
+    if( b == 1 )
+    {
+        cstd.puts( "b is 1 - correct" );
+    }
+    else
+    {
+        cstd.puts( "b is not 1 - incorrect - if-else may not be dealing with locals properly" );
+    }
+}
+
+// testrepeat()
+// {
+    // int32 c = zero_extend< int32 >( 39 );
+    // repeat( 3 )
+    // {
+        // c = c + 1;
+    // }
+    
+    // if( c == 42 )
+    // {
+        // cstd.puts( "c is 42 - correct" );
+    // }
+    // else
+    // {
+        // cstd.puts( "c is not 42 - incorrect - repeat loop may not be dealing with locals properly" );
+    // }
+// }

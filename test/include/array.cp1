@@ -1,0 +1,30 @@
+generic < type T > type T[] array;
+
+//array.clear()
+//{
+//    this.size = 0;
+//}
+
+// foldl
+//const generic< T > T array.foldl( ( T, this.T ) -> T f, T initialValue = T.identity< f >  )
+//{
+//    T returnValue = initialValue;
+//    for( int32 i = 0; i < this.size; ++i )
+//    {
+//        returnValue = f( returnValue, this[ i ] );
+//    }
+//
+//    return returnValue;
+//}
+
+// foldr
+//const generic< T > T array.foldr( ( byte, T ) -> T f, T initialValue = T.identity< f >  )
+//{
+//    T returnValue = initialValue;
+//    for( int32 i = this.size - 1; i >= 0; --i )
+//    {
+//        returnValue = f( this[ i ], returnValue );
+//    }
+//
+//    return returnValue;
+//}

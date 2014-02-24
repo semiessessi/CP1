@@ -6,11 +6,13 @@ std::map< std::string, Local > LLVMTransformVisitor::handlePhiInstructions( std:
     
     for( std::map< std::string, Local >::iterator it = xResolvedLocals.begin(); it != xResolvedLocals.end(); ++it )
     {
+        //std::map< std::string, Local >::iterator it0 = originalLocals.find( it->first );
         std::map< std::string, Local >::iterator it1 = locals1.find( it->first );
         std::map< std::string, Local >::iterator it2 = locals2.find( it->first );
         if( ( it1 != locals1.end() )
             && ( it2 != locals2.end() ) )
         {
+            //Local l0 = it0->second;
             Local l1 = it1->second;
             Local l2 = it2->second;
             
