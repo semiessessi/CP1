@@ -8,6 +8,7 @@
 #include "../ParameterInfo.h"
 #include "../ParameterVisitor.h"
 #include "../RVVisitor.h"
+#include "../SimpleEval.h"
 #include "../TypeVisitor.h"
 
 #include "../../Error/CompileError.h"
@@ -547,11 +548,15 @@ void LLVMTransformVisitor::visitSLoop( SLoop *p )
 
 void LLVMTransformVisitor::visitSWhile( SWhile *p )
 {
-	//SE - TODO: types	
 	static int siRepeatCounter = 0;
 	int iRepeatCount = siRepeatCounter;
 	++siRepeatCounter;
 	
+    for( int i = 0; i < siTabLevel; ++i )
+    {
+        out += "\t";
+    }
+	out += "br label %while" + std::to_string( iRepeatCount ) + "\r\n";
 	out += "while" + std::to_string( iRepeatCount ) + ":\r\n";	
 	
 	for( int i = 0; i < siTabLevel; ++i )
@@ -954,9 +959,17 @@ void LLVMTransformVisitor::visitEOp( std::string szOperatorMangled, Expression* 
     int left = -1;
 
     DetailedTypeInfo* pLeftType = 0;
+    // SimpleEval seLeft;
     if( pLeft )
     {
-        pLeft->accept( this );
+        // pLeft->accept( seLeft );
+        // if( seLeft.bSimple )
+        // {
+        // }
+        // else
+        {
+            pLeft->accept( this );
+        }
         left = siTempCounter;
         ++siTempCounter;
         pLeftType = pCurrentType;
