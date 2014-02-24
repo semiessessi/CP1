@@ -54,20 +54,18 @@ void TrivialConstantExpressionOptimiser::visitSExpression( SExpression* pExpress
 void TrivialConstantExpressionOptimiser::visitListExpression( ListExpression* p )
 {
    	ListExpression* pListExpressions = p;
-    while( pListExpressions )
+    for( size_t i = 0 ; i < pListExpressions->size(); ++i )
     {
-        Expression* pNew = OptimiseExpression( pListExpressions->expression_ );
+        Expression* pNew = OptimiseExpression( ( *pListExpressions )[ i ] );
         if( pNew )
         {
-            Expression* pOld = pListExpressions->expression_;
-            pListExpressions->expression_ = pNew;
+            Expression* pOld = ( *pListExpressions )[ i ];
+            ( *pListExpressions )[ i ] = pNew;
             delete pOld;
         }
         else
         {
-            pListExpressions->expression_->accept( this );
+            ( *pListExpressions )[ i ]->accept( this );
         }
-    
-        pListExpressions = pListExpressions->listexpression_;
     }
 }

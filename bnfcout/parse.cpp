@@ -60,9 +60,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
+#include <algorithm>
 #include "Absyn.H"
+typedef struct yy_buffer_state *YY_BUFFER_STATE;
 int yyparse(void);
 int yylex(void);
+YY_BUFFER_STATE yy_scan_string(const char *str);
+void yy_delete_buffer(YY_BUFFER_STATE buf);
 int yy_mylinenumber;
 int initialize_lexer(FILE * inp);
 int yywrap(void)
@@ -71,14 +75,16 @@ int yywrap(void)
 }
 extern void yyerror(const char *str);void yyerror_fucko(const char *str)
 {
-  std::cout << "line " << yy_mylinenumber + 1 << std::endl ;
+  std::cout << "line " << yy_mylinenumber << std::endl ;
   fprintf(stderr,"error: %s\n",str);
 }
 
 
-Code* YY_RESULT_Code_ = 0;
+
+static Code* YY_RESULT_Code_ = 0;
 Code* pCode(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -89,10 +95,29 @@ Code* pCode(FILE *inp)
     return YY_RESULT_Code_;
   }
 }
+Code* pCode(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_Code_;
+  }
+}
 
-TLDeclaration* YY_RESULT_TLDeclaration_ = 0;
+static TLDeclaration* YY_RESULT_TLDeclaration_ = 0;
 TLDeclaration* pTLDeclaration(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -103,10 +128,29 @@ TLDeclaration* pTLDeclaration(FILE *inp)
     return YY_RESULT_TLDeclaration_;
   }
 }
+TLDeclaration* pTLDeclaration(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_TLDeclaration_;
+  }
+}
 
-Declaration* YY_RESULT_Declaration_ = 0;
+static Declaration* YY_RESULT_Declaration_ = 0;
 Declaration* pDeclaration(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -117,10 +161,29 @@ Declaration* pDeclaration(FILE *inp)
     return YY_RESULT_Declaration_;
   }
 }
+Declaration* pDeclaration(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_Declaration_;
+  }
+}
 
-Prototype* YY_RESULT_Prototype_ = 0;
+static Prototype* YY_RESULT_Prototype_ = 0;
 Prototype* pPrototype(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -131,10 +194,29 @@ Prototype* pPrototype(FILE *inp)
     return YY_RESULT_Prototype_;
   }
 }
+Prototype* pPrototype(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_Prototype_;
+  }
+}
 
-OperatorName* YY_RESULT_OperatorName_ = 0;
+static OperatorName* YY_RESULT_OperatorName_ = 0;
 OperatorName* pOperatorName(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -145,10 +227,29 @@ OperatorName* pOperatorName(FILE *inp)
     return YY_RESULT_OperatorName_;
   }
 }
+OperatorName* pOperatorName(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_OperatorName_;
+  }
+}
 
-OperatorTrait* YY_RESULT_OperatorTrait_ = 0;
+static OperatorTrait* YY_RESULT_OperatorTrait_ = 0;
 OperatorTrait* pOperatorTrait(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -159,10 +260,29 @@ OperatorTrait* pOperatorTrait(FILE *inp)
     return YY_RESULT_OperatorTrait_;
   }
 }
+OperatorTrait* pOperatorTrait(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_OperatorTrait_;
+  }
+}
 
-FunctionSpecifier* YY_RESULT_FunctionSpecifier_ = 0;
+static FunctionSpecifier* YY_RESULT_FunctionSpecifier_ = 0;
 FunctionSpecifier* pFunctionSpecifier(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -173,10 +293,29 @@ FunctionSpecifier* pFunctionSpecifier(FILE *inp)
     return YY_RESULT_FunctionSpecifier_;
   }
 }
+FunctionSpecifier* pFunctionSpecifier(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_FunctionSpecifier_;
+  }
+}
 
-ConversionSpecifier* YY_RESULT_ConversionSpecifier_ = 0;
+static ConversionSpecifier* YY_RESULT_ConversionSpecifier_ = 0;
 ConversionSpecifier* pConversionSpecifier(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -187,10 +326,29 @@ ConversionSpecifier* pConversionSpecifier(FILE *inp)
     return YY_RESULT_ConversionSpecifier_;
   }
 }
+ConversionSpecifier* pConversionSpecifier(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_ConversionSpecifier_;
+  }
+}
 
-VariableSpecifier* YY_RESULT_VariableSpecifier_ = 0;
+static VariableSpecifier* YY_RESULT_VariableSpecifier_ = 0;
 VariableSpecifier* pVariableSpecifier(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -201,10 +359,29 @@ VariableSpecifier* pVariableSpecifier(FILE *inp)
     return YY_RESULT_VariableSpecifier_;
   }
 }
+VariableSpecifier* pVariableSpecifier(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_VariableSpecifier_;
+  }
+}
 
-TypeSpecifier* YY_RESULT_TypeSpecifier_ = 0;
+static TypeSpecifier* YY_RESULT_TypeSpecifier_ = 0;
 TypeSpecifier* pTypeSpecifier(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -215,10 +392,29 @@ TypeSpecifier* pTypeSpecifier(FILE *inp)
     return YY_RESULT_TypeSpecifier_;
   }
 }
+TypeSpecifier* pTypeSpecifier(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_TypeSpecifier_;
+  }
+}
 
-GenericParam* YY_RESULT_GenericParam_ = 0;
+static GenericParam* YY_RESULT_GenericParam_ = 0;
 GenericParam* pGenericParam(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -229,10 +425,29 @@ GenericParam* pGenericParam(FILE *inp)
     return YY_RESULT_GenericParam_;
   }
 }
+GenericParam* pGenericParam(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_GenericParam_;
+  }
+}
 
-Type* YY_RESULT_Type_ = 0;
+static Type* YY_RESULT_Type_ = 0;
 Type* pType(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -243,10 +458,29 @@ Type* pType(FILE *inp)
     return YY_RESULT_Type_;
   }
 }
+Type* pType(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_Type_;
+  }
+}
 
-StructMemberDeclaration* YY_RESULT_StructMemberDeclaration_ = 0;
+static StructMemberDeclaration* YY_RESULT_StructMemberDeclaration_ = 0;
 StructMemberDeclaration* pStructMemberDeclaration(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -257,10 +491,29 @@ StructMemberDeclaration* pStructMemberDeclaration(FILE *inp)
     return YY_RESULT_StructMemberDeclaration_;
   }
 }
+StructMemberDeclaration* pStructMemberDeclaration(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_StructMemberDeclaration_;
+  }
+}
 
-ParameterDeclaration* YY_RESULT_ParameterDeclaration_ = 0;
+static ParameterDeclaration* YY_RESULT_ParameterDeclaration_ = 0;
 ParameterDeclaration* pParameterDeclaration(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -271,10 +524,29 @@ ParameterDeclaration* pParameterDeclaration(FILE *inp)
     return YY_RESULT_ParameterDeclaration_;
   }
 }
+ParameterDeclaration* pParameterDeclaration(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_ParameterDeclaration_;
+  }
+}
 
-Statement* YY_RESULT_Statement_ = 0;
+static Statement* YY_RESULT_Statement_ = 0;
 Statement* pStatement(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -285,10 +557,29 @@ Statement* pStatement(FILE *inp)
     return YY_RESULT_Statement_;
   }
 }
+Statement* pStatement(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_Statement_;
+  }
+}
 
-RValue* YY_RESULT_RValue_ = 0;
+static RValue* YY_RESULT_RValue_ = 0;
 RValue* pRValue(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -299,10 +590,29 @@ RValue* pRValue(FILE *inp)
     return YY_RESULT_RValue_;
   }
 }
+RValue* pRValue(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_RValue_;
+  }
+}
 
-Expression* YY_RESULT_Expression_ = 0;
+static Expression* YY_RESULT_Expression_ = 0;
 Expression* pExpression(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -313,10 +623,29 @@ Expression* pExpression(FILE *inp)
     return YY_RESULT_Expression_;
   }
 }
+Expression* pExpression(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_Expression_;
+  }
+}
 
-ListTLDeclaration* YY_RESULT_ListTLDeclaration_ = 0;
+static ListTLDeclaration* YY_RESULT_ListTLDeclaration_ = 0;
 ListTLDeclaration* pListTLDeclaration(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -327,10 +656,29 @@ ListTLDeclaration* pListTLDeclaration(FILE *inp)
     return YY_RESULT_ListTLDeclaration_;
   }
 }
+ListTLDeclaration* pListTLDeclaration(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_ListTLDeclaration_;
+  }
+}
 
-ListDeclaration* YY_RESULT_ListDeclaration_ = 0;
+static ListDeclaration* YY_RESULT_ListDeclaration_ = 0;
 ListDeclaration* pListDeclaration(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -341,10 +689,29 @@ ListDeclaration* pListDeclaration(FILE *inp)
     return YY_RESULT_ListDeclaration_;
   }
 }
+ListDeclaration* pListDeclaration(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_ListDeclaration_;
+  }
+}
 
-ListStatement* YY_RESULT_ListStatement_ = 0;
+static ListStatement* YY_RESULT_ListStatement_ = 0;
 ListStatement* pListStatement(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -355,10 +722,29 @@ ListStatement* pListStatement(FILE *inp)
     return YY_RESULT_ListStatement_;
   }
 }
+ListStatement* pListStatement(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_ListStatement_;
+  }
+}
 
-ListTypeSpecifier* YY_RESULT_ListTypeSpecifier_ = 0;
+static ListTypeSpecifier* YY_RESULT_ListTypeSpecifier_ = 0;
 ListTypeSpecifier* pListTypeSpecifier(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -369,10 +755,29 @@ ListTypeSpecifier* pListTypeSpecifier(FILE *inp)
     return YY_RESULT_ListTypeSpecifier_;
   }
 }
+ListTypeSpecifier* pListTypeSpecifier(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_ListTypeSpecifier_;
+  }
+}
 
-ListConversionSpecifier* YY_RESULT_ListConversionSpecifier_ = 0;
+static ListConversionSpecifier* YY_RESULT_ListConversionSpecifier_ = 0;
 ListConversionSpecifier* pListConversionSpecifier(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -383,10 +788,29 @@ ListConversionSpecifier* pListConversionSpecifier(FILE *inp)
     return YY_RESULT_ListConversionSpecifier_;
   }
 }
+ListConversionSpecifier* pListConversionSpecifier(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_ListConversionSpecifier_;
+  }
+}
 
-ListFunctionSpecifier* YY_RESULT_ListFunctionSpecifier_ = 0;
+static ListFunctionSpecifier* YY_RESULT_ListFunctionSpecifier_ = 0;
 ListFunctionSpecifier* pListFunctionSpecifier(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -397,10 +821,29 @@ ListFunctionSpecifier* pListFunctionSpecifier(FILE *inp)
     return YY_RESULT_ListFunctionSpecifier_;
   }
 }
+ListFunctionSpecifier* pListFunctionSpecifier(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_ListFunctionSpecifier_;
+  }
+}
 
-ListVariableSpecifier* YY_RESULT_ListVariableSpecifier_ = 0;
+static ListVariableSpecifier* YY_RESULT_ListVariableSpecifier_ = 0;
 ListVariableSpecifier* pListVariableSpecifier(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -411,10 +854,29 @@ ListVariableSpecifier* pListVariableSpecifier(FILE *inp)
     return YY_RESULT_ListVariableSpecifier_;
   }
 }
+ListVariableSpecifier* pListVariableSpecifier(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_ListVariableSpecifier_;
+  }
+}
 
-ListStructMemberDeclaration* YY_RESULT_ListStructMemberDeclaration_ = 0;
+static ListStructMemberDeclaration* YY_RESULT_ListStructMemberDeclaration_ = 0;
 ListStructMemberDeclaration* pListStructMemberDeclaration(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -425,10 +887,29 @@ ListStructMemberDeclaration* pListStructMemberDeclaration(FILE *inp)
     return YY_RESULT_ListStructMemberDeclaration_;
   }
 }
+ListStructMemberDeclaration* pListStructMemberDeclaration(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_ListStructMemberDeclaration_;
+  }
+}
 
-ListGenericParam* YY_RESULT_ListGenericParam_ = 0;
+static ListGenericParam* YY_RESULT_ListGenericParam_ = 0;
 ListGenericParam* pListGenericParam(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -439,10 +920,29 @@ ListGenericParam* pListGenericParam(FILE *inp)
     return YY_RESULT_ListGenericParam_;
   }
 }
+ListGenericParam* pListGenericParam(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_ListGenericParam_;
+  }
+}
 
-ListParameterDeclaration* YY_RESULT_ListParameterDeclaration_ = 0;
+static ListParameterDeclaration* YY_RESULT_ListParameterDeclaration_ = 0;
 ListParameterDeclaration* pListParameterDeclaration(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -453,10 +953,29 @@ ListParameterDeclaration* pListParameterDeclaration(FILE *inp)
     return YY_RESULT_ListParameterDeclaration_;
   }
 }
+ListParameterDeclaration* pListParameterDeclaration(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_ListParameterDeclaration_;
+  }
+}
 
-ListExpression* YY_RESULT_ListExpression_ = 0;
+static ListExpression* YY_RESULT_ListExpression_ = 0;
 ListExpression* pListExpression(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -467,10 +986,29 @@ ListExpression* pListExpression(FILE *inp)
     return YY_RESULT_ListExpression_;
   }
 }
+ListExpression* pListExpression(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_ListExpression_;
+  }
+}
 
-ListType* YY_RESULT_ListType_ = 0;
+static ListType* YY_RESULT_ListType_ = 0;
 ListType* pListType(FILE *inp)
 {
+  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -481,169 +1019,31 @@ ListType* pListType(FILE *inp)
     return YY_RESULT_ListType_;
   }
 }
+ListType* pListType(const char *str)
+{
+  YY_BUFFER_STATE buf;
+  int result;
+  yy_mylinenumber = 1;
+  initialize_lexer(0);
+  buf = yy_scan_string(str);
+  result = yyparse();
+  yy_delete_buffer(buf);
+  if (result)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return YY_RESULT_ListType_;
+  }
+}
 
 
-ListTLDeclaration* reverseListTLDeclaration(ListTLDeclaration *l)
-{
-  ListTLDeclaration *prev = 0;
-  ListTLDeclaration *tmp = 0;
-  while (l)
-  {
-    tmp = l->listtldeclaration_;
-    l->listtldeclaration_ = prev;
-    prev = l;
-    l = tmp;
-  }
-  return prev;
-}
-ListDeclaration* reverseListDeclaration(ListDeclaration *l)
-{
-  ListDeclaration *prev = 0;
-  ListDeclaration *tmp = 0;
-  while (l)
-  {
-    tmp = l->listdeclaration_;
-    l->listdeclaration_ = prev;
-    prev = l;
-    l = tmp;
-  }
-  return prev;
-}
-ListStatement* reverseListStatement(ListStatement *l)
-{
-  ListStatement *prev = 0;
-  ListStatement *tmp = 0;
-  while (l)
-  {
-    tmp = l->liststatement_;
-    l->liststatement_ = prev;
-    prev = l;
-    l = tmp;
-  }
-  return prev;
-}
-ListTypeSpecifier* reverseListTypeSpecifier(ListTypeSpecifier *l)
-{
-  ListTypeSpecifier *prev = 0;
-  ListTypeSpecifier *tmp = 0;
-  while (l)
-  {
-    tmp = l->listtypespecifier_;
-    l->listtypespecifier_ = prev;
-    prev = l;
-    l = tmp;
-  }
-  return prev;
-}
-ListConversionSpecifier* reverseListConversionSpecifier(ListConversionSpecifier *l)
-{
-  ListConversionSpecifier *prev = 0;
-  ListConversionSpecifier *tmp = 0;
-  while (l)
-  {
-    tmp = l->listconversionspecifier_;
-    l->listconversionspecifier_ = prev;
-    prev = l;
-    l = tmp;
-  }
-  return prev;
-}
-ListFunctionSpecifier* reverseListFunctionSpecifier(ListFunctionSpecifier *l)
-{
-  ListFunctionSpecifier *prev = 0;
-  ListFunctionSpecifier *tmp = 0;
-  while (l)
-  {
-    tmp = l->listfunctionspecifier_;
-    l->listfunctionspecifier_ = prev;
-    prev = l;
-    l = tmp;
-  }
-  return prev;
-}
-ListVariableSpecifier* reverseListVariableSpecifier(ListVariableSpecifier *l)
-{
-  ListVariableSpecifier *prev = 0;
-  ListVariableSpecifier *tmp = 0;
-  while (l)
-  {
-    tmp = l->listvariablespecifier_;
-    l->listvariablespecifier_ = prev;
-    prev = l;
-    l = tmp;
-  }
-  return prev;
-}
-ListStructMemberDeclaration* reverseListStructMemberDeclaration(ListStructMemberDeclaration *l)
-{
-  ListStructMemberDeclaration *prev = 0;
-  ListStructMemberDeclaration *tmp = 0;
-  while (l)
-  {
-    tmp = l->liststructmemberdeclaration_;
-    l->liststructmemberdeclaration_ = prev;
-    prev = l;
-    l = tmp;
-  }
-  return prev;
-}
-ListGenericParam* reverseListGenericParam(ListGenericParam *l)
-{
-  ListGenericParam *prev = 0;
-  ListGenericParam *tmp = 0;
-  while (l)
-  {
-    tmp = l->listgenericparam_;
-    l->listgenericparam_ = prev;
-    prev = l;
-    l = tmp;
-  }
-  return prev;
-}
-ListParameterDeclaration* reverseListParameterDeclaration(ListParameterDeclaration *l)
-{
-  ListParameterDeclaration *prev = 0;
-  ListParameterDeclaration *tmp = 0;
-  while (l)
-  {
-    tmp = l->listparameterdeclaration_;
-    l->listparameterdeclaration_ = prev;
-    prev = l;
-    l = tmp;
-  }
-  return prev;
-}
-ListExpression* reverseListExpression(ListExpression *l)
-{
-  ListExpression *prev = 0;
-  ListExpression *tmp = 0;
-  while (l)
-  {
-    tmp = l->listexpression_;
-    l->listexpression_ = prev;
-    prev = l;
-    l = tmp;
-  }
-  return prev;
-}
-ListType* reverseListType(ListType *l)
-{
-  ListType *prev = 0;
-  ListType *tmp = 0;
-  while (l)
-  {
-    tmp = l->listtype_;
-    l->listtype_ = prev;
-    prev = l;
-    l = tmp;
-  }
-  return prev;
-}
 
 
 
 /* Line 172 of glr.c  */
-#line 647 "parse.cpp"
+#line 1047 "parse.cpp"
 
 
 
@@ -678,7 +1078,7 @@ static YYSTYPE yyval_default;
 
 
 /* Line 243 of glr.c  */
-#line 682 "parse.cpp"
+#line 1082 "parse.cpp"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -963,28 +1363,28 @@ static const short int yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const unsigned short int yyrline[] =
 {
-       0,   795,   795,   797,   798,   800,   801,   802,   803,   804,
-     805,   806,   807,   808,   809,   811,   813,   814,   815,   816,
-     817,   818,   819,   820,   821,   822,   823,   824,   825,   826,
-     827,   828,   829,   830,   831,   832,   833,   834,   835,   836,
-     837,   838,   839,   841,   843,   844,   845,   846,   847,   848,
-     849,   850,   851,   853,   854,   855,   857,   859,   860,   861,
-     862,   864,   866,   867,   868,   869,   870,   871,   872,   873,
-     874,   875,   877,   879,   880,   882,   883,   884,   885,   886,
-     887,   888,   889,   890,   891,   892,   893,   894,   895,   896,
-     897,   899,   900,   902,   903,   904,   905,   906,   907,   908,
-     910,   911,   912,   913,   914,   915,   916,   917,   918,   919,
-     920,   921,   922,   923,   924,   925,   926,   927,   928,   929,
-     930,   931,   932,   933,   934,   935,   936,   937,   938,   939,
-     940,   941,   942,   943,   944,   945,   946,   947,   949,   950,
-     951,   952,   953,   954,   955,   957,   958,   959,   960,   961,
-     963,   964,   965,   966,   967,   969,   970,   971,   973,   974,
-     975,   976,   977,   979,   980,   981,   983,   984,   985,   986,
-     988,   989,   990,   991,   993,   994,   996,   997,   998,   999,
-    1000,  1001,  1002,  1003,  1004,  1005,  1006,  1007,  1009,  1010,
-    1012,  1013,  1015,  1016,  1018,  1019,  1021,  1022,  1024,  1025,
-    1027,  1028,  1030,  1031,  1033,  1034,  1036,  1037,  1038,  1040,
-    1041,  1043,  1044,  1045
+       0,  1196,  1196,  1198,  1199,  1201,  1202,  1203,  1204,  1205,
+    1206,  1207,  1208,  1209,  1210,  1212,  1214,  1215,  1216,  1217,
+    1218,  1219,  1220,  1221,  1222,  1223,  1224,  1225,  1226,  1227,
+    1228,  1229,  1230,  1231,  1232,  1233,  1234,  1235,  1236,  1237,
+    1238,  1239,  1240,  1242,  1244,  1245,  1246,  1247,  1248,  1249,
+    1250,  1251,  1252,  1254,  1255,  1256,  1258,  1260,  1261,  1262,
+    1263,  1265,  1267,  1268,  1269,  1270,  1271,  1272,  1273,  1274,
+    1275,  1276,  1278,  1280,  1281,  1283,  1284,  1285,  1286,  1287,
+    1288,  1289,  1290,  1291,  1292,  1293,  1294,  1295,  1296,  1297,
+    1298,  1300,  1301,  1303,  1304,  1305,  1306,  1307,  1308,  1309,
+    1311,  1312,  1313,  1314,  1315,  1316,  1317,  1318,  1319,  1320,
+    1321,  1322,  1323,  1324,  1325,  1326,  1327,  1328,  1329,  1330,
+    1331,  1332,  1333,  1334,  1335,  1336,  1337,  1338,  1339,  1340,
+    1341,  1342,  1343,  1344,  1345,  1346,  1347,  1348,  1350,  1351,
+    1352,  1353,  1354,  1355,  1356,  1358,  1359,  1360,  1361,  1362,
+    1364,  1365,  1366,  1367,  1368,  1370,  1371,  1372,  1374,  1375,
+    1376,  1377,  1378,  1380,  1381,  1382,  1384,  1385,  1386,  1387,
+    1389,  1390,  1391,  1392,  1394,  1395,  1397,  1398,  1399,  1400,
+    1401,  1402,  1403,  1404,  1405,  1406,  1407,  1408,  1410,  1411,
+    1413,  1414,  1416,  1417,  1419,  1420,  1422,  1423,  1425,  1426,
+    1428,  1429,  1431,  1432,  1434,  1435,  1437,  1438,  1439,  1441,
+    1442,  1444,  1445,  1446
 };
 #endif
 
@@ -2849,1491 +3249,1491 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
         case 2:
 
 /* Line 936 of glr.c  */
-#line 795 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).code_) = new Main(reverseListTLDeclaration((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listtldeclaration_)), reverseListDeclaration((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.listdeclaration_))); YY_RESULT_Code_= ((*yyvalp).code_); ;}
+#line 1196 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).code_) = new Main((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listtldeclaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.listdeclaration_)); YY_RESULT_Code_= ((*yyvalp).code_); ;}
     break;
 
   case 3:
 
 /* Line 936 of glr.c  */
-#line 797 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).tldeclaration_) = new DImport((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.string_));  ;}
+#line 1198 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).tldeclaration_) = new DImport((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.string_));  ;}
     break;
 
   case 4:
 
 /* Line 936 of glr.c  */
-#line 798 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).tldeclaration_) = new DExpose((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.string_));  ;}
+#line 1199 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).tldeclaration_) = new DExpose((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.string_));  ;}
     break;
 
   case 5:
 
 /* Line 936 of glr.c  */
-#line 800 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).declaration_) = new DNamespace((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.string_), reverseListDeclaration((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listdeclaration_)));  ;}
+#line 1201 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).declaration_) = new DNamespace((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listdeclaration_));  ;}
     break;
 
   case 6:
 
 /* Line 936 of glr.c  */
-#line 801 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).declaration_) = new DDefaultFunction(reverseListFunctionSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (8))].yystate.yysemantics.yysval.listfunctionspecifier_)), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (8))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.listparameterdeclaration_), reverseListStatement((((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (8))].yystate.yysemantics.yysval.liststatement_)));  ;}
+#line 1202 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.listparameterdeclaration_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.listparameterdeclaration_)->end()) ;((*yyvalp).declaration_) = new DDefaultFunction((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (8))].yystate.yysemantics.yysval.listfunctionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (8))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.listparameterdeclaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (8))].yystate.yysemantics.yysval.liststatement_));  ;}
     break;
 
   case 7:
 
 /* Line 936 of glr.c  */
-#line 802 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).declaration_) = new DFunction(reverseListFunctionSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (9))].yystate.yysemantics.yysval.listfunctionspecifier_)), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_), reverseListStatement((((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.liststatement_)));  ;}
+#line 1203 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_)->end()) ;((*yyvalp).declaration_) = new DFunction((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (9))].yystate.yysemantics.yysval.listfunctionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.liststatement_));  ;}
     break;
 
   case 8:
 
 /* Line 936 of glr.c  */
-#line 803 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).declaration_) = new DOperator(reverseListFunctionSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (9))].yystate.yysemantics.yysval.listfunctionspecifier_)), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.operatorname_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_), reverseListStatement((((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.liststatement_)));  ;}
+#line 1204 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_)->end()) ;((*yyvalp).declaration_) = new DOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (9))].yystate.yysemantics.yysval.listfunctionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.operatorname_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.liststatement_));  ;}
     break;
 
   case 9:
 
 /* Line 936 of glr.c  */
-#line 804 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).declaration_) = new DOperatorInfo((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.operatortrait_));  ;}
+#line 1205 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).declaration_) = new DOperatorInfo((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.operatortrait_));  ;}
     break;
 
   case 10:
 
 /* Line 936 of glr.c  */
-#line 805 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).declaration_) = new DTypeDecl(reverseListTypeSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.listtypespecifier_)), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (5))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.string_));  ;}
+#line 1206 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).declaration_) = new DTypeDecl((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.listtypespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (5))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.string_));  ;}
     break;
 
   case 11:
 
 /* Line 936 of glr.c  */
-#line 806 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).declaration_) = new DTypeConv((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (11))].yystate.yysemantics.yysval.type_), reverseListConversionSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (11))].yystate.yysemantics.yysval.listconversionspecifier_)), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (11))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (11))].yystate.yysemantics.yysval.string_), reverseListStatement((((yyGLRStackItem const *)yyvsp)[YYFILL ((10) - (11))].yystate.yysemantics.yysval.liststatement_)));  ;}
+#line 1207 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).declaration_) = new DTypeConv((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (11))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (11))].yystate.yysemantics.yysval.listconversionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (11))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (11))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((10) - (11))].yystate.yysemantics.yysval.liststatement_));  ;}
     break;
 
   case 12:
 
 /* Line 936 of glr.c  */
-#line 807 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).declaration_) = new DExtern((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.prototype_));  ;}
+#line 1208 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).declaration_) = new DExtern((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.prototype_));  ;}
     break;
 
   case 13:
 
 /* Line 936 of glr.c  */
-#line 808 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).declaration_) = new DIVariable(reverseListVariableSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.listvariablespecifier_)), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (6))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1209 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).declaration_) = new DIVariable((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (6))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 14:
 
 /* Line 936 of glr.c  */
-#line 809 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).declaration_) = new DVariable(reverseListVariableSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.listvariablespecifier_)), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.string_));  ;}
+#line 1210 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).declaration_) = new DVariable((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.string_));  ;}
     break;
 
   case 15:
 
 /* Line 936 of glr.c  */
-#line 811 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).prototype_) = new PFunction(reverseListFunctionSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (7))].yystate.yysemantics.yysval.listfunctionspecifier_)), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.listparameterdeclaration_));  ;}
+#line 1212 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.listparameterdeclaration_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.listparameterdeclaration_)->end()) ;((*yyvalp).prototype_) = new PFunction((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (7))].yystate.yysemantics.yysval.listfunctionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.listparameterdeclaration_));  ;}
     break;
 
   case 16:
 
 /* Line 936 of glr.c  */
-#line 813 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONLnot();  ;}
+#line 1214 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONLnot();  ;}
     break;
 
   case 17:
 
 /* Line 936 of glr.c  */
-#line 814 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONPreInc();  ;}
+#line 1215 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONPreInc();  ;}
     break;
 
   case 18:
 
 /* Line 936 of glr.c  */
-#line 815 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONPreDec();  ;}
+#line 1216 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONPreDec();  ;}
     break;
 
   case 19:
 
 /* Line 936 of glr.c  */
-#line 816 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONBnot();  ;}
+#line 1217 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONBnot();  ;}
     break;
 
   case 20:
 
 /* Line 936 of glr.c  */
-#line 817 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONMul();  ;}
+#line 1218 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONMul();  ;}
     break;
 
   case 21:
 
 /* Line 936 of glr.c  */
-#line 818 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONExp();  ;}
+#line 1219 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONExp();  ;}
     break;
 
   case 22:
 
 /* Line 936 of glr.c  */
-#line 819 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONDiv();  ;}
+#line 1220 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONDiv();  ;}
     break;
 
   case 23:
 
 /* Line 936 of glr.c  */
-#line 820 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONRDiv();  ;}
+#line 1221 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONRDiv();  ;}
     break;
 
   case 24:
 
 /* Line 936 of glr.c  */
-#line 821 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONMod();  ;}
+#line 1222 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONMod();  ;}
     break;
 
   case 25:
 
 /* Line 936 of glr.c  */
-#line 822 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONAdd();  ;}
+#line 1223 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONAdd();  ;}
     break;
 
   case 26:
 
 /* Line 936 of glr.c  */
-#line 823 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONSub();  ;}
+#line 1224 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONSub();  ;}
     break;
 
   case 27:
 
 /* Line 936 of glr.c  */
-#line 824 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONLSh();  ;}
+#line 1225 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONLSh();  ;}
     break;
 
   case 28:
 
 /* Line 936 of glr.c  */
-#line 825 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONRSh();  ;}
+#line 1226 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONRSh();  ;}
     break;
 
   case 29:
 
 /* Line 936 of glr.c  */
-#line 826 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONLT();  ;}
+#line 1227 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONLT();  ;}
     break;
 
   case 30:
 
 /* Line 936 of glr.c  */
-#line 827 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONGT();  ;}
+#line 1228 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONGT();  ;}
     break;
 
   case 31:
 
 /* Line 936 of glr.c  */
-#line 828 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONLE();  ;}
+#line 1229 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONLE();  ;}
     break;
 
   case 32:
 
 /* Line 936 of glr.c  */
-#line 829 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONGE();  ;}
+#line 1230 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONGE();  ;}
     break;
 
   case 33:
 
 /* Line 936 of glr.c  */
-#line 830 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONE();  ;}
+#line 1231 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONE();  ;}
     break;
 
   case 34:
 
 /* Line 936 of glr.c  */
-#line 831 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONNE();  ;}
+#line 1232 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONNE();  ;}
     break;
 
   case 35:
 
 /* Line 936 of glr.c  */
-#line 832 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONBand();  ;}
+#line 1233 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONBand();  ;}
     break;
 
   case 36:
 
 /* Line 936 of glr.c  */
-#line 833 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONBor();  ;}
+#line 1234 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONBor();  ;}
     break;
 
   case 37:
 
 /* Line 936 of glr.c  */
-#line 834 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONBxor();  ;}
+#line 1235 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONBxor();  ;}
     break;
 
   case 38:
 
 /* Line 936 of glr.c  */
-#line 835 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONLand();  ;}
+#line 1236 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONLand();  ;}
     break;
 
   case 39:
 
 /* Line 936 of glr.c  */
-#line 836 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONLor();  ;}
+#line 1237 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONLor();  ;}
     break;
 
   case 40:
 
 /* Line 936 of glr.c  */
-#line 837 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONLxor();  ;}
+#line 1238 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONLxor();  ;}
     break;
 
   case 41:
 
 /* Line 936 of glr.c  */
-#line 838 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONRight();  ;}
+#line 1239 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONRight();  ;}
     break;
 
   case 42:
 
 /* Line 936 of glr.c  */
-#line 839 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatorname_) = new ONLeft();  ;}
+#line 1240 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatorname_) = new ONLeft();  ;}
     break;
 
   case 43:
 
 /* Line 936 of glr.c  */
-#line 841 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).operatortrait_) = new OTIdentity((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.operatorname_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1242 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).operatortrait_) = new OTIdentity((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.operatorname_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 44:
 
 /* Line 936 of glr.c  */
-#line 843 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).functionspecifier_) = new FSEntryPoint();  ;}
+#line 1244 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).functionspecifier_) = new FSEntryPoint();  ;}
     break;
 
   case 45:
 
 /* Line 936 of glr.c  */
-#line 844 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).functionspecifier_) = new FSPure();  ;}
+#line 1245 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).functionspecifier_) = new FSPure();  ;}
     break;
 
   case 46:
 
 /* Line 936 of glr.c  */
-#line 845 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).functionspecifier_) = new FSConst();  ;}
+#line 1246 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).functionspecifier_) = new FSConst();  ;}
     break;
 
   case 47:
 
 /* Line 936 of glr.c  */
-#line 846 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).functionspecifier_) = new FSInline();  ;}
+#line 1247 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).functionspecifier_) = new FSInline();  ;}
     break;
 
   case 48:
 
 /* Line 936 of glr.c  */
-#line 847 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).functionspecifier_) = new FSAssociative();  ;}
+#line 1248 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).functionspecifier_) = new FSAssociative();  ;}
     break;
 
   case 49:
 
 /* Line 936 of glr.c  */
-#line 848 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).functionspecifier_) = new FSCommutative();  ;}
+#line 1249 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).functionspecifier_) = new FSCommutative();  ;}
     break;
 
   case 50:
 
 /* Line 936 of glr.c  */
-#line 849 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).functionspecifier_) = new FSAntiCommutative();  ;}
+#line 1250 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).functionspecifier_) = new FSAntiCommutative();  ;}
     break;
 
   case 51:
 
 /* Line 936 of glr.c  */
-#line 850 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).functionspecifier_) = new FSInverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.operatorname_));  ;}
+#line 1251 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).functionspecifier_) = new FSInverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.operatorname_));  ;}
     break;
 
   case 52:
 
 /* Line 936 of glr.c  */
-#line 851 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).functionspecifier_) = new FSSelfInverse();  ;}
+#line 1252 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).functionspecifier_) = new FSSelfInverse();  ;}
     break;
 
   case 53:
 
 /* Line 936 of glr.c  */
-#line 853 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).conversionspecifier_) = new CSUp();  ;}
+#line 1254 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).conversionspecifier_) = new CSUp();  ;}
     break;
 
   case 54:
 
 /* Line 936 of glr.c  */
-#line 854 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).conversionspecifier_) = new CSDown();  ;}
+#line 1255 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).conversionspecifier_) = new CSDown();  ;}
     break;
 
   case 55:
 
 /* Line 936 of glr.c  */
-#line 855 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).conversionspecifier_) = new CSImplicit();  ;}
+#line 1256 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).conversionspecifier_) = new CSImplicit();  ;}
     break;
 
   case 56:
 
 /* Line 936 of glr.c  */
-#line 857 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).variablespecifier_) = new VSConst();  ;}
+#line 1258 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).variablespecifier_) = new VSConst();  ;}
     break;
 
   case 57:
 
 /* Line 936 of glr.c  */
-#line 859 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).typespecifier_) = new TSAlign((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.int_));  ;}
+#line 1260 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).typespecifier_) = new TSAlign((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.int_));  ;}
     break;
 
   case 58:
 
 /* Line 936 of glr.c  */
-#line 860 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).typespecifier_) = new TSGeneric((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listgenericparam_));  ;}
+#line 1261 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listgenericparam_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listgenericparam_)->end()) ;((*yyvalp).typespecifier_) = new TSGeneric((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listgenericparam_));  ;}
     break;
 
   case 59:
 
 /* Line 936 of glr.c  */
-#line 861 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).typespecifier_) = new TSInteger();  ;}
+#line 1262 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).typespecifier_) = new TSInteger();  ;}
     break;
 
   case 60:
 
 /* Line 936 of glr.c  */
-#line 862 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).typespecifier_) = new TSReal();  ;}
+#line 1263 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).typespecifier_) = new TSReal();  ;}
     break;
 
   case 61:
 
 /* Line 936 of glr.c  */
-#line 864 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).genericparam_) = new TSGParam((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.string_));  ;}
+#line 1265 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).genericparam_) = new TSGParam((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.string_));  ;}
     break;
 
   case 62:
 
 /* Line 936 of glr.c  */
-#line 866 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).type_) = new TAddress();  ;}
+#line 1267 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).type_) = new TAddress();  ;}
     break;
 
   case 63:
 
 /* Line 936 of glr.c  */
-#line 867 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).type_) = new TByte();  ;}
+#line 1268 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).type_) = new TByte();  ;}
     break;
 
   case 64:
 
 /* Line 936 of glr.c  */
-#line 868 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).type_) = new TCustom((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_));  ;}
+#line 1269 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).type_) = new TCustom((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_));  ;}
     break;
 
   case 65:
 
 /* Line 936 of glr.c  */
-#line 869 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).type_) = new TFixedArray((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.int_));  ;}
+#line 1270 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).type_) = new TFixedArray((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.int_));  ;}
     break;
 
   case 66:
 
 /* Line 936 of glr.c  */
-#line 870 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).type_) = new TGenericArray((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.type_));  ;}
+#line 1271 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).type_) = new TGenericArray((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.type_));  ;}
     break;
 
   case 67:
 
 /* Line 936 of glr.c  */
-#line 871 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).type_) = new TList((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.type_));  ;}
+#line 1272 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).type_) = new TList((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.type_));  ;}
     break;
 
   case 68:
 
 /* Line 936 of glr.c  */
-#line 872 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).type_) = new TInfiniteList((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_));  ;}
+#line 1273 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).type_) = new TInfiniteList((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_));  ;}
     break;
 
   case 69:
 
 /* Line 936 of glr.c  */
-#line 873 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).type_) = new TStruct(reverseListStructMemberDeclaration((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.liststructmemberdeclaration_)));  ;}
+#line 1274 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).type_) = new TStruct((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.liststructmemberdeclaration_));  ;}
     break;
 
   case 70:
 
 /* Line 936 of glr.c  */
-#line 874 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).type_) = new TFunction((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.listtype_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.type_));  ;}
+#line 1275 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.listtype_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.listtype_)->end()) ;((*yyvalp).type_) = new TFunction((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.listtype_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.type_));  ;}
     break;
 
   case 71:
 
 /* Line 936 of glr.c  */
-#line 875 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).type_) = new TType();  ;}
+#line 1276 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).type_) = new TType();  ;}
     break;
 
   case 72:
 
 /* Line 936 of glr.c  */
-#line 877 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).structmemberdeclaration_) = new SMDMemberDeclaration((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.string_));  ;}
+#line 1278 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).structmemberdeclaration_) = new SMDMemberDeclaration((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.string_));  ;}
     break;
 
   case 73:
 
 /* Line 936 of glr.c  */
-#line 879 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).parameterdeclaration_) = new PDAutoParameter(reverseListVariableSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listvariablespecifier_)), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.string_));  ;}
+#line 1280 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).parameterdeclaration_) = new PDAutoParameter((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.string_));  ;}
     break;
 
   case 74:
 
 /* Line 936 of glr.c  */
-#line 880 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).parameterdeclaration_) = new PDTypedParameter(reverseListVariableSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.listvariablespecifier_)), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.string_));  ;}
+#line 1281 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).parameterdeclaration_) = new PDTypedParameter((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.string_));  ;}
     break;
 
   case 75:
 
 /* Line 936 of glr.c  */
-#line 882 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SReturn((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1283 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).statement_) = new SReturn((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 76:
 
 /* Line 936 of glr.c  */
-#line 883 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SExpression((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1284 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).statement_) = new SExpression((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 77:
 
 /* Line 936 of glr.c  */
-#line 884 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SScope(reverseListStatement((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.liststatement_)));  ;}
+#line 1285 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).statement_) = new SScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.liststatement_));  ;}
     break;
 
   case 78:
 
 /* Line 936 of glr.c  */
-#line 885 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SIf((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), reverseListStatement((((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_)));  ;}
+#line 1286 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).statement_) = new SIf((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_));  ;}
     break;
 
   case 79:
 
 /* Line 936 of glr.c  */
-#line 886 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SIfElse((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (11))].yystate.yysemantics.yysval.expression_), reverseListStatement((((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (11))].yystate.yysemantics.yysval.liststatement_)), reverseListStatement((((yyGLRStackItem const *)yyvsp)[YYFILL ((10) - (11))].yystate.yysemantics.yysval.liststatement_)));  ;}
+#line 1287 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).statement_) = new SIfElse((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (11))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (11))].yystate.yysemantics.yysval.liststatement_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((10) - (11))].yystate.yysemantics.yysval.liststatement_));  ;}
     break;
 
   case 80:
 
 /* Line 936 of glr.c  */
-#line 887 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SLoop((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), reverseListStatement((((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_)));  ;}
+#line 1288 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).statement_) = new SLoop((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_));  ;}
     break;
 
   case 81:
 
 /* Line 936 of glr.c  */
-#line 888 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SWhile((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), reverseListStatement((((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_)));  ;}
+#line 1289 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).statement_) = new SWhile((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_));  ;}
     break;
 
   case 82:
 
 /* Line 936 of glr.c  */
-#line 889 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SUntil((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), reverseListStatement((((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_)));  ;}
+#line 1290 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).statement_) = new SUntil((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_));  ;}
     break;
 
   case 83:
 
 /* Line 936 of glr.c  */
-#line 890 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SFor((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (11))].yystate.yysemantics.yysval.listexpression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (11))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (11))].yystate.yysemantics.yysval.listexpression_), reverseListStatement((((yyGLRStackItem const *)yyvsp)[YYFILL ((10) - (11))].yystate.yysemantics.yysval.liststatement_)));  ;}
+#line 1291 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (11))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (11))].yystate.yysemantics.yysval.listexpression_)->end()) ; std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (11))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (11))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).statement_) = new SFor((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (11))].yystate.yysemantics.yysval.listexpression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (11))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (11))].yystate.yysemantics.yysval.listexpression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((10) - (11))].yystate.yysemantics.yysval.liststatement_));  ;}
     break;
 
   case 84:
 
 /* Line 936 of glr.c  */
-#line 891 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SForEach((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (10))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (10))].yystate.yysemantics.yysval.expression_), reverseListStatement((((yyGLRStackItem const *)yyvsp)[YYFILL ((9) - (10))].yystate.yysemantics.yysval.liststatement_)));  ;}
+#line 1292 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).statement_) = new SForEach((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (10))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (10))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((9) - (10))].yystate.yysemantics.yysval.liststatement_));  ;}
     break;
 
   case 85:
 
 /* Line 936 of glr.c  */
-#line 892 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SForAll((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (10))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (10))].yystate.yysemantics.yysval.expression_), reverseListStatement((((yyGLRStackItem const *)yyvsp)[YYFILL ((9) - (10))].yystate.yysemantics.yysval.liststatement_)));  ;}
+#line 1293 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).statement_) = new SForAll((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (10))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (10))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((9) - (10))].yystate.yysemantics.yysval.liststatement_));  ;}
     break;
 
   case 86:
 
 /* Line 936 of glr.c  */
-#line 893 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SBreak();  ;}
+#line 1294 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).statement_) = new SBreak();  ;}
     break;
 
   case 87:
 
 /* Line 936 of glr.c  */
-#line 894 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SContinue();  ;}
+#line 1295 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).statement_) = new SContinue();  ;}
     break;
 
   case 88:
 
 /* Line 936 of glr.c  */
-#line 895 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SBreakpoint();  ;}
+#line 1296 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).statement_) = new SBreakpoint();  ;}
     break;
 
   case 89:
 
 /* Line 936 of glr.c  */
-#line 896 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SIVariable(reverseListVariableSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.listvariablespecifier_)), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (6))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1297 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).statement_) = new SIVariable((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (6))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 90:
 
 /* Line 936 of glr.c  */
-#line 897 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).statement_) = new SVariable(reverseListVariableSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.listvariablespecifier_)), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.string_));  ;}
+#line 1298 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).statement_) = new SVariable((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.string_));  ;}
     break;
 
   case 91:
 
 /* Line 936 of glr.c  */
-#line 899 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).rvalue_) = new RVIdent((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_));  ;}
+#line 1300 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).rvalue_) = new RVIdent((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_));  ;}
     break;
 
   case 92:
 
 /* Line 936 of glr.c  */
-#line 900 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).rvalue_) = new RVQualified((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.rvalue_));  ;}
+#line 1301 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).rvalue_) = new RVQualified((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.rvalue_));  ;}
     break;
 
   case 93:
 
 /* Line 936 of glr.c  */
-#line 902 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EDouble((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.double_));  ;}
+#line 1303 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EDouble((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.double_));  ;}
     break;
 
   case 94:
 
 /* Line 936 of glr.c  */
-#line 903 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EInteger((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.int_));  ;}
+#line 1304 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EInteger((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.int_));  ;}
     break;
 
   case 95:
 
 /* Line 936 of glr.c  */
-#line 904 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EString((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_));  ;}
+#line 1305 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EString((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_));  ;}
     break;
 
   case 96:
 
 /* Line 936 of glr.c  */
-#line 905 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EChar((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_));  ;}
+#line 1306 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EChar((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_));  ;}
     break;
 
   case 97:
 
 /* Line 936 of glr.c  */
-#line 906 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EPi();  ;}
+#line 1307 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EPi();  ;}
     break;
 
   case 98:
 
 /* Line 936 of glr.c  */
-#line 907 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ERValue((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.rvalue_));  ;}
+#line 1308 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ERValue((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.rvalue_));  ;}
     break;
 
   case 99:
 
 /* Line 936 of glr.c  */
-#line 908 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.expression_);  ;}
+#line 1309 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.expression_);  ;}
     break;
 
   case 100:
 
 /* Line 936 of glr.c  */
-#line 910 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EArray((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_));  ;}
+#line 1311 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).expression_) = new EArray((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_));  ;}
     break;
 
   case 101:
 
 /* Line 936 of glr.c  */
-#line 911 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EList((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_));  ;}
+#line 1312 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).expression_) = new EList((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_));  ;}
     break;
 
   case 102:
 
 /* Line 936 of glr.c  */
-#line 912 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EAComp((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_));  ;}
+#line 1313 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).expression_) = new EAComp((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_));  ;}
     break;
 
   case 103:
 
 /* Line 936 of glr.c  */
-#line 913 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ELComp((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_));  ;}
+#line 1314 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).expression_) = new ELComp((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_));  ;}
     break;
 
   case 104:
 
 /* Line 936 of glr.c  */
-#line 914 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIndex((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1315 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIndex((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 105:
 
 /* Line 936 of glr.c  */
-#line 915 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ESimpleCall((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_));  ;}
+#line 1316 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ESimpleCall((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_));  ;}
     break;
 
   case 106:
 
 /* Line 936 of glr.c  */
-#line 916 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ECall((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listexpression_));  ;}
+#line 1317 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).expression_) = new ECall((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listexpression_));  ;}
     break;
 
   case 107:
 
 /* Line 936 of glr.c  */
-#line 917 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EPostInc((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.rvalue_));  ;}
+#line 1318 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EPostInc((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.rvalue_));  ;}
     break;
 
   case 108:
 
 /* Line 936 of glr.c  */
-#line 918 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EPostDec((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.rvalue_));  ;}
+#line 1319 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EPostDec((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.rvalue_));  ;}
     break;
 
   case 109:
 
 /* Line 936 of glr.c  */
-#line 919 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EAddress((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1320 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EAddress((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 110:
 
 /* Line 936 of glr.c  */
-#line 920 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ELeft((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1321 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ELeft((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 111:
 
 /* Line 936 of glr.c  */
-#line 921 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ERight((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1322 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ERight((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 112:
 
 /* Line 936 of glr.c  */
-#line 922 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinSExt((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1323 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinSExt((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 113:
 
 /* Line 936 of glr.c  */
-#line 923 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinZExt((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1324 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinZExt((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 114:
 
 /* Line 936 of glr.c  */
-#line 924 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinCast((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1325 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinCast((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 115:
 
 /* Line 936 of glr.c  */
-#line 925 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinConvert((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1326 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinConvert((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 116:
 
 /* Line 936 of glr.c  */
-#line 926 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinAddI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1327 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinAddI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 117:
 
 /* Line 936 of glr.c  */
-#line 927 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinSubI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1328 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinSubI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 118:
 
 /* Line 936 of glr.c  */
-#line 928 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinMulI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1329 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinMulI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 119:
 
 /* Line 936 of glr.c  */
-#line 929 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinUdivI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1330 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinUdivI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 120:
 
 /* Line 936 of glr.c  */
-#line 930 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinSdivI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1331 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinSdivI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 121:
 
 /* Line 936 of glr.c  */
-#line 931 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinUremI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1332 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinUremI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 122:
 
 /* Line 936 of glr.c  */
-#line 932 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinSremI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1333 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinSremI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 123:
 
 /* Line 936 of glr.c  */
-#line 933 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinAndI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1334 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinAndI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 124:
 
 /* Line 936 of glr.c  */
-#line 934 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinOrI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1335 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinOrI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 125:
 
 /* Line 936 of glr.c  */
-#line 935 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinXorI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1336 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinXorI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 126:
 
 /* Line 936 of glr.c  */
-#line 936 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinShlI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1337 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinShlI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 127:
 
 /* Line 936 of glr.c  */
-#line 937 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinLshrI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1338 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinLshrI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 128:
 
 /* Line 936 of glr.c  */
-#line 938 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinAshrI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1339 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinAshrI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 129:
 
 /* Line 936 of glr.c  */
-#line 939 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinNotI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1340 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinNotI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 130:
 
 /* Line 936 of glr.c  */
-#line 940 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinNegI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1341 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinNegI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 131:
 
 /* Line 936 of glr.c  */
-#line 941 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinCEqI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1342 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinCEqI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 132:
 
 /* Line 936 of glr.c  */
-#line 942 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinCNeI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1343 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinCNeI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 133:
 
 /* Line 936 of glr.c  */
-#line 943 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinCLtI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1344 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinCLtI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 134:
 
 /* Line 936 of glr.c  */
-#line 944 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinCGtI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1345 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinCGtI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 135:
 
 /* Line 936 of glr.c  */
-#line 945 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinCLeI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1346 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinCLeI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 136:
 
 /* Line 936 of glr.c  */
-#line 946 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EIntrinCGeI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1347 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EIntrinCGeI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 137:
 
 /* Line 936 of glr.c  */
-#line 947 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
+#line 1348 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
     break;
 
   case 138:
 
 /* Line 936 of glr.c  */
-#line 949 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ELnot((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1350 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ELnot((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 139:
 
 /* Line 936 of glr.c  */
-#line 950 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EPreInc((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.rvalue_));  ;}
+#line 1351 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EPreInc((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.rvalue_));  ;}
     break;
 
   case 140:
 
 /* Line 936 of glr.c  */
-#line 951 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EPreDec((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.rvalue_));  ;}
+#line 1352 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EPreDec((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.rvalue_));  ;}
     break;
 
   case 141:
 
 /* Line 936 of glr.c  */
-#line 952 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ENeg((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1353 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ENeg((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 142:
 
 /* Line 936 of glr.c  */
-#line 953 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EBnot((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1354 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EBnot((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 143:
 
 /* Line 936 of glr.c  */
-#line 954 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EPos((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1355 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EPos((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 144:
 
 /* Line 936 of glr.c  */
-#line 955 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
+#line 1356 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
     break;
 
   case 145:
 
 /* Line 936 of glr.c  */
-#line 957 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EMul((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1358 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EMul((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 146:
 
 /* Line 936 of glr.c  */
-#line 958 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EMulA((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1359 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EMulA((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 147:
 
 /* Line 936 of glr.c  */
-#line 959 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EDiv((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1360 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EDiv((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 148:
 
 /* Line 936 of glr.c  */
-#line 960 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EMod((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1361 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EMod((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 149:
 
 /* Line 936 of glr.c  */
-#line 961 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
+#line 1362 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
     break;
 
   case 150:
 
 /* Line 936 of glr.c  */
-#line 963 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EAdd((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1364 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EAdd((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 151:
 
 /* Line 936 of glr.c  */
-#line 964 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ESub((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1365 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ESub((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 152:
 
 /* Line 936 of glr.c  */
-#line 965 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EAddA((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1366 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EAddA((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 153:
 
 /* Line 936 of glr.c  */
-#line 966 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ESubA((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1367 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ESubA((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 154:
 
 /* Line 936 of glr.c  */
-#line 967 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
+#line 1368 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
     break;
 
   case 155:
 
 /* Line 936 of glr.c  */
-#line 969 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ELSh((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1370 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ELSh((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 156:
 
 /* Line 936 of glr.c  */
-#line 970 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ERSh((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1371 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ERSh((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 157:
 
 /* Line 936 of glr.c  */
-#line 971 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
+#line 1372 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
     break;
 
   case 158:
 
 /* Line 936 of glr.c  */
-#line 973 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ELT((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1374 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ELT((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 159:
 
 /* Line 936 of glr.c  */
-#line 974 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EGT((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1375 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EGT((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 160:
 
 /* Line 936 of glr.c  */
-#line 975 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ELE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1376 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ELE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 161:
 
 /* Line 936 of glr.c  */
-#line 976 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EGE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1377 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EGE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 162:
 
 /* Line 936 of glr.c  */
-#line 977 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
+#line 1378 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
     break;
 
   case 163:
 
 /* Line 936 of glr.c  */
-#line 979 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1380 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 164:
 
 /* Line 936 of glr.c  */
-#line 980 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ENE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1381 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ENE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 165:
 
 /* Line 936 of glr.c  */
-#line 981 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
+#line 1382 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
     break;
 
   case 166:
 
 /* Line 936 of glr.c  */
-#line 983 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EBand((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1384 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EBand((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 167:
 
 /* Line 936 of glr.c  */
-#line 984 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EBor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1385 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EBor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 168:
 
 /* Line 936 of glr.c  */
-#line 985 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EBxor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1386 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EBxor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 169:
 
 /* Line 936 of glr.c  */
-#line 986 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
+#line 1387 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
     break;
 
   case 170:
 
 /* Line 936 of glr.c  */
-#line 988 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ELand((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1389 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ELand((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 171:
 
 /* Line 936 of glr.c  */
-#line 989 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ELor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1390 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ELor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 172:
 
 /* Line 936 of glr.c  */
-#line 990 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ELxor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1391 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ELxor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 173:
 
 /* Line 936 of glr.c  */
-#line 991 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
+#line 1392 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
     break;
 
   case 174:
 
 /* Line 936 of glr.c  */
-#line 993 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EConditional((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1394 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EConditional((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 175:
 
 /* Line 936 of glr.c  */
-#line 994 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
+#line 1395 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
     break;
 
   case 176:
 
 /* Line 936 of glr.c  */
-#line 996 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1397 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 177:
 
 /* Line 936 of glr.c  */
-#line 997 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EAddAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1398 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EAddAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 178:
 
 /* Line 936 of glr.c  */
-#line 998 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ESubAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1399 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ESubAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 179:
 
 /* Line 936 of glr.c  */
-#line 999 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EMulAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1400 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EMulAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 180:
 
 /* Line 936 of glr.c  */
-#line 1000 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EDivAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1401 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EDivAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 181:
 
 /* Line 936 of glr.c  */
-#line 1001 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EModAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1402 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EModAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 182:
 
 /* Line 936 of glr.c  */
-#line 1002 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EAndAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1403 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EAndAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 183:
 
 /* Line 936 of glr.c  */
-#line 1003 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EOrAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1404 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EOrAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 184:
 
 /* Line 936 of glr.c  */
-#line 1004 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new EXorAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1405 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new EXorAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 185:
 
 /* Line 936 of glr.c  */
-#line 1005 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ELShAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1406 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ELShAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 186:
 
 /* Line 936 of glr.c  */
-#line 1006 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = new ERShAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1407 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = new ERShAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 187:
 
 /* Line 936 of glr.c  */
-#line 1007 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
+#line 1408 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).expression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_);  ;}
     break;
 
   case 188:
 
 /* Line 936 of glr.c  */
-#line 1009 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listtldeclaration_) = 0;  ;}
+#line 1410 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).listtldeclaration_) = new ListTLDeclaration();  ;}
     break;
 
   case 189:
 
 /* Line 936 of glr.c  */
-#line 1010 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listtldeclaration_) = new ListTLDeclaration((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.tldeclaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listtldeclaration_));  ;}
+#line 1411 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listtldeclaration_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.tldeclaration_)) ; ((*yyvalp).listtldeclaration_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listtldeclaration_) ;  ;}
     break;
 
   case 190:
 
 /* Line 936 of glr.c  */
-#line 1012 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listdeclaration_) = 0;  ;}
+#line 1413 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).listdeclaration_) = new ListDeclaration();  ;}
     break;
 
   case 191:
 
 /* Line 936 of glr.c  */
-#line 1013 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listdeclaration_) = new ListDeclaration((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.declaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listdeclaration_));  ;}
+#line 1414 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listdeclaration_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.declaration_)) ; ((*yyvalp).listdeclaration_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listdeclaration_) ;  ;}
     break;
 
   case 192:
 
 /* Line 936 of glr.c  */
-#line 1015 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).liststatement_) = 0;  ;}
+#line 1416 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).liststatement_) = new ListStatement();  ;}
     break;
 
   case 193:
 
 /* Line 936 of glr.c  */
-#line 1016 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).liststatement_) = new ListStatement((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.statement_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.liststatement_));  ;}
+#line 1417 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.liststatement_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.statement_)) ; ((*yyvalp).liststatement_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.liststatement_) ;  ;}
     break;
 
   case 194:
 
 /* Line 936 of glr.c  */
-#line 1018 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listtypespecifier_) = 0;  ;}
+#line 1419 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).listtypespecifier_) = new ListTypeSpecifier();  ;}
     break;
 
   case 195:
 
 /* Line 936 of glr.c  */
-#line 1019 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listtypespecifier_) = new ListTypeSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.typespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listtypespecifier_));  ;}
+#line 1420 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listtypespecifier_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.typespecifier_)) ; ((*yyvalp).listtypespecifier_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listtypespecifier_) ;  ;}
     break;
 
   case 196:
 
 /* Line 936 of glr.c  */
-#line 1021 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listconversionspecifier_) = 0;  ;}
+#line 1422 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).listconversionspecifier_) = new ListConversionSpecifier();  ;}
     break;
 
   case 197:
 
 /* Line 936 of glr.c  */
-#line 1022 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listconversionspecifier_) = new ListConversionSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.conversionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listconversionspecifier_));  ;}
+#line 1423 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listconversionspecifier_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.conversionspecifier_)) ; ((*yyvalp).listconversionspecifier_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listconversionspecifier_) ;  ;}
     break;
 
   case 198:
 
 /* Line 936 of glr.c  */
-#line 1024 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listfunctionspecifier_) = 0;  ;}
+#line 1425 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).listfunctionspecifier_) = new ListFunctionSpecifier();  ;}
     break;
 
   case 199:
 
 /* Line 936 of glr.c  */
-#line 1025 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listfunctionspecifier_) = new ListFunctionSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.functionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listfunctionspecifier_));  ;}
+#line 1426 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listfunctionspecifier_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.functionspecifier_)) ; ((*yyvalp).listfunctionspecifier_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listfunctionspecifier_) ;  ;}
     break;
 
   case 200:
 
 /* Line 936 of glr.c  */
-#line 1027 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listvariablespecifier_) = 0;  ;}
+#line 1428 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).listvariablespecifier_) = new ListVariableSpecifier();  ;}
     break;
 
   case 201:
 
 /* Line 936 of glr.c  */
-#line 1028 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listvariablespecifier_) = new ListVariableSpecifier((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.variablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listvariablespecifier_));  ;}
+#line 1429 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listvariablespecifier_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.variablespecifier_)) ; ((*yyvalp).listvariablespecifier_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listvariablespecifier_) ;  ;}
     break;
 
   case 202:
 
 /* Line 936 of glr.c  */
-#line 1030 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).liststructmemberdeclaration_) = 0;  ;}
+#line 1431 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).liststructmemberdeclaration_) = new ListStructMemberDeclaration();  ;}
     break;
 
   case 203:
 
 /* Line 936 of glr.c  */
-#line 1031 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).liststructmemberdeclaration_) = new ListStructMemberDeclaration((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.structmemberdeclaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.liststructmemberdeclaration_));  ;}
+#line 1432 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.liststructmemberdeclaration_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.structmemberdeclaration_)) ; ((*yyvalp).liststructmemberdeclaration_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.liststructmemberdeclaration_) ;  ;}
     break;
 
   case 204:
 
 /* Line 936 of glr.c  */
-#line 1033 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listgenericparam_) = new ListGenericParam((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.genericparam_));  ;}
+#line 1434 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).listgenericparam_) = new ListGenericParam() ; ((*yyvalp).listgenericparam_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.genericparam_));  ;}
     break;
 
   case 205:
 
 /* Line 936 of glr.c  */
-#line 1034 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listgenericparam_) = new ListGenericParam((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.genericparam_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.listgenericparam_));  ;}
+#line 1435 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.listgenericparam_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.genericparam_)) ; ((*yyvalp).listgenericparam_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.listgenericparam_) ;  ;}
     break;
 
   case 206:
 
 /* Line 936 of glr.c  */
-#line 1036 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listparameterdeclaration_) = 0;  ;}
+#line 1437 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).listparameterdeclaration_) = new ListParameterDeclaration();  ;}
     break;
 
   case 207:
 
 /* Line 936 of glr.c  */
-#line 1037 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listparameterdeclaration_) = new ListParameterDeclaration((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.parameterdeclaration_));  ;}
+#line 1438 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).listparameterdeclaration_) = new ListParameterDeclaration() ; ((*yyvalp).listparameterdeclaration_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.parameterdeclaration_));  ;}
     break;
 
   case 208:
 
 /* Line 936 of glr.c  */
-#line 1038 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listparameterdeclaration_) = new ListParameterDeclaration((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.parameterdeclaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.listparameterdeclaration_));  ;}
+#line 1439 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.listparameterdeclaration_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.parameterdeclaration_)) ; ((*yyvalp).listparameterdeclaration_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.listparameterdeclaration_) ;  ;}
     break;
 
   case 209:
 
 /* Line 936 of glr.c  */
-#line 1040 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listexpression_) = new ListExpression((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_));  ;}
+#line 1441 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).listexpression_) = new ListExpression() ; ((*yyvalp).listexpression_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.expression_));  ;}
     break;
 
   case 210:
 
 /* Line 936 of glr.c  */
-#line 1041 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listexpression_) = new ListExpression((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.listexpression_));  ;}
+#line 1442 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.listexpression_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_)) ; ((*yyvalp).listexpression_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.listexpression_) ;  ;}
     break;
 
   case 211:
 
 /* Line 936 of glr.c  */
-#line 1043 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listtype_) = 0;  ;}
+#line 1444 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).listtype_) = new ListType();  ;}
     break;
 
   case 212:
 
 /* Line 936 of glr.c  */
-#line 1044 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listtype_) = new ListType((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.type_));  ;}
+#line 1445 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  ((*yyvalp).listtype_) = new ListType() ; ((*yyvalp).listtype_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.type_));  ;}
     break;
 
   case 213:
 
 /* Line 936 of glr.c  */
-#line 1045 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    { ((*yyvalp).listtype_) = new ListType((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.listtype_));  ;}
+#line 1446 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
+    {  (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.listtype_)->push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.type_)) ; ((*yyvalp).listtype_) = (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.listtype_) ;  ;}
     break;
 
 
 
 /* Line 936 of glr.c  */
-#line 4337 "parse.cpp"
+#line 4737 "parse.cpp"
       default: break;
     }
 

@@ -29,11 +29,9 @@ public:
 		if( p )
 		{
 			EntryPointFinderFinal final;
-			ListFunctionSpecifier* iter = p;
-			while( iter )
-			{
-				iter->functionspecifier_->accept( &final );
-				iter = iter->listfunctionspecifier_;
+			for( size_t i = 0 ; i < p->size(); ++i )
+            {
+                ( *p )[ i ]->accept( &final );
 			}
 
 			if( final.bFound )
@@ -52,7 +50,7 @@ public:
 
         DescendingCompilerVisitor::visitDNamespace( p );
 
-        mszCurrentNamespace.resize( mszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_ ) );
+        mszCurrentNamespace.resize( mszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_.c_str() ) );
     }
     
 	virtual void visitDDefaultFunction(DDefaultFunction *p)

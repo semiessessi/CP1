@@ -55,12 +55,9 @@ void LLVMTransformVisitor::visitDNamespace(DNamespace *p)
 	sszCurrentNamespace += "_dot_";
 	
 	verboseInfo( 2, "Current namespace: %s\n", sszCurrentNamespace.c_str() );
-	if( p->listdeclaration_->declaration_ )
-	{
-		visitListDeclaration( p->listdeclaration_ );
-	}
+    visitListDeclaration( p->listdeclaration_ );
 	
-	sszCurrentNamespace.resize( sszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_ ) );
+	sszCurrentNamespace.resize( sszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_.c_str() ) );
 	verboseInfo( 2, "Current namespace: %s\n", sszCurrentNamespace.c_str() );
 }
 
@@ -96,15 +93,11 @@ void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnTy
     out += " @";
     out += szLLVMName;
     out += "( ";
-    ListParameterDeclaration* pList = parameters;
-
     std::vector< DetailedTypeInfo* > parameterTypes;
-    ListParameterDeclaration* lp = pList;
-    while( lp && lp->parameterdeclaration_ )
+    for( size_t i = 0 ; i < parameters->size(); ++i )
     {
         DetailedTypeVisitor dtv;
-        lp->parameterdeclaration_->accept( &dtv );
-        lp = lp->listparameterdeclaration_;
+        ( *parameters )[ i ]->accept( &dtv );
         
         parameterTypes.push_back( dtv.pxTypeInfo );
     }
@@ -125,7 +118,7 @@ void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnTy
         }
         
         ParameterVisitor p;
-		pList->parameterdeclaration_->accept( &p );
+		( *parameters )[ i ]->accept( &p );
 		out += " %_dot_";
 		out += p.szName;
         std::string szLLVMIdent = std::string( "%_dot_" ) + p.szName;
@@ -137,8 +130,6 @@ void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnTy
         {
             out += ", ";
         }
-        
-        pList = pList->listparameterdeclaration_;
     }
     out += " ) ";
     if( info.bInline )
@@ -181,12 +172,7 @@ void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnTy
 
 void LLVMTransformVisitor::visitFunctionBody( ListStatement* statements )
 {
-    ListStatement* pSList = statements;
-	while( pSList )
-	{
-		pSList->statement_->accept( this );
-		pSList = pSList->liststatement_;
-	}
+    visitListStatement( statements );
 }
 
 void LLVMTransformVisitor::visitDTypeDecl(DTypeDecl *p)
@@ -226,7 +212,7 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
         }
         
         ParameterVisitor p;
-		pList->parameterdeclaration_->accept( &p );
+		( *pList )[ i ]->accept( &p );
 		out += " %_dot_";
 		out += p.szName;
         std::string szLLVMIdent = std::string( "%_dot_" ) + p.szName;
@@ -237,8 +223,6 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
         {
             out += ", ";
         }
-        
-        pList = pList->listparameterdeclaration_;
     }
     out += " ) ";
     if( info.bInline )
@@ -908,11 +892,10 @@ void LLVMTransformVisitor::visitECall( ECall* p )
     
     // count our parameters and work out what vars to chuck them in
     ListExpression* pList = p->listexpression_;
-	while( pList && pList->expression_ )
-	{
-        pList->expression_->accept( this );
+	for( size_t i = 0 ; i < pList->size(); ++i )
+    {
+        ( *pList )[ i ]->accept( this );
         aiParameterTemps[ iParameterCount ] = siTempCounter;
-        pList = pList->listexpression_;
         ++siTempCounter;
         ++iParameterCount;
 	}

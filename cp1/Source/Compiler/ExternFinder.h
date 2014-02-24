@@ -29,7 +29,7 @@ public:
 		
 		DescendingCompilerVisitor::visitDNamespace( p );
 		
-		mszCurrentNamespace.resize( mszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_ ) );
+		mszCurrentNamespace.resize( mszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_.c_str() ) );
 	}
 	
 	virtual void visitDExtern( DExtern *p )

@@ -17,20 +17,18 @@ void DescendingCompilerVisitor::visitMain( Main *p )
 
 void DescendingCompilerVisitor::visitListTLDeclaration(ListTLDeclaration *p)
 {
-	p->tldeclaration_->accept( this );
-	if( p->listtldeclaration_ )
-	{
-		p->listtldeclaration_->accept( this );
-	}
+    for( size_t i = 0 ; i < p->size(); ++i )
+    {
+        ( *p )[ i ]->accept( this );
+    }
 }
 
 void DescendingCompilerVisitor::visitListDeclaration(ListDeclaration *p)
 {
-	p->declaration_->accept( this );
-	if( p->listdeclaration_ )
-	{
-		p->listdeclaration_->accept( this );
-	}
+    for( size_t i = 0 ; i < p->size(); ++i )
+    {
+        ( *p )[ i ]->accept( this );
+    }
 }
 
 // void DescendingCompilerVisitor::visitSDecl( SDecl *p )
@@ -41,127 +39,54 @@ void DescendingCompilerVisitor::visitListDeclaration(ListDeclaration *p)
 void DescendingCompilerVisitor::visitDNamespace( DNamespace* p )
 {
 	m_pCurrentNamespace = p;
-	ListDeclaration* pList = p->listdeclaration_;
-	while( pList )
-	{
-		pList->declaration_->accept( this );
-		pList = pList->listdeclaration_;
-	}
+
+	visitListDeclaration( p->listdeclaration_ );
 }
 
 void DescendingCompilerVisitor::visitDDefaultFunction( DDefaultFunction *p )
 {
-	ListFunctionSpecifier* pListFS = p->listfunctionspecifier_;
-	while( pListFS )
-	{
-		pListFS->functionspecifier_->accept( this );
-		pListFS = pListFS->listfunctionspecifier_;
-	}
-
-	ListParameterDeclaration* pListPD = p->listparameterdeclaration_;
-	while( pListPD )
-	{
-		pListPD->parameterdeclaration_->accept( this );
-		pListPD = pListPD->listparameterdeclaration_;
-	}
-
-	ListStatement* pList = p->liststatement_;
-	while( pList )
-	{
-		pList->statement_->accept( this );
-		pList = pList->liststatement_;
-	}
+	visitListFunctionSpecifier( p->listfunctionspecifier_ );
+	visitListParameterDeclaration( p->listparameterdeclaration_ );
+    visitListStatement( p->liststatement_ );
 }
 
 void DescendingCompilerVisitor::visitDFunction(DFunction *p)
 {
-    ListFunctionSpecifier* pListFS = p->listfunctionspecifier_;
-    while( pListFS )
-    {
-        pListFS->functionspecifier_->accept( this );
-        pListFS = pListFS->listfunctionspecifier_;
-    }
+    visitListFunctionSpecifier( p->listfunctionspecifier_ );
 
     p->type_->accept( this );
 
-    ListParameterDeclaration* pListPD = p->listparameterdeclaration_;
-    while( pListPD )
-    {
-        pListPD->parameterdeclaration_->accept( this );
-        pListPD = pListPD->listparameterdeclaration_;
-    }
-
-    ListStatement* pList = p->liststatement_;
-    while( pList )
-    {
-        pList->statement_->accept( this );
-        pList = pList->liststatement_;
-    }
+    visitListParameterDeclaration( p->listparameterdeclaration_ );
+    visitListStatement( p->liststatement_ );
 }
 
 void DescendingCompilerVisitor::visitPDAutoParameter(PDAutoParameter *p)
 {
-    ListVariableSpecifier* pList = p->listvariablespecifier_;
-	while( pList )
-	{
-		pList->variablespecifier_->accept(this);
-		pList = pList->listvariablespecifier_;
-	}
+    visitListVariableSpecifier( p->listvariablespecifier_ );
 }
 
 void DescendingCompilerVisitor::visitPDTypedParameter(PDTypedParameter *p)
 {
     p->type_->accept( this );
-    ListVariableSpecifier* pList = p->listvariablespecifier_;
-	while( pList )
-	{
-		pList->variablespecifier_->accept(this);
-		pList = pList->listvariablespecifier_;
-	}
+    
+    visitListVariableSpecifier( p->listvariablespecifier_ );
 }
 
 void DescendingCompilerVisitor::visitDOperator(DOperator *p)
 {
-    ListFunctionSpecifier* pListFS = p->listfunctionspecifier_;
-    while( pListFS )
-    {
-        pListFS->functionspecifier_->accept( this );
-        pListFS = pListFS->listfunctionspecifier_;
-    }
-
-    ListParameterDeclaration* pListPD = p->listparameterdeclaration_;
-    while( pListPD )
-    {
-        pListPD->parameterdeclaration_->accept( this );
-        pListPD = pListPD->listparameterdeclaration_;
-    }
-
-    ListStatement* pList = p->liststatement_;
-    while( pList )
-    {
-        pList->statement_->accept( this );
-        pList = pList->liststatement_;
-    }
+    visitListFunctionSpecifier( p->listfunctionspecifier_ );
+    visitListParameterDeclaration( p->listparameterdeclaration_ );
+    visitListStatement( p->liststatement_ );
 }
 
 void DescendingCompilerVisitor::visitDTypeConv(DTypeConv *p)
 {
-    ListStatement* pList = p->liststatement_;
-    while( pList )
-    {
-        pList->statement_->accept( this );
-        pList = pList->liststatement_;
-    }
+    visitListStatement( p->liststatement_ );
 }
 
 void DescendingCompilerVisitor::visitPFunction( PFunction* p )
 {
-	ListParameterDeclaration* pListPD = p->listparameterdeclaration_;
-	while( pListPD )
-	{
-		pListPD->parameterdeclaration_->accept( this );
-		pListPD = pListPD->listparameterdeclaration_;
-	}
+	visitListParameterDeclaration( p->listparameterdeclaration_ );
 }
 
 void DescendingCompilerVisitor::visitSExpression( SExpression *p )
@@ -225,30 +150,40 @@ void DescendingCompilerVisitor::visitECall( ECall *p )
 
 void DescendingCompilerVisitor::visitListExpression( ListExpression* p )
 {
-	ListExpression* pListExpressions = p;
-	while( pListExpressions && pListExpressions->expression_ )
-	{
-		pListExpressions->expression_->accept( this );
-		pListExpressions = pListExpressions->listexpression_;
-	}
+    for( size_t i = 0 ; i < p->size(); ++i )
+    {
+        ( *p )[ i ]->accept( this );
+    }
 }
 
 void DescendingCompilerVisitor::visitListStatement( ListStatement* p )
 {
-	ListStatement* pList = p;
-	while( pList )
-	{
-		pList->statement_->accept( this );
-		pList = pList->liststatement_;
-	}
+    for( size_t i = 0 ; i < p->size(); ++i )
+    {
+        ( *p )[ i ]->accept( this );
+    }
+}
+
+void DescendingCompilerVisitor::visitListFunctionSpecifier( ListFunctionSpecifier* p )
+{
+    for( size_t i = 0 ; i < p->size(); ++i )
+    {
+        ( *p )[ i ]->accept( this );
+    }
+}
+
+void DescendingCompilerVisitor::visitListVariableSpecifier( ListVariableSpecifier* p )
+{
+    for( size_t i = 0 ; i < p->size(); ++i )
+    {
+        ( *p )[ i ]->accept( this );
+    }
 }
 
 void DescendingCompilerVisitor::visitListParameterDeclaration( ListParameterDeclaration* p )
 {
-	ListParameterDeclaration* pListPD = p;
-	while( pListPD )
-	{
-		pListPD->parameterdeclaration_->accept( this );
-		pListPD = pListPD->listparameterdeclaration_;
-	}
+    for( size_t i = 0 ; i < p->size(); ++i )
+    {
+        ( *p )[ i ]->accept( this );
+    }
 }
