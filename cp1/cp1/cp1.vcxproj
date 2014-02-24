@@ -60,7 +60,7 @@
     </Link>
     <PreBuildEvent>
       <Command>cd $(SolutionDir)..\..\bnfcout\
-$(SolutionDir)..\..\tools\bnfc-2.4b.exe -cpp $(SolutionDir)..\..\grammar\cp.cf
+$(SolutionDir)..\..\tools\bnfc-2.5.exe -cpp -l $(SolutionDir)..\..\grammar\cp.cf
 $(SolutionDir)..\..\tools\sed.exe -i "s/BEGIN YYINITIAL/BEGIN YYINITIAL\; return 0/g" $(SolutionDir).l
 $(SolutionDir)..\..\tools\flex++.exe $(SolutionDir).l
 $(SolutionDir)..\..\tools\sed.exe -i "s/%%%%/%%glr-parser\n\n%%%%/g" $(SolutionDir).y
@@ -87,7 +87,7 @@ $(SolutionDir)..\..\tools\sed.exe -i "s/void yyerror/extern void yyerror(const c
     </Link>
     <PreBuildEvent>
       <Command>cd $(SolutionDir)..\..\bnfcout\
-$(SolutionDir)..\..\tools\bnfc-2.4b.exe -cpp $(SolutionDir)..\..\grammar\cp.cf
+$(SolutionDir)..\..\tools\bnfc-2.5.exe -cpp -l $(SolutionDir)..\..\grammar\cp.cf
 $(SolutionDir)..\..\tools\sed.exe -i "s/BEGIN YYINITIAL/BEGIN YYINITIAL\; return 0/g" $(SolutionDir).l
 $(SolutionDir)..\..\tools\flex++.exe $(SolutionDir).l
 $(SolutionDir)..\..\tools\sed.exe -i "s/%%%%/%%glr-parser\n\n%%%%/g" $(SolutionDir).y
@@ -116,10 +116,6 @@ $(SolutionDir)..\..\tools\sed.exe -i "s/void yyerror/extern void yyerror(const c
     <ClCompile Include="..\..\bnfcout\parse.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\bnfcout\Printer.C">
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="..\Source\Compiler\CompilerVisitor.cpp" />
     <ClCompile Include="..\Source\Compiler\LLVM\LLVMTransform.cpp" />

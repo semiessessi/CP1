@@ -20,6 +20,7 @@ extern std::map< std::string, TypeInfo > gxTypeMap;
 
 struct DetailedTypeInfo
 {
+    std::string szPrettyCPName;
     std::string szCPName;
     std::string szLLVMName;
     

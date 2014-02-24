@@ -33,19 +33,13 @@ public:
         p->operatorname_->accept( &ov );
         name = ov.operatorName;
         
-        ListFunctionSpecifier* lf = p->listfunctionspecifier_;
-        while( lf && lf->functionspecifier_ )
-        {
-            lf->functionspecifier_->accept( this );
-            lf = lf->listfunctionspecifier_;
-        }
+        visitListFunctionSpecifier( p->listfunctionspecifier_ );
         
         ListParameterDeclaration* lp = p->listparameterdeclaration_;
-        while( lp && lp->parameterdeclaration_ )
+        for( size_t i = 0 ; i < lp->size(); ++i )
         {
             DetailedTypeVisitor dtv;
-            lp->parameterdeclaration_->accept( &dtv );
-            lp = lp->listparameterdeclaration_;
+            ( *lp )[ i ]->accept( &dtv );
             
             parameterTypes.push_back( dtv.pxTypeInfo );
         }

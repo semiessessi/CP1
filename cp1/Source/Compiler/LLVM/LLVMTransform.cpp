@@ -55,12 +55,9 @@ void LLVMTransformVisitor::visitDNamespace(DNamespace *p)
 	sszCurrentNamespace += "_dot_";
 	
 	verboseInfo( 2, "Current namespace: %s\n", sszCurrentNamespace.c_str() );
-	if( p->listdeclaration_->declaration_ )
-	{
-		visitListDeclaration( p->listdeclaration_ );
-	}
+    visitListDeclaration( p->listdeclaration_ );
 	
-	sszCurrentNamespace.resize( sszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_ ) );
+	sszCurrentNamespace.resize( sszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_.c_str() ) );
 	verboseInfo( 2, "Current namespace: %s\n", sszCurrentNamespace.c_str() );
 }
 
@@ -96,15 +93,11 @@ void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnTy
     out += " @";
     out += szLLVMName;
     out += "( ";
-    ListParameterDeclaration* pList = parameters;
-
     std::vector< DetailedTypeInfo* > parameterTypes;
-    ListParameterDeclaration* lp = pList;
-    while( lp && lp->parameterdeclaration_ )
+    for( size_t i = 0 ; i < parameters->size(); ++i )
     {
         DetailedTypeVisitor dtv;
-        lp->parameterdeclaration_->accept( &dtv );
-        lp = lp->listparameterdeclaration_;
+        ( *parameters )[ i ]->accept( &dtv );
         
         parameterTypes.push_back( dtv.pxTypeInfo );
     }
@@ -125,7 +118,7 @@ void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnTy
         }
         
         ParameterVisitor p;
-		pList->parameterdeclaration_->accept( &p );
+		( *parameters )[ i ]->accept( &p );
 		out += " %_dot_";
 		out += p.szName;
         std::string szLLVMIdent = std::string( "%_dot_" ) + p.szName;
@@ -137,8 +130,6 @@ void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnTy
         {
             out += ", ";
         }
-        
-        pList = pList->listparameterdeclaration_;
     }
     out += " ) ";
     if( info.bInline )
@@ -181,16 +172,12 @@ void LLVMTransformVisitor::visitFunction( std::string szLLVMName, Type* returnTy
 
 void LLVMTransformVisitor::visitFunctionBody( ListStatement* statements )
 {
-    ListStatement* pSList = statements;
-	while( pSList )
-	{
-		pSList->statement_->accept( this );
-		pSList = pSList->liststatement_;
-	}
+    visitListStatement( statements );
 }
 
 void LLVMTransformVisitor::visitDTypeDecl(DTypeDecl *p)
 {
+    iCurrentLine = p->line_number;
 	//TypeVisitor t;
 	//p->type_->accept( & t );
 
@@ -203,6 +190,8 @@ void LLVMTransformVisitor::visitDTypeDecl(DTypeDecl *p)
 
 void LLVMTransformVisitor::visitDOperator(DOperator *p)
 {
+    iCurrentLine = p->line_number;
+    
 	OperatorInfo& info = OperatorFinder::FindOperator( p );
     std::map< std::string, Local > oldLocals = gxLocals;
     gxLocals.clear();
@@ -226,7 +215,7 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
         }
         
         ParameterVisitor p;
-		pList->parameterdeclaration_->accept( &p );
+		( *pList )[ i ]->accept( &p );
 		out += " %_dot_";
 		out += p.szName;
         std::string szLLVMIdent = std::string( "%_dot_" ) + p.szName;
@@ -237,8 +226,6 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
         {
             out += ", ";
         }
-        
-        pList = pList->listparameterdeclaration_;
     }
     out += " ) ";
     if( info.bInline )
@@ -271,6 +258,8 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
 
 void LLVMTransformVisitor::visitDTypeConv( DTypeConv* p )
 {
+    iCurrentLine = p->line_number;
+    
     DetailedTypeVisitor v1;
     p->type_1->accept( &v1 );
     
@@ -281,7 +270,7 @@ void LLVMTransformVisitor::visitDTypeConv( DTypeConv* p )
     
     if( info.size() == 0 )
     {
-        compileError( 0, "Unable to find suitable type conversion!\n" );
+        compileError( 0, "unable to find suitable type conversion from %s to %s", v2.pxTypeInfo->szCPName.c_str(), v1.pxTypeInfo->szCPName.c_str() );
     }
     else
     {
@@ -321,12 +310,14 @@ void LLVMTransformVisitor::visitDIVariable( DIVariable* p )
 
 void LLVMTransformVisitor::visitSExpression(SExpression *p)
 {
+    iCurrentLine = p->line_number;
     p->expression_->accept( this );
 	++siTempCounter;
 }
 
 void LLVMTransformVisitor::visitSIVariable(SIVariable* p)
 {
+    iCurrentLine = p->line_number;
     p->expression_->accept( this );
     
     std::string szLLVMIdent = std::string( "%_dot_" ) + p->ident_;
@@ -341,6 +332,8 @@ void LLVMTransformVisitor::visitSIVariable(SIVariable* p)
 
 void LLVMTransformVisitor::visitSReturn(SReturn *p)
 {
+    iCurrentLine = p->line_number;
+    
     p->expression_->accept( this );
     for( int i = 0; i < siTabLevel; ++i )
     {
@@ -358,6 +351,8 @@ void LLVMTransformVisitor::visitSReturn(SReturn *p)
 void LLVMTransformVisitor::visitSIf( SIf *p )
 {
     // SE - TODO: handle return and break...
+    
+    iCurrentLine = p->line_number;
     
     static int siIfCounter = 0;
 	int iIfCounter = siIfCounter;
@@ -411,6 +406,8 @@ void LLVMTransformVisitor::visitSIf( SIf *p )
 
 void LLVMTransformVisitor::visitSIfElse( SIfElse *p )
 {
+    iCurrentLine = p->line_number;
+    
     // SE - TODO: handle return and break...
     
 	p->expression_->accept( this );
@@ -750,6 +747,8 @@ void LLVMTransformVisitor::visitERValue(ERValue *p)
 
 void LLVMTransformVisitor::visitEAssign(EAssign* p)
 {
+    iCurrentLine = p->line_number;
+    
     ++siTempCounter;
     DetailedTypeInfo* pType = 0;
     int exprID = -1;
@@ -908,11 +907,10 @@ void LLVMTransformVisitor::visitECall( ECall* p )
     
     // count our parameters and work out what vars to chuck them in
     ListExpression* pList = p->listexpression_;
-	while( pList && pList->expression_ )
-	{
-        pList->expression_->accept( this );
+	for( size_t i = 0 ; i < pList->size(); ++i )
+    {
+        ( *pList )[ i ]->accept( this );
         aiParameterTemps[ iParameterCount ] = siTempCounter;
-        pList = pList->listexpression_;
         ++siTempCounter;
         ++iParameterCount;
 	}
@@ -1073,7 +1071,7 @@ void LLVMTransformVisitor::visitEOp( std::string szOperatorMangled, Expression* 
         
         if( potentials.size() == 0 )
         {
-            compileError( 0, "Unable to match operator!\n" );
+            compileError( 0, "unable to match operator" );
             return;
         }
     }
@@ -1118,7 +1116,7 @@ void LLVMTransformVisitor::visitGenericIntIntrinsic( Expression* pLeft, Expressi
     
     if( dtv.pxTypeInfo == 0 )
     {
-        compileError( 0 , "Unable to resolve type!\n" );
+        compileError( 0 , "unable to resolve type" );
         return;
     }
     

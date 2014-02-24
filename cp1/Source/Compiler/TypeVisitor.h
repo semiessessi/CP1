@@ -29,7 +29,7 @@ public:
 
 	virtual void visitTCustom(TCustom *p)
 	{
-		szName = p->ident_;
+		szName = p->ident_.c_str();
 	}
 
 	virtual void visitTFixedArray(TFixedArray *p)
@@ -71,7 +71,7 @@ public:
 		
 		DescendingCompilerVisitor::visitDNamespace( p );
 		
-		mszCurrentNamespace.resize( mszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_ ) );
+		mszCurrentNamespace.resize( mszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_.c_str() ) );
 	}
     
     virtual void visitTAddress( TAddress* p )
@@ -148,10 +148,9 @@ public:
         p->type_->accept( &v );
         
         ListTypeSpecifier* ps = p->listtypespecifier_;
-        while( ps && ps->typespecifier_ )
+        for( size_t i = 0 ; i < ps->size(); ++i )
         {
-            ps->typespecifier_->accept( &v );
-            ps = ps->listtypespecifier_;
+            ( *ps )[ i ]->accept( &v );
         }
         
         *pxNewTypeInfo = *v.pxTypeInfo;
@@ -193,7 +192,7 @@ public:
 
         DescendingCompilerVisitor::visitDNamespace( p );
 
-        mszCurrentNamespace.resize( mszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_ ) );
+        mszCurrentNamespace.resize( mszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_.c_str() ) );
     }
     
     virtual void visitEString( EString* p )

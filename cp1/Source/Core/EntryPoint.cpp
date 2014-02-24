@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "../../../bnfcout/parser.h"
-#include "../../../bnfcout/printer.h"
+//#include "../../../bnfcout/printer.h"
 
 #include <conio.h>
 
@@ -26,6 +26,7 @@
 
 extern int yydebug;
 std::string szCurrentFile;
+int iCurrentLine = 0;
 extern int yy_mylinenumber;
 extern void LexFlushBuffer();
 extern void doHackery( FILE* pFile );
@@ -204,50 +205,6 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 				}
 			}
 		}
-		
-        // pretty original code...
-        if( gxSwitches.infoVerbosity > 1 )
-        {
-            PrintAbsyn printer;
-            for( size_t i = 0; i < apCode.size(); ++i )
-            {
-				if( apCode[ i ] )
-				{
-					printf( "\r\nOriginal source for %s:\r\n", aszFilenames[ i ].c_str() );
-					printf( "%s\r\n", printer.print( apCode[ i ] ) );
-				}
-			}
-        }
-        
-        // pretty original code after first pass optimisation...
-        if( gxSwitches.infoVerbosity > 1 )
-        {
-            PrintAbsyn printer;
-            for( size_t i = 0; i < apCode.size(); ++i )
-            {
-				if( apCode[ i ] )
-				{
-                    FirstPassOptimiser fp;
-                    apCode[ i ]->accept( &fp );
-					printf( "\r\n%s after first pass optimisation:\r\n", aszFilenames[ i ].c_str() );
-					printf( "%s\r\n", printer.print( apCode[ i ] ) );
-				}
-			}
-        }
-        
-        // pretty print parse trees...
-        if( gxSwitches.infoVerbosity > 2 )
-        {
-            ShowAbsyn printer;
-            for( size_t i = 0; i < apCode.size(); ++i )
-            {
-				if( apCode[ i ] )
-				{
-					printf( "\r\nParse tree for %s:\r\n", aszFilenames[ i ].c_str() );
-					printf( "%s\r\n", printer.show( apCode[ i ] ) );
-				}
-			}
-        }
         
 		if( gxSwitches.infoVerbosity > 1 )
         {
@@ -385,9 +342,11 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 		{
             if( apCode[ i ] )
 			{
+                szCurrentFile = aszFilenames[ i ];
+                
 				LLVMTransformVisitor l;
 				l.out = "; LLVM IR generated from ";
-				l.out += aszFilenames[ i ];
+				l.out += szCurrentFile;
 				l.out += " by CP1 - Experimental compiler\r\n";
 				l.out += "\r\n";
 

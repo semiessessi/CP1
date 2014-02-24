@@ -35,7 +35,7 @@ public:
 
 	TypeVisitor t;
 	bool topType;
-	const char* szName;
+	std::string szName;
 
 };
 

@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+
 /* Certain applications may improve performance by changing the buffer size */
 #define BUFFER_INITIAL 2000
 /* You may wish to change _L_PAREN or _R_PAREN */
@@ -236,6 +237,9 @@ class PrintAbsyn : public Visitor
   void visitChar(Char c);
   void visitString(String s);
   void visitIdent(String s);
+  void visitCString(String s);
+  void visitCChar(String s);
+  void visitOperator(String s);
  protected:
   void inline bufAppend(const char* s)
   {
@@ -507,6 +511,9 @@ class ShowAbsyn : public Visitor
   void visitChar(Char c);
   void visitString(String s);
   void visitIdent(String s);
+  void visitCString(String s);
+  void visitCChar(String s);
+  void visitOperator(String s);
  protected:
   void inline bufAppend(const char* s)
   {
@@ -559,6 +566,7 @@ class ShowAbsyn : public Visitor
   char *buf_;
   int cur_, buf_size;
 };
+
 
 
 

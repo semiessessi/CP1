@@ -60,10 +60,9 @@ public:
         
         ListFunctionSpecifier* lf = lfs;
         FSVisitor fsv;
-        while( lf && lf->functionspecifier_ )
+        for( size_t i = 0 ; i < lf->size(); ++i )
         {
-            lf->functionspecifier_->accept( &fsv );
-            lf = lf->listfunctionspecifier_;
+            ( *lf )[ i ]->accept( &fsv );
         }
         
         // SE - TODO: ...
@@ -81,11 +80,10 @@ public:
         
         rInfo.aszParameterTypes.clear();
         ListParameterDeclaration* lp = lpd;
-        while( lp && lp->parameterdeclaration_ )
+        for( size_t i = 0 ; i < lp->size(); ++i )
         {
             DetailedTypeVisitor dtv;
-            lp->parameterdeclaration_->accept( &dtv );
-            lp = lp->listparameterdeclaration_;
+            ( *lp )[ i ]->accept( &dtv );
             
             rInfo.aszParameterTypes.push_back( dtv.pxTypeInfo );
         }
@@ -99,7 +97,7 @@ public:
 		
 		DescendingCompilerVisitor::visitDNamespace( p );
 		
-		sszCurrentNamespace.resize( sszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_ ) );
+		sszCurrentNamespace.resize( sszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_.c_str() ) );
 	}
     
     virtual void visitDExtern( DExtern *p )

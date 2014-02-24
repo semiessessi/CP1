@@ -1,6 +1,10 @@
 #ifndef PARSER_HEADER_FILE
 #define PARSER_HEADER_FILE
 
+#include<vector>
+#include<string>
+
+
 class Code;
 class TLDeclaration;
 class Declaration;
@@ -67,6 +71,11 @@ typedef union
   ListExpression* listexpression_;
   ListType* listtype_;
 } YYSTYPE;
+
+Code* pCode(FILE *inp);
+Code* pCode(const char *str);
+
+
 
 #define _ERROR_ 258
 #define _SYMB_0 259
@@ -192,7 +201,5 @@ typedef union
 #define _IDENT_ 379
 
 extern YYSTYPE yylval;
-Code* pCode(FILE *inp);
-
 
 #endif

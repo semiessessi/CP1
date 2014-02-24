@@ -1,6 +1,8 @@
 /*** BNFC-Generated Pretty Printer and Abstract Syntax Viewer ***/
 
+#include <string>
 #include "Printer.H"
+
 
 //You may wish to change render
 void PrintAbsyn::render(Char c)
@@ -51,8 +53,9 @@ void PrintAbsyn::render(Char c)
      bufAppend(' ');
   }
 }
-void PrintAbsyn::render(String s)
+void PrintAbsyn::render(String s_)
 {
+  const char *s = s_.c_str() ;
   if(strlen(s) > 0)
   {
     bufAppend(s);
@@ -2641,229 +2644,109 @@ void PrintAbsyn::visitERShAssign(ERShAssign* p)
 
 void PrintAbsyn::visitListTLDeclaration(ListTLDeclaration *listtldeclaration)
 {
-  while(listtldeclaration!= 0)
+  for (ListTLDeclaration::const_iterator i = listtldeclaration->begin() ; i != listtldeclaration->end() ; ++i)
   {
-    if (listtldeclaration->listtldeclaration_ == 0)
-    {
-      listtldeclaration->tldeclaration_->accept(this);
-      render("");
-      listtldeclaration = 0;
-    }
-    else
-    {
-      listtldeclaration->tldeclaration_->accept(this);
-      render("");
-      listtldeclaration = listtldeclaration->listtldeclaration_;
-    }
+    (*i)->accept(this);
+    render("");
   }
 }
 
 void PrintAbsyn::visitListDeclaration(ListDeclaration *listdeclaration)
 {
-  while(listdeclaration!= 0)
+  for (ListDeclaration::const_iterator i = listdeclaration->begin() ; i != listdeclaration->end() ; ++i)
   {
-    if (listdeclaration->listdeclaration_ == 0)
-    {
-      listdeclaration->declaration_->accept(this);
-      render("");
-      listdeclaration = 0;
-    }
-    else
-    {
-      listdeclaration->declaration_->accept(this);
-      render("");
-      listdeclaration = listdeclaration->listdeclaration_;
-    }
+    (*i)->accept(this);
+    render("");
   }
 }
 
 void PrintAbsyn::visitListStatement(ListStatement *liststatement)
 {
-  while(liststatement!= 0)
+  for (ListStatement::const_iterator i = liststatement->begin() ; i != liststatement->end() ; ++i)
   {
-    if (liststatement->liststatement_ == 0)
-    {
-      liststatement->statement_->accept(this);
-      render("");
-      liststatement = 0;
-    }
-    else
-    {
-      liststatement->statement_->accept(this);
-      render("");
-      liststatement = liststatement->liststatement_;
-    }
+    (*i)->accept(this);
+    render("");
   }
 }
 
 void PrintAbsyn::visitListTypeSpecifier(ListTypeSpecifier *listtypespecifier)
 {
-  while(listtypespecifier!= 0)
+  for (ListTypeSpecifier::const_iterator i = listtypespecifier->begin() ; i != listtypespecifier->end() ; ++i)
   {
-    if (listtypespecifier->listtypespecifier_ == 0)
-    {
-      listtypespecifier->typespecifier_->accept(this);
-      render("");
-      listtypespecifier = 0;
-    }
-    else
-    {
-      listtypespecifier->typespecifier_->accept(this);
-      render("");
-      listtypespecifier = listtypespecifier->listtypespecifier_;
-    }
+    (*i)->accept(this);
+    render("");
   }
 }
 
 void PrintAbsyn::visitListConversionSpecifier(ListConversionSpecifier *listconversionspecifier)
 {
-  while(listconversionspecifier!= 0)
+  for (ListConversionSpecifier::const_iterator i = listconversionspecifier->begin() ; i != listconversionspecifier->end() ; ++i)
   {
-    if (listconversionspecifier->listconversionspecifier_ == 0)
-    {
-      listconversionspecifier->conversionspecifier_->accept(this);
-      render("");
-      listconversionspecifier = 0;
-    }
-    else
-    {
-      listconversionspecifier->conversionspecifier_->accept(this);
-      render("");
-      listconversionspecifier = listconversionspecifier->listconversionspecifier_;
-    }
+    (*i)->accept(this);
+    render("");
   }
 }
 
 void PrintAbsyn::visitListFunctionSpecifier(ListFunctionSpecifier *listfunctionspecifier)
 {
-  while(listfunctionspecifier!= 0)
+  for (ListFunctionSpecifier::const_iterator i = listfunctionspecifier->begin() ; i != listfunctionspecifier->end() ; ++i)
   {
-    if (listfunctionspecifier->listfunctionspecifier_ == 0)
-    {
-      listfunctionspecifier->functionspecifier_->accept(this);
-      render("");
-      listfunctionspecifier = 0;
-    }
-    else
-    {
-      listfunctionspecifier->functionspecifier_->accept(this);
-      render("");
-      listfunctionspecifier = listfunctionspecifier->listfunctionspecifier_;
-    }
+    (*i)->accept(this);
+    render("");
   }
 }
 
 void PrintAbsyn::visitListVariableSpecifier(ListVariableSpecifier *listvariablespecifier)
 {
-  while(listvariablespecifier!= 0)
+  for (ListVariableSpecifier::const_iterator i = listvariablespecifier->begin() ; i != listvariablespecifier->end() ; ++i)
   {
-    if (listvariablespecifier->listvariablespecifier_ == 0)
-    {
-      listvariablespecifier->variablespecifier_->accept(this);
-      render("");
-      listvariablespecifier = 0;
-    }
-    else
-    {
-      listvariablespecifier->variablespecifier_->accept(this);
-      render("");
-      listvariablespecifier = listvariablespecifier->listvariablespecifier_;
-    }
+    (*i)->accept(this);
+    render("");
   }
 }
 
 void PrintAbsyn::visitListStructMemberDeclaration(ListStructMemberDeclaration *liststructmemberdeclaration)
 {
-  while(liststructmemberdeclaration!= 0)
+  for (ListStructMemberDeclaration::const_iterator i = liststructmemberdeclaration->begin() ; i != liststructmemberdeclaration->end() ; ++i)
   {
-    if (liststructmemberdeclaration->liststructmemberdeclaration_ == 0)
-    {
-      liststructmemberdeclaration->structmemberdeclaration_->accept(this);
-      render("");
-      liststructmemberdeclaration = 0;
-    }
-    else
-    {
-      liststructmemberdeclaration->structmemberdeclaration_->accept(this);
-      render("");
-      liststructmemberdeclaration = liststructmemberdeclaration->liststructmemberdeclaration_;
-    }
+    (*i)->accept(this);
+    render("");
   }
 }
 
 void PrintAbsyn::visitListGenericParam(ListGenericParam *listgenericparam)
 {
-  while(listgenericparam!= 0)
+  for (ListGenericParam::const_iterator i = listgenericparam->begin() ; i != listgenericparam->end() ; ++i)
   {
-    if (listgenericparam->listgenericparam_ == 0)
-    {
-      listgenericparam->genericparam_->accept(this);
-
-      listgenericparam = 0;
-    }
-    else
-    {
-      listgenericparam->genericparam_->accept(this);
-      render(',');
-      listgenericparam = listgenericparam->listgenericparam_;
-    }
+    (*i)->accept(this);
+    if (i != listgenericparam->end() - 1) render(',');
   }
 }
 
 void PrintAbsyn::visitListParameterDeclaration(ListParameterDeclaration *listparameterdeclaration)
 {
-  while(listparameterdeclaration!= 0)
+  for (ListParameterDeclaration::const_iterator i = listparameterdeclaration->begin() ; i != listparameterdeclaration->end() ; ++i)
   {
-    if (listparameterdeclaration->listparameterdeclaration_ == 0)
-    {
-      listparameterdeclaration->parameterdeclaration_->accept(this);
-
-      listparameterdeclaration = 0;
-    }
-    else
-    {
-      listparameterdeclaration->parameterdeclaration_->accept(this);
-      render(',');
-      listparameterdeclaration = listparameterdeclaration->listparameterdeclaration_;
-    }
+    (*i)->accept(this);
+    if (i != listparameterdeclaration->end() - 1) render(',');
   }
 }
 
 void PrintAbsyn::visitListExpression(ListExpression *listexpression)
 {
-  while(listexpression!= 0)
+  for (ListExpression::const_iterator i = listexpression->begin() ; i != listexpression->end() ; ++i)
   {
-    if (listexpression->listexpression_ == 0)
-    {
-      listexpression->expression_->accept(this);
-
-      listexpression = 0;
-    }
-    else
-    {
-      listexpression->expression_->accept(this);
-      render(',');
-      listexpression = listexpression->listexpression_;
-    }
+    (*i)->accept(this);
+    if (i != listexpression->end() - 1) render(',');
   }
 }
 
 void PrintAbsyn::visitListType(ListType *listtype)
 {
-  while(listtype!= 0)
+  for (ListType::const_iterator i = listtype->begin() ; i != listtype->end() ; ++i)
   {
-    if (listtype->listtype_ == 0)
-    {
-      listtype->type_->accept(this);
-
-      listtype = 0;
-    }
-    else
-    {
-      listtype->type_->accept(this);
-      render(',');
-      listtype = listtype->listtype_;
-    }
+    (*i)->accept(this);
+    if (i != listtype->end() - 1) render(',');
   }
 }
 
@@ -2885,16 +2768,39 @@ void PrintAbsyn::visitChar(Char c)
   bufAppend(c);
   bufAppend('\'');
 }
-void PrintAbsyn::visitString(String s)
+void PrintAbsyn::visitString(String s_)
 {
+  const char *s = s_.c_str() ;
   bufAppend('\"');
   bufAppend(s);
   bufAppend('\"');
 }
-void PrintAbsyn::visitIdent(String s)
+void PrintAbsyn::visitIdent(String s_)
 {
+  const char *s = s_.c_str() ;
   render(s);
 }
+
+void PrintAbsyn::visitCString(String s_)
+{
+  const char *s = s_.c_str() ;
+  render(s);
+}
+
+
+void PrintAbsyn::visitCChar(String s_)
+{
+  const char *s = s_.c_str() ;
+  render(s);
+}
+
+
+void PrintAbsyn::visitOperator(String s_)
+{
+  const char *s = s_.c_str() ;
+  render(s);
+}
+
 
 ShowAbsyn::ShowAbsyn(void)
 {
@@ -4779,217 +4685,109 @@ void ShowAbsyn::visitERShAssign(ERShAssign* p)
 }
 void ShowAbsyn::visitListTLDeclaration(ListTLDeclaration *listtldeclaration)
 {
-  while(listtldeclaration!= 0)
+  for (ListTLDeclaration::const_iterator i = listtldeclaration->begin() ; i != listtldeclaration->end() ; ++i)
   {
-    if (listtldeclaration->listtldeclaration_)
-    {
-      listtldeclaration->tldeclaration_->accept(this);
-      bufAppend(", ");
-      listtldeclaration = listtldeclaration->listtldeclaration_;
-    }
-    else
-    {
-      listtldeclaration->tldeclaration_->accept(this);
-      listtldeclaration = 0;
-    }
+    (*i)->accept(this);
+    if (i != listtldeclaration->end() - 1) bufAppend(", ");
   }
 }
 
 void ShowAbsyn::visitListDeclaration(ListDeclaration *listdeclaration)
 {
-  while(listdeclaration!= 0)
+  for (ListDeclaration::const_iterator i = listdeclaration->begin() ; i != listdeclaration->end() ; ++i)
   {
-    if (listdeclaration->listdeclaration_)
-    {
-      listdeclaration->declaration_->accept(this);
-      bufAppend(", ");
-      listdeclaration = listdeclaration->listdeclaration_;
-    }
-    else
-    {
-      listdeclaration->declaration_->accept(this);
-      listdeclaration = 0;
-    }
+    (*i)->accept(this);
+    if (i != listdeclaration->end() - 1) bufAppend(", ");
   }
 }
 
 void ShowAbsyn::visitListStatement(ListStatement *liststatement)
 {
-  while(liststatement!= 0)
+  for (ListStatement::const_iterator i = liststatement->begin() ; i != liststatement->end() ; ++i)
   {
-    if (liststatement->liststatement_)
-    {
-      liststatement->statement_->accept(this);
-      bufAppend(", ");
-      liststatement = liststatement->liststatement_;
-    }
-    else
-    {
-      liststatement->statement_->accept(this);
-      liststatement = 0;
-    }
+    (*i)->accept(this);
+    if (i != liststatement->end() - 1) bufAppend(", ");
   }
 }
 
 void ShowAbsyn::visitListTypeSpecifier(ListTypeSpecifier *listtypespecifier)
 {
-  while(listtypespecifier!= 0)
+  for (ListTypeSpecifier::const_iterator i = listtypespecifier->begin() ; i != listtypespecifier->end() ; ++i)
   {
-    if (listtypespecifier->listtypespecifier_)
-    {
-      listtypespecifier->typespecifier_->accept(this);
-      bufAppend(", ");
-      listtypespecifier = listtypespecifier->listtypespecifier_;
-    }
-    else
-    {
-      listtypespecifier->typespecifier_->accept(this);
-      listtypespecifier = 0;
-    }
+    (*i)->accept(this);
+    if (i != listtypespecifier->end() - 1) bufAppend(", ");
   }
 }
 
 void ShowAbsyn::visitListConversionSpecifier(ListConversionSpecifier *listconversionspecifier)
 {
-  while(listconversionspecifier!= 0)
+  for (ListConversionSpecifier::const_iterator i = listconversionspecifier->begin() ; i != listconversionspecifier->end() ; ++i)
   {
-    if (listconversionspecifier->listconversionspecifier_)
-    {
-      listconversionspecifier->conversionspecifier_->accept(this);
-      bufAppend(", ");
-      listconversionspecifier = listconversionspecifier->listconversionspecifier_;
-    }
-    else
-    {
-      listconversionspecifier->conversionspecifier_->accept(this);
-      listconversionspecifier = 0;
-    }
+    (*i)->accept(this);
+    if (i != listconversionspecifier->end() - 1) bufAppend(", ");
   }
 }
 
 void ShowAbsyn::visitListFunctionSpecifier(ListFunctionSpecifier *listfunctionspecifier)
 {
-  while(listfunctionspecifier!= 0)
+  for (ListFunctionSpecifier::const_iterator i = listfunctionspecifier->begin() ; i != listfunctionspecifier->end() ; ++i)
   {
-    if (listfunctionspecifier->listfunctionspecifier_)
-    {
-      listfunctionspecifier->functionspecifier_->accept(this);
-      bufAppend(", ");
-      listfunctionspecifier = listfunctionspecifier->listfunctionspecifier_;
-    }
-    else
-    {
-      listfunctionspecifier->functionspecifier_->accept(this);
-      listfunctionspecifier = 0;
-    }
+    (*i)->accept(this);
+    if (i != listfunctionspecifier->end() - 1) bufAppend(", ");
   }
 }
 
 void ShowAbsyn::visitListVariableSpecifier(ListVariableSpecifier *listvariablespecifier)
 {
-  while(listvariablespecifier!= 0)
+  for (ListVariableSpecifier::const_iterator i = listvariablespecifier->begin() ; i != listvariablespecifier->end() ; ++i)
   {
-    if (listvariablespecifier->listvariablespecifier_)
-    {
-      listvariablespecifier->variablespecifier_->accept(this);
-      bufAppend(", ");
-      listvariablespecifier = listvariablespecifier->listvariablespecifier_;
-    }
-    else
-    {
-      listvariablespecifier->variablespecifier_->accept(this);
-      listvariablespecifier = 0;
-    }
+    (*i)->accept(this);
+    if (i != listvariablespecifier->end() - 1) bufAppend(", ");
   }
 }
 
 void ShowAbsyn::visitListStructMemberDeclaration(ListStructMemberDeclaration *liststructmemberdeclaration)
 {
-  while(liststructmemberdeclaration!= 0)
+  for (ListStructMemberDeclaration::const_iterator i = liststructmemberdeclaration->begin() ; i != liststructmemberdeclaration->end() ; ++i)
   {
-    if (liststructmemberdeclaration->liststructmemberdeclaration_)
-    {
-      liststructmemberdeclaration->structmemberdeclaration_->accept(this);
-      bufAppend(", ");
-      liststructmemberdeclaration = liststructmemberdeclaration->liststructmemberdeclaration_;
-    }
-    else
-    {
-      liststructmemberdeclaration->structmemberdeclaration_->accept(this);
-      liststructmemberdeclaration = 0;
-    }
+    (*i)->accept(this);
+    if (i != liststructmemberdeclaration->end() - 1) bufAppend(", ");
   }
 }
 
 void ShowAbsyn::visitListGenericParam(ListGenericParam *listgenericparam)
 {
-  while(listgenericparam!= 0)
+  for (ListGenericParam::const_iterator i = listgenericparam->begin() ; i != listgenericparam->end() ; ++i)
   {
-    if (listgenericparam->listgenericparam_)
-    {
-      listgenericparam->genericparam_->accept(this);
-      bufAppend(", ");
-      listgenericparam = listgenericparam->listgenericparam_;
-    }
-    else
-    {
-      listgenericparam->genericparam_->accept(this);
-      listgenericparam = 0;
-    }
+    (*i)->accept(this);
+    if (i != listgenericparam->end() - 1) bufAppend(", ");
   }
 }
 
 void ShowAbsyn::visitListParameterDeclaration(ListParameterDeclaration *listparameterdeclaration)
 {
-  while(listparameterdeclaration!= 0)
+  for (ListParameterDeclaration::const_iterator i = listparameterdeclaration->begin() ; i != listparameterdeclaration->end() ; ++i)
   {
-    if (listparameterdeclaration->listparameterdeclaration_)
-    {
-      listparameterdeclaration->parameterdeclaration_->accept(this);
-      bufAppend(", ");
-      listparameterdeclaration = listparameterdeclaration->listparameterdeclaration_;
-    }
-    else
-    {
-      listparameterdeclaration->parameterdeclaration_->accept(this);
-      listparameterdeclaration = 0;
-    }
+    (*i)->accept(this);
+    if (i != listparameterdeclaration->end() - 1) bufAppend(", ");
   }
 }
 
 void ShowAbsyn::visitListExpression(ListExpression *listexpression)
 {
-  while(listexpression!= 0)
+  for (ListExpression::const_iterator i = listexpression->begin() ; i != listexpression->end() ; ++i)
   {
-    if (listexpression->listexpression_)
-    {
-      listexpression->expression_->accept(this);
-      bufAppend(", ");
-      listexpression = listexpression->listexpression_;
-    }
-    else
-    {
-      listexpression->expression_->accept(this);
-      listexpression = 0;
-    }
+    (*i)->accept(this);
+    if (i != listexpression->end() - 1) bufAppend(", ");
   }
 }
 
 void ShowAbsyn::visitListType(ListType *listtype)
 {
-  while(listtype!= 0)
+  for (ListType::const_iterator i = listtype->begin() ; i != listtype->end() ; ++i)
   {
-    if (listtype->listtype_)
-    {
-      listtype->type_->accept(this);
-      bufAppend(", ");
-      listtype = listtype->listtype_;
-    }
-    else
-    {
-      listtype->type_->accept(this);
-      listtype = 0;
-    }
+    (*i)->accept(this);
+    if (i != listtype->end() - 1) bufAppend(", ");
   }
 }
 
@@ -5011,16 +4809,46 @@ void ShowAbsyn::visitChar(Char c)
   bufAppend(c);
   bufAppend('\'');
 }
-void ShowAbsyn::visitString(String s)
+void ShowAbsyn::visitString(String s_)
 {
+  const char *s = s_.c_str() ;
   bufAppend('\"');
   bufAppend(s);
   bufAppend('\"');
 }
-void ShowAbsyn::visitIdent(String s)
+void ShowAbsyn::visitIdent(String s_)
 {
+  const char *s = s_.c_str() ;
   bufAppend('\"');
   bufAppend(s);
   bufAppend('\"');
 }
+
+void ShowAbsyn::visitCString(String s_)
+{
+  const char *s = s_.c_str() ;
+  bufAppend('\"');
+  bufAppend(s);
+  bufAppend('\"');
+}
+
+
+void ShowAbsyn::visitCChar(String s_)
+{
+  const char *s = s_.c_str() ;
+  bufAppend('\"');
+  bufAppend(s);
+  bufAppend('\"');
+}
+
+
+void ShowAbsyn::visitOperator(String s_)
+{
+  const char *s = s_.c_str() ;
+  bufAppend('\"');
+  bufAppend(s);
+  bufAppend('\"');
+}
+
+
 

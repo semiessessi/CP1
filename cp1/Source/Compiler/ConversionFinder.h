@@ -129,7 +129,7 @@ public:
         
         DescendingCompilerVisitor::visitDNamespace( p );
         
-        sszCurrentNamespace.resize( sszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_ ) );
+        sszCurrentNamespace.resize( sszCurrentNamespace.size() - ( sizeof( "_dot_" ) - 1 ) - strlen( p->ident_.c_str() ) );
     }
     
     virtual void visitDTypeConv( DTypeConv* p )
@@ -137,10 +137,9 @@ public:
         Reset();
         
         ListConversionSpecifier* pList = p->listconversionspecifier_;
-        while( pList && pList->conversionspecifier_ )
+        for( size_t i = 0 ; i < pList->size(); ++i )
         {
-            pList->conversionspecifier_->accept( this );
-            pList = pList->listconversionspecifier_;
+            ( *pList )[ i ]->accept( this );
         }
         
         DetailedTypeVisitor v1;

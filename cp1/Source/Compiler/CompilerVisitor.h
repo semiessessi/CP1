@@ -218,6 +218,10 @@ class CompilerVisitor : public Visitor
   virtual void visitExpression(Expression *p) {}
   virtual void visitStructMemberDeclaration( StructMemberDeclaration* p ) {}
 
+  virtual void visitCChar(CChar cchar) {}
+  virtual void visitCString(CString cstring) {}
+  virtual void visitOperator(Operator op) {}
+  virtual void visitIdent(Ident id) {}
   virtual void visitInteger(Integer i) {}
   virtual void visitDouble(Double d) {}
   virtual void visitChar(Char c) {}
@@ -303,6 +307,8 @@ class DescendingCompilerVisitor : public CompilerVisitor
   virtual void visitListExpression( ListExpression *p );
   virtual void visitListParameterDeclaration( ListParameterDeclaration* p );
   virtual void visitListDeclaration(ListDeclaration *p);
+  virtual void visitListFunctionSpecifier( ListFunctionSpecifier* p );
+  virtual void visitListVariableSpecifier( ListVariableSpecifier* p );
   virtual void visitListTLDeclaration(ListTLDeclaration *p);
 
 protected:
