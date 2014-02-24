@@ -50,7 +50,9 @@ void LLVMTransformVisitor::visitMain(Main *p)
 }
 
 void LLVMTransformVisitor::visitDNamespace(DNamespace *p)
-{	
+{
+    iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
+    
 	sszCurrentNamespace += p->ident_;
 	sszCurrentNamespace += "_dot_";
 	
@@ -63,11 +65,13 @@ void LLVMTransformVisitor::visitDNamespace(DNamespace *p)
 
 void LLVMTransformVisitor::visitDDefaultFunction( DDefaultFunction *p )
 {
+    iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
     visitFunction( sszCurrentNamespace + p->ident_, 0, p->listparameterdeclaration_, p->liststatement_ );
 }
 
 void LLVMTransformVisitor::visitDFunction(DFunction *p)
 {    
+    iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
 	visitFunction( sszCurrentNamespace + p->ident_, p->type_, p->listparameterdeclaration_, p->liststatement_ );
 }
 
@@ -177,7 +181,7 @@ void LLVMTransformVisitor::visitFunctionBody( ListStatement* statements )
 
 void LLVMTransformVisitor::visitDTypeDecl(DTypeDecl *p)
 {
-    iCurrentLine = p->line_number;
+    iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
 	//TypeVisitor t;
 	//p->type_->accept( & t );
 
@@ -190,7 +194,7 @@ void LLVMTransformVisitor::visitDTypeDecl(DTypeDecl *p)
 
 void LLVMTransformVisitor::visitDOperator(DOperator *p)
 {
-    iCurrentLine = p->line_number;
+    iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
     
 	OperatorInfo& info = OperatorFinder::FindOperator( p );
     std::map< std::string, Local > oldLocals = gxLocals;
@@ -258,7 +262,7 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
 
 void LLVMTransformVisitor::visitDTypeConv( DTypeConv* p )
 {
-    iCurrentLine = p->line_number;
+    iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
     
     DetailedTypeVisitor v1;
     p->type_1->accept( &v1 );
@@ -310,14 +314,14 @@ void LLVMTransformVisitor::visitDIVariable( DIVariable* p )
 
 void LLVMTransformVisitor::visitSExpression(SExpression *p)
 {
-    iCurrentLine = p->line_number;
+    iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
     p->expression_->accept( this );
 	++siTempCounter;
 }
 
 void LLVMTransformVisitor::visitSIVariable(SIVariable* p)
 {
-    iCurrentLine = p->line_number;
+    iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
     p->expression_->accept( this );
     
     std::string szLLVMIdent = std::string( "%_dot_" ) + p->ident_;
@@ -332,7 +336,7 @@ void LLVMTransformVisitor::visitSIVariable(SIVariable* p)
 
 void LLVMTransformVisitor::visitSReturn(SReturn *p)
 {
-    iCurrentLine = p->line_number;
+    iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
     
     p->expression_->accept( this );
     for( int i = 0; i < siTabLevel; ++i )
@@ -352,7 +356,7 @@ void LLVMTransformVisitor::visitSIf( SIf *p )
 {
     // SE - TODO: handle return and break...
     
-    iCurrentLine = p->line_number;
+    iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
     
     static int siIfCounter = 0;
 	int iIfCounter = siIfCounter;
@@ -406,7 +410,7 @@ void LLVMTransformVisitor::visitSIf( SIf *p )
 
 void LLVMTransformVisitor::visitSIfElse( SIfElse *p )
 {
-    iCurrentLine = p->line_number;
+    iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
     
     // SE - TODO: handle return and break...
     
@@ -713,6 +717,8 @@ void LLVMTransformVisitor::visitEInteger(EInteger *p)
 
 void LLVMTransformVisitor::visitERValue(ERValue *p)
 {
+    iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
+    
     RVVisitor v;
     p->rvalue_->accept( &v );
 
@@ -747,7 +753,7 @@ void LLVMTransformVisitor::visitERValue(ERValue *p)
 
 void LLVMTransformVisitor::visitEAssign(EAssign* p)
 {
-    iCurrentLine = p->line_number;
+    iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
     
     ++siTempCounter;
     DetailedTypeInfo* pType = 0;
@@ -867,6 +873,8 @@ void LLVMTransformVisitor::visitEString( EString* p )
 
 void LLVMTransformVisitor::visitESimpleCall( ESimpleCall* p )
 {
+    iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
+    
 	RVVisitor rvv;
 	p->rvalue_->accept( &rvv );
     
@@ -898,6 +906,8 @@ void LLVMTransformVisitor::visitESimpleCall( ESimpleCall* p )
 
 void LLVMTransformVisitor::visitECall( ECall* p )
 {
+    iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
+    
 	RVVisitor rvv;
 	p->rvalue_->accept( &rvv );
 
