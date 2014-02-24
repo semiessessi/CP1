@@ -800,7 +800,7 @@ void LLVMTransformVisitor::visitEAssign(EAssign* p)
             }
             else
             {
-                compileError( 0, "Unable to convert from %s to %s", pType->ShortLLVMName().c_str(), local.pType->ShortLLVMName().c_str() );
+                compileError( 0, "unable to convert from %s to %s", pType->szPrettyCPName.c_str(), local.pType->szPrettyCPName.c_str() );
             }
         }
         

@@ -54,6 +54,8 @@ struct DetailedTypeInfo
         
         bDefined = false;
         bTypedef = false;
+        
+        szPrettyCPName = "<unknown-type>";
     }
     
     static bool AlreadyInMap( const std::string& key ) { return sxTypeMap.find( key ) != sxTypeMap.end(); }

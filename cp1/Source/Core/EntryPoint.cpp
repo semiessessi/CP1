@@ -391,7 +391,7 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 		
 		verboseInfo( 1, "Linking with GCC...\n" );
 		
-		system( "gcc temp.o -O3 -oa.exe\n" );
+		system( "gcc temp.o -dead-strip -O3 -Os -oa.exe\n" );
 	}
 	else
 	{

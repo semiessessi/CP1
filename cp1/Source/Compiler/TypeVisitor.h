@@ -79,6 +79,7 @@ public:
         pxTypeInfo = DetailedTypeInfo::Find( "address" );
 		pxTypeInfo->bAddress = true;
         pxTypeInfo->szCPName = "address";
+        pxTypeInfo->szPrettyCPName = "address";
         pxTypeInfo->szLLVMName = "i8*";
         pxTypeInfo->bDefined = true;
 	}
@@ -87,6 +88,7 @@ public:
 	{
         pxTypeInfo = DetailedTypeInfo::Find( "byte" );
 		pxTypeInfo->bByte = true;
+        pxTypeInfo->szPrettyCPName = "byte";
         pxTypeInfo->szCPName = "byte";
         pxTypeInfo->szLLVMName = "i8";
         pxTypeInfo->bDefined = true;
@@ -155,6 +157,7 @@ public:
         
         *pxNewTypeInfo = *v.pxTypeInfo;
         
+        pxNewTypeInfo->szPrettyCPName = p->ident_;
         pxNewTypeInfo->szCPName = mszCurrentNamespace + p->ident_;
         pxNewTypeInfo->bDefined = true;
         pxNewTypeInfo->bTypedef = true;
