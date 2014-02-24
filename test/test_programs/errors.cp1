@@ -1,0 +1,15 @@
+import int32;
+
+entrypoint errors()
+{
+    int32 a = 0;
+    if( a == 0 )
+    {
+        a = add< fucko >( a, 3 );
+    }
+    
+    if( a -> "1" )
+    {
+        // ...
+    }
+}

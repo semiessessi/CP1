@@ -463,119 +463,119 @@ class Code : public Visitable
 {
 public:
   virtual Code *clone() const = 0;
-
+  int line_number;
 };
 
 class TLDeclaration : public Visitable
 {
 public:
   virtual TLDeclaration *clone() const = 0;
-
+  int line_number;
 };
 
 class Declaration : public Visitable
 {
 public:
   virtual Declaration *clone() const = 0;
-
+  int line_number;
 };
 
 class Prototype : public Visitable
 {
 public:
   virtual Prototype *clone() const = 0;
-
+  int line_number;
 };
 
 class OperatorName : public Visitable
 {
 public:
   virtual OperatorName *clone() const = 0;
-
+  int line_number;
 };
 
 class OperatorTrait : public Visitable
 {
 public:
   virtual OperatorTrait *clone() const = 0;
-
+  int line_number;
 };
 
 class FunctionSpecifier : public Visitable
 {
 public:
   virtual FunctionSpecifier *clone() const = 0;
-
+  int line_number;
 };
 
 class ConversionSpecifier : public Visitable
 {
 public:
   virtual ConversionSpecifier *clone() const = 0;
-
+  int line_number;
 };
 
 class VariableSpecifier : public Visitable
 {
 public:
   virtual VariableSpecifier *clone() const = 0;
-
+  int line_number;
 };
 
 class TypeSpecifier : public Visitable
 {
 public:
   virtual TypeSpecifier *clone() const = 0;
-
+  int line_number;
 };
 
 class GenericParam : public Visitable
 {
 public:
   virtual GenericParam *clone() const = 0;
-
+  int line_number;
 };
 
 class Type : public Visitable
 {
 public:
   virtual Type *clone() const = 0;
-
+  int line_number;
 };
 
 class StructMemberDeclaration : public Visitable
 {
 public:
   virtual StructMemberDeclaration *clone() const = 0;
-
+  int line_number;
 };
 
 class ParameterDeclaration : public Visitable
 {
 public:
   virtual ParameterDeclaration *clone() const = 0;
-
+  int line_number;
 };
 
 class Statement : public Visitable
 {
 public:
   virtual Statement *clone() const = 0;
-
+  int line_number;
 };
 
 class RValue : public Visitable
 {
 public:
   virtual RValue *clone() const = 0;
-
+  int line_number;
 };
 
 class Expression : public Visitable
 {
 public:
   virtual Expression *clone() const = 0;
-
+  int line_number;
 };
 
 

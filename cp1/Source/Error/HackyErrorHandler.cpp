@@ -220,7 +220,10 @@ void yyerror(const char *str)
             else
             {
 				printf( "   \t| " );
-                for( int i = 0; i < gpxLocation->first_column - 1; ++i )
+                const int iLimit1 = ( gpxLocation->first_column < (int) gaszLines[ yy_mylinenumber ].size() )
+                    ? ( gpxLocation->first_column - 1 )
+                    : ( gaszLines[ yy_mylinenumber ].size() - 2 );
+                for( int i = 0; i < iLimit1; ++i )
 			    {
                     if( gaszLines[ yy_mylinenumber ].c_str()[ i ] == '\t' )
                     {
@@ -231,7 +234,7 @@ void yyerror(const char *str)
                 printf( "|" );
                 const int iLimit = ( gpxLocation->last_column < (int) gaszLines[ yy_mylinenumber ].size() )
                     ? gpxLocation->last_column
-                    : ( gpxLocation->first_column + 1 );
+                    : ( iLimit1 + 1 );
 			    for( int i = gpxLocation->first_column; i < iLimit; ++i )
 			    {
                     if( gaszLines[ yy_mylinenumber ].c_str()[ i ] == '\t' )

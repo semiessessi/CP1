@@ -60,7 +60,7 @@
     </Link>
     <PreBuildEvent>
       <Command>cd $(SolutionDir)..\..\bnfcout\
-$(SolutionDir)..\..\tools\bnfc-2.5.exe -cpp $(SolutionDir)..\..\grammar\cp.cf
+$(SolutionDir)..\..\tools\bnfc-2.5.exe -cpp -l $(SolutionDir)..\..\grammar\cp.cf
 $(SolutionDir)..\..\tools\sed.exe -i "s/BEGIN YYINITIAL/BEGIN YYINITIAL\; return 0/g" $(SolutionDir).l
 $(SolutionDir)..\..\tools\flex++.exe $(SolutionDir).l
 $(SolutionDir)..\..\tools\sed.exe -i "s/%%%%/%%glr-parser\n\n%%%%/g" $(SolutionDir).y
@@ -87,7 +87,7 @@ $(SolutionDir)..\..\tools\sed.exe -i "s/void yyerror/extern void yyerror(const c
     </Link>
     <PreBuildEvent>
       <Command>cd $(SolutionDir)..\..\bnfcout\
-$(SolutionDir)..\..\tools\bnfc-2.5.exe -cpp $(SolutionDir)..\..\grammar\cp.cf
+$(SolutionDir)..\..\tools\bnfc-2.5.exe -cpp -l $(SolutionDir)..\..\grammar\cp.cf
 $(SolutionDir)..\..\tools\sed.exe -i "s/BEGIN YYINITIAL/BEGIN YYINITIAL\; return 0/g" $(SolutionDir).l
 $(SolutionDir)..\..\tools\flex++.exe $(SolutionDir).l
 $(SolutionDir)..\..\tools\sed.exe -i "s/%%%%/%%glr-parser\n\n%%%%/g" $(SolutionDir).y

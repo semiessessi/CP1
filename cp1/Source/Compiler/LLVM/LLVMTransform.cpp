@@ -177,6 +177,7 @@ void LLVMTransformVisitor::visitFunctionBody( ListStatement* statements )
 
 void LLVMTransformVisitor::visitDTypeDecl(DTypeDecl *p)
 {
+    iCurrentLine = p->line_number;
 	//TypeVisitor t;
 	//p->type_->accept( & t );
 
@@ -189,6 +190,8 @@ void LLVMTransformVisitor::visitDTypeDecl(DTypeDecl *p)
 
 void LLVMTransformVisitor::visitDOperator(DOperator *p)
 {
+    iCurrentLine = p->line_number;
+    
 	OperatorInfo& info = OperatorFinder::FindOperator( p );
     std::map< std::string, Local > oldLocals = gxLocals;
     gxLocals.clear();
@@ -255,6 +258,8 @@ void LLVMTransformVisitor::visitDOperator(DOperator *p)
 
 void LLVMTransformVisitor::visitDTypeConv( DTypeConv* p )
 {
+    iCurrentLine = p->line_number;
+    
     DetailedTypeVisitor v1;
     p->type_1->accept( &v1 );
     
@@ -265,7 +270,7 @@ void LLVMTransformVisitor::visitDTypeConv( DTypeConv* p )
     
     if( info.size() == 0 )
     {
-        compileError( 0, "Unable to find suitable type conversion!\n" );
+        compileError( 0, "unable to find suitable type conversion from %s to %s", v2.pxTypeInfo->szCPName.c_str(), v1.pxTypeInfo->szCPName.c_str() );
     }
     else
     {
@@ -305,12 +310,14 @@ void LLVMTransformVisitor::visitDIVariable( DIVariable* p )
 
 void LLVMTransformVisitor::visitSExpression(SExpression *p)
 {
+    iCurrentLine = p->line_number;
     p->expression_->accept( this );
 	++siTempCounter;
 }
 
 void LLVMTransformVisitor::visitSIVariable(SIVariable* p)
 {
+    iCurrentLine = p->line_number;
     p->expression_->accept( this );
     
     std::string szLLVMIdent = std::string( "%_dot_" ) + p->ident_;
@@ -325,6 +332,8 @@ void LLVMTransformVisitor::visitSIVariable(SIVariable* p)
 
 void LLVMTransformVisitor::visitSReturn(SReturn *p)
 {
+    iCurrentLine = p->line_number;
+    
     p->expression_->accept( this );
     for( int i = 0; i < siTabLevel; ++i )
     {
@@ -342,6 +351,8 @@ void LLVMTransformVisitor::visitSReturn(SReturn *p)
 void LLVMTransformVisitor::visitSIf( SIf *p )
 {
     // SE - TODO: handle return and break...
+    
+    iCurrentLine = p->line_number;
     
     static int siIfCounter = 0;
 	int iIfCounter = siIfCounter;
@@ -395,6 +406,8 @@ void LLVMTransformVisitor::visitSIf( SIf *p )
 
 void LLVMTransformVisitor::visitSIfElse( SIfElse *p )
 {
+    iCurrentLine = p->line_number;
+    
     // SE - TODO: handle return and break...
     
 	p->expression_->accept( this );
@@ -734,6 +747,8 @@ void LLVMTransformVisitor::visitERValue(ERValue *p)
 
 void LLVMTransformVisitor::visitEAssign(EAssign* p)
 {
+    iCurrentLine = p->line_number;
+    
     ++siTempCounter;
     DetailedTypeInfo* pType = 0;
     int exprID = -1;
@@ -1056,7 +1071,7 @@ void LLVMTransformVisitor::visitEOp( std::string szOperatorMangled, Expression* 
         
         if( potentials.size() == 0 )
         {
-            compileError( 0, "Unable to match operator!\n" );
+            compileError( 0, "unable to match operator" );
             return;
         }
     }
@@ -1101,7 +1116,7 @@ void LLVMTransformVisitor::visitGenericIntIntrinsic( Expression* pLeft, Expressi
     
     if( dtv.pxTypeInfo == 0 )
     {
-        compileError( 0 , "Unable to resolve type!\n" );
+        compileError( 0 , "unable to resolve type" );
         return;
     }
     

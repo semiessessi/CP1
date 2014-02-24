@@ -3250,679 +3250,679 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
 
 /* Line 936 of glr.c  */
 #line 1196 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).code_) = new Main((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listtldeclaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.listdeclaration_)); YY_RESULT_Code_= ((*yyvalp).code_); ;}
+    {  ((*yyvalp).code_) = new Main((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listtldeclaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.listdeclaration_)); ((*yyvalp).code_)->line_number = yy_mylinenumber; YY_RESULT_Code_= ((*yyvalp).code_); ;}
     break;
 
   case 3:
 
 /* Line 936 of glr.c  */
 #line 1198 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).tldeclaration_) = new DImport((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.string_));  ;}
+    {  ((*yyvalp).tldeclaration_) = new DImport((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.string_)); ((*yyvalp).tldeclaration_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 4:
 
 /* Line 936 of glr.c  */
 #line 1199 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).tldeclaration_) = new DExpose((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.string_));  ;}
+    {  ((*yyvalp).tldeclaration_) = new DExpose((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.string_)); ((*yyvalp).tldeclaration_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 5:
 
 /* Line 936 of glr.c  */
 #line 1201 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).declaration_) = new DNamespace((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listdeclaration_));  ;}
+    {  ((*yyvalp).declaration_) = new DNamespace((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listdeclaration_)); ((*yyvalp).declaration_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 6:
 
 /* Line 936 of glr.c  */
 #line 1202 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.listparameterdeclaration_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.listparameterdeclaration_)->end()) ;((*yyvalp).declaration_) = new DDefaultFunction((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (8))].yystate.yysemantics.yysval.listfunctionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (8))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.listparameterdeclaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (8))].yystate.yysemantics.yysval.liststatement_));  ;}
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.listparameterdeclaration_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.listparameterdeclaration_)->end()) ;((*yyvalp).declaration_) = new DDefaultFunction((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (8))].yystate.yysemantics.yysval.listfunctionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (8))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.listparameterdeclaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (8))].yystate.yysemantics.yysval.liststatement_)); ((*yyvalp).declaration_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 7:
 
 /* Line 936 of glr.c  */
 #line 1203 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_)->end()) ;((*yyvalp).declaration_) = new DFunction((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (9))].yystate.yysemantics.yysval.listfunctionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.liststatement_));  ;}
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_)->end()) ;((*yyvalp).declaration_) = new DFunction((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (9))].yystate.yysemantics.yysval.listfunctionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.liststatement_)); ((*yyvalp).declaration_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 8:
 
 /* Line 936 of glr.c  */
 #line 1204 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_)->end()) ;((*yyvalp).declaration_) = new DOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (9))].yystate.yysemantics.yysval.listfunctionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.operatorname_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.liststatement_));  ;}
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_)->end()) ;((*yyvalp).declaration_) = new DOperator((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (9))].yystate.yysemantics.yysval.listfunctionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.operatorname_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.listparameterdeclaration_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.liststatement_)); ((*yyvalp).declaration_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 9:
 
 /* Line 936 of glr.c  */
 #line 1205 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).declaration_) = new DOperatorInfo((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.operatortrait_));  ;}
+    {  ((*yyvalp).declaration_) = new DOperatorInfo((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.operatortrait_)); ((*yyvalp).declaration_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 10:
 
 /* Line 936 of glr.c  */
 #line 1206 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).declaration_) = new DTypeDecl((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.listtypespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (5))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.string_));  ;}
+    {  ((*yyvalp).declaration_) = new DTypeDecl((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.listtypespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (5))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.string_)); ((*yyvalp).declaration_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 11:
 
 /* Line 936 of glr.c  */
 #line 1207 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).declaration_) = new DTypeConv((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (11))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (11))].yystate.yysemantics.yysval.listconversionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (11))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (11))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((10) - (11))].yystate.yysemantics.yysval.liststatement_));  ;}
+    {  ((*yyvalp).declaration_) = new DTypeConv((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (11))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (11))].yystate.yysemantics.yysval.listconversionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (11))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (11))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((10) - (11))].yystate.yysemantics.yysval.liststatement_)); ((*yyvalp).declaration_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 12:
 
 /* Line 936 of glr.c  */
 #line 1208 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).declaration_) = new DExtern((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.prototype_));  ;}
+    {  ((*yyvalp).declaration_) = new DExtern((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.prototype_)); ((*yyvalp).declaration_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 13:
 
 /* Line 936 of glr.c  */
 #line 1209 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).declaration_) = new DIVariable((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (6))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).declaration_) = new DIVariable((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (6))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).declaration_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 14:
 
 /* Line 936 of glr.c  */
 #line 1210 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).declaration_) = new DVariable((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.string_));  ;}
+    {  ((*yyvalp).declaration_) = new DVariable((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.string_)); ((*yyvalp).declaration_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 15:
 
 /* Line 936 of glr.c  */
 #line 1212 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.listparameterdeclaration_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.listparameterdeclaration_)->end()) ;((*yyvalp).prototype_) = new PFunction((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (7))].yystate.yysemantics.yysval.listfunctionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.listparameterdeclaration_));  ;}
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.listparameterdeclaration_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.listparameterdeclaration_)->end()) ;((*yyvalp).prototype_) = new PFunction((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (7))].yystate.yysemantics.yysval.listfunctionspecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.listparameterdeclaration_)); ((*yyvalp).prototype_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 16:
 
 /* Line 936 of glr.c  */
 #line 1214 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONLnot();  ;}
+    {  ((*yyvalp).operatorname_) = new ONLnot(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 17:
 
 /* Line 936 of glr.c  */
 #line 1215 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONPreInc();  ;}
+    {  ((*yyvalp).operatorname_) = new ONPreInc(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 18:
 
 /* Line 936 of glr.c  */
 #line 1216 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONPreDec();  ;}
+    {  ((*yyvalp).operatorname_) = new ONPreDec(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 19:
 
 /* Line 936 of glr.c  */
 #line 1217 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONBnot();  ;}
+    {  ((*yyvalp).operatorname_) = new ONBnot(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 20:
 
 /* Line 936 of glr.c  */
 #line 1218 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONMul();  ;}
+    {  ((*yyvalp).operatorname_) = new ONMul(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 21:
 
 /* Line 936 of glr.c  */
 #line 1219 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONExp();  ;}
+    {  ((*yyvalp).operatorname_) = new ONExp(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 22:
 
 /* Line 936 of glr.c  */
 #line 1220 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONDiv();  ;}
+    {  ((*yyvalp).operatorname_) = new ONDiv(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 23:
 
 /* Line 936 of glr.c  */
 #line 1221 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONRDiv();  ;}
+    {  ((*yyvalp).operatorname_) = new ONRDiv(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 24:
 
 /* Line 936 of glr.c  */
 #line 1222 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONMod();  ;}
+    {  ((*yyvalp).operatorname_) = new ONMod(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 25:
 
 /* Line 936 of glr.c  */
 #line 1223 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONAdd();  ;}
+    {  ((*yyvalp).operatorname_) = new ONAdd(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 26:
 
 /* Line 936 of glr.c  */
 #line 1224 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONSub();  ;}
+    {  ((*yyvalp).operatorname_) = new ONSub(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 27:
 
 /* Line 936 of glr.c  */
 #line 1225 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONLSh();  ;}
+    {  ((*yyvalp).operatorname_) = new ONLSh(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 28:
 
 /* Line 936 of glr.c  */
 #line 1226 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONRSh();  ;}
+    {  ((*yyvalp).operatorname_) = new ONRSh(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 29:
 
 /* Line 936 of glr.c  */
 #line 1227 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONLT();  ;}
+    {  ((*yyvalp).operatorname_) = new ONLT(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 30:
 
 /* Line 936 of glr.c  */
 #line 1228 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONGT();  ;}
+    {  ((*yyvalp).operatorname_) = new ONGT(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 31:
 
 /* Line 936 of glr.c  */
 #line 1229 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONLE();  ;}
+    {  ((*yyvalp).operatorname_) = new ONLE(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 32:
 
 /* Line 936 of glr.c  */
 #line 1230 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONGE();  ;}
+    {  ((*yyvalp).operatorname_) = new ONGE(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 33:
 
 /* Line 936 of glr.c  */
 #line 1231 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONE();  ;}
+    {  ((*yyvalp).operatorname_) = new ONE(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 34:
 
 /* Line 936 of glr.c  */
 #line 1232 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONNE();  ;}
+    {  ((*yyvalp).operatorname_) = new ONNE(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 35:
 
 /* Line 936 of glr.c  */
 #line 1233 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONBand();  ;}
+    {  ((*yyvalp).operatorname_) = new ONBand(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 36:
 
 /* Line 936 of glr.c  */
 #line 1234 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONBor();  ;}
+    {  ((*yyvalp).operatorname_) = new ONBor(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 37:
 
 /* Line 936 of glr.c  */
 #line 1235 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONBxor();  ;}
+    {  ((*yyvalp).operatorname_) = new ONBxor(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 38:
 
 /* Line 936 of glr.c  */
 #line 1236 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONLand();  ;}
+    {  ((*yyvalp).operatorname_) = new ONLand(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 39:
 
 /* Line 936 of glr.c  */
 #line 1237 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONLor();  ;}
+    {  ((*yyvalp).operatorname_) = new ONLor(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 40:
 
 /* Line 936 of glr.c  */
 #line 1238 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONLxor();  ;}
+    {  ((*yyvalp).operatorname_) = new ONLxor(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 41:
 
 /* Line 936 of glr.c  */
 #line 1239 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONRight();  ;}
+    {  ((*yyvalp).operatorname_) = new ONRight(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 42:
 
 /* Line 936 of glr.c  */
 #line 1240 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatorname_) = new ONLeft();  ;}
+    {  ((*yyvalp).operatorname_) = new ONLeft(); ((*yyvalp).operatorname_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 43:
 
 /* Line 936 of glr.c  */
 #line 1242 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).operatortrait_) = new OTIdentity((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.operatorname_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).operatortrait_) = new OTIdentity((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.operatorname_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).operatortrait_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 44:
 
 /* Line 936 of glr.c  */
 #line 1244 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).functionspecifier_) = new FSEntryPoint();  ;}
+    {  ((*yyvalp).functionspecifier_) = new FSEntryPoint(); ((*yyvalp).functionspecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 45:
 
 /* Line 936 of glr.c  */
 #line 1245 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).functionspecifier_) = new FSPure();  ;}
+    {  ((*yyvalp).functionspecifier_) = new FSPure(); ((*yyvalp).functionspecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 46:
 
 /* Line 936 of glr.c  */
 #line 1246 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).functionspecifier_) = new FSConst();  ;}
+    {  ((*yyvalp).functionspecifier_) = new FSConst(); ((*yyvalp).functionspecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 47:
 
 /* Line 936 of glr.c  */
 #line 1247 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).functionspecifier_) = new FSInline();  ;}
+    {  ((*yyvalp).functionspecifier_) = new FSInline(); ((*yyvalp).functionspecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 48:
 
 /* Line 936 of glr.c  */
 #line 1248 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).functionspecifier_) = new FSAssociative();  ;}
+    {  ((*yyvalp).functionspecifier_) = new FSAssociative(); ((*yyvalp).functionspecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 49:
 
 /* Line 936 of glr.c  */
 #line 1249 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).functionspecifier_) = new FSCommutative();  ;}
+    {  ((*yyvalp).functionspecifier_) = new FSCommutative(); ((*yyvalp).functionspecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 50:
 
 /* Line 936 of glr.c  */
 #line 1250 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).functionspecifier_) = new FSAntiCommutative();  ;}
+    {  ((*yyvalp).functionspecifier_) = new FSAntiCommutative(); ((*yyvalp).functionspecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 51:
 
 /* Line 936 of glr.c  */
 #line 1251 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).functionspecifier_) = new FSInverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.operatorname_));  ;}
+    {  ((*yyvalp).functionspecifier_) = new FSInverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.operatorname_)); ((*yyvalp).functionspecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 52:
 
 /* Line 936 of glr.c  */
 #line 1252 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).functionspecifier_) = new FSSelfInverse();  ;}
+    {  ((*yyvalp).functionspecifier_) = new FSSelfInverse(); ((*yyvalp).functionspecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 53:
 
 /* Line 936 of glr.c  */
 #line 1254 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).conversionspecifier_) = new CSUp();  ;}
+    {  ((*yyvalp).conversionspecifier_) = new CSUp(); ((*yyvalp).conversionspecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 54:
 
 /* Line 936 of glr.c  */
 #line 1255 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).conversionspecifier_) = new CSDown();  ;}
+    {  ((*yyvalp).conversionspecifier_) = new CSDown(); ((*yyvalp).conversionspecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 55:
 
 /* Line 936 of glr.c  */
 #line 1256 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).conversionspecifier_) = new CSImplicit();  ;}
+    {  ((*yyvalp).conversionspecifier_) = new CSImplicit(); ((*yyvalp).conversionspecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 56:
 
 /* Line 936 of glr.c  */
 #line 1258 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).variablespecifier_) = new VSConst();  ;}
+    {  ((*yyvalp).variablespecifier_) = new VSConst(); ((*yyvalp).variablespecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 57:
 
 /* Line 936 of glr.c  */
 #line 1260 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).typespecifier_) = new TSAlign((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.int_));  ;}
+    {  ((*yyvalp).typespecifier_) = new TSAlign((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.int_)); ((*yyvalp).typespecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 58:
 
 /* Line 936 of glr.c  */
 #line 1261 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listgenericparam_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listgenericparam_)->end()) ;((*yyvalp).typespecifier_) = new TSGeneric((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listgenericparam_));  ;}
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listgenericparam_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listgenericparam_)->end()) ;((*yyvalp).typespecifier_) = new TSGeneric((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listgenericparam_)); ((*yyvalp).typespecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 59:
 
 /* Line 936 of glr.c  */
 #line 1262 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).typespecifier_) = new TSInteger();  ;}
+    {  ((*yyvalp).typespecifier_) = new TSInteger(); ((*yyvalp).typespecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 60:
 
 /* Line 936 of glr.c  */
 #line 1263 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).typespecifier_) = new TSReal();  ;}
+    {  ((*yyvalp).typespecifier_) = new TSReal(); ((*yyvalp).typespecifier_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 61:
 
 /* Line 936 of glr.c  */
 #line 1265 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).genericparam_) = new TSGParam((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.string_));  ;}
+    {  ((*yyvalp).genericparam_) = new TSGParam((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.string_)); ((*yyvalp).genericparam_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 62:
 
 /* Line 936 of glr.c  */
 #line 1267 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).type_) = new TAddress();  ;}
+    {  ((*yyvalp).type_) = new TAddress(); ((*yyvalp).type_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 63:
 
 /* Line 936 of glr.c  */
 #line 1268 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).type_) = new TByte();  ;}
+    {  ((*yyvalp).type_) = new TByte(); ((*yyvalp).type_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 64:
 
 /* Line 936 of glr.c  */
 #line 1269 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).type_) = new TCustom((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_));  ;}
+    {  ((*yyvalp).type_) = new TCustom((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_)); ((*yyvalp).type_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 65:
 
 /* Line 936 of glr.c  */
 #line 1270 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).type_) = new TFixedArray((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.int_));  ;}
+    {  ((*yyvalp).type_) = new TFixedArray((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.int_)); ((*yyvalp).type_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 66:
 
 /* Line 936 of glr.c  */
 #line 1271 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).type_) = new TGenericArray((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.type_));  ;}
+    {  ((*yyvalp).type_) = new TGenericArray((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.type_)); ((*yyvalp).type_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 67:
 
 /* Line 936 of glr.c  */
 #line 1272 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).type_) = new TList((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.type_));  ;}
+    {  ((*yyvalp).type_) = new TList((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.type_)); ((*yyvalp).type_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 68:
 
 /* Line 936 of glr.c  */
 #line 1273 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).type_) = new TInfiniteList((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_));  ;}
+    {  ((*yyvalp).type_) = new TInfiniteList((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_)); ((*yyvalp).type_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 69:
 
 /* Line 936 of glr.c  */
 #line 1274 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).type_) = new TStruct((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.liststructmemberdeclaration_));  ;}
+    {  ((*yyvalp).type_) = new TStruct((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.liststructmemberdeclaration_)); ((*yyvalp).type_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 70:
 
 /* Line 936 of glr.c  */
 #line 1275 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.listtype_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.listtype_)->end()) ;((*yyvalp).type_) = new TFunction((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.listtype_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.type_));  ;}
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.listtype_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.listtype_)->end()) ;((*yyvalp).type_) = new TFunction((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.listtype_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.type_)); ((*yyvalp).type_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 71:
 
 /* Line 936 of glr.c  */
 #line 1276 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).type_) = new TType();  ;}
+    {  ((*yyvalp).type_) = new TType(); ((*yyvalp).type_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 72:
 
 /* Line 936 of glr.c  */
 #line 1278 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).structmemberdeclaration_) = new SMDMemberDeclaration((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.string_));  ;}
+    {  ((*yyvalp).structmemberdeclaration_) = new SMDMemberDeclaration((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.string_)); ((*yyvalp).structmemberdeclaration_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 73:
 
 /* Line 936 of glr.c  */
 #line 1280 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).parameterdeclaration_) = new PDAutoParameter((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.string_));  ;}
+    {  ((*yyvalp).parameterdeclaration_) = new PDAutoParameter((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.string_)); ((*yyvalp).parameterdeclaration_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 74:
 
 /* Line 936 of glr.c  */
 #line 1281 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).parameterdeclaration_) = new PDTypedParameter((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.string_));  ;}
+    {  ((*yyvalp).parameterdeclaration_) = new PDTypedParameter((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.string_)); ((*yyvalp).parameterdeclaration_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 75:
 
 /* Line 936 of glr.c  */
 #line 1283 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).statement_) = new SReturn((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).statement_) = new SReturn((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 76:
 
 /* Line 936 of glr.c  */
 #line 1284 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).statement_) = new SExpression((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).statement_) = new SExpression((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 77:
 
 /* Line 936 of glr.c  */
 #line 1285 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).statement_) = new SScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.liststatement_));  ;}
+    {  ((*yyvalp).statement_) = new SScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.liststatement_)); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 78:
 
 /* Line 936 of glr.c  */
 #line 1286 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).statement_) = new SIf((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_));  ;}
+    {  ((*yyvalp).statement_) = new SIf((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_)); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 79:
 
 /* Line 936 of glr.c  */
 #line 1287 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).statement_) = new SIfElse((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (11))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (11))].yystate.yysemantics.yysval.liststatement_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((10) - (11))].yystate.yysemantics.yysval.liststatement_));  ;}
+    {  ((*yyvalp).statement_) = new SIfElse((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (11))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (11))].yystate.yysemantics.yysval.liststatement_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((10) - (11))].yystate.yysemantics.yysval.liststatement_)); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 80:
 
 /* Line 936 of glr.c  */
 #line 1288 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).statement_) = new SLoop((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_));  ;}
+    {  ((*yyvalp).statement_) = new SLoop((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_)); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 81:
 
 /* Line 936 of glr.c  */
 #line 1289 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).statement_) = new SWhile((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_));  ;}
+    {  ((*yyvalp).statement_) = new SWhile((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_)); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 82:
 
 /* Line 936 of glr.c  */
 #line 1290 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).statement_) = new SUntil((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_));  ;}
+    {  ((*yyvalp).statement_) = new SUntil((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.liststatement_)); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 83:
 
 /* Line 936 of glr.c  */
 #line 1291 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (11))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (11))].yystate.yysemantics.yysval.listexpression_)->end()) ; std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (11))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (11))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).statement_) = new SFor((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (11))].yystate.yysemantics.yysval.listexpression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (11))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (11))].yystate.yysemantics.yysval.listexpression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((10) - (11))].yystate.yysemantics.yysval.liststatement_));  ;}
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (11))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (11))].yystate.yysemantics.yysval.listexpression_)->end()) ; std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (11))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (11))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).statement_) = new SFor((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (11))].yystate.yysemantics.yysval.listexpression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (11))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (11))].yystate.yysemantics.yysval.listexpression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((10) - (11))].yystate.yysemantics.yysval.liststatement_)); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 84:
 
 /* Line 936 of glr.c  */
 #line 1292 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).statement_) = new SForEach((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (10))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (10))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((9) - (10))].yystate.yysemantics.yysval.liststatement_));  ;}
+    {  ((*yyvalp).statement_) = new SForEach((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (10))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (10))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((9) - (10))].yystate.yysemantics.yysval.liststatement_)); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 85:
 
 /* Line 936 of glr.c  */
 #line 1293 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).statement_) = new SForAll((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (10))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (10))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((9) - (10))].yystate.yysemantics.yysval.liststatement_));  ;}
+    {  ((*yyvalp).statement_) = new SForAll((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (10))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (10))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((9) - (10))].yystate.yysemantics.yysval.liststatement_)); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 86:
 
 /* Line 936 of glr.c  */
 #line 1294 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).statement_) = new SBreak();  ;}
+    {  ((*yyvalp).statement_) = new SBreak(); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 87:
 
 /* Line 936 of glr.c  */
 #line 1295 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).statement_) = new SContinue();  ;}
+    {  ((*yyvalp).statement_) = new SContinue(); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 88:
 
 /* Line 936 of glr.c  */
 #line 1296 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).statement_) = new SBreakpoint();  ;}
+    {  ((*yyvalp).statement_) = new SBreakpoint(); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 89:
 
 /* Line 936 of glr.c  */
 #line 1297 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).statement_) = new SIVariable((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (6))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).statement_) = new SIVariable((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (6))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 90:
 
 /* Line 936 of glr.c  */
 #line 1298 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).statement_) = new SVariable((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.string_));  ;}
+    {  ((*yyvalp).statement_) = new SVariable((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.listvariablespecifier_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.string_)); ((*yyvalp).statement_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 91:
 
 /* Line 936 of glr.c  */
 #line 1300 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).rvalue_) = new RVIdent((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_));  ;}
+    {  ((*yyvalp).rvalue_) = new RVIdent((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_)); ((*yyvalp).rvalue_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 92:
 
 /* Line 936 of glr.c  */
 #line 1301 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).rvalue_) = new RVQualified((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.rvalue_));  ;}
+    {  ((*yyvalp).rvalue_) = new RVQualified((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.string_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.rvalue_)); ((*yyvalp).rvalue_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 93:
 
 /* Line 936 of glr.c  */
 #line 1303 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EDouble((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.double_));  ;}
+    {  ((*yyvalp).expression_) = new EDouble((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.double_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 94:
 
 /* Line 936 of glr.c  */
 #line 1304 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EInteger((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.int_));  ;}
+    {  ((*yyvalp).expression_) = new EInteger((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.int_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 95:
 
 /* Line 936 of glr.c  */
 #line 1305 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EString((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_));  ;}
+    {  ((*yyvalp).expression_) = new EString((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 96:
 
 /* Line 936 of glr.c  */
 #line 1306 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EChar((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_));  ;}
+    {  ((*yyvalp).expression_) = new EChar((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.string_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 97:
 
 /* Line 936 of glr.c  */
 #line 1307 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EPi();  ;}
+    {  ((*yyvalp).expression_) = new EPi(); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 98:
 
 /* Line 936 of glr.c  */
 #line 1308 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ERValue((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.rvalue_));  ;}
+    {  ((*yyvalp).expression_) = new ERValue((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.rvalue_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 99:
@@ -3936,259 +3936,259 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
 
 /* Line 936 of glr.c  */
 #line 1311 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).expression_) = new EArray((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_));  ;}
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).expression_) = new EArray((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 101:
 
 /* Line 936 of glr.c  */
 #line 1312 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).expression_) = new EList((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_));  ;}
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).expression_) = new EList((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.listexpression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 102:
 
 /* Line 936 of glr.c  */
 #line 1313 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).expression_) = new EAComp((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_));  ;}
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).expression_) = new EAComp((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 103:
 
 /* Line 936 of glr.c  */
 #line 1314 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).expression_) = new ELComp((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_));  ;}
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).expression_) = new ELComp((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.listexpression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 104:
 
 /* Line 936 of glr.c  */
 #line 1315 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIndex((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIndex((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 105:
 
 /* Line 936 of glr.c  */
 #line 1316 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ESimpleCall((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_));  ;}
+    {  ((*yyvalp).expression_) = new ESimpleCall((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 106:
 
 /* Line 936 of glr.c  */
 #line 1317 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).expression_) = new ECall((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listexpression_));  ;}
+    {  std::reverse((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listexpression_)->begin(),(((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listexpression_)->end()) ;((*yyvalp).expression_) = new ECall((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.listexpression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 107:
 
 /* Line 936 of glr.c  */
 #line 1318 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EPostInc((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.rvalue_));  ;}
+    {  ((*yyvalp).expression_) = new EPostInc((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.rvalue_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 108:
 
 /* Line 936 of glr.c  */
 #line 1319 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EPostDec((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.rvalue_));  ;}
+    {  ((*yyvalp).expression_) = new EPostDec((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.rvalue_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 109:
 
 /* Line 936 of glr.c  */
 #line 1320 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EAddress((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EAddress((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 110:
 
 /* Line 936 of glr.c  */
 #line 1321 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ELeft((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ELeft((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 111:
 
 /* Line 936 of glr.c  */
 #line 1322 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ERight((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ERight((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 112:
 
 /* Line 936 of glr.c  */
 #line 1323 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinSExt((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinSExt((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 113:
 
 /* Line 936 of glr.c  */
 #line 1324 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinZExt((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinZExt((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 114:
 
 /* Line 936 of glr.c  */
 #line 1325 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinCast((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinCast((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 115:
 
 /* Line 936 of glr.c  */
 #line 1326 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinConvert((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinConvert((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 116:
 
 /* Line 936 of glr.c  */
 #line 1327 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinAddI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinAddI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 117:
 
 /* Line 936 of glr.c  */
 #line 1328 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinSubI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinSubI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 118:
 
 /* Line 936 of glr.c  */
 #line 1329 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinMulI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinMulI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 119:
 
 /* Line 936 of glr.c  */
 #line 1330 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinUdivI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinUdivI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 120:
 
 /* Line 936 of glr.c  */
 #line 1331 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinSdivI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinSdivI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 121:
 
 /* Line 936 of glr.c  */
 #line 1332 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinUremI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinUremI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 122:
 
 /* Line 936 of glr.c  */
 #line 1333 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinSremI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinSremI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 123:
 
 /* Line 936 of glr.c  */
 #line 1334 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinAndI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinAndI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 124:
 
 /* Line 936 of glr.c  */
 #line 1335 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinOrI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinOrI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 125:
 
 /* Line 936 of glr.c  */
 #line 1336 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinXorI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinXorI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 126:
 
 /* Line 936 of glr.c  */
 #line 1337 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinShlI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinShlI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 127:
 
 /* Line 936 of glr.c  */
 #line 1338 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinLshrI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinLshrI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 128:
 
 /* Line 936 of glr.c  */
 #line 1339 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinAshrI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinAshrI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 129:
 
 /* Line 936 of glr.c  */
 #line 1340 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinNotI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinNotI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 130:
 
 /* Line 936 of glr.c  */
 #line 1341 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinNegI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinNegI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (7))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 131:
 
 /* Line 936 of glr.c  */
 #line 1342 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinCEqI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinCEqI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 132:
 
 /* Line 936 of glr.c  */
 #line 1343 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinCNeI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinCNeI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 133:
 
 /* Line 936 of glr.c  */
 #line 1344 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinCLtI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinCLtI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 134:
 
 /* Line 936 of glr.c  */
 #line 1345 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinCGtI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinCGtI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 135:
 
 /* Line 936 of glr.c  */
 #line 1346 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinCLeI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinCLeI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 136:
 
 /* Line 936 of glr.c  */
 #line 1347 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EIntrinCGeI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EIntrinCGeI((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (9))].yystate.yysemantics.yysval.type_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (9))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((8) - (9))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 137:
@@ -4202,42 +4202,42 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
 
 /* Line 936 of glr.c  */
 #line 1350 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ELnot((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ELnot((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 139:
 
 /* Line 936 of glr.c  */
 #line 1351 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EPreInc((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.rvalue_));  ;}
+    {  ((*yyvalp).expression_) = new EPreInc((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.rvalue_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 140:
 
 /* Line 936 of glr.c  */
 #line 1352 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EPreDec((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.rvalue_));  ;}
+    {  ((*yyvalp).expression_) = new EPreDec((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.rvalue_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 141:
 
 /* Line 936 of glr.c  */
 #line 1353 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ENeg((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ENeg((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 142:
 
 /* Line 936 of glr.c  */
 #line 1354 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EBnot((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EBnot((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 143:
 
 /* Line 936 of glr.c  */
 #line 1355 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EPos((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EPos((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 144:
@@ -4251,28 +4251,28 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
 
 /* Line 936 of glr.c  */
 #line 1358 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EMul((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EMul((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 146:
 
 /* Line 936 of glr.c  */
 #line 1359 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EMulA((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EMulA((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 147:
 
 /* Line 936 of glr.c  */
 #line 1360 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EDiv((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EDiv((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 148:
 
 /* Line 936 of glr.c  */
 #line 1361 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EMod((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EMod((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 149:
@@ -4286,28 +4286,28 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
 
 /* Line 936 of glr.c  */
 #line 1364 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EAdd((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EAdd((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 151:
 
 /* Line 936 of glr.c  */
 #line 1365 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ESub((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ESub((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 152:
 
 /* Line 936 of glr.c  */
 #line 1366 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EAddA((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EAddA((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 153:
 
 /* Line 936 of glr.c  */
 #line 1367 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ESubA((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ESubA((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 154:
@@ -4321,14 +4321,14 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
 
 /* Line 936 of glr.c  */
 #line 1370 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ELSh((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ELSh((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 156:
 
 /* Line 936 of glr.c  */
 #line 1371 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ERSh((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ERSh((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 157:
@@ -4342,28 +4342,28 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
 
 /* Line 936 of glr.c  */
 #line 1374 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ELT((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ELT((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 159:
 
 /* Line 936 of glr.c  */
 #line 1375 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EGT((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EGT((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 160:
 
 /* Line 936 of glr.c  */
 #line 1376 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ELE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ELE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 161:
 
 /* Line 936 of glr.c  */
 #line 1377 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EGE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EGE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 162:
@@ -4377,14 +4377,14 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
 
 /* Line 936 of glr.c  */
 #line 1380 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 164:
 
 /* Line 936 of glr.c  */
 #line 1381 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ENE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ENE((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 165:
@@ -4398,21 +4398,21 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
 
 /* Line 936 of glr.c  */
 #line 1384 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EBand((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EBand((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 167:
 
 /* Line 936 of glr.c  */
 #line 1385 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EBor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EBor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 168:
 
 /* Line 936 of glr.c  */
 #line 1386 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EBxor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EBxor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 169:
@@ -4426,21 +4426,21 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
 
 /* Line 936 of glr.c  */
 #line 1389 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ELand((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ELand((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 171:
 
 /* Line 936 of glr.c  */
 #line 1390 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ELor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ELor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 172:
 
 /* Line 936 of glr.c  */
 #line 1391 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ELxor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ELxor((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 173:
@@ -4454,7 +4454,7 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
 
 /* Line 936 of glr.c  */
 #line 1394 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EConditional((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EConditional((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (5))].yystate.yysemantics.yysval.expression_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 175:
@@ -4468,77 +4468,77 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
 
 /* Line 936 of glr.c  */
 #line 1397 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 177:
 
 /* Line 936 of glr.c  */
 #line 1398 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EAddAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EAddAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 178:
 
 /* Line 936 of glr.c  */
 #line 1399 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ESubAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ESubAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 179:
 
 /* Line 936 of glr.c  */
 #line 1400 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EMulAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EMulAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 180:
 
 /* Line 936 of glr.c  */
 #line 1401 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EDivAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EDivAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 181:
 
 /* Line 936 of glr.c  */
 #line 1402 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EModAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EModAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 182:
 
 /* Line 936 of glr.c  */
 #line 1403 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EAndAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EAndAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 183:
 
 /* Line 936 of glr.c  */
 #line 1404 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EOrAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EOrAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 184:
 
 /* Line 936 of glr.c  */
 #line 1405 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new EXorAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new EXorAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 185:
 
 /* Line 936 of glr.c  */
 #line 1406 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ELShAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ELShAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 186:
 
 /* Line 936 of glr.c  */
 #line 1407 "C:\\Users\\Semi\\Documents\\cp1\\cp1\\cp1\\.y"
-    {  ((*yyvalp).expression_) = new ERShAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_));  ;}
+    {  ((*yyvalp).expression_) = new ERShAssign((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.rvalue_), (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.expression_)); ((*yyvalp).expression_)->line_number = yy_mylinenumber;  ;}
     break;
 
   case 187:

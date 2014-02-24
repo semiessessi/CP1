@@ -12,10 +12,13 @@
         gbPendingCompileError = true; \
 		if( gxSwitches.errorVerbosity >= level ) \
 		{ \
-			printf(  __VA_ARGS__ ); \
+			printf( "%s(%d): ", szCurrentFile, iCurrentLine ); printf( __VA_ARGS__ ); printf( "\n" ); \
 		} \
 	} while( false )
 
 extern bool gbPendingCompileError;
+
+extern std::string szCurrentFile;
+extern int iCurrentLine;
     
 #endif
