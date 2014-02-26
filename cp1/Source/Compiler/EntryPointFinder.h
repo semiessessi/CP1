@@ -87,7 +87,7 @@ public:
         // SE - TODO: allow return code + more?
         
         out += "define ccc void @main() nounwind\r\n{\r\n";
-        out += "\t"/*%epret = */ "call void @";
+        out += "\t"/*%epret = */ "call fastcc void @";
         out += szIdentifier;
         out += "()\r\n";
         out += "\tret void\r\n";//" %epret\r\n";

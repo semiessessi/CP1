@@ -379,6 +379,15 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
             goto mainExit;
         }
 	
+        if( gxSwitches.infoVerbosity > 0 )
+		{
+			printf( "Optimising generated LLVM...\n" );
+		}
+        
+        std::string opt = std::string( "..\\tools\\opt.exe temp.ll -S -O" );
+        opt += std::to_string( ( gxSwitches.optimisationLevel >3 ) ? 3 : ( ( gxSwitches.optimisationLevel < 1 ) ? 1 : gxSwitches.optimisationLevel ) );
+        system( ( opt + " -o=tempopt.ll \n" ).c_str() );
+        
 		if( gxSwitches.infoVerbosity > 0 )
 		{
 			printf( "Compiling from generated LLVM...\n" );
@@ -386,12 +395,12 @@ int main( const int iArgumentCount, const char* const* const pszArguments )
 		
 		params += " -cppgen=program -filetype=obj -O=";
 		params += std::to_string( gxSwitches.optimisationLevel );
-		params += " temp.ll";
+		params += " tempopt.ll";
 		system( params.c_str() );
 		
 		verboseInfo( 1, "Linking with GCC...\n" );
 		
-		system( "gcc temp.obj -dead-strip -O3 -Os -oa.exe\n" );
+		system( "gcc tempopt.obj -s -dead-strip -O3 -Os -oa.exe\n" );
 	}
 	else
 	{
