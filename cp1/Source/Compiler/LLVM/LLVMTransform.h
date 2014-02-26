@@ -25,6 +25,7 @@ struct LocalPhiRef
     
     std::string szLocalCPIdent;
     std::string szSource;
+    int iLastTemp;
     int iNewTemp;
 };
 
@@ -34,7 +35,7 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
     static int siTempCounter;
     static int siTabLevel;
  public:
-  virtual ~LLVMTransformVisitor() { out = ""; pCurrentType = 0; }
+  virtual ~LLVMTransformVisitor() { out = ""; pCurrentType = 0; bTrackPhi = false; }
   virtual void visitMain(Main *p);
   
   virtual void visitDNamespace( DNamespace *p );
@@ -57,6 +58,7 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   
   std::map< std::string, Local > handlePhiInstructions( std::map< std::string, Local > originalLocals, std::map< std::string, Local > locals1, std::map< std::string, Local > locals2, std::string szLabel1, std::string szLabel2 );
   std::string handleLoopLocalPhis( std::map< std::string, Local > originalLocals, std::string szLoopEntry, std::string szLoopRepeat );
+  std::string handleLoopLocalPhisPost( std::map< std::string, Local > originalLocals, std::string szLoopEntry, std::string szLoopRepeat );
   
   virtual void visitSIf(SIf *p);
   virtual void visitSIfElse(SIfElse *p);
@@ -165,6 +167,7 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
 
   std::string out;
   std::map< std::string, LocalPhiRef > mxLocalPhiRefs;
+  bool bTrackPhi;
 
 };
 

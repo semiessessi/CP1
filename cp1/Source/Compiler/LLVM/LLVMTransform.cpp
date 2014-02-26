@@ -554,7 +554,7 @@ void LLVMTransformVisitor::visitSLoop( SLoop *p )
 void LLVMTransformVisitor::visitSWhile( SWhile *p )
 {
     mxLocalPhiRefs.clear();
-    
+    bTrackPhi = true;
 	static int siRepeatCounter = 0;
 	int iRepeatCount = siRepeatCounter;
 	++siRepeatCounter;
@@ -620,6 +620,10 @@ void LLVMTransformVisitor::visitSWhile( SWhile *p )
     
     std::string phis = handleLoopLocalPhis( gxLocals, "whileloop", "whilebody" );
     out.insert( iInsertPhiPos, phis );
+    
+    out += handleLoopLocalPhisPost( gxLocals, "whileloop", "whilebody" );
+    
+    bTrackPhi = false;
 }
 
 void LLVMTransformVisitor::visitSUntil( SUntil *p )
@@ -760,6 +764,10 @@ void LLVMTransformVisitor::visitERValue(ERValue *p)
 
 void LLVMTransformVisitor::visitEAssign(EAssign* p)
 {
+    // SE - we may or may not need this, and leave the correct value dangling for the next guy...
+    int iPhiRefTempTrick = siTempCounter;
+    ++siTempCounter;
+    
     iCurrentLine = p->line_number ? p->line_number : iCurrentLine;
     
     ++siTempCounter;
@@ -811,16 +819,20 @@ void LLVMTransformVisitor::visitEAssign(EAssign* p)
             }
         }
         
-        LocalPhiRef& phiref = mxLocalPhiRefs[ local.szCPIdent ];
-        if( phiref.iNewTemp == -1 )
+        if( bTrackPhi )
         {
-            phiref.szLocalCPIdent = local.szCPIdent;
-            phiref.szSource = local.szLLVMIdent;
+            LocalPhiRef& phiref = mxLocalPhiRefs[ local.szCPIdent ];
+            phiref.iLastTemp = finalID;
             
+            if( phiref.iNewTemp == -1 )
+            {
+                phiref.szLocalCPIdent = local.szCPIdent;
+                phiref.szSource = local.szLLVMIdent;
+                phiref.iNewTemp = iPhiRefTempTrick;
+                //finalID = iPhiRefTempTrick; // a phi will set this before we reach here in the final output IR
+            }
         }
-        
-        phiref.iNewTemp = finalID;
-        
+
         local.szLLVMIdent = std::string( "%r" ) + std::to_string( finalID );
     }
 }

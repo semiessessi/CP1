@@ -5,6 +5,7 @@ entrypoint phi_test()
     testif();
     testifelse();
     // testrepeat();
+    testwhile();
 }
 
 testif()
@@ -77,6 +78,40 @@ testifelse()
     else
     {
         cstd.puts( "b is not 1 - incorrect - if-else may not be dealing with locals properly" );
+    }
+}
+
+testwhile()
+{
+    int32 d = zero_extend< int32 >( 12 );
+    while( d > 2 )
+    {
+        d = d - 1;
+    }
+    
+    if( d == 1 )
+    {
+        cstd.puts( "d is 1 - correct" );
+    }
+    else
+    {
+        cstd.puts( "d is not 1 - incorrect - while loop may not be dealing with locals properly" );
+    }
+    
+    int32 d = zero_extend< int32 >( 12 );
+    int32 e = zero_extend< int32 >( 22 );
+    while( d <= e )
+    {
+        d = d + ( e - d + 1 ) / 2;
+    }
+    
+    if( d > e )
+    {
+        cstd.puts( "d is greater than e - correct" );
+    }
+    else
+    {
+        cstd.puts( "d is not greater than e - incorrect - while loop may not be dealing with locals properly" );
     }
 }
 
