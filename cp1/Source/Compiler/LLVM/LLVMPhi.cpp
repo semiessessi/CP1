@@ -1,5 +1,24 @@
 #include "LLVMTransform.h"
 
+std::string LLVMTransformVisitor::handleLoopLocalPhis( std::map< std::string, Local > originalLocals, std::string szLoopEntry, std::string szLoopRepeat )
+{
+    std::string szResult = "";
+    
+    // for( std::map< std::string, Local >::iterator it = mxLocalPhiRefs.begin(); it != mxLocalPhiRefs.end(); ++it )
+    // {
+        // std::map< std::string, Local >::iterator it0 = originalLocals.find( it->first );
+        // if( it0 != originalLocals.end() )
+        // {
+            // for( int i = 0; i < siTabLevel; ++i )
+            // {
+                // szResult += "\t";
+            // }
+        // }
+    // }
+    
+    return szResult;
+}
+
 std::map< std::string, Local > LLVMTransformVisitor::handlePhiInstructions( std::map< std::string, Local > originalLocals, std::map< std::string, Local > locals1, std::map< std::string, Local > locals2, std::string szLabel1, std::string szLabel2 )
 {
     std::map< std::string, Local > xResolvedLocals = originalLocals;

@@ -4,6 +4,7 @@
 #include "../CompilerVisitor.h"
 #include "../TypeInfo.h"
 
+#include <map>
 #include <string>
 
 struct Local
@@ -11,6 +12,20 @@ struct Local
     DetailedTypeInfo* pType;
     std::string szCPIdent;
     std::string szLLVMIdent;
+};
+
+struct LocalPhiRef
+{
+    LocalPhiRef()
+    : szLocalCPIdent( "" )
+    , szSource( "" )
+    , iNewTemp( -1 )
+    {
+    }
+    
+    std::string szLocalCPIdent;
+    std::string szSource;
+    int iNewTemp;
 };
 
 class LLVMTransformVisitor : public DescendingCompilerVisitor
@@ -41,6 +56,7 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   virtual void visitSExpression(SExpression *p);
   
   std::map< std::string, Local > handlePhiInstructions( std::map< std::string, Local > originalLocals, std::map< std::string, Local > locals1, std::map< std::string, Local > locals2, std::string szLabel1, std::string szLabel2 );
+  std::string handleLoopLocalPhis( std::map< std::string, Local > originalLocals, std::string szLoopEntry, std::string szLoopRepeat );
   
   virtual void visitSIf(SIf *p);
   virtual void visitSIfElse(SIfElse *p);
@@ -148,6 +164,7 @@ class LLVMTransformVisitor : public DescendingCompilerVisitor
   //virtual void visitString(String s);
 
   std::string out;
+  std::map< std::string, LocalPhiRef > mxLocalPhiRefs;
 
 };
 

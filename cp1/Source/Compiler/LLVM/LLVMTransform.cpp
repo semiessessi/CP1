@@ -553,6 +553,8 @@ void LLVMTransformVisitor::visitSLoop( SLoop *p )
 
 void LLVMTransformVisitor::visitSWhile( SWhile *p )
 {
+    mxLocalPhiRefs.clear();
+    
 	static int siRepeatCounter = 0;
 	int iRepeatCount = siRepeatCounter;
 	++siRepeatCounter;
@@ -574,6 +576,8 @@ void LLVMTransformVisitor::visitSWhile( SWhile *p )
 	
 	out += "\r\nwhilebody" + std::to_string( iRepeatCount ) + ":\r\n";
 	
+    int iInsertPhiPos = out.length();
+    
 	std::map< std::string, Local > oldLocals = gxLocals;
 	p->liststatement_->accept( this );
     gxLocals = oldLocals;
@@ -613,6 +617,9 @@ void LLVMTransformVisitor::visitSWhile( SWhile *p )
 	// ...
 	
 	out += "\r\nendwhile" + std::to_string( iRepeatCount ) + ":\r\n";	
+    
+    std::string phis = handleLoopLocalPhis( gxLocals, "whileloop", "whilebody" );
+    out.insert( iInsertPhiPos, phis );
 }
 
 void LLVMTransformVisitor::visitSUntil( SUntil *p )
@@ -803,6 +810,16 @@ void LLVMTransformVisitor::visitEAssign(EAssign* p)
                 compileError( 0, "unable to convert from %s to %s", pType->szPrettyCPName.c_str(), local.pType->szPrettyCPName.c_str() );
             }
         }
+        
+        LocalPhiRef& phiref = mxLocalPhiRefs[ local.szCPIdent ];
+        if( phiref.iNewTemp == -1 )
+        {
+            phiref.szLocalCPIdent = local.szCPIdent;
+            phiref.szSource = local.szLLVMIdent;
+            
+        }
+        
+        phiref.iNewTemp = finalID;
         
         local.szLLVMIdent = std::string( "%r" ) + std::to_string( finalID );
     }
