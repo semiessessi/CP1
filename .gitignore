@@ -1,7 +1,7 @@
-syntax: glob
 cp1/cp1/Release/
 *.ipch
-bnfcout\sed*
-test\a.exe
-test\*.o
-test\*.ll
+bnfcout/sed*
+test/a.exe
+test/*.o
+test/*.ll
+.tex.tmp
